@@ -2,21 +2,21 @@ import React from "react";
 import InputComponent from "../InputComponent";
 import { useState , useEffect} from "react";
 import MagentaLogo from "../../assets/logo";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ItemContext } from "../../contextApi/stateMang.contextApi";
 
 const EmailChangeComponent = () => {
+  const navigate = useNavigate()
   const { verificationMail, setVerificationMail , showNav, setShowNav} = ItemContext();
   useEffect(() => {
     setShowNav(false)
   },[])
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(verificationMail);
   };
 
   return (
-    <div>
+    <div className="w-screen">
       <div className="px-[20px] py-4">
         <MagentaLogo />
       </div>
@@ -32,40 +32,40 @@ const EmailChangeComponent = () => {
             <path
               d="M12 1.33325V8.33325L14.3333 5.99992"
               stroke="#4E00AD"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               d="M12.0013 8.33333L9.66797 6"
               stroke="#4E00AD"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               d="M6.16667 13C1.5 13 1.5 15.0883 1.5 17.6667V18.8333C1.5 22.0533 1.5 24.6667 7.33333 24.6667H16.6667C21.3333 24.6667 22.5 22.0533 22.5 18.8333V17.6667C22.5 15.0883 22.5 13 17.8333 13C16.6667 13 16.34 13.245 15.7333 13.7L14.5433 14.96C13.1667 16.43 10.8333 16.43 9.445 14.96L8.26667 13.7C7.66 13.245 7.33333 13 6.16667 13Z"
               stroke="#4E00AD"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.5"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               d="M3.83203 13V8.33338C3.83203 5.98838 3.83203 4.05171 7.33203 3.71338"
               stroke="#4E00AD"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.5"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               d="M20.168 13V8.33338C20.168 5.98838 20.168 4.05171 16.668 3.71338"
               stroke="#4E00AD"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.5"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </div>

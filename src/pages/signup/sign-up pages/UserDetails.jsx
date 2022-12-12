@@ -6,11 +6,12 @@ import { ItemContext } from "../../../contextApi/stateMang.contextApi";
 const UserDetails = ({ markAsComplete = () => {} }) => {
   // const [userDetails, setUserDetails] = useState({});
   const { userDetails, setUserDetails } = ItemContext();
-  
 
   return (
-    <div className="user-details text-cente r flex flex-col gap-4">
+    <div className="user-details text-center flex flex-col gap-4">
       <h1 className="text-[32px] font-semibold">Add Details</h1>
+
+      <p>Please provide your name and email</p>
 
       <div className="input-group flex flex-col gap-7">
         <InputComponent

@@ -4,15 +4,17 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-/* table,th,td{
-  border: 1px solid black;
-  text-align: left;
-}
-th{
-    background-color: #EEE8F8;
-} */
 
-.content-dahboard div:not(:last-child){
+.content-dashboard tr:not(:last-child){
     border-bottom: 1px solid #C7AFE4;
 
 }
+
+.input{
+     -moz-appearance: textfield;
+}
+ input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }

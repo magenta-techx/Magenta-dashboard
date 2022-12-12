@@ -1,14 +1,78 @@
 import { useState } from "react";
 import InputComponent from "../../InputComponent";
 import { ItemContext } from "../../../contextApi/stateMang.contextApi";
+import axios from "axios";
 
-const SetPassword = ({ markAsComplete = () => {} }) => {
+const CompanyDetails = ({ markAsComplete = () => {} }) => {
+  const {
+    companyDetails,
+    setCompanyDetails,
+    userDetails,
+    setPasswordDetails,
+    passwordDetails,
+    merchant,
+    client,
+  } = ItemContext();
+  const [bool, setBool] = useState(true);
+  const [err, setErr] = useState("");
 
-  const {passwordDetails, setPasswordDetails} = ItemContext();
+  const handleSubmit = async () => {
+    try {
+      //   const response = await axios.post("https://backend.magentacashier.com/accounts/register-client/", {
+      //     email: userDetails.email,
+      //     first_name:userDetails.firstname,
+      //     last_name:userDetails.surname,
+      //     password: passwordDetails.password,
+      //     phone_number: companyDetails.companyPhone,
+      //   })
 
+      //  if (response.status != 401 && response.status != 400) {
+      //   const token = response.data.tokens["access"];
+      //   localStorage.setItem('token', token);
+      //   console.log(response.data)
+      //   console.log(token)
+      //  } else {
+      //   console.log("bad request")
+      //   console.log(response.data)
+      //  }
+      // console.log(response.data.tokens["access"])
+
+      const response = await axios.post(
+        "https://backend.magentacashier.com/accounts/register-merchant/",
+        {
+          company_name: companyDetails?.companyName,
+          email: userDetails.email,
+          phone_number: companyDetails.companyPhone,
+          password: passwordDetails.password,
+        }
+      );
+      if (response.status !== 401 && response.status !== 400) {
+        const token = response.data.tokens["access"];
+        localStorage.setItem("token", token);
+       
+      } else {
+        console.log("bad request");
+      }
+      // console.log(response.data.tokens["access"])
+
+      // console.log(response.data)
+    } catch (err) {
+      console.log(err);
+      if (err.response.data === undefined) {
+        setErr(err.message);
+      } else {
+        setErr(err.response.data.detail);
+      }
+      setBool(true);
+    }
+  };
+  setTimeout(() => {
+    setBool(false);
+  }, 3000);
   return (
     <div className="user-details text-center flex flex-col gap-4">
       <h1 className="text-[32px] font-semibold">Set Password</h1>
+      <p>Choose a secure password</p>
 
       <div className="input-group flex flex-col gap-7">
         <InputComponent
@@ -60,4 +124,4 @@ const SetPassword = ({ markAsComplete = () => {} }) => {
   );
 };
 
-export default SetPassword;
+export default CompanyDetails;

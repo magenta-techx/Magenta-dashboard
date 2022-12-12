@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import InputComponent from "../InputComponent";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import MagentaLogo from "../../assets/logo";
 // import Cookies from "js-cookie"
@@ -11,6 +11,7 @@ import { ItemContext } from "../../contextApi/stateMang.contextApi";
 const LoginComponent = () => {
   const [err, setErr] = useState("");
   const [bool, setBool] = useState("");
+  const navigate = useNavigate();
 
   const {
     loginEmail,
@@ -19,16 +20,16 @@ const LoginComponent = () => {
     setLoginPassword,
     showNav,
     setShowNav,
-    isAuth,
-    setIsAuth,
+    
+    setUser,
   } = ItemContext();
-
+  
   useEffect(() => {
     setShowNav(false);
   }, []);
   const handleSubmit = async (e) => {
+ 
     e.preventDefault();
-    // console.log(userDetails)
     try {
       const response = await axios.post(
         "https://backend.magentacashier.com/accounts/login/",
@@ -37,8 +38,17 @@ const LoginComponent = () => {
           password: loginPassword,
         }
       );
+      if (response.status !== 401 && response.status !== 400) {
+        const login_token = response.data.tokens["access"];
+        localStorage.setItem("login_token", login_token);
+        localStorage.setItem("isAuth", true);
+        navigate("/");
+      } else {
+        console.log("bad request");
+        console.log(response.data);
+      }
+
       console.log(response.data);
-      // setIsAuth(true);
     } catch (err) {
       console.log(err);
       if (err.response.data === undefined) {
@@ -54,11 +64,11 @@ const LoginComponent = () => {
   }, 3000);
 
   return (
-    <div>
+    <div className="w-screen">
       <div className="px-[20px] py-4">
         <MagentaLogo />
       </div>
-      <div className="w-screen"> 
+      <div className="w-full">
         <div className="user-details text-center bg-[#EEE8F8] rounded-xl w-[550px] m-auto my-[50px] flex pt-[44px] flex-col gap-5">
           <div className="flex justify-center">
             <svg
@@ -71,25 +81,25 @@ const LoginComponent = () => {
               <path
                 d="M18.7906 13.9301C16.7306 15.9801 13.7806 16.6101 11.1906 15.8001L6.48063 20.5001C6.14063 20.8501 5.47063 21.0601 4.99063 20.9901L2.81063 20.6901C2.09063 20.5901 1.42063 19.9101 1.31063 19.1901L1.01063 17.0101C0.940635 16.5301 1.17063 15.8601 1.50063 15.5201L6.20063 10.8201C5.40063 8.22007 6.02063 5.27007 8.08063 3.22007C11.0306 0.270068 15.8206 0.270068 18.7806 3.22007C21.7406 6.17007 21.7406 10.9801 18.7906 13.9301Z"
                 stroke="#4E00AD"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeMiterlimit="10"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M5.89062 16.49L8.19062 18.79"
                 stroke="#4E00AD"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeMiterlimit="10"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M13.5 10C14.3284 10 15 9.32843 15 8.5C15 7.67157 14.3284 7 13.5 7C12.6716 7 12 7.67157 12 8.5C12 9.32843 12.6716 10 13.5 10Z"
                 stroke="#4E00AD"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>
@@ -124,7 +134,7 @@ const LoginComponent = () => {
             <InputComponent
               className="bg-[#EEE8F8] border-[#C7AFE4]"
               type="password"
-              label="Create Password"
+              label="Password"
               name="password"
               onChange={(evt) => setLoginPassword(evt.target.value)}
             />

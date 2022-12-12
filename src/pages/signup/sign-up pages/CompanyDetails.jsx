@@ -12,59 +12,77 @@ const CompanyDetails = ({ markAsComplete = () => {} }) => {
     merchant,
     client,
   } = ItemContext();
-  const[bool, setBool] = useState(true)
-  const[err, setErr] = useState("") 
+  const [bool, setBool] = useState(true);
+  const [err, setErr] = useState("");
 
   const handleSubmit = async () => {
-    console.log(client)
-    console.log(merchant)
-    // try{
-    //   const response = await axios.post("https://backend.magentacashier.com/accounts/register-client/", {
-    //     email: userDetails.email,
-    //     first_name:userDetails.firstname,
-    //     last_name:userDetails.surname,
-    //     password: passwordDetails.password,
-    //     phone_number: companyDetails.companyPhone,
-    //   }) 
-    //   console.log(response.data)
+    try {
+      //   const response = await axios.post("https://backend.magentacashier.com/accounts/register-client/", {
+      //     email: userDetails.email,
+      //     first_name:userDetails.firstname,
+      //     last_name:userDetails.surname,
+      //     password: passwordDetails.password,
+      //     phone_number: companyDetails.companyPhone,
+      //   })
 
-    //   const resTwo = await axios.post("https://backend.magentacashier.com/accounts/register-merchant/", {
-    //     company_name: companyDetails?.companyName,
-    //     email: userDetails.email,
-    //     phone_number: companyDetails.companyPhone,
-    //     password: passwordDetails.password,
-    //   })
+      //  if (response.status != 401 && response.status != 400) {
+      //   const token = response.data.tokens["access"];
+      //   localStorage.setItem('token', token);
+      //   console.log(response.data)
+      //   console.log(token)
+      //  } else {
+      //   console.log("bad request")
+      //   console.log(response.data)
+      //  }
+      // console.log(response.data.tokens["access"])
 
-    //   console.log(resTwo.data)
-    // } catch (err) {
-    //   console.log(err);
-    //   if (err.response.data === undefined) {
-    //     setErr(err.message);
-    //   } else {
-    //     setErr(err.response.data.detail);
-    //   }
-    //   setBool(true);
-    // }
-  }
+      const response = await axios.post(
+        "https://backend.magentacashier.com/accounts/register-merchant/",
+        {
+          company_name: companyDetails?.companyName,
+          email: userDetails.email,
+          phone_number: companyDetails.companyPhone,
+          password: passwordDetails.password,
+        }
+      );
+      if (response.status !== 401 && response.status !== 400) {
+        const token = response.data.tokens["access"];
+        localStorage.setItem("token", token);
+      } else {
+        console.log("bad request");
+      }
+      // console.log(response.data.tokens["access"])
+
+      // console.log(response.data)
+    } catch (err) {
+      console.log(err);
+      if (err.response.data === undefined) {
+        setErr(err.message);
+      } else {
+        setErr(err.response.data.detail);
+      }
+      setBool(true);
+    }
+  };
   setTimeout(() => {
     setBool(false);
   }, 3000);
 
-  
-
   return (
     <div className="user-details text-center flex flex-col gap-4">
       <h1 className="text-[32px] font-semibold">Company Details</h1>
-      
-    <div
-          className={`${
-            bool
-              ? " w-[360px] max-w-full h-[26px] m-auto rounded-[10px] justify-center text-red-700"
-              : "hidden"
-          }`}
-        >
-          <p className="flex justify-center align-center font-medium text-[14px] items-center">{err}</p>
-        </div>
+
+      <div
+        className={`${
+          bool
+            ? " w-[360px] max-w-full h-[26px] m-auto rounded-[10px] justify-center text-red-700"
+            : "hidden"
+        }`}
+      >
+        <p className="flex justify-center align-center font-medium text-[14px] items-center">
+          {err}
+        </p>
+      </div>
 
       <div className="input-group flex flex-col gap-7">
         <InputComponent
