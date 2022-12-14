@@ -10,10 +10,10 @@ const ShowOTP = () => {
     setOTP,
     setShowOTP,
     loginEmail,
-    showAcctSucc,
+
     setIsLoading,
     isLoading,
-    setShowAcctSucc,
+
     bankName,
     GET_ACCOUNT,
     setBankName,
@@ -43,10 +43,10 @@ const ShowOTP = () => {
           },
         }
       );
-      if (res.status === 200 || res.status===201) {
+      if (res.status === 200 || res.status === 201) {
         setIsLoading(false);
         setShowOTP(false);
-        GET_ACCOUNT()
+        GET_ACCOUNT();
       } else {
         setIsLoading(false);
       }
@@ -84,10 +84,10 @@ const ShowOTP = () => {
           setShowOTP(false);
           setOTP("");
           document.body.style.overflow = "visible";
-          setAccountName("")
-          setAccountNumber("")
-          setBankName("")
-          GET_ACCOUNT()
+          setAccountName("");
+          setAccountNumber("");
+          setBankName("");
+          GET_ACCOUNT();
           if (isLoading === true) {
             setIsLoading(false);
           }

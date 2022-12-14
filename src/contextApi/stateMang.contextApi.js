@@ -7,6 +7,7 @@ import React, {
   useRef,
   useEffect,
 } from "react";
+import { useNavigate } from "react-router-dom";
 import reducer, { INITIAL_STATE } from "../components/reducer/reducer";
 import { onboardingSteps } from "../pages/utils";
 const StateMang = createContext();
@@ -14,9 +15,98 @@ const Context = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const token = localStorage.getItem("login_token");
   const [passcode, setPassCode] = useState("");
+  const navigate = useNavigate();
   const [address, setAddress] = useState("");
   const [name, setName] = useState("");
   const [autoSweepID, setAutoSweepID] = useState(null);
+  const [steps, setSteps] = useState(onboardingSteps);
+  const [currentStep, setCurrentStep] = useState(0);
+  //sign up flow
+
+  const [value, setValue] = useState("");
+  const [showEye, setShowEye] = useState(true);
+  const labelRef = useRef(null);
+  const inputRef = useRef(null);
+  const [userDetails, setUserDetails] = useState({});
+  const [passwordDetails, setPasswordDetails] = useState({});
+  const [companyDetails, setCompanyDetails] = useState({});
+  const [file, setFile] = useState(null);
+  const [userMail, setUserMail] = useState({});
+  const [userOtp, setUserOtp] = useState({});
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  // const [isAuth, setIsAuth] = useState(false);
+  const [newPassword, setNewPassword] = useState({});
+  const [verificationMail, setVerificationMail] = useState("");
+  const [user, setUser] = useState({});
+  const [showNav, setShowNav] = useState(true);
+  const [showCreateBranch, setShowCreateBranch] = useState(false);
+  const [showDeleteBranch, setShowDeleteBranch] = useState(false);
+  const [showDeletedMsg, setShowDeletedMsg] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const [editBranchName, setEditBranchName] = useState("");
+  const [editBranchAddress, setEditBranchAddress] = useState("");
+  const [editBranchPasscode, setEditBranchPasscode] = useState("");
+  const [showEditSucc, setShowEditSucc] = useState(false);
+  const [showAddAccount, setShowAddAccount] = useState(false);
+  const [accountNumber, setAccountNumber] = useState("");
+  const [bankName, setBankName] = useState("");
+  const [accountName, setAccountName] = useState("");
+  const [bankCode, setBankCode] = useState("");
+  const [acctName, setAcctName] = useState("");
+  const [acct, setAcct] = useState("");
+  const [showOTP, setShowOTP] = useState(false);
+  const [showAcctSucc, setShowAcctSucc] = useState(false);
+  const [showWithdrawSucc, setShowWithdrawSucc] = useState(false);
+  const [otp, setOTP] = useState("");
+  const [withdrawOTP, setWithdrawOTP] = useState("");
+  const [withdrawPassword, setWithdrawPassword] = useState("");
+  const [withdrawAmount, setWithdrawAmount] = useState("");
+  const [showWithdrawOTP, setShowWithdrawOTP] = useState(false);
+  const [showWithdrawAmount, setShowWithdrawAmount] = useState(false);
+  const [showWithdrawPassword, setShowWithdrawPassword] = useState(false);
+  const [showSelectAutoSweep, setShowSelectAutoSweep] = useState(false);
+  const [showSelectHourly, setShowSelectHourly] = useState(false);
+  const [showSelectDaily, setShowSelectDaily] = useState(false);
+  const [selected, setSelected] = useState(false);
+  const [frequency, setFrequency] = useState(false);
+  const [freq, setFreq] = useState("");
+  const [showAutoSweepAmount, setShowAutoSweepAmount] = useState(false);
+  const [showAutoSweepOTP, setShowAutoSweepOTP] = useState(false);
+  const [autoSweepOTP, setAutoSweepOTP] = useState("");
+  const [autoSweepAmount, setAutoSweepAmount] = useState("");
+  const [hour, setHour] = useState("1 hour");
+  const [time, setTime] = useState("12:00 am");
+  const [setOrResetAutoSweep, setSetOrResetAutoSweep] = useState(false);
+  const [resetAutoSweepTime, setResetAutoSweepTime] = useState("");
+  const [resetAutoSweepFreq, setResetAutoSweepFreq] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  let isAuth;
+  const handleAutoSweepDelete = async () => {
+    const token = localStorage.getItem("login_token");
+    setIsLoading(true);
+    try {
+      const res = await axios.delete(
+        `https://backend.magentacashier.com/business/recurrentcashout/delete/${autoSweepID}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status === 204) {
+        setIsLoading(false);
+
+        localStorage.removeItem("reset_auto_sweep_result");
+        if (localStorage.getItem("item") !== null) {
+          localStorage.removeItem("item");
+        }
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  };
   const data = {
     passcode,
     address,
@@ -52,8 +142,7 @@ const Context = ({ children }) => {
       res?.data?.map((a) => {
         setAutoSweepID(a.id);
       });
-    } catch (err) {
-    }
+    } catch (err) {}
   };
   const GET_ACCOUNT = async () => {
     const token = localStorage.getItem("login_token");
@@ -72,8 +161,8 @@ const Context = ({ children }) => {
     }
   };
   useEffect(() => {
-    Get_Branch();
     Get_Auto_Sweep();
+    Get_Branch();
   }, []);
   const label = [
     "Jan",
@@ -174,74 +263,16 @@ const Context = ({ children }) => {
     ],
   };
 
-  const [steps, setSteps] = useState(onboardingSteps);
-  const [currentStep, setCurrentStep] = useState(0);
-  //sign up flow
-
-  const [value, setValue] = useState("");
-  const [showEye, setShowEye] = useState(true);
-  const labelRef = useRef(null);
-  const inputRef = useRef(null);
-  const [userDetails, setUserDetails] = useState({});
-  const [passwordDetails, setPasswordDetails] = useState({});
-  const [companyDetails, setCompanyDetails] = useState({});
-  const [file, setFile] = useState(null);
-  const [userMail, setUserMail] = useState({});
-  const [userOtp, setUserOtp] = useState({});
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  // const [isAuth, setIsAuth] = useState(false);
-  const [newPassword, setNewPassword] = useState({});
-  const [verificationMail, setVerificationMail] = useState("");
-  const [user, setUser] = useState({});
-  const [showNav, setShowNav] = useState(true);
-  const [showCreateBranch, setShowCreateBranch] = useState(false);
-  const [showDeleteBranch, setShowDeleteBranch] = useState(false);
-  const [showDeletedMsg, setShowDeletedMsg] = useState(false);
-  const [showEdit, setShowEdit] = useState(false);
-  const [editBranchName, setEditBranchName] = useState("");
-  const [editBranchAddress, setEditBranchAddress] = useState("");
-  const [editBranchPasscode, setEditBranchPasscode] = useState("");
-  const [showEditSucc, setShowEditSucc] = useState(false);
-  const [showAddAccount, setShowAddAccount] = useState(false);
-  const [accountNumber, setAccountNumber] = useState("");
-  const [bankName, setBankName] = useState("");
-  const [accountName, setAccountName] = useState("");
-  const [bankCode, setBankCode] = useState("");
-  const [acctName, setAcctName] = useState("");
-  const [acct, setAcct] = useState("");
-  const [showOTP, setShowOTP] = useState(false);
-  const [showAcctSucc, setShowAcctSucc] = useState(false);
-  const [showWithdrawSucc, setShowWithdrawSucc] = useState(false);
-  const [otp, setOTP] = useState("");
-  const [withdrawOTP, setWithdrawOTP] = useState("");
-  const [withdrawPassword, setWithdrawPassword] = useState("");
-  const [withdrawAmount, setWithdrawAmount] = useState("");
-  const [showWithdrawOTP, setShowWithdrawOTP] = useState(false);
-  const [showWithdrawAmount, setShowWithdrawAmount] = useState(false);
-  const [showWithdrawPassword, setShowWithdrawPassword] = useState(false);
-  const [showSelectAutoSweep, setShowSelectAutoSweep] = useState(false);
-  const [showSelectHourly, setShowSelectHourly] = useState(false);
-  const [showSelectDaily, setShowSelectDaily] = useState(false);
-  const [selected, setSelected] = useState(false);
-  const [frequency, setFrequency] = useState(false);
-  const [freq, setFreq] = useState("");
-  const [showAutoSweepAmount, setShowAutoSweepAmount] = useState(false);
-  const [showAutoSweepOTP, setShowAutoSweepOTP] = useState(false);
-  const [autoSweepOTP, setAutoSweepOTP] = useState("");
-  const [autoSweepAmount, setAutoSweepAmount] = useState("");
-  const [hour, setHour] = useState("1 hour");
-  const [time, setTime] = useState("12:00 am");
-  const [setOrResetAutoSweep, setSetOrResetAutoSweep] = useState(false);
-  const [resetAutoSweepTime, setResetAutoSweepTime] = useState("");
-  const [resetAutoSweepFreq, setResetAutoSweepFreq] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  let isAuth;
   if (localStorage.getItem("isAuth") === null) {
     isAuth = false;
   } else {
     isAuth = true;
   }
+  useEffect(() => {
+     if (!localStorage.getItem("isAuth")) {
+       navigate("/login");
+     }
+ },[])
   const merchant = {
     company_name: companyDetails?.companyName,
     email: userDetails.email,
@@ -334,6 +365,7 @@ const Context = ({ children }) => {
         setEditBranchAddress,
         setEditBranchName,
         setEditBranchPasscode,
+        handleAutoSweepDelete,
         editBranchAddress,
         editBranchName,
         editBranchPasscode,

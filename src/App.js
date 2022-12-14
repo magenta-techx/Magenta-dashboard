@@ -33,7 +33,7 @@ import WithdrawSuccMsg from "./components/WithdrawSucc";
 import Frequency from "./components/Frequency";
 import { ShowAutoSweepAmount } from "./components/ShowAutoSweepAmount";
 import AutoSweepOTP from "./components/AutoSweepOTP";
-
+import { useNavigate } from "react-router-dom";
 function App() {
   const {
     showNav,
@@ -88,6 +88,7 @@ function App() {
     isLoading,
   } = ItemContext();
   let docTitle = document.title;
+  const navigate = useNavigate();
   window.addEventListener("blur", () => {
     document.title = "Come back 😒";
   });
@@ -97,6 +98,9 @@ function App() {
   useEffect(() => {
     document.addEventListener("contextmenu", (event) => event.preventDefault());
   }, []);
+
+  const auth = localStorage.getItem("isAuth");
+  const isAuth = JSON.parse(auth);
   return (
     <div className="flex">
       {showNav && (
@@ -104,7 +108,7 @@ function App() {
           <Navbar />
         </div>
       )}
-      {showCreateBranch && (
+      {showCreateBranch && isAuth && (
         <div
           onClick={() => {
             setShowCreateBranch(false);
@@ -115,14 +119,13 @@ function App() {
             if (isLoading === true) {
               setIsLoading(false);
             }
-           
           }}
-          className="w-screen h-screen z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
+          className="w-screen h-screen z-20 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
         >
           <CreateBranch />
         </div>
       )}
-      {showWithdrawAmount && (
+      {showWithdrawAmount && isAuth && (
         <div
           onClick={() => {
             setShowWithdrawAmount(false);
@@ -138,7 +141,7 @@ function App() {
           <WithdrawAmount />
         </div>
       )}
-      {frequency && (
+      {frequency && isAuth && (
         <div
           onClick={() => {
             setFrequency(false);
@@ -149,7 +152,7 @@ function App() {
           <Frequency />
         </div>
       )}
-      {showAutoSweepAmount && (
+      {showAutoSweepAmount && isAuth && (
         <div
           onClick={() => {
             setShowAutoSweepAmount(false);
@@ -161,7 +164,7 @@ function App() {
           <ShowAutoSweepAmount />
         </div>
       )}
-      {showAutoSweepOTP && (
+      {showAutoSweepOTP && isAuth && (
         <div
           onClick={() => {
             setShowAutoSweepOTP(false);
@@ -175,7 +178,7 @@ function App() {
           <AutoSweepOTP />
         </div>
       )}
-      {showWithdrawSucc && (
+      {showWithdrawSucc && isAuth && (
         <div
           onClick={() => {
             setShowWithdrawSucc(false);
@@ -188,7 +191,7 @@ function App() {
           <WithdrawSuccMsg />
         </div>
       )}
-      {showWithdrawOTP && (
+      {showWithdrawOTP && isAuth && (
         <div
           onClick={() => {
             setShowWithdrawOTP(false);
@@ -203,7 +206,7 @@ function App() {
           <WithdrawOTP />
         </div>
       )}
-      {showSelectHourly && (
+      {showSelectHourly && isAuth && (
         <div
           onClick={() => {
             setShowSelectHourly(false);
@@ -214,7 +217,7 @@ function App() {
           <SelectHourly />
         </div>
       )}
-      {showSelectAutoSweep && (
+      {showSelectAutoSweep && isAuth && (
         <div
           onClick={() => {
             setShowSelectAutoSweep(false);
@@ -226,7 +229,7 @@ function App() {
           <SelectAutoSweep />
         </div>
       )}
-      {showDeleteBranch && (
+      {showDeleteBranch && isAuth && (
         <div
           onClick={() => {
             setShowDeleteBranch(false);
@@ -237,7 +240,7 @@ function App() {
           <DeleteBranchMsg />
         </div>
       )}
-      {showDeletedMsg && (
+      {showDeletedMsg && isAuth && (
         <div
           onClick={() => {
             setShowDeletedMsg(false);
@@ -249,7 +252,7 @@ function App() {
           <DeletedMsg />
         </div>
       )}
-      {showEdit && (
+      {showEdit && isAuth && (
         <div
           onClick={() => {
             setShowEdit(false);
@@ -266,7 +269,7 @@ function App() {
           <Edit />
         </div>
       )}
-      {showEditSucc && (
+      {showEditSucc && isAuth && (
         <div
           onClick={() => {
             setShowEditSucc(false);
@@ -279,7 +282,7 @@ function App() {
           <ShowEditSucc />
         </div>
       )}
-      {showOTP && (
+      {showOTP && isAuth && (
         <div
           onClick={() => {
             setShowOTP(false);
@@ -297,7 +300,7 @@ function App() {
           <ShowOTP />
         </div>
       )}
-      {showAddAccount && (
+      {showAddAccount && isAuth && (
         <div
           onClick={() => {
             setShowAddAccount(false);
@@ -314,7 +317,7 @@ function App() {
           <AddAccount />
         </div>
       )}
-      {showAcctSucc && (
+      {showAcctSucc && isAuth && (
         <div
           onClick={() => {
             setShowAcctSucc(false);

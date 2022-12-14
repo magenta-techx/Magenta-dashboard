@@ -47,6 +47,7 @@ const WithdrawalDetails = ({
               payload: account,
             });
             setSelected(true);
+            localStorage.setItem("account",JSON.stringify(account_number))
           }}
           type="radio"
           name="sam"

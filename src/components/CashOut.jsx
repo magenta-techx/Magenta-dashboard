@@ -21,6 +21,7 @@ const CashOut = () => {
     setShowSelectAutoSweep,
     time,
     GET_ACCOUNT,
+    handleAutoSweepDelete,
     state: { accountDetails },
     autoSweepID,
   } = ItemContext();
@@ -31,6 +32,7 @@ const CashOut = () => {
   } else {
     items = true;
   }
+  console.log(accountDetails)
   const timeSet = JSON.parse(get);
   const hour = timeSet?.hour;
   const frequency = timeSet?.frequency;
@@ -42,31 +44,6 @@ const CashOut = () => {
   const handleAutoSweep = () => {
     setShowSelectAutoSweep(true);
     document.body.style.overflow = "hidden";
-  };
-  const handleAutoSweepDelete = async () => {
-    const token = localStorage.getItem("login_token");
-    setIsLoading(true);
-    try {
-      const res = await axios.delete(
-        `https://backend.magentacashier.com/business/recurrentcashout/delete/${autoSweepID}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (res.status === 204) {
-        setIsLoading(false);
-
-        localStorage.removeItem("reset_auto_sweep_result");
-        if (localStorage.getItem("item") !== null) {
-          localStorage.removeItem("item");
-        }
-      }
-    } catch (error) {
-      setIsLoading(false);
-      console.log(error);
-    }
   };
 
   useEffect(() => {
@@ -155,7 +132,10 @@ const CashOut = () => {
               Make a withdrawal into your bank account
             </p>
             <div className="flex justify-end" onClick={handleWithdraw}>
-              <button className="text-[16px] w-[157px] h-[45px] m-auto  flex rounded-xl justify-center items-center bg-white text-[#4E00AD] font-medium cursor-pointer  ">
+              <button
+                disabled={accountDetails.length === 0}
+                className="text-[16px] w-[157px] h-[45px] m-auto  flex rounded-xl justify-center items-center bg-white text-[#4E00AD] font-medium cursor-pointer  disabled:text-black disabled:bg-[#E2E6EE] disabled:cursor-not-allowed"
+              >
                 Withdraw
               </button>
             </div>
@@ -173,7 +153,10 @@ const CashOut = () => {
                 Set an auto sweep for <br /> withdrawal
               </p>
               <div className="flex justify-end" onClick={handleAutoSweep}>
-                <button className="text-[15px] mt-2 w-[157px] h-[45px] m-auto flex rounded-xl justify-center items-center font-normal bg-[#4E00AD] text-white cursor-pointer  ">
+                <button
+                  disabled={accountDetails.length === 0}
+                  className="text-[15px] mt-2 w-[157px] h-[45px] m-auto flex rounded-xl justify-center items-center font-normal bg-[#4E00AD] text-white cursor-pointer   disabled:text-black disabled:bg-[#E2E6EE] disabled:cursor-not-allowed"
+                >
                   Set auto sweep
                 </button>
               </div>
@@ -193,7 +176,8 @@ const CashOut = () => {
                 </span>
               </div>
               <p className="text-black font-medium text-sm">
-                An auto sweep for {hour}{ timeAmOrPm} {frequency} has been set
+                An auto sweep for {hour}
+                {timeAmOrPm} {frequency} has been set
               </p>
               <div className="flex justify-end" onClick={handleAutoSweepDelete}>
                 <button className="text-sm w-[157px] h-[45px]  flex rounded-xl justify-center items-center bg-[#4E00AD] text-white font-medium cursor-pointer  ">

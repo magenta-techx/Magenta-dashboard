@@ -30,7 +30,7 @@ const AutoSweepOTP = () => {
     const index = hour.indexOf(" ");
     const hou = hour.substring(index + 1, 0);
     const token = localStorage.getItem("login_token");
-   
+   console.log(hou)
     setIsLoading(true);
     try {
       const res = await axios.post(
@@ -48,6 +48,9 @@ const AutoSweepOTP = () => {
           },
         }
       );
+      console.log(res)
+      console.log(hou);
+      
       // setShowAcctSucc(true);
       if (res.status === 200 || res.status === 201) {
         setShowAutoSweepOTP(false);

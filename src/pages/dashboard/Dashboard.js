@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import { ItemContext } from "../../contextApi/stateMang.contextApi";
 import DashboardCol1 from "./dashboardCol1/DashboardCol1";
@@ -7,9 +8,13 @@ import DashboardCol2 from "./dashboardCol2/DashboardCol2.jsx";
 import DashboardCol3 from "./dashboardCol3/DashboardCol3";
 
 const Dashboard = () => {
-  const { setShowNav,Get_Branch } = ItemContext();
+  const { setShowNav, Get_Branch } = ItemContext();
+  const navigate=useNavigate()
   useEffect(() => {
     setShowNav(true);
+    if (!localStorage.getItem("isAuth")) {
+      navigate("/login");
+    }
   }, []);
 
   return (

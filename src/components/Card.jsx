@@ -7,7 +7,11 @@ import { TbTrash } from "react-icons/tb";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 
 const Card = ({ detail: { account_number, bank_name, id }, detail }) => {
-  const { GET_ACCOUNT } = ItemContext();
+  const {
+    GET_ACCOUNT,
+    handleAutoSweepDelete,
+    state: { ForEachAcctDetail },
+  } = ItemContext();
   const [state, setState] = useState(false);
   const split = account_number.split("");
   const fitr = split?.filter((a, i) => {
@@ -27,31 +31,75 @@ const Card = ({ detail: { account_number, bank_name, id }, detail }) => {
   const sec = midfth.splice(1, 1, "*");
   const trd = midfth.splice(2, 2, "*");
   const fth = midfth.splice(3, 2, "*");
-
+  const acct = localStorage.getItem("account");
+  const acct_num = JSON.parse(acct);
   const handleClick = (detail) => {
     if (detail.id === id) {
       setState(!state);
+      console.log(acct_num);
     } else {
       setState(false);
     }
   };
+  // console.log(accountDetails)
   const handleDelete = async (detail) => {
     const token = localStorage.getItem("login_token");
-    try {
-      const res = await axios.delete(
-        `https://backend.magentacashier.com/accounts/account/delete/${detail?.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+    console.log(detail);
+    // Check if acct number are equal
+    if (localStorage.getItem("item")) {
+      if (detail?.account_number === acct_num) {
+        handleAutoSweepDelete();
+        try {
+          const res = await axios.delete(
+            `https://backend.magentacashier.com/accounts/account/delete/${detail?.id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          if (res.status === 204) {
+            GET_ACCOUNT();
+            setState(false);
+          }
+        } catch (error) {
+          console.log(error);
         }
-      );
-      if (res.status === 204) {
-        GET_ACCOUNT()
-        setState(false)
+      } else {
+        try {
+          const res = await axios.delete(
+            `https://backend.magentacashier.com/accounts/account/delete/${detail?.id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          if (res.status === 204) {
+            GET_ACCOUNT();
+            setState(false);
+          }
+        } catch (error) {
+          console.log(error);
+        }
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      try {
+        const res = await axios.delete(
+          `https://backend.magentacashier.com/accounts/account/delete/${detail?.id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (res.status === 204) {
+          GET_ACCOUNT();
+          setState(false);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   return (

@@ -5,9 +5,12 @@ import { ItemContext } from "../contextApi/stateMang.contextApi";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const { user } = ItemContext();
-  const userFirstLetter = user?.email?.split("")[0];
-  const userSecondLetter = user?.email?.split("")[1];
+  const {} = ItemContext();
+  const user = localStorage.getItem("user");
+  const email = JSON.parse(user);
+
+  const userFirstLetter = email?.email?.split("")[0];
+  const userSecondLetter = email?.email?.split("")[1];
   const navigate = useNavigate();
 
   return (
@@ -15,12 +18,21 @@ const Header = () => {
       <div>
         <TbNotification size="30px" className="text-[#7132BD]" />
       </div>
-      <div className="flex gap-4">
+      <div className="flex gap-6 ">
         <div className="relative w-fit cursor-pointer">
-          <IoMdNotifications size="25px" className="text-[#93A3C0] " />
-          <p className="absolute top-0 right-0 bg-[#7132BD] w-3 h-3 rounded-full"></p>
+          <IoMdNotifications size="25px" className="text-[#93A3C0] w-[6.5" />
+          <p className="absolute top-0 right-0 bg-[#7132BD] w-3 h-3 rounded-full "></p>
         </div>
-        <div className="bg-[#7132BD] cursor-pointer rounded-full w-8 text-white h-8 flex justify-center items-center">
+        <div
+          className="bg-[#7132BD] cursor-pointer rounded-full w-[42px] text-white h-[42px] text-lg flex justify-center items-center"
+          onClick={() => {
+            localStorage.removeItem("isAuth")
+            localStorage.removeItem("account")
+            localStorage.removeItem("login_token")
+            localStorage.removeItem("user")
+            navigate("/login")
+          }}
+        >
           {`${userFirstLetter?.toUpperCase()}${userSecondLetter?.toUpperCase()}  `}
         </div>
       </div>

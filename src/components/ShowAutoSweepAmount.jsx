@@ -16,6 +16,7 @@ export const ShowAutoSweepAmount = () => {
     setSelected,
     state: { accountDetails },
   } = ItemContext();
+  console.log(accountDetails);
   const handleSubmit = async (e) => {
 
     e.preventDefault();

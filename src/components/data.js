@@ -134,6 +134,7 @@ export const data = {
 };
 
 export const timee = [
+  "12:00 am",
   "1:00 am",
   "2:00 am",
   "3:00 am",

@@ -106,7 +106,7 @@ const CompanyBranch = () => {
                      document.body.style.overflow = "hidden";
               }}>
                 <button className="text-sm w-[157px] h-[45px]  flex rounded-xl justify-center items-center bg-[#4E00AD] text-white font-medium cursor-pointer  ">
-                  Withdraw
+                  Create New Branch
                 </button>
               </div>
             </div>

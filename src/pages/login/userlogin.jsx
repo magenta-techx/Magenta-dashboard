@@ -9,6 +9,10 @@ import MagentaLogo from "../../assets/logo";
 import { ItemContext } from "../../contextApi/stateMang.contextApi";
 
 const LoginComponent = () => {
+  const { Get_Branch } = ItemContext();
+  // useEffect(() => {
+  //   Get_Branch()
+  // },[])
   const [err, setErr] = useState("");
   const [bool, setBool] = useState("");
   const navigate = useNavigate();
@@ -20,16 +24,17 @@ const LoginComponent = () => {
     setLoginPassword,
     showNav,
     setShowNav,
-    
+    isLoading,
+    setIsLoading,
     setUser,
   } = ItemContext();
-  
+
   useEffect(() => {
     setShowNav(false);
   }, []);
   const handleSubmit = async (e) => {
- 
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.post(
         "https://backend.magentacashier.com/accounts/login/",
@@ -43,16 +48,20 @@ const LoginComponent = () => {
         localStorage.setItem("login_token", login_token);
         localStorage.setItem("isAuth", true);
         navigate("/");
+        setIsLoading(false);
+        Get_Branch();
+        // window.location.reload()
       } else {
         console.log("bad request");
         console.log(response.data);
       }
-
+      localStorage.setItem("user",JSON.stringify(response.data));
       console.log(response.data);
     } catch (err) {
       console.log(err);
       if (err.response.data === undefined) {
         setErr(err.message);
+        setIsLoading(false);
       } else {
         setErr(err.response.data.detail);
       }
@@ -70,7 +79,7 @@ const LoginComponent = () => {
       </div>
       <div className="w-full">
         <div className="user-details text-center bg-[#EEE8F8] rounded-xl w-[550px] m-auto my-[50px] flex pt-[44px] flex-col gap-5">
-          <div className="flex justify-center">
+          <div className="flex justify-center relative z-[]">
             <svg
               width="22"
               height="22"
@@ -144,7 +153,7 @@ const LoginComponent = () => {
             Forgot Password
           </p>
           <button
-            className="w-[360px] max-w-full h-[46px]  m-auto rounded-[10px] disabled:text-gray-500 disabled:bg-[#E2E6EE] bg-[#4E00AD] text-white"
+            className="w-[360px] max-w-full h-[46px]  m-auto rounded-[10px] disabled:text-gray-500 disabled:bg-[#E2E6EE] bg-[#4E00AD] text-white flex justify-center items-center"
             onClick={handleSubmit}
             disabled={
               !loginPassword ||
@@ -154,7 +163,16 @@ const LoginComponent = () => {
               !loginEmail.includes(".")
             }
           >
-            Continue
+            {isLoading ? (
+              <div className="flex items-center gap-4">
+                <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
+                  null
+                </div>
+                <span>Loading</span>
+              </div>
+            ) : (
+              "Continue"
+            )}
           </button>
 
           <p className="pb-5">
