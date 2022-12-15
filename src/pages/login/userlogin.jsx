@@ -9,10 +9,6 @@ import MagentaLogo from "../../assets/logo";
 import { ItemContext } from "../../contextApi/stateMang.contextApi";
 
 const LoginComponent = () => {
-  const { Get_Branch } = ItemContext();
-  // useEffect(() => {
-  //   Get_Branch()
-  // },[])
   const [err, setErr] = useState("");
   const [bool, setBool] = useState("");
   const navigate = useNavigate();
@@ -22,11 +18,9 @@ const LoginComponent = () => {
     loginPassword,
     setLoginEmail,
     setLoginPassword,
-    showNav,
     setShowNav,
     isLoading,
     setIsLoading,
-    setUser,
   } = ItemContext();
 
   useEffect(() => {
@@ -49,8 +43,6 @@ const LoginComponent = () => {
         localStorage.setItem("isAuth", true);
         navigate("/");
         setIsLoading(false);
-        Get_Branch();
-        // window.location.reload()
       } else {
         console.log("bad request");
         console.log(response.data);

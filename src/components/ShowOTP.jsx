@@ -47,6 +47,9 @@ const ShowOTP = () => {
         setIsLoading(false);
         setShowOTP(false);
         GET_ACCOUNT();
+        setBankName("");
+        setAccountNumber("");
+        setAccountName("");
       } else {
         setIsLoading(false);
       }

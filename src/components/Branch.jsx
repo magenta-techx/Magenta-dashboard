@@ -12,6 +12,7 @@ const Branch = ({ branch }) => {
     setEditBranchAddress,
     setEditBranchName,
     setEditBranchPasscode,
+    state: { ForEachAcctDetail },
   } = ItemContext();
   const navigate = useNavigate();
   const handleClick = (item) => {
@@ -28,6 +29,7 @@ const Branch = ({ branch }) => {
   const handleDelete = (item) => {
     setShowDeleteBranch(true);
     dispatch({ type: "Individual Details", payload: item });
+    console.log(ForEachAcctDetail)
     document.body.style.overflow = "hidden";
   };
   return (

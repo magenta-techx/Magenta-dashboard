@@ -38,11 +38,14 @@ const Context = ({ children }) => {
   // const [isAuth, setIsAuth] = useState(false);
   const [newPassword, setNewPassword] = useState({});
   const [verificationMail, setVerificationMail] = useState("");
+  const [states, setStates] = useState(false);
   const [user, setUser] = useState({});
   const [showNav, setShowNav] = useState(true);
   const [showCreateBranch, setShowCreateBranch] = useState(false);
   const [showDeleteBranch, setShowDeleteBranch] = useState(false);
   const [showDeletedMsg, setShowDeletedMsg] = useState(false);
+  const [showAcctDelete, setShowAcctDelete] = useState(false);
+
   const [showEdit, setShowEdit] = useState(false);
   const [editBranchName, setEditBranchName] = useState("");
   const [editBranchAddress, setEditBranchAddress] = useState("");
@@ -58,6 +61,7 @@ const Context = ({ children }) => {
   const [showOTP, setShowOTP] = useState(false);
   const [showAcctSucc, setShowAcctSucc] = useState(false);
   const [showWithdrawSucc, setShowWithdrawSucc] = useState(false);
+  const [showDeleteSucc, setShowDeleteSucc] = useState(false);
   const [otp, setOTP] = useState("");
   const [withdrawOTP, setWithdrawOTP] = useState("");
   const [withdrawPassword, setWithdrawPassword] = useState("");
@@ -160,10 +164,7 @@ const Context = ({ children }) => {
       console.log(error);
     }
   };
-  useEffect(() => {
-    Get_Auto_Sweep();
-    Get_Branch();
-  }, []);
+ 
   const label = [
     "Jan",
     "",
@@ -269,10 +270,10 @@ const Context = ({ children }) => {
     isAuth = true;
   }
   useEffect(() => {
-     if (!localStorage.getItem("isAuth")) {
-       navigate("/login");
-     }
- },[])
+    if (!localStorage.getItem("isAuth")) {
+      navigate("/login");
+    }
+  }, []);
   const merchant = {
     company_name: companyDetails?.companyName,
     email: userDetails.email,
@@ -305,6 +306,8 @@ const Context = ({ children }) => {
         setShowAutoSweepOTP,
         autoSweepAmount,
         setAutoSweepAmount,
+        showDeleteSucc,
+        setShowDeleteSucc,
         showAutoSweepAmount,
         isLoading,
         setIsLoading,
@@ -338,6 +341,8 @@ const Context = ({ children }) => {
         showWithdrawAmount,
         setShowWithdrawAmount,
         withdrawPassword,
+        states,
+        setStates,
         setWithdrawPassword,
         setShowAcctSucc,
         withdrawAmount,
@@ -386,6 +391,8 @@ const Context = ({ children }) => {
         userDetails,
         setShowDeleteBranch,
         showDeleteBranch,
+        showAcctDelete,
+        setShowAcctDelete,
         setUserDetails,
         passwordDetails,
         setPasswordDetails,

@@ -34,6 +34,8 @@ import Frequency from "./components/Frequency";
 import { ShowAutoSweepAmount } from "./components/ShowAutoSweepAmount";
 import AutoSweepOTP from "./components/AutoSweepOTP";
 import { useNavigate } from "react-router-dom";
+import AcctDeleteMsg from "./components/AcctDeleteMsg";
+import ShowDeleteSucc from "./components/ShowDeleteSucc";
 function App() {
   const {
     showNav,
@@ -74,6 +76,8 @@ function App() {
     setAccountNumber,
     setIsLoading,
     showAcctSucc,
+    showAcctDelete,
+    setShowAcctDelete,
     setShowAcctSucc,
     showWithdrawAmount,
     setShowWithdrawAmount,
@@ -86,6 +90,8 @@ function App() {
     setShowSelectAutoSweep,
     setSelected,
     isLoading,
+    setShowDeleteSucc,
+    showDeleteSucc
   } = ItemContext();
   let docTitle = document.title;
   const navigate = useNavigate();
@@ -282,6 +288,18 @@ function App() {
           <ShowEditSucc />
         </div>
       )}
+      {showDeleteSucc && isAuth && (
+        <div
+          onClick={() => {
+            setShowDeleteSucc(false);
+            setIsLoading(false);
+            document.body.style.overflow = "visible";
+          }}
+          className="w-screen h-screen z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
+        >
+          <ShowDeleteSucc />
+        </div>
+      )}
       {showOTP && isAuth && (
         <div
           onClick={() => {
@@ -326,6 +344,17 @@ function App() {
           className="w-screen h-screen z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
         >
           <AcctSuccMsg />
+        </div>
+      )}
+      {showAcctDelete && isAuth && (
+        <div
+          onClick={() => {
+            setShowAcctDelete(false);
+            document.body.style.overflow = "visible";
+          }}
+          className="w-screen h-screen z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
+        >
+          <AcctDeleteMsg />
         </div>
       )}
 

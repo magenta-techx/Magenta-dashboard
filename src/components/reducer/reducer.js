@@ -4,7 +4,7 @@ export const INITIAL_STATE = {
   accountDetails: [],
   ForEachDetail: {},
   ForEachAcctDetail: {},
-  time: 1,
+  AccountDeleteDetail: {},
 };
 const reducer = (state, action) => {
   switch (action.type) {
@@ -28,17 +28,11 @@ const reducer = (state, action) => {
         ...state,
         ForEachAcctDetail: action.payload,
       };
-    case "Increment time":
+    case "Account Delete Detail":
       return {
         ...state,
-        time: state.time + 1,
+        AccountDeleteDetail: action.payload,
       };
-    case "Decrement time":
-      return {
-        ...state,
-        time: state.time - 1,
-      };
-
     default:
       return state;
   }

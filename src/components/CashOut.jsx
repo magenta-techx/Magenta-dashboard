@@ -22,7 +22,8 @@ const CashOut = () => {
     time,
     GET_ACCOUNT,
     handleAutoSweepDelete,
-    state: { accountDetails },
+    state: { accountDetails, ForEachAcctDetail },
+    dispatch,
     autoSweepID,
   } = ItemContext();
   const get = localStorage.getItem("reset_auto_sweep_result");
@@ -32,7 +33,6 @@ const CashOut = () => {
   } else {
     items = true;
   }
-  console.log(accountDetails)
   const timeSet = JSON.parse(get);
   const hour = timeSet?.hour;
   const frequency = timeSet?.frequency;

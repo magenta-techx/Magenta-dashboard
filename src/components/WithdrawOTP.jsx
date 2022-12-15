@@ -14,12 +14,14 @@ const WithdrawOTP = () => {
     setIsLoading,
     withdrawAmount,
     setShowWithdrawSucc,
-
+    setAccountName,
+    setAccountNumber,
+    setBankName,
     state: { ForEachAcctDetail },
   } = ItemContext();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
     const token = localStorage.getItem("login_token");
     try {
       const res = await axios.post(
@@ -41,13 +43,15 @@ const WithdrawOTP = () => {
       if (res.status === 200) {
         setShowWithdrawSucc(true);
         setShowWithdrawOTP(false);
-        setIsLoading(false)
+        setIsLoading(false);
+        
+        // setWithdrawAmount("")
       } else {
         setShowWithdrawSucc(false);
       }
     } catch (error) {
       console.log(error);
-      setIsLoading(false)
+      setIsLoading(false);
     }
     // setOTP("");
   };

@@ -48,8 +48,7 @@ const AutoSweepOTP = () => {
           },
         }
       );
-      console.log(res)
-      console.log(hou);
+    
       
       // setShowAcctSucc(true);
       if (res.status === 200 || res.status === 201) {

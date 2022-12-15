@@ -13,7 +13,6 @@ const SelectHourly = () => {
 
     setTime(timee[index]);
   };
-  console.log(time);
   const handleDecrease = () => {
     setIndex(index - 1);
     if (index <= 0) setIndex(0);

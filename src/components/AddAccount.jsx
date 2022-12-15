@@ -38,6 +38,7 @@ const AddAccount = () => {
           },
         }
       );
+      console.log(res)
       if (res.status === 200) {
         setIsLoading(false);
         document.body.style.overflow = "hidden";
@@ -57,6 +58,7 @@ const AddAccount = () => {
     // setBankName("");
     // setAccountName("");
   };
+
 
   useEffect(() => {
     const entries = Object.entries(data);
@@ -170,7 +172,6 @@ const AddAccount = () => {
                   let set = acc.split(":");
                   return (
                     <>
-                      {/* <option key={i}></option> */}
                       <option key={i}>{set[1].trim()}</option>
                     </>
                   );

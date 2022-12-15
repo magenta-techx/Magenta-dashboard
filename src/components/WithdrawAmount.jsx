@@ -55,6 +55,7 @@ export const WithdrawAmount = () => {
           setWithdrawAmount("");
           document.body.style.overflow = "visible";
           setSelected(false);
+          console.log('object');
           if (isLoading === true) {
             setIsLoading(false);
           }

@@ -5,7 +5,11 @@ import { ItemContext } from "../../../contextApi/stateMang.contextApi";
 const DashboardCol3Part1 = () => {
   const {
     state: { branchDetails },
+    Get_Branch,
   } = ItemContext();
+  useEffect(() => {
+    Get_Branch();
+  }, [branchDetails]);
   return (
     <div className="w-8/12 border rounded-lg shadow-md h-fit flex flex-col p-4 gap-4">
       <div className="flex justify-between">
@@ -51,7 +55,7 @@ const DashboardCol3Part1 = () => {
             })
             .map((branch, idx) => {
               return (
-                <tr className="text-center">
+                <tr className="text-center" key={idx}>
                   <td className="py-2">{branch.name}</td>
                   <td className="py-2">{branch.id}</td>
                   <td className="py-2">{branch.created_at.substring(0, 10)}</td>
