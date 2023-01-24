@@ -24,7 +24,7 @@ const ViewAllBranch = () => {
       <div className="flex gap-6 items-center">
         <div
           className=" w-[50px] h-[50px] flex justify-center items-center rounded-full bg-[#EEE8F8] cursor-pointer"
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/branch")}
         >
           <BsArrowLeft className="text-[#4E00AD] text-2xl" />
         </div>

@@ -17,7 +17,6 @@ const AddAccount = () => {
     bankName,
     setBankName,
     setShowAddAccount,
-
     setShowOTP,
     bankCode,
     setBankCode,
@@ -38,7 +37,6 @@ const AddAccount = () => {
           },
         }
       );
-      console.log(res)
       if (res.status === 200) {
         setIsLoading(false);
         document.body.style.overflow = "hidden";
@@ -96,8 +94,7 @@ const AddAccount = () => {
         setAccountName("");
       }
     } catch (error) {
-      console.log(error.response.data.message);
-      // setAccountName(error.response.data.message);
+      // console.log(error?.response?.data.message);
     }
   };
   useEffect(() => {
@@ -114,17 +111,16 @@ const AddAccount = () => {
     <div
       onClick={(e) => {
         e.stopPropagation();
-        document.body.style.overflow = "visible";
       }}
-      className="w-[487px] h-[398px] bg-white rounded-3xl relative p-6"
+      className="w-[487px] h-[398px] bg-white rounded-3xl relative p-6 poppins"
     >
       <div
         onClick={() => {
+          document.body.style.overflow = "visible";
           setShowAddAccount(false);
           setBankName("");
           setAccountNumber("");
           setAccountName("");
-          document.body.style.overflow = "visible";
           if (isLoading === true) {
             setIsLoading(false);
           }
@@ -151,7 +147,7 @@ const AddAccount = () => {
               }}
               name=""
               id="accountnumber"
-              className="border-[#AF8BDA] border outline-none w-full h-[46px] px-4 rounded-xl font-medium"
+              className="border-[#AF8BDA] border outline-none w-full h-[46px] px-4 rounded-xl font-medium bg-[#F7F9FA] poppins"
             />
           </div>
 
@@ -165,7 +161,7 @@ const AddAccount = () => {
 
             {acct.length && (
               <select
-                className="border-[#AF8BDA] border outline-none w-full h-[46px] text-[#ADB3BD]  pr-6 rounded-xl font-medium cursor-pointer"
+                className="border-[#AF8BDA] border outline-none w-full h-[46px] text-[#ADB3BD] bg-[#F7F9FA] pr-6 rounded-xl font-medium cursor-pointer poppins"
                 onChange={(e) => handleChange(e.target.value)}
               >
                 {acct.map((acc, i) => {
@@ -194,7 +190,7 @@ const AddAccount = () => {
             type="text"
             name=""
             id="accountname"
-            className="border-[#AF8BDA] border outline-none w-full h-[46px] px-4 rounded-xl font-medium"
+            className="border-[#AF8BDA] border outline-none w-full h-[46px] px-4 rounded-xl font-medium poppins bg-[#F7F9FA]"
           />
         </div>
         <div className="w-full  flex justify-center" onClick={REQUEST_OTP}>

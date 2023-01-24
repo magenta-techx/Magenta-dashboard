@@ -8,11 +8,9 @@ const AcctDeleteMsg = () => {
     setShowAcctDelete,
     isLoading,
     GET_ACCOUNT,
-    setIsLoading,
     setShowDeleteSucc,
     handleAutoSweepDelete,
     state: { ForEachAcctDetail },
-    setShowDeleteBranch,
     setStates,
   } = ItemContext();
   const acct = localStorage.getItem("account");
@@ -86,16 +84,16 @@ const AcctDeleteMsg = () => {
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="w-[500px] h-[212px] bg-white rounded-3xl relative px-6 py-10 flex flex-col gap-3 justify-between"
+      className="w-[500px] h-[212px] bg-white rounded-3xl relative px-6 py-10 flex flex-col gap-3 justify-between albert"
     >
-      <p className="text-lg">
+      <p className="text-lg ">
         Are you sure you want to <span className="text-[#DD55D4]">Delete</span>{" "}
         this account number from your magenta account?
       </p>
 
       <div className="flex w-full justify-center gap-10 items-center">
         <div
-          onClick={() => setShowDeleteBranch(false)}
+          onClick={() => setShowAcctDelete(false)}
           className="bg-[#4E00AD] w-[140px] h-[46px] rounded-xl text-white flex justify-center items-center cursor-pointer"
         >
           Cancel

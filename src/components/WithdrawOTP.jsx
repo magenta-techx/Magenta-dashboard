@@ -44,7 +44,7 @@ const WithdrawOTP = () => {
         setShowWithdrawSucc(true);
         setShowWithdrawOTP(false);
         setIsLoading(false);
-        
+        console.log('first')
         // setWithdrawAmount("")
       } else {
         setShowWithdrawSucc(false);
@@ -96,10 +96,10 @@ const WithdrawOTP = () => {
       <form className="flex flex-col gap-4" onSubmit={(e) => handleSubmit(e)}>
         <div className="flex items-center ">
           <img src="/assets/ATM machine.png" alt="ATM machine image" />
-          <h1 className="text-xl font-medium">Make A withdrawal</h1>
+          <h1 className="text-xl font-medium poppins">Make A withdrawal</h1>
         </div>
         <div className="flex flex-col justify-center items-center gap-2 w-full">
-          <label className="text-lg" htmlFor="name">
+          <label className="text-lg poppins font-normal" htmlFor="name">
             Enter OTP sent to{" "}
             <span className="text-sm">
               {loginEmail ? loginEmail : "your email"}
@@ -123,7 +123,7 @@ const WithdrawOTP = () => {
         >
           {isLoading ? (
             <div className="flex items-center gap-4">
-              <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
+              <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent poppins font-medium text-sm">
                 null
               </div>
               <span>Loading</span>
@@ -133,7 +133,7 @@ const WithdrawOTP = () => {
           )}
         </button>
         <div className="flex justify-center" onClick={REQUEST_OTP}>
-          <p className="text-[#B800AE] border-b-[#B800AE]  border-b cursor-pointer text-lg font-medium">
+          <p className="text-[#B800AE] border-b-[#B800AE]  border-b cursor-pointer text-lg font-medium albert">
             Resend OTP code
           </p>
         </div>

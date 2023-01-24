@@ -9,7 +9,7 @@ const DashboardCol2 = () => {
       <div className="flex justify-between">
         <div className="bg-[#4E00AD] rounded-xl w-[143px] h-[48px] mb-5  flex justify-center items-center cursor-pointer">
           <div className="flex gap-6 items-center text-white">
-            <small className="text-sm">Refresh</small>
+            <small className="text-sm albert font-normal">Refresh</small>
             <img src="/assets/refresh.png" alt="refresh image" />
           </div>
         </div>
@@ -20,7 +20,7 @@ const DashboardCol2 = () => {
             </div>
             <input
               placeholder="Search"
-              className="border-r-[#93A3C0] border-r outline-none w-[80] flex-1 font-medium"
+              className="border-r-[#93A3C0] border-r outline-none w-[80] flex-1 font-medium albert text-[16px]"
             />
             <div className="">
               <HiOutlineFilter className="text-[#4E00AD]" />

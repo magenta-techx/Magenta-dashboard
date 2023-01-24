@@ -33,6 +33,9 @@ const ShowWithdrawalOTP = () => {
       );
       // setShowAcctSucc(true);
       // setShowOTP(false);
+      // if (res.status === 200) {
+      //   console.log('object');
+      // }
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +74,7 @@ const ShowWithdrawalOTP = () => {
       <form className="flex flex-col gap-4" onSubmit={(e) => handleSubmit(e)}>
         <h1 className="text-xl">Add New Account Number</h1>
         <div className="flex flex-col justify-center items-center gap-2 w-full">
-          <label className="text-lg" htmlFor="name">
+          <label className="text-lg poppins font-normal" htmlFor="name">
             Enter OTP sent to{" "}
             <span className="text-sm">
               {loginEmail ? loginEmail : "your email"}
@@ -91,12 +94,12 @@ const ShowWithdrawalOTP = () => {
 
         <button
           disabled={!withdrawOTP}
-          className="w-[351px] mx-auto h-[45px] text-white flex justify-center items-center disabled:cursor-not-allowed disabled:text-gray-500 disabled:bg-[#E2E6EE]  bg-[#4E00AD] rounded-xl"
+          className="w-[351px] mx-auto h-[45px] text-white flex justify-center items-center disabled:cursor-not-allowed disabled:text-gray-500 disabled:bg-[#E2E6EE]  bg-[#4E00AD] rounded-xl poppins text-sm font-medium"
         >
           Continue
         </button>
         <div className="flex justify-center" onClick={REQUEST_OTP}>
-          <p className="text-[#B800AE] border-b-[#B800AE]  border-b cursor-pointer text-lg font-medium">
+          <p className="text-[#B800AE] border-b-[#B800AE]  border-b cursor-pointer text-lg font-medium albert">
             Resend OTP code
           </p>
         </div>

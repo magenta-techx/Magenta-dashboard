@@ -18,7 +18,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="w-[80%] px-8 py-6">
+    <div className="w-[80%] px-8 py-6 font">
       <div className="w-[full]  bg-white  ">
         <Header />
       </div>

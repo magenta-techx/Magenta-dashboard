@@ -29,7 +29,7 @@ const SelectAutoSweep = () => {
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="w-[472px] h-[255px] bg-white rounded-3xl relative p-6"
+      className="w-[472px] h-[255px] bg-white rounded-3xl relative p-6 poppins"
     >
       <div
         onClick={() => {
@@ -48,7 +48,7 @@ const SelectAutoSweep = () => {
             className="w-[96px] h-[96px]"
             alt="Time management-cuate 2"
           />
-          <p className="text-lg tracking-normal w-[265px]">
+          <p className="text-lg tracking-normal w-[265px] ">
             Set an auto Hourly or Daily withdrawal sweep for your company to
             your bank account
           </p>

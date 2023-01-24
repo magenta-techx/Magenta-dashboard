@@ -8,10 +8,7 @@ import { ItemContext } from "../contextApi/stateMang.contextApi";
 
 const Card = ({ detail: { account_number, bank_name, id }, detail }) => {
   const {
-    GET_ACCOUNT,
-    handleAutoSweepDelete,
-    isLoading,
-    setIsLoading,
+  
     setShowAcctDelete,
     state: { ForEachAcctDetail },
     states,setStates,
@@ -45,7 +42,6 @@ const Card = ({ detail: { account_number, bank_name, id }, detail }) => {
       setStates(false);
     }
   };
-  // console.log(accountDetails)
   const handleShowAcctDeleteMsg = (item) => {
     dispatch({ type: "Individual AcctDetails", payload: item });
     setShowAcctDelete(true);
@@ -57,7 +53,7 @@ const Card = ({ detail: { account_number, bank_name, id }, detail }) => {
     <>
       <div className="w-[242px] bg-[#F4F5F7] h-[86px] p-4 flex flex-col gap-4 rounded-lg">
         <div className="flex justify-between">
-          <small className="text-sm font-medium text-black">
+          <small className="text-[16px] font-normal- albert text-black">
             {fitr}
             {midfth?.join("")}
             {latr}
@@ -76,12 +72,12 @@ const Card = ({ detail: { account_number, bank_name, id }, detail }) => {
                 className="absolute w-[107px] h-[60px] bg-white text-[#DD55D4] flex justify-center items-center gap-2 rounded-2xl cursor-pointer"
               >
                 <TbTrash size="20px" />
-                <small className="text-lg">Delete</small>
+                <small className="text-sm poppins">Delete</small>
               </div>
             )}
           </div>
         </div>
-        <h4 className="text-[rgba(0,0,0,0.4)]">{bank_name}</h4>
+        <h4 className="text-[rgba(0,0,0,0.4)] albert font-normal text-[16px]">{bank_name}</h4>
       </div>
     </>
   );

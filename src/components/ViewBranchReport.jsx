@@ -37,7 +37,7 @@ const ViewBranchReport = () => {
       );
       setData(res.data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
   useEffect(() => {
@@ -62,24 +62,26 @@ const ViewBranchReport = () => {
           <div
             className=" w-[50px] h-[50px] flex justify-center items-center rounded-full bg-[#EEE8F8] cursor-pointer"
             onClick={() => {
-              navigate(-1);
+              navigate("/branch");
               document.documentElement.scrollTop = 0;
             }}
           >
             <BsArrowLeft className="text-[#4E00AD] text-2xl" />
           </div>
-          <p className="text-2xl">{report?.name}</p>
+          <p className="text-2xl font-medium abert">{report?.name}</p>
         </div>
-        <p className="text-[#6B778C] text-sm flex gap-2">
+        <p className="text-[#6B778C] text-[16px] flex gap-2">
           <span>Branch Id</span>
-          <span className="text-black">{report?.unique_id}</span>
+          <span className="text-black inter font-normal ">
+            {report?.unique_id}
+          </span>
         </p>
       </div>
       <div className="flex w-full">
         <div></div>
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center albert text-[#7132BD]">
           <MdEditLocation className="h-[20px] w-[17.25px] text-[#4E00AD]" />
-          <p className=" whitespace-nowrap overflow-hidden text-ellipsis">
+          <p className=" whitespace-nowrap overflow-hidden text-ellipsis text-[16px] font-normal">
             {report?.address}
           </p>
           <div className="flex flex-col cursor-pointer">
@@ -99,9 +101,9 @@ const ViewBranchReport = () => {
           <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
             <HiOutlineChartSquareBar size="25px" className="text-[#4E00AD]" />
           </div>
-          <div className="flex flex-col gap-6">
-            <h4 className="font-normal">Total Sales Made</h4>
-            <h2 className="font-bold flex items-center">
+          <div className="flex flex-col gap-6 inter">
+            <h4 className="font-normal  text-[16px]">Total Sales Made</h4>
+            <h2 className="font-medium flex items-center text-xl">
               <TbCurrencyNaira />
               {report?.sales_and_customers?.total_transactions}
             </h2>
@@ -111,9 +113,9 @@ const ViewBranchReport = () => {
           <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
             <HiOutlineUserGroup size="20px" className="text-[#4E00AD]" />
           </div>
-          <div className="flex flex-col gap-6">
-            <h4 className="font-normal">Total Customers</h4>
-            <h2 className="font-bold flex items-center">
+          <div className="flex flex-col gap-6 inter">
+            <h4 className="font-normal  text-[16px]">Total Customers</h4>
+            <h2 className="font-medium flex items-center text-xl">
               {/* <TbCurrencyNaira />{" "} */}
               {report?.sales_and_customers?.unique_customers}
             </h2>
@@ -123,24 +125,24 @@ const ViewBranchReport = () => {
           <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
             <RiCalendar2Line size="25px" className="text-[#4E00AD]" />
           </div>
-          <div className="flex flex-col gap-6">
-            <h4 className="font-normal">Date Created</h4>
-            <h2 className="font-bold">
+          <div className="flex flex-col gap-6 inter">
+            <h4 className="font-medium text-[16px]">Date Created</h4>
+            <h2 className="font-bold text-xl">
               {report?.created_at?.substring(0, 10)}
             </h2>
           </div>
         </div>
       </div>
       <div className="">
-        <div className="flex justify-between items-center">
-          <h2 className="text-xl font-medium">Transaction History</h2>
+        <div className="flex justify-between items-center albert">
+          <h2 className="text-xl font-medium ">Transaction History</h2>
           <div className="w-[344px] bg-white opacity-75 rounded-xl border gap-4 px-4 h-[48px] flex items-center justify-end">
             <div className="">
               <BsSearch className="text-[#4E00AD]" />
             </div>
             <input
               placeholder="Search"
-              className="border-r-[#93A3C0] border-r outline-none w-[80] flex-1 font-medium"
+              className="border-r-[#93A3C0] border-r outline-none w-[80px] albert flex-1 font-medium"
             />
             <div className="">
               <HiOutlineFilter className="text-[#4E00AD]" />
@@ -148,9 +150,9 @@ const ViewBranchReport = () => {
           </div>
         </div>
         <div className="border mt-10">
-          <table className="border h-fit w-full py-4">
+          <table className="border h-[412px] w-full py-4 relative">
             <thead>
-              <tr className="border-b  bg-[#F7F9FA]">
+              <tr className="border-b  bg-[#F7F9FA] font-medium text-lg">
                 <th className="py-3">User UIID</th>
                 <th className="py-3">Branch Name</th>
                 <th className="py-3">Invoice date</th>
@@ -160,7 +162,7 @@ const ViewBranchReport = () => {
               </tr>
             </thead>
 
-            <tbody className="content-dashboard">
+            <tbody className="content-dashboard flex">
               {data.length > 1 &&
                 data
                   // .filter((data, idx) => {
@@ -179,15 +181,15 @@ const ViewBranchReport = () => {
                     );
                   })}
             </tbody>
-          </table>
           {!data.length && (
-            <div className="flex justify-center items-center">
+            <div className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
               <img
                 src="/assets/NothingHereYet.png"
                 alt="Nothing here yet image"
               />
             </div>
           )}
+          </table>
         </div>
       </div>
     </div>

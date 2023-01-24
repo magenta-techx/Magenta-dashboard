@@ -5,11 +5,11 @@ import {Chart as ChartJS} from "chart.js/auto"
 const DashboardCol3Part2 = () => {
     const {data2, option2}=ItemContext()
   return (
-    <div className="w-4/12 h-[296.59px] border rounded-lg shadow-md flex flex-col p-4 items-center gap-10">
+    <div className="w-4/12 h-[296.59px] border rounded-lg shadow-md flex flex-col p-4 items-center gap-10 albert">
       <div className="flex justify-between items-center w-full">
-        <h1>Customers</h1>
-        <small className="text-[rgba(0,0,0,0.6)]">
-          last updated <span className="text-black ">16-9-2022</span>
+        <h1 className="font-medium">Customers</h1>
+        <small className="text-[rgba(0,0,0,0.6)] font-normal text-sm">
+          last updated <span className="text-black font-medium">16-9-2022</span>
         </small>
       </div>
       <div className="w-full h-36 p10">

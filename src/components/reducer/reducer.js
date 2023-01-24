@@ -4,7 +4,15 @@ export const INITIAL_STATE = {
   accountDetails: [],
   ForEachDetail: {},
   ForEachAcctDetail: {},
-  AccountDeleteDetail: {},
+  showProfile: false,
+  settingStates: {
+    newTransaction: false,
+    mode: false,
+    withdrawMade: false,
+    createdBranch: false,
+    addDocument: false,
+    documentValue: "",
+  },
 };
 const reducer = (state, action) => {
   switch (action.type) {
@@ -28,11 +36,46 @@ const reducer = (state, action) => {
         ...state,
         ForEachAcctDetail: action.payload,
       };
-    case "Account Delete Detail":
+    case "show-profile":
       return {
         ...state,
-        AccountDeleteDetail: action.payload,
+        showProfile: true,
       };
+    case "hide-profile":
+      return {
+        ...state,
+        showProfile: false,
+      };
+    case "New transaction":
+      return {
+        ...state,
+        settingStates: {
+          ...state.settingStates,
+          newTransaction: !state.settingStates.newTransaction,
+        },
+      };
+    case "Created branch":
+      return {
+        ...state,
+        settingStates: {
+          ...state.settingStates,
+          createdBranch: !state.settingStates.createdBranch,
+        },
+      };
+    case "Withdrawal made":
+      return {
+        ...state,
+        settingStates: {
+          ...state.settingStates,
+          withdrawMade: !state.settingStates.withdrawMade,
+        },
+      };
+    case "Change mode":
+      return {
+        ...state,
+        settingStates: { ...state.settingStates, mode: false },
+      };
+
     default:
       return state;
   }

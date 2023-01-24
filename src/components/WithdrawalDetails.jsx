@@ -4,12 +4,8 @@ import { ItemContext } from "../contextApi/stateMang.contextApi";
 const WithdrawalDetails = ({
   account: { account_number, bank_name },
   account,
-  selected,
-  
 }) => {
-  const {
-    state: { ForEachAcctDetail },setSelected,
-  } = ItemContext();
+  const { setSelected } = ItemContext();
   const split = account_number.split("");
   const fitr = split?.filter((a, i) => {
     return i < 3;
@@ -24,35 +20,38 @@ const WithdrawalDetails = ({
     .join("")
     .substring(4, 0);
   const midfth = midfrs.split("");
-  // arr.splice(1, 1, "replacement");
   const fir = midfth.splice(0, 0, "*");
   const sec = midfth.splice(1, 1, "*");
   const trd = midfth.splice(2, 2, "*");
   const fth = midfth.splice(3, 2, "*");
   const { dispatch } = ItemContext();
+
   return (
-    <div className="w-full h-[43px] bg-white rounded-xl flex justify-between p-2">
-      <h3>
+    <div className="w-full h-[43px] relative bg-white rounded-xl flex justify-between p-2 albert items-center">
+      <h3 className="">
         {fitr}
         {midfth?.join("")}
         {latr}
       </h3>
-      <div className="flex gap-4">
+      <div className="flex gap-4 check items-center">
         <span>{bank_name}</span>
         <input
+          className="appearance-none cursor-pointer w-[33px] h-[33px] rounded-xl bg-[#8652C7] "
           // checked
-          onChange={() => {
+          onChange={(e) => {
             dispatch({
               type: "Individual AcctDetails",
               payload: account,
             });
-            setSelected(true);
-            localStorage.setItem("account",JSON.stringify(account_number))
+
+            // setSelected(true);
+            // localStorage.setItem("account", JSON.stringify(account_number));
           }}
           type="radio"
           name="sam"
-          id=""
+          id={Math.random()}
         />
+        <div className="w-full absolute top-0 left-0 bg-transparent h-[43px] bg-white rounded-xl  pointer-events-none"></div>
       </div>
     </div>
   );

@@ -36,6 +36,7 @@ import AutoSweepOTP from "./components/AutoSweepOTP";
 import { useNavigate } from "react-router-dom";
 import AcctDeleteMsg from "./components/AcctDeleteMsg";
 import ShowDeleteSucc from "./components/ShowDeleteSucc";
+import ProfilePage from "./components/ProfilePage";
 function App() {
   const {
     showNav,
@@ -50,7 +51,6 @@ function App() {
     showEdit,
     setShowEdit,
     showEditSucc,
-    // showAddAccount,
     setShowEditSucc,
     setShowAddAccount,
     showAddAccount,
@@ -91,7 +91,9 @@ function App() {
     setSelected,
     isLoading,
     setShowDeleteSucc,
-    showDeleteSucc
+    showDeleteSucc,
+    state: { showProfile },
+    dispatch,
   } = ItemContext();
   let docTitle = document.title;
   const navigate = useNavigate();
@@ -104,9 +106,34 @@ function App() {
   useEffect(() => {
     document.addEventListener("contextmenu", (event) => event.preventDefault());
   }, []);
+  
 
+  
   const auth = localStorage.getItem("isAuth");
   const isAuth = JSON.parse(auth);
+
+  window.onpopstate = function () {
+    document.body.style.overflow="visible"
+    setShowAcctDelete(false);
+    setShowAcctSucc(false);
+    setShowAddAccount(false);
+    setShowAutoSweepAmount(false);
+    setShowAutoSweepOTP(false);
+    setShowCreateBranch(false);
+    setShowDeleteBranch(false);
+    setShowDeleteSucc(false);
+    setShowDeletedMsg(false);
+    setShowEdit(false);
+    setShowEditSucc(false);
+    setShowWithdrawAmount(false);
+    setShowSelectHourly(false);
+    setShowWithdrawSucc(false);
+    setShowWithdrawOTP(false);
+    setShowOTP(false);
+    setShowSelectAutoSweep(false);
+    setFrequency(false)
+  };
+
   return (
     <div className="flex">
       {showNav && (
@@ -250,7 +277,6 @@ function App() {
         <div
           onClick={() => {
             setShowDeletedMsg(false);
-            Get_Branch();
             document.body.style.overflow = "visible";
           }}
           className="w-screen h-screen z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
@@ -279,6 +305,7 @@ function App() {
         <div
           onClick={() => {
             setShowEditSucc(false);
+            navigate("/branch/all");
             Get_Branch();
             setIsLoading(false);
             document.body.style.overflow = "visible";
@@ -357,6 +384,18 @@ function App() {
           <AcctDeleteMsg />
         </div>
       )}
+      {showProfile && isAuth && (
+        <div
+          onClick={() => {
+            document.body.style.overflow = "visible";
+            dispatch({ type: "hide-profile" });
+          }}
+          className="w-screen h-screen z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center"
+        >
+          <ProfilePage />
+        </div>
+      )}
+      
 
       <Routes>
         <Route element={<ProtectedRoutes />}>

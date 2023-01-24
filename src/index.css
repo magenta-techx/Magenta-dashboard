@@ -2,19 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Albert+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-
-.content-dashboard tr:not(:last-child){
-    border-bottom: 1px solid #C7AFE4;
-
+.content-dashboard tr:not(:last-child) {
+  border-bottom: 1px solid #c7afe4;
 }
 
-.input{
-     -moz-appearance: textfield;
+.input {
+  -moz-appearance: textfield;
 }
- input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.inter {
+  font-family: inter;
+}
+
+.albert {
+  font-family: Albert Sans;
+}
+.poppins {
+  font-family: Poppins;
+}
+
+.check :checked + div::after {
+    content: "✔";
+    position: absolute;
+
+    width: fit-content;
+    height: fit-content;
+    top: 6px;
+    right: 16px;
+    font-size: 20px;
+    color: white;
+}
+.check :checked + div{
+    border: 1px solid #8652c7;
+
+}

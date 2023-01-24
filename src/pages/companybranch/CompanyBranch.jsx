@@ -1,18 +1,16 @@
 import axios from "axios";
-import React, { useCallback, useEffect, useMemo } from "react";
+import React  from "react";
 import Branch from "../../components/Branch";
 import Header from "../../components/Header";
 import { HiArrowRight, HiOutlineFilter } from "react-icons/hi";
-import { BsPlus, BsPlusLg, BsSearch } from "react-icons/bs";
+import {  BsPlusLg, BsSearch } from "react-icons/bs";
 import { ItemContext } from "../../contextApi/stateMang.contextApi";
-import CreateBranch from "../../components/CreateBranch";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const CompanyBranch = () => {
   const navigate = useNavigate();
   const {
     state: { branchDetails },
-    showCreateBranch,
     setShowCreateBranch,
     Get_Branch,
     setName,
@@ -40,7 +38,7 @@ const CompanyBranch = () => {
         </div>
         <div className=" flex flex-col gap-4 py-6 w-full">
           <div className="flex justify-between w-full">
-            <p className="font-medium text-xl">Added Branch</p>
+            <p className="font-medium text-[24px] albert">Added Branch</p>
             <div>
               <div className="w-[344px] bg-white opacity-75 rounded-xl border gap-4 px-4 h-[48px] flex items-center justify-end">
                 <div className="">
@@ -78,10 +76,10 @@ const CompanyBranch = () => {
             {branchDetails?.length >= 2 && (
               <div className="flex justify-end w-full items-center">
                 <div
-                  className="cursor-pointer flex items-center- gap-4"
+                  className="cursor-pointer flex items-center- gap-4 albert"
                   onClick={handleClick2}
                 >
-                  <p>View all</p>
+                  <p className="text-[18px] font-medium">View all</p>
                   <HiArrowRight className="text-xl text-[#7132BD]" />
                 </div>
               </div>

@@ -36,6 +36,7 @@ const Context = ({ children }) => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   // const [isAuth, setIsAuth] = useState(false);
+  const { branchDetails } = state;
   const [newPassword, setNewPassword] = useState({});
   const [verificationMail, setVerificationMail] = useState("");
   const [states, setStates] = useState(false);
@@ -102,9 +103,9 @@ const Context = ({ children }) => {
         setIsLoading(false);
 
         localStorage.removeItem("reset_auto_sweep_result");
-        if (localStorage.getItem("item") !== null) {
-          localStorage.removeItem("item");
-        }
+        // if (localStorage.getItem("item") !== null) {
+        localStorage.removeItem("item");
+        // }
       }
     } catch (error) {
       setIsLoading(false);
@@ -127,10 +128,14 @@ const Context = ({ children }) => {
         }
       );
       dispatch({ type: "Branch Details", payload: res.data });
+      if (res.status === "401") {
+        localStorage.clear("isAuth");
+      }
     } catch (err) {
       console.log(err);
     }
   };
+
   const Get_Auto_Sweep = async () => {
     const token = localStorage.getItem("login_token");
     try {
@@ -164,7 +169,7 @@ const Context = ({ children }) => {
       console.log(error);
     }
   };
- 
+
   const label = [
     "Jan",
     "",
@@ -211,8 +216,9 @@ const Context = ({ children }) => {
           "13",
         ],
         backgroundColor: "#7132BD",
+
         cutout: "90%",
-        // borderWidth: 3,
+        fontFamily: "albert",
         borderRadius: 100,
       },
       {
@@ -233,7 +239,7 @@ const Context = ({ children }) => {
         ],
         backgroundColor: "#D733CE",
         cutout: "90%",
-        // borderWidth: 3,
+        fontFamily: "albert",
         borderRadius: 100,
       },
     ],
@@ -273,7 +279,8 @@ const Context = ({ children }) => {
     if (!localStorage.getItem("isAuth")) {
       navigate("/login");
     }
-  }, []);
+    Get_Branch();
+  }, [branchDetails]);
   const merchant = {
     company_name: companyDetails?.companyName,
     email: userDetails.email,

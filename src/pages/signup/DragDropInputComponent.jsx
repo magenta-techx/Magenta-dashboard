@@ -18,7 +18,6 @@ const DragDropInputComponent = ({
     return false;
   };
 
-
   const processFiles = (files, callBack) => {
     const dataUrlArr = [];
     Array.from(files).forEach((file, index) => {
@@ -34,7 +33,6 @@ const DragDropInputComponent = ({
       });
     });
   };
-
 
   const handleUpload = async (evt) => {
     evt.stopPropagation();
@@ -57,9 +55,7 @@ const DragDropInputComponent = ({
 
     return false;
   };
-   const handleSubmit = () => {
-    
-   }
+  const handleSubmit = () => {};
 
   const handleDragEnter = (evt) => {
     evt.preventDefault();
@@ -69,7 +65,6 @@ const DragDropInputComponent = ({
     return false;
   };
 
-
   const handleDragLeave = (evt) => {
     evt.preventDefault();
 
@@ -77,7 +72,6 @@ const DragDropInputComponent = ({
 
     return false;
   };
-
 
   const handleFileRemoval = () => {
     removeFile();
