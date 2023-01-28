@@ -134,6 +134,7 @@ export const data = {
 };
 
 export const timee = [
+  "12:00 am",
   "1:00 am",
   "2:00 am",
   "3:00 am",
@@ -157,6 +158,7 @@ export const timee = [
   "9:00 pm",
   "10:00 pm",
   "11:00 pm",
+  "11:00 pm",
 ];
 export const hourrs = [
   "1 hour",
@@ -170,5 +172,6 @@ export const hourrs = [
   "9 hour",
   "10 hour",
   "11 hour",
+  "12 hour",
   "12 hour",
 ];

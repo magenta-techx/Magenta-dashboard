@@ -14,18 +14,17 @@ const Edit = () => {
     editBranchPasscode,
     setShowEdit,
     setShowEditSucc,
-    setShowChangePassword,
-    showChangePassword,
+   
     isLoading,
     setIsLoading,
     state: { ForEachDetail },
   } = ItemContext();
+  const report = localStorage.getItem("branch_report");
+  const result = JSON.parse(report);
   const handleSubmit = async (e) => {
     setIsLoading(true);
     e.preventDefault();
     const token = localStorage.getItem("login_token");
-    const report = localStorage.getItem("branch_report");
-    const result = JSON.parse(report);
     try {
       const res = await axios.patch(
         "https://backend.magentacashier.com/business/branch/",
@@ -56,7 +55,7 @@ const Edit = () => {
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="w-[434px] h-fit bg-white rounded-3xl relative p-6"
+      className="w-[404px] h-[487px] bg-white rounded-3xl relative p-6"
     >
       <div
         onClick={() => {
@@ -66,58 +65,64 @@ const Edit = () => {
           }
           document.body.style.overflow = "visible";
         }}
-        className="absolute w-[60px] h-[60px] flex justify-center items-center rounded-full bg-[#EEE8F8] cursor-pointer top-0 -right-4"
+        className="albert absolute w-[60px] h-[60px] flex justify-center items-center rounded-full bg-[#EEE8F8] cursor-pointer top-0 -right-4"
       >
         <img src="/assets/x.png" alt="Delete image" />
       </div>
       <form className="flex flex-col gap-4" onSubmit={(e) => handleSubmit(e)}>
-        <h1 className="text-xl">Edit Branch Information</h1>
-        <div className="flex flex-col gap-2 w-full">
-          <label className="text-lg" htmlFor="name">
-            Branch name
+        <h1 className="text-xl  font-medium">Edit Branch Information</h1>
+        <div className="flex flex-col gap-4 w-full">
+          <label className="text-lg albert font-normal" htmlFor="name">
+            Branch Name
           </label>
           <input
             type="text"
             value={editBranchName}
+            // value={result.name}
             onChange={(e) => setEditBranchName(e.target.value)}
             name=""
             placeholder="Shoprite Lekki"
             id=""
-            className="border-[#AF8BDA] border outline-none w-full h-[46px] px-4 rounded-xl"
+            className="border-[#AF8BDA] font-normal border outline-none w-full h-[46px] px-4 rounded-xl albert bg-[#F7F9FA]"
           />
         </div>
-        <div className="flex flex-col gap-2 w-full">
-          <label className="text-lg" htmlFor="address">
-            Branch address
+        <div className="flex flex-col gap-4 w-full">
+          <label className="text-lg albert font-normal" htmlFor="address">
+            Branch Address
           </label>
           <input
             disabled
             value={editBranchAddress}
-            onChange={(e) => setEditBranchAddress(e.target.value)}
+            // value={result.address}
+            // onChange={(e) => setEditBranchAddress(e.target.value)}
             type="text"
             placeholder="11, Rock Stone Estate, Addo, Ikeja"
             name=""
             id=""
-            className="border-[#AF8BDA] border outline-none w-full h-[46px] px-4 rounded-xl"
+            className="border-[#AF8BDA] bg-[#F7F9FA] font-normal border outline-none w-full h-[46px] px-4 rounded-xl albert"
           />
         </div>
-        <div className="flex flex-col gap-2 w-full mb-10">
-          <label className="text-lg" htmlFor="passcode">
-            Branch passcode
+        <div className="flex flex-col gap-4 w-full mb-5">
+          <label className="text-lg font-normal albert" htmlFor="passcode">
+            Branch Passcode
           </label>
           <div className="w-full flex gap-8 items-end relative">
             <input
               value={editBranchPasscode}
+              // value={result.passcode}
               onChange={(e) => setEditBranchPasscode(e.target.value)}
               placeholder="673yge79iwuhy"
               type="text"
               name=""
               id=""
-              className="border-[#AF8BDA] text-lg border outline-none h-[46px] px-4 rounded-xl w-full"
+              className="border-[#AF8BDA]  border outline-none h-[46px] px-4 rounded-xl w-full albert bg-[#F7F9FA]"
             />
           </div>
         </div>
-        <button disabled={isLoading} className="w-full h-[45px] text-white flex justify-center items-center bg-[#4E00AD] rounded-xl disabled:cursor-not-allowed">
+        <button
+          disabled={isLoading}
+          className="w-full h-[45px] text-white flex justify-center items-center bg-[#4E00AD] rounded-xl disabled:cursor-not-allowed poppins"
+        >
           {isLoading ? (
             <div className="flex items-center gap-4">
               <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">

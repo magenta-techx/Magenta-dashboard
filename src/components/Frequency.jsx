@@ -7,15 +7,14 @@ const Frequency = () => {
   const { hour, setHour, setShowAutoSweepAmount, setFrequency } = ItemContext();
   const [index, setIndex] = useState(1);
   const handleIncrease = () => {
-    setIndex(index + 1);
-    if (index >= hourrs.length - 1) setIndex(11);
+    setIndex((prevState) => prevState - 1);
     setHour(hourrs[index]);
   };
   const handleDecrease = () => {
-    setIndex(index - 1);
-    if (index <= 0) setIndex(0);
+    setIndex((prevState) => prevState + 1);
     setHour(hourrs[index]);
   };
+  console.log(index);
   const handleSubmit = () => {
     setShowAutoSweepAmount(true);
     setFrequency(false);
@@ -45,32 +44,37 @@ const Frequency = () => {
             className="w-[96px] h-[96px]"
             alt="Time management-cuate 2"
           />
-          <p className="text-lg tracking-normal w-[265px]">
+          <p className="text-lg tracking-normal w-[265px] poppins">
             How frequent would you like to make a withdrawal in one day?
           </p>
         </div>
         <div className="w-full h-full flex justify-center">
           <div className="w-[228px] h-[52px] flex ">
-            <div className="w-[40%] h-full bg-[#F7F9FA] rounded-tl-lg rounded-bl-lg flex justify-center items-center">
+            <div className="w-[40%] h-full bg-[#F7F9FA] rounded-tl-lg rounded-bl-lg flex justify-center items-center poppins font-normal">
               Every
             </div>
             <div className="bg-[#4E00AD] w-[60%] rounded-lg h-full px-4 text-white">
               {" "}
               <div className="flex justify-between items-center h-full">
-                <h2>{hour}</h2>
+                <h2 className="poppins font-normal">{hour}</h2>
                 <div className="flex flex-col gap-4">
-                  <img
-                    onClick={handleIncrease}
-                    src="/assets/Vector.png"
-                    alt="Arrow up for increasing time"
-                    className="cursor-pointer"
-                  />
-                  <img
+                  <button disabled={index === 0} onClick={handleIncrease}>
+                    <img
+                      src="/assets/Vector.png"
+                      alt="Arrow up for increasing time"
+                      className="cursor-pointer"
+                    />
+                  </button>
+                  <button
                     onClick={handleDecrease}
-                    src="/assets/Vector (2).png"
-                    alt="Arrow down for decreasing time"
-                    className="cursor-pointer"
-                  />
+                    disabled={index === hourrs.length - 1}
+                  >
+                    <img
+                      src="/assets/Vector (2).png"
+                      alt="Arrow down for decreasing time"
+                      className="cursor-pointer"
+                    />
+                  </button>
                 </div>
               </div>
             </div>
@@ -86,7 +90,7 @@ const Frequency = () => {
           <div className="flex justify-center">
             <button
               onClick={handleSubmit}
-              className="w-[299px] h-[46px] bg-[#4E00AD]  text-white  flex justify-center rounded-xl items-center "
+              className="w-[299px] h-[46px] bg-[#4E00AD]  text-white  flex justify-center rounded-xl items-center poppins"
             >
               Create Daily Withdrawal
             </button>

@@ -25,13 +25,13 @@ const Navbar = () => {
         to="/"
         className={({ isActive }) => {
           return isActive
-            ? "text-white duration-500 w-[full] bg-[#7132BD]   px-10 py-3   border-[#C7AFE4] border-r-4 "
-            : " text-[#ADB3BD] w-full px-10 py-3   ";
+            ? "text-white duration-500 w-[full] bg-[#7132BD]   px-10 py-3   border-[#C7AFE4] border-r-4 my-2"
+            : " text-[#ADB3BD] w-full px-10 py-3 my-2";
         }}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 albert">
           <BsGrid className="text-lg" />
-          <p>Dashboard</p>
+          <p className="text-[16px]">Dashboard</p>
         </div>
       </NavLink>
       <NavLink
@@ -39,14 +39,14 @@ const Navbar = () => {
         to="/branch"
         className={({ isActive }) => {
           return isActive
-            ? "text-white duration-500 w-full bg-[#7132BD]   px-10 py-3   border-[#C7AFE4] border-r-4 "
-            : " text-[#ADB3BD] w-full px-10 py-3 ";
+            ? "text-white duration-500 w-full bg-[#7132BD]   px-10 py-3   border-[#C7AFE4] border-r-4 my-2"
+            : " text-[#ADB3BD] w-full px-10 py-3 my-2";
         }}
       >
-        <div className="flex items-center gap-3">
-          <HiOutlineChartSquareBar className="text-lg" />
+        <div className="flex items-center gap-3 albert">
+          <HiOutlineChartSquareBar className="text-xl" />
 
-          <p>Company Branch</p>
+          <p className="text-[16px]">Company Branch</p>
         </div>
       </NavLink>
       <NavLink
@@ -54,13 +54,13 @@ const Navbar = () => {
         to="/transaction"
         className={({ isActive }) => {
           return isActive
-            ? "text-white duration-500 w-full bg-[#7132BD]   px-10 py-3   border-[#C7AFE4] border-r-4 "
-            : " text-[#ADB3BD] w-full px-10 py-3 ";
+            ? "text-white duration-500 w-full bg-[#7132BD]   px-10 py-3   border-[#C7AFE4] border-r-4 my-2"
+            : " text-[#ADB3BD] w-full px-10 py-3 my-2";
         }}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 albert">
           <BsJournalBookmark className="text-lg" />
-          <p>Transaction History</p>
+          <p className="text-[16px]">Transaction History</p>
         </div>
       </NavLink>
       <NavLink
@@ -68,13 +68,13 @@ const Navbar = () => {
         to="/cashout"
         className={({ isActive }) => {
           return isActive
-            ? "text-white duration-500 w-full bg-[#7132BD]   px-10 py-3   border-[#C7AFE4] border-r-4 "
-            : " text-[#ADB3BD] w-full px-10 py-3 ";
+            ? "text-white duration-500 w-full bg-[#7132BD]   px-10 py-3   border-[#C7AFE4] border-r-4 my-2"
+            : " text-[#ADB3BD] w-full px-10 py-3 my-2";
         }}
       >
-        <div className="flex items-center gap-3">
-          <TbCashBanknote className="text-lg" />
-          <p>Cash out</p>
+        <div className="flex items-center gap-3 albert">
+          <TbCashBanknote className="text-xl" />
+          <p className="text-[16px]">Cash out</p>
         </div>
       </NavLink>
       <NavLink
@@ -82,13 +82,13 @@ const Navbar = () => {
         to="/settings"
         className={({ isActive }) => {
           return isActive
-            ? "text-white duration-500 w-full bg-[#7132BD]   px-10 py-3   border-[#C7AFE4] border-r-4 "
-            : " text-[#ADB3BD] w-full px-10 py-3 ";
+            ? "text-white duration-500 w-full bg-[#7132BD]   px-10 py-3   border-[#C7AFE4] border-r-4 my-2"
+            : " text-[#ADB3BD] w-full px-10 py-3 my-2";
         }}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 albert">
           <FiSettings className="text-lg" />
-          <p>Settings</p>
+          <p className="text-[16px]">Settings</p>
         </div>
       </NavLink>
     </>

@@ -15,11 +15,11 @@ export const WithdrawAmount = () => {
     setShowWithdrawAmount,
     setShowWithdrawOTP,
     selected,
-    setSelected
+    setSelected,
   } = ItemContext();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
     const token = localStorage.getItem("login_token");
     try {
       const res = await axios.get(
@@ -34,12 +34,11 @@ export const WithdrawAmount = () => {
       if (res.statusText === "OK") {
         setShowWithdrawAmount(false);
         setShowWithdrawOTP(true);
-        setIsLoading(false)
-        
+        setIsLoading(false);
       }
     } catch (err) {
       console.log(err);
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
   return (
@@ -55,6 +54,7 @@ export const WithdrawAmount = () => {
           setWithdrawAmount("");
           document.body.style.overflow = "visible";
           setSelected(false);
+          console.log("object");
           if (isLoading === true) {
             setIsLoading(false);
           }
@@ -66,7 +66,7 @@ export const WithdrawAmount = () => {
       <form className="flex flex-col gap-4" onSubmit={(e) => handleSubmit(e)}>
         <div className="flex items-center ">
           <img src="/assets/ATM machine.png" alt="ATM machine image" />
-          <h1 className="text-xl font-medium">Make A withdrawal</h1>
+          <h1 className="text-xl font-medium poppins">Make A withdrawal</h1>
         </div>
         <div className="flex flex-col justify-center items-center gap-2 w-full">
           <input
@@ -77,20 +77,25 @@ export const WithdrawAmount = () => {
             name=""
             placeholder="Enter withdrawal amount"
             id=""
-            className="input border-[#AF8BDA] border text-center text-lg font-normal outline-none w-[299px] h-[60px] px-4 rounded-xl text-[#6B778C] "
+            className="input border-[#ADB3BD] bg-[#F7F9FA] border text-center text-lg font-normal outline-none w-[299px] h-[60px] px-4 rounded-xl text-[#6B778C] inter "
           />
         </div>
         <div className="w-full h-full bg-[#F7F9FA] p-6 flex flex-col gap-6">
-          <h2 className="text-lg font-medium">Select destination account</h2>
+          <h2 className="text-lg font-medium poppins ">
+            Select destination account
+          </h2>
           <div className="flex flex-col gap-4">
             {accountDetails?.map((account, idx) => {
-              return <WithdrawalDetails account={account} key={idx} />;
+              return (
+                <>
+                  <WithdrawalDetails account={account} key={idx} />
+                </>
+              );
             })}
-            {/* <WithdrawalDetails /> */}
           </div>
           <button
-            disabled={withdrawAmount<10||isLoading||!selected}
-            className="w-[299px] mx-auto h-[46px] text-white flex justify-center items-center disabled:cursor-not-allowed disabled:text-gray-500 disabled:bg-[#E2E6EE]  bg-[#4E00AD] rounded-xl"
+            disabled={withdrawAmount < 10 || isLoading || !selected}
+            className="w-[299px] mx-auto h-[46px] text-white flex justify-center items-center disabled:cursor-not-allowed disabled:text-gray-500 disabled:bg-[#E2E6EE]  bg-[#4E00AD] rounded-xl poppins font-normal"
           >
             {isLoading ? (
               <div className="flex items-center gap-4">

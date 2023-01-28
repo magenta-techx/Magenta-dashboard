@@ -9,7 +9,7 @@ const WithdrawSuccMsg = () => {
       onClick={(e) => {
         e.stopPropagation();
       }}
-      className="w-[487px] h-[354px] bg-white rounded-3xl relative p-6 flex flex-col gap-6 justify-center items-center text-[#0B0B0B] text-lg font-medium"
+      className="w-[487px] h-[354px] bg-white rounded-3xl relative p-6 flex flex-col gap-6 justify-center items-center text-[#0B0B0B] text-lg font-medium poppins"
     >
       <img
         className="w-[250px] h-[162.1px]"

@@ -4,8 +4,8 @@ import { FaCaretDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 
-const ShowEditSucc = () => {
-  const { setShowEditSucc, Get_Branch, setShowAcctDelete } = ItemContext();
+const ShowDeleteSucc = () => {
+  const { setShowDeleteSucc, } = ItemContext();
   const navigate = useNavigate();
   return (
     <div
@@ -25,10 +25,7 @@ const ShowEditSucc = () => {
       <div
         className="  flex-aut flex justify-center items-center px-4 text-[#C7AFE4] cursor-pointer "
         onClick={() => {
-          setShowEditSucc(false);
-          navigate("/branch/all");
-          document.body.style.overflow = "visible";
-          Get_Branch()
+          setShowDeleteSucc(false);
         }}
       >
         <span>Close</span>
@@ -37,4 +34,4 @@ const ShowEditSucc = () => {
   );
 };
 
-export default ShowEditSucc;
+export default ShowDeleteSucc;

@@ -21,7 +21,9 @@ const CashOut = () => {
     setShowSelectAutoSweep,
     time,
     GET_ACCOUNT,
-    state: { accountDetails },
+    handleAutoSweepDelete,
+    state: { accountDetails, ForEachAcctDetail },
+    dispatch,
     autoSweepID,
   } = ItemContext();
   const get = localStorage.getItem("reset_auto_sweep_result");
@@ -34,39 +36,14 @@ const CashOut = () => {
   const timeSet = JSON.parse(get);
   const hour = timeSet?.hour;
   const frequency = timeSet?.frequency;
-  const index = time.indexOf(" ");
-  const timeAmOrPm = time.substring(index).trim();
+  const index = time?.indexOf(" ");
+  const timeAmOrPm = time?.substring(index)?.trim();
   const handleWithdraw = () => {
     setShowWithdrawAmount(true);
   };
   const handleAutoSweep = () => {
     setShowSelectAutoSweep(true);
     document.body.style.overflow = "hidden";
-  };
-  const handleAutoSweepDelete = async () => {
-    const token = localStorage.getItem("login_token");
-    setIsLoading(true);
-    try {
-      const res = await axios.delete(
-        `https://backend.magentacashier.com/business/recurrentcashout/delete/${autoSweepID}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (res.status === 204) {
-        setIsLoading(false);
-
-        localStorage.removeItem("reset_auto_sweep_result");
-        if (localStorage.getItem("item") !== null) {
-          localStorage.removeItem("item");
-        }
-      }
-    } catch (error) {
-      setIsLoading(false);
-      console.log(error);
-    }
   };
 
   useEffect(() => {
@@ -77,15 +54,15 @@ const CashOut = () => {
       <div className="w-full  bg-white   ">
         <Header />
       </div>
-      <h2 className="font-medium text-xl">Cash Out</h2>
+      <h2 className="font-medium text-xl albert">Cash Out</h2>
       <div className="flex w-full justify-between gap-4 ">
         <div className="w-80 h-fit border-[#E1E1E1] border-2 rounded-xl flex gap-6 px-6 py-4">
           <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
             <HiOutlineChartSquareBar size="25px" className="text-[#4E00AD]" />
           </div>
-          <div className="flex flex-col gap-3">
-            <h4 className="font-normal">Total Withdrawal</h4>
-            <h2 className="font-bold flex items-center">
+          <div className="flex flex-col albert gap-3 ">
+            <h4 className="font-normal ">Total Withdrawal</h4>
+            <h2 className="font-medium flex items-center text-[24px]">
               <TbCurrencyNaira /> 0
             </h2>
           </div>
@@ -94,9 +71,9 @@ const CashOut = () => {
           <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
             <HiOutlineUserGroup size="20px" className="text-[#4E00AD]" />
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 albert">
             <h4 className="font-normal">Total Payment Made</h4>
-            <h2 className="font-bold flex items-center">
+            <h2 className="font-medium flex items-center text-[24px]">
               <TbCurrencyNaira /> 0
             </h2>
           </div>
@@ -105,17 +82,17 @@ const CashOut = () => {
           <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
             <RiCalendar2Line size="25px" className="text-[#4E00AD]" />
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 albert">
             <h4 className="font-normal">In App Cash</h4>
-            <h2 className="font-bold flex items-center">
-              <TbCurrencyNaira />1
+            <h2 className="font-medium text-[24px] flex items-center">
+              <TbCurrencyNaira />0
             </h2>
           </div>
         </div>
       </div>
       <div className="w-full h-fit flex  gap-4 mt-6">
         <div className="w-1/2 border-[#E1E1E1] border-2 p-4 rounded-xl flex flex-col gap-4">
-          <p className="text-lg font-medium">
+          <p className="text-lg font-normal albert">
             Bank account number associated with your magenta account.
           </p>
           <div className="flex gap-4 ">
@@ -134,8 +111,7 @@ const CashOut = () => {
                 document.body.style.overflow = "hidden";
               }}
               disabled={accountDetails?.length >= 2 ? true : false}
-              className="text-sm w-[236px] h-[49px]
-                  text-white 
+              className="text-sm w-[236px] h-[49px] poppins text-white 
                  flex rounded-xl justify-center items-center bg-[#4E00AD] font-medium cursor-pointer disabled:bg-[#E2E6EE] disabled:text-gray-500 disabled:cursor-not-allowed "
             >
               Add Account Number
@@ -151,11 +127,14 @@ const CashOut = () => {
                 alt="atm machine image"
               />
             </div>
-            <p className="text-white text-sm ml-2 mb-2">
+            <p className="text-white text-sm ml-2 mb-2 albert font-medium">
               Make a withdrawal into your bank account
             </p>
             <div className="flex justify-end" onClick={handleWithdraw}>
-              <button className="text-[16px] w-[157px] h-[45px] m-auto  flex rounded-xl justify-center items-center bg-white text-[#4E00AD] font-medium cursor-pointer  ">
+              <button
+                disabled={accountDetails.length === 0}
+                className="text-[16px] w-[157px] h-[45px] m-auto  flex  albert rounded-xl justify-center items-center bg-white text-[#4E00AD] font-normal cursor-pointer  disabled:text-black disabled:bg-[#E2E6EE] disabled:cursor-not-allowed"
+              >
                 Withdraw
               </button>
             </div>
@@ -169,11 +148,14 @@ const CashOut = () => {
                   alt="Time management-cuate"
                 />
               </div>
-              <p className="text-black font-medium text-sm ml-2 mt-2">
+              <p className="text-black font-medium text-sm ml-2 mt-2 alb ert ">
                 Set an auto sweep for <br /> withdrawal
               </p>
               <div className="flex justify-end" onClick={handleAutoSweep}>
-                <button className="text-[15px] mt-2 w-[157px] h-[45px] m-auto flex rounded-xl justify-center items-center font-normal bg-[#4E00AD] text-white cursor-pointer  ">
+                <button
+                  disabled={accountDetails.length === 0}
+                  className="text-[15px] mt-2 w-[157px] h-[45px] m-auto flex rounded-xl justify-center items-center inter font-normal bg-[#4E00AD] text-white cursor-pointer   disabled:text-black disabled:bg-[#E2E6EE] disabled:cursor-not-allowed"
+                >
                   Set auto sweep
                 </button>
               </div>
@@ -188,12 +170,13 @@ const CashOut = () => {
                   alt="Time management-cuate"
                 />
                 <span className="text-[#CC00C1] font-medium">
-                  {hour}
+                  {hour === 0 ? "12" : hour}
                   {timeAmOrPm}
                 </span>
               </div>
               <p className="text-black font-medium text-sm">
-                An auto sweep for {hour}{ timeAmOrPm} {frequency} has been set
+                An auto sweep for {hour === 0 ? "12" : hour}
+                {timeAmOrPm} {frequency} has been set
               </p>
               <div className="flex justify-end" onClick={handleAutoSweepDelete}>
                 <button className="text-sm w-[157px] h-[45px]  flex rounded-xl justify-center items-center bg-[#4E00AD] text-white font-medium cursor-pointer  ">

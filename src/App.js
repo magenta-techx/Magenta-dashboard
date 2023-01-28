@@ -33,7 +33,10 @@ import WithdrawSuccMsg from "./components/WithdrawSucc";
 import Frequency from "./components/Frequency";
 import { ShowAutoSweepAmount } from "./components/ShowAutoSweepAmount";
 import AutoSweepOTP from "./components/AutoSweepOTP";
-
+import { useNavigate } from "react-router-dom";
+import AcctDeleteMsg from "./components/AcctDeleteMsg";
+import ShowDeleteSucc from "./components/ShowDeleteSucc";
+import ProfilePage from "./components/ProfilePage";
 function App() {
   const {
     showNav,
@@ -48,7 +51,6 @@ function App() {
     showEdit,
     setShowEdit,
     showEditSucc,
-    // showAddAccount,
     setShowEditSucc,
     setShowAddAccount,
     showAddAccount,
@@ -74,6 +76,8 @@ function App() {
     setAccountNumber,
     setIsLoading,
     showAcctSucc,
+    showAcctDelete,
+    setShowAcctDelete,
     setShowAcctSucc,
     showWithdrawAmount,
     setShowWithdrawAmount,
@@ -86,8 +90,13 @@ function App() {
     setShowSelectAutoSweep,
     setSelected,
     isLoading,
+    setShowDeleteSucc,
+    showDeleteSucc,
+    state: { showProfile },
+    dispatch,
   } = ItemContext();
   let docTitle = document.title;
+  const navigate = useNavigate();
   window.addEventListener("blur", () => {
     document.title = "Come back 😒";
   });
@@ -97,6 +106,34 @@ function App() {
   useEffect(() => {
     document.addEventListener("contextmenu", (event) => event.preventDefault());
   }, []);
+  
+
+  
+  const auth = localStorage.getItem("isAuth");
+  const isAuth = JSON.parse(auth);
+
+  window.onpopstate = function () {
+    document.body.style.overflow="visible"
+    setShowAcctDelete(false);
+    setShowAcctSucc(false);
+    setShowAddAccount(false);
+    setShowAutoSweepAmount(false);
+    setShowAutoSweepOTP(false);
+    setShowCreateBranch(false);
+    setShowDeleteBranch(false);
+    setShowDeleteSucc(false);
+    setShowDeletedMsg(false);
+    setShowEdit(false);
+    setShowEditSucc(false);
+    setShowWithdrawAmount(false);
+    setShowSelectHourly(false);
+    setShowWithdrawSucc(false);
+    setShowWithdrawOTP(false);
+    setShowOTP(false);
+    setShowSelectAutoSweep(false);
+    setFrequency(false)
+  };
+
   return (
     <div className="flex">
       {showNav && (
@@ -104,7 +141,7 @@ function App() {
           <Navbar />
         </div>
       )}
-      {showCreateBranch && (
+      {showCreateBranch && isAuth && (
         <div
           onClick={() => {
             setShowCreateBranch(false);
@@ -115,14 +152,13 @@ function App() {
             if (isLoading === true) {
               setIsLoading(false);
             }
-           
           }}
-          className="w-screen h-screen z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
+          className="w-screen h-screen z-20 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
         >
           <CreateBranch />
         </div>
       )}
-      {showWithdrawAmount && (
+      {showWithdrawAmount && isAuth && (
         <div
           onClick={() => {
             setShowWithdrawAmount(false);
@@ -138,7 +174,7 @@ function App() {
           <WithdrawAmount />
         </div>
       )}
-      {frequency && (
+      {frequency && isAuth && (
         <div
           onClick={() => {
             setFrequency(false);
@@ -149,7 +185,7 @@ function App() {
           <Frequency />
         </div>
       )}
-      {showAutoSweepAmount && (
+      {showAutoSweepAmount && isAuth && (
         <div
           onClick={() => {
             setShowAutoSweepAmount(false);
@@ -161,7 +197,7 @@ function App() {
           <ShowAutoSweepAmount />
         </div>
       )}
-      {showAutoSweepOTP && (
+      {showAutoSweepOTP && isAuth && (
         <div
           onClick={() => {
             setShowAutoSweepOTP(false);
@@ -175,7 +211,7 @@ function App() {
           <AutoSweepOTP />
         </div>
       )}
-      {showWithdrawSucc && (
+      {showWithdrawSucc && isAuth && (
         <div
           onClick={() => {
             setShowWithdrawSucc(false);
@@ -188,7 +224,7 @@ function App() {
           <WithdrawSuccMsg />
         </div>
       )}
-      {showWithdrawOTP && (
+      {showWithdrawOTP && isAuth && (
         <div
           onClick={() => {
             setShowWithdrawOTP(false);
@@ -203,7 +239,7 @@ function App() {
           <WithdrawOTP />
         </div>
       )}
-      {showSelectHourly && (
+      {showSelectHourly && isAuth && (
         <div
           onClick={() => {
             setShowSelectHourly(false);
@@ -214,7 +250,7 @@ function App() {
           <SelectHourly />
         </div>
       )}
-      {showSelectAutoSweep && (
+      {showSelectAutoSweep && isAuth && (
         <div
           onClick={() => {
             setShowSelectAutoSweep(false);
@@ -226,7 +262,7 @@ function App() {
           <SelectAutoSweep />
         </div>
       )}
-      {showDeleteBranch && (
+      {showDeleteBranch && isAuth && (
         <div
           onClick={() => {
             setShowDeleteBranch(false);
@@ -237,11 +273,10 @@ function App() {
           <DeleteBranchMsg />
         </div>
       )}
-      {showDeletedMsg && (
+      {showDeletedMsg && isAuth && (
         <div
           onClick={() => {
             setShowDeletedMsg(false);
-            Get_Branch();
             document.body.style.overflow = "visible";
           }}
           className="w-screen h-screen z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
@@ -249,7 +284,7 @@ function App() {
           <DeletedMsg />
         </div>
       )}
-      {showEdit && (
+      {showEdit && isAuth && (
         <div
           onClick={() => {
             setShowEdit(false);
@@ -266,10 +301,11 @@ function App() {
           <Edit />
         </div>
       )}
-      {showEditSucc && (
+      {showEditSucc && isAuth && (
         <div
           onClick={() => {
             setShowEditSucc(false);
+            navigate("/branch/all");
             Get_Branch();
             setIsLoading(false);
             document.body.style.overflow = "visible";
@@ -279,7 +315,19 @@ function App() {
           <ShowEditSucc />
         </div>
       )}
-      {showOTP && (
+      {showDeleteSucc && isAuth && (
+        <div
+          onClick={() => {
+            setShowDeleteSucc(false);
+            setIsLoading(false);
+            document.body.style.overflow = "visible";
+          }}
+          className="w-screen h-screen z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
+        >
+          <ShowDeleteSucc />
+        </div>
+      )}
+      {showOTP && isAuth && (
         <div
           onClick={() => {
             setShowOTP(false);
@@ -297,7 +345,7 @@ function App() {
           <ShowOTP />
         </div>
       )}
-      {showAddAccount && (
+      {showAddAccount && isAuth && (
         <div
           onClick={() => {
             setShowAddAccount(false);
@@ -314,7 +362,7 @@ function App() {
           <AddAccount />
         </div>
       )}
-      {showAcctSucc && (
+      {showAcctSucc && isAuth && (
         <div
           onClick={() => {
             setShowAcctSucc(false);
@@ -325,6 +373,29 @@ function App() {
           <AcctSuccMsg />
         </div>
       )}
+      {showAcctDelete && isAuth && (
+        <div
+          onClick={() => {
+            setShowAcctDelete(false);
+            document.body.style.overflow = "visible";
+          }}
+          className="w-screen h-screen z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
+        >
+          <AcctDeleteMsg />
+        </div>
+      )}
+      {showProfile && isAuth && (
+        <div
+          onClick={() => {
+            document.body.style.overflow = "visible";
+            dispatch({ type: "hide-profile" });
+          }}
+          className="w-screen h-screen z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center"
+        >
+          <ProfilePage />
+        </div>
+      )}
+      
 
       <Routes>
         <Route element={<ProtectedRoutes />}>
