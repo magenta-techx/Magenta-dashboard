@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 import axios from "axios";
 import { useState } from "react";
 import { data } from "./data";
+import { debounce } from "lodash";
+import Select from "react-select";
 
 const AddAccount = () => {
-  const pa = "";
   const {
     accountName,
     setAccountName,
@@ -14,14 +15,11 @@ const AddAccount = () => {
     setAccountNumber,
     isLoading,
     setIsLoading,
-    bankName,
-    setBankName,
     setShowAddAccount,
     setShowOTP,
-    bankCode,
-    setBankCode,
-    acct,
-    setAcct,
+
+    setSelectedOption,
+    selectedOption,
   } = ItemContext();
 
   const REQUEST_OTP = async () => {
@@ -52,25 +50,6 @@ const AddAccount = () => {
     } catch (err) {
       setIsLoading(false);
     }
-    // setAccountNumber("");
-    // setBankName("");
-    // setAccountName("");
-  };
-
-
-  useEffect(() => {
-    const entries = Object.entries(data);
-    const arraySet = [];
-    for (const key in entries) {
-      const set = entries[key];
-      arraySet.push(`${set[0]}: ${set[1]}`);
-    }
-    setAcct(arraySet);
-  }, []);
-  const handleChange = (acc) => {
-    let selectedOpt = acct.filter((val) => val.includes(acc))[0]?.split(":");
-    setBankCode(selectedOpt[0]);
-    setBankName(selectedOpt[1]);
   };
 
   const GET_ACCOUNT_NAME = async () => {
@@ -80,7 +59,7 @@ const AddAccount = () => {
         "https://backend.magentacashier.com/accounts/resolvebankdetails/",
         {
           account_number: accountNumber,
-          bank_code: bankCode,
+          bank_code: selectedOption?.value,
         },
         {
           headers: {
@@ -88,25 +67,32 @@ const AddAccount = () => {
           },
         }
       );
-      if ((accountNumber && bankName) || res.data.status === 200) {
-        setAccountName(JSON.stringify(res.data.data.account_name));
+      console.log(res);
+      if ((accountNumber && selectedOption) || res.data.status === 200) {
+        setAccountName(res?.data?.data.account_name);
       } else {
         setAccountName("");
       }
     } catch (error) {
-      // console.log(error?.response?.data.message);
+      setAccountName(error?.response?.data.message);
     }
+  };
+  const deb = useCallback(
+    debounce((name) => setAccountNumber(name), 1000),
+    []
+  );
+
+  const handleBankName = (name) => {
+    deb(name);
+    // setAccountNumber(name);
   };
   useEffect(() => {
     GET_ACCOUNT_NAME();
-  }, [accountNumber, bankName]);
+  }, [accountNumber, selectedOption]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    //     setBankName("");
-    //     setAccountNumber("");
-    //     setAccountName("");
   };
+
   return (
     <div
       onClick={(e) => {
@@ -118,8 +104,8 @@ const AddAccount = () => {
         onClick={() => {
           document.body.style.overflow = "visible";
           setShowAddAccount(false);
-          setBankName("");
           setAccountNumber("");
+          setSelectedOption(null);
           setAccountName("");
           if (isLoading === true) {
             setIsLoading(false);
@@ -141,10 +127,8 @@ const AddAccount = () => {
             </label>
             <input
               type="number"
-              value={accountNumber}
-              onChange={(e) => {
-                setAccountNumber(e.target.value);
-              }}
+              // value={accountNumber}
+              onChange={(e) => handleBankName(e.target.value)}
               name=""
               id="accountnumber"
               className="border-[#AF8BDA] border outline-none w-full h-[46px] px-4 rounded-xl font-medium bg-[#F7F9FA] poppins"
@@ -159,21 +143,20 @@ const AddAccount = () => {
               Bank name
             </label>
 
-            {acct.length && (
-              <select
-                className="border-[#AF8BDA] border outline-none w-full h-[46px] text-[#ADB3BD] bg-[#F7F9FA] pr-6 rounded-xl font-medium cursor-pointer poppins"
-                onChange={(e) => handleChange(e.target.value)}
-              >
-                {acct.map((acc, i) => {
-                  let set = acc.split(":");
-                  return (
-                    <>
-                      <option key={i}>{set[1].trim()}</option>
-                    </>
-                  );
-                })}
-              </select>
-            )}
+            <Select
+              options={data}
+              defaultValue={selectedOption}
+              onChange={setSelectedOption}
+              styles={{
+                control: (baseStyles) => ({
+                  ...baseStyles,
+                  height: "46px",
+                  borderRadius: "12px",
+                  backgroundColor: "#F7F9FA",
+                  border: "#AF8BDA 1px solid",
+                }),
+              }}
+            />
           </div>
         </div>
         <div className="flex flex-col gap-2 w-full mb-10">
@@ -184,18 +167,27 @@ const AddAccount = () => {
             Account name
           </label>
           <input
-            value={accountName.trim()}
+            value={accountName ? accountName : ""}
             onChange={(e) => setAccountName(e.target.value)}
             disabled={true}
             type="text"
             name=""
             id="accountname"
-            className="border-[#AF8BDA] border outline-none w-full h-[46px] px-4 rounded-xl font-medium poppins bg-[#F7F9FA]"
+            className={`${
+              accountName === "could not fetch account name"
+                ? "text-red-500"
+                : "text-black"
+            } border-[#AF8BDA] border outline-none w-full h-[46px] px-4 rounded-xl font-medium poppins bg-[#F7F9FA] `}
           />
         </div>
         <div className="w-full  flex justify-center" onClick={REQUEST_OTP}>
           <button
-            disabled={!accountNumber || !bankName || !accountName || isLoading}
+            disabled={
+              !accountNumber ||
+              !selectedOption ||
+              accountName === "could not fetch account name" ||
+              isLoading
+            }
             className="w-[351px] h-[49px] flex rounded-xl justify-center items-center font-medium cursor-pointer disabled:cursor-not-allowed  disabled:text-gray-500 disabled:bg-[#E2E6EE] bg-[#4E00AD] text-white"
           >
             {isLoading ? (

@@ -20,15 +20,15 @@ import Header from "./Header";
 const ViewBranchReport = () => {
   const [data, setData] = useState([]);
   const {
-    state: { ForEachDetail },
-    showEdit,
     setShowEdit,
   } = ItemContext();
   const history = async () => {
     const token = localStorage.getItem("login_token");
+    const get =localStorage.getItem("branch_report")
+    const {id}=JSON.parse(get);
     try {
       const res = await axios.get(
-        `https://backend.magentacashier.com/business/branch/transactions/${ForEachDetail?.id}/`,
+        `https://backend.magentacashier.com/business/branch/transactions/${id}/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ const ViewBranchReport = () => {
       );
       setData(res.data);
     } catch (err) {
-      // console.log(err);
+      console.log(err);
     }
   };
   useEffect(() => {

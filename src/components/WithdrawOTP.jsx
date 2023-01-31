@@ -14,22 +14,23 @@ const WithdrawOTP = () => {
     setIsLoading,
     withdrawAmount,
     setShowWithdrawSucc,
+
     setAccountName,
     setAccountNumber,
-    setBankName,
     state: { ForEachAcctDetail },
   } = ItemContext();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    const getAcct=localStorage.getItem('account')
+    const result=JSON.parse(getAcct)
     const token = localStorage.getItem("login_token");
     try {
       const res = await axios.post(
         "https://backend.magentacashier.com/business/cashout/",
         {
-          // account_id: ForEachAcctDetail?.raw_payload.data.id,
-          account_id: ForEachAcctDetail?.id,
-          bank_code: ForEachAcctDetail?.raw_payload.data.details.bank_code,
+          account_id: result.id,
+          bank_code:result.bank_code,
           amount: withdrawAmount,
           token: withdrawOTP,
         },
@@ -39,12 +40,13 @@ const WithdrawOTP = () => {
           },
         }
       );
+      console.log(res)
       // setShowAcctSucc(true);
       if (res.status === 200) {
         setShowWithdrawSucc(true);
         setShowWithdrawOTP(false);
         setIsLoading(false);
-        console.log('first')
+        localStorage.removeItem("account")
         // setWithdrawAmount("")
       } else {
         setShowWithdrawSucc(false);
@@ -83,6 +85,8 @@ const WithdrawOTP = () => {
           setShowWithdrawOTP(false);
           setWithdrawAmount("");
           document.body.style.overflow = "visible";
+          localStorage.removeItem("account");
+          localStorage.removeItem("num");
           if (isLoading === true) {
             setIsLoading(false);
             //STOP THE API CALL OR REMOVE EVENT LISTENER

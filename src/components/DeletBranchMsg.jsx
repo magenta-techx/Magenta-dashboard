@@ -15,6 +15,7 @@ const DeleteBranchMsg = () => {
     //   Check if the message is successful before setting showDeletedMsg=true
     const token = localStorage.getItem("login_token");
     setIsLoading(true)
+    console.log('isLoading');
     try {
       const res = await axios.delete(
         `https://backend.magentacashier.com/business/branch/delete/${id}/`,
@@ -66,7 +67,7 @@ const DeleteBranchMsg = () => {
         <div
           onClick={() => {
             setShowDeleteBranch(false)
-             document.body.style.overflow = "visible";
+            document.body.style.overflow = "visible";
           }}
           className="bg-[#4E00AD] w-[140px] h-[46px] rounded-xl text-white flex justify-center items-center cursor-pointer"
         >

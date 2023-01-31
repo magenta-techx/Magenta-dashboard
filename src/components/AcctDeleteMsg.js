@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { BsTrash } from "react-icons/bs";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 
@@ -7,21 +7,29 @@ const AcctDeleteMsg = () => {
   const {
     setShowAcctDelete,
     isLoading,
+    setIsLoading,
     GET_ACCOUNT,
     setShowDeleteSucc,
     handleAutoSweepDelete,
     state: { ForEachAcctDetail },
     setStates,
+    det,
+    setDel,
   } = ItemContext();
-  const acct = localStorage.getItem("account");
-  const acct_num = JSON.parse(acct);
+
+  const acc = localStorage.getItem("num");
+  const filterColon = acc
+    ?.split("")
+    ?.filter((a) => a !== '"')
+    ?.join("");
   const handleDelete = async (detail) => {
+    setIsLoading(true);
     const token = localStorage.getItem("login_token");
-    console.log(detail);
     // Check if acct number are equal
     if (localStorage.getItem("item")) {
-      if (detail?.account_number === acct_num) {
+      if (detail?.account_number === filterColon) {
         handleAutoSweepDelete();
+        localStorage.removeItem("num")
         try {
           const res = await axios.delete(
             `https://backend.magentacashier.com/accounts/account/delete/${detail?.id}`,
@@ -31,9 +39,10 @@ const AcctDeleteMsg = () => {
               },
             }
           );
+        console.log(res);
           if (res.status === 204) {
-            GET_ACCOUNT();
             setStates(false);
+            setIsLoading(false)
             setShowAcctDelete(false);
             setShowDeleteSucc(true);
           }
@@ -41,6 +50,8 @@ const AcctDeleteMsg = () => {
           console.log(error);
         }
       } else {
+        localStorage.removeItem("num");
+
         try {
           const res = await axios.delete(
             `https://backend.magentacashier.com/accounts/account/delete/${detail?.id}`,
@@ -51,16 +62,18 @@ const AcctDeleteMsg = () => {
             }
           );
           if (res.status === 204) {
-            GET_ACCOUNT();
+            // GET_ACCOUNT();
             setStates(false);
-                setShowAcctDelete(false);
-                 setShowDeleteSucc(true);
+            setShowAcctDelete(false);
+            setShowDeleteSucc(true);
           }
         } catch (error) {
           console.log(error);
         }
       }
     } else {
+        localStorage.removeItem("num");
+
       try {
         const res = await axios.delete(
           `https://backend.magentacashier.com/accounts/account/delete/${detail?.id}`,
@@ -71,10 +84,9 @@ const AcctDeleteMsg = () => {
           }
         );
         if (res.status === 204) {
-          GET_ACCOUNT();
           setShowAcctDelete(false);
-              setStates(false);
-               setShowDeleteSucc(true);
+          setStates(false);
+          setShowDeleteSucc(true);
         }
       } catch (error) {
         console.log(error);
@@ -93,13 +105,18 @@ const AcctDeleteMsg = () => {
 
       <div className="flex w-full justify-center gap-10 items-center">
         <div
-          onClick={() => setShowAcctDelete(false)}
+          onClick={() => {
+            setShowAcctDelete(false);
+            document.body.style.overflow = "visible";
+          }}
           className="bg-[#4E00AD] w-[140px] h-[46px] rounded-xl text-white flex justify-center items-center cursor-pointer"
         >
           Cancel
         </div>
         <div
-          onClick={() => handleDelete(ForEachAcctDetail)}
+          onClick={() => {
+            handleDelete(ForEachAcctDetail);
+          }}
           className="bg-[#EEE8F8] w-[140px] h-[46px] rounded-xl text-black flex justify-center gap-4 items-center cursor-pointer"
         >
           {isLoading ? (

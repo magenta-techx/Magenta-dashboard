@@ -3,6 +3,7 @@ import React  from "react";
 import Branch from "../../components/Branch";
 import Header from "../../components/Header";
 import { HiArrowRight, HiOutlineFilter } from "react-icons/hi";
+import { motion } from "framer-motion";
 import {  BsPlusLg, BsSearch } from "react-icons/bs";
 import { ItemContext } from "../../contextApi/stateMang.contextApi";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -32,7 +33,13 @@ const CompanyBranch = () => {
   };
   return (
     <>
-      <div className="w-[80%] px-8 py-6 ">
+      <div
+        className="w-[80%] px-8 py-6 "
+        // initial={{ width: "80%" }}
+        // animate={{ width: "80%" }}
+        // exit={{ x: "80%",transition:{duration:0.1} }}
+       
+      >
         <div className="w-[full]  bg-white   ">
           <Header />
         </div>
@@ -99,10 +106,13 @@ const CompanyBranch = () => {
                   alt="undraw_grades_re_j7d6 1"
                 />
               </div>
-              <div className="flex justify-end" onClick={() => {
-                setShowCreateBranch(true);
-                     document.body.style.overflow = "hidden";
-              }}>
+              <div
+                className="flex justify-end"
+                onClick={() => {
+                  setShowCreateBranch(true);
+                  document.body.style.overflow = "hidden";
+                }}
+              >
                 <button className="text-sm w-[157px] h-[45px]  flex rounded-xl justify-center items-center bg-[#4E00AD] text-white font-medium cursor-pointer  ">
                   Create New Branch
                 </button>

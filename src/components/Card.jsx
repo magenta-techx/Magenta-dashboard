@@ -14,7 +14,6 @@ const Card = ({ detail: { account_number, bank_name, id }, detail }) => {
     states,setStates,
     dispatch,
   } = ItemContext();
-  const [check, setCheck] = useState(false);
   
   const split = account_number.split("");
   const fitr = split?.filter((a, i) => {
@@ -46,8 +45,8 @@ const Card = ({ detail: { account_number, bank_name, id }, detail }) => {
     dispatch({ type: "Individual AcctDetails", payload: item });
     setShowAcctDelete(true);
     document.body.style.overflow = "hidden";
-    console.log(ForEachAcctDetail);
-    console.log(item);
+    // console.log(ForEachAcctDetail);
+    // console.log(item);
   };
   return (
     <>
@@ -58,7 +57,12 @@ const Card = ({ detail: { account_number, bank_name, id }, detail }) => {
             {midfth?.join("")}
             {latr}
           </small>
-          <div className="relative">
+          <div
+            className="relative"
+            onMouseLeave={() => {
+              setStates(false);
+            }}
+          >
             <div onClick={() => handleClick(detail)}>
               {states ? (
                 <FaTimes className="cursor-pointer" />
@@ -77,7 +81,9 @@ const Card = ({ detail: { account_number, bank_name, id }, detail }) => {
             )}
           </div>
         </div>
-        <h4 className="text-[rgba(0,0,0,0.4)] albert font-normal text-[16px]">{bank_name}</h4>
+        <h4 className="text-[rgba(0,0,0,0.4)] albert font-normal text-[16px]">
+          {bank_name}
+        </h4>
       </div>
     </>
   );

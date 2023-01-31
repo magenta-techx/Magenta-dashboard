@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DragDropInputComponent from "../DragDropInputComponent";
 import { ItemContext } from "../../../contextApi/stateMang.contextApi";
-import axios, { Axios } from "axios";
-import { useEffect } from "react";
+import axios from "axios";
 const AttachDocuments = ({ markAsComplete = () => {} }) => {
   // const [file, setFile] = useState(null);
   const { userDetails } = ItemContext();
   const [file, setFile, attachMent] = useState({});
   const [bool, setBool] = useState(true);
   const [err, setErr] = useState("");
+  const navigate = useNavigate();
   const handleSubmit = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -22,7 +23,6 @@ const AttachDocuments = ({ markAsComplete = () => {} }) => {
           },
         }
       );
-
     } catch (err) {
       if (err.response.data === undefined) {
         setErr(err.message);
@@ -82,7 +82,10 @@ const AttachDocuments = ({ markAsComplete = () => {} }) => {
         </button>
 
         <p>
-          Already a member? <span className="text-violet-500">Sign In</span>
+          Already a member?{" "}
+          <span onClick={() => navigate("/login")} className="text-violet-500 cursor-pointer">
+            Sign In
+          </span>
         </p>
       </div>
     </div>

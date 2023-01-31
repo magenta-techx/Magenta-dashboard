@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 
 const ShowDeleteSucc = () => {
-  const { setShowDeleteSucc, } = ItemContext();
+  const { setShowDeleteSucc, setIsLoading } = ItemContext();
   const navigate = useNavigate();
   return (
     <div
@@ -26,6 +26,7 @@ const ShowDeleteSucc = () => {
         className="  flex-aut flex justify-center items-center px-4 text-[#C7AFE4] cursor-pointer "
         onClick={() => {
           setShowDeleteSucc(false);
+          setIsLoading(false);
         }}
       >
         <span>Close</span>

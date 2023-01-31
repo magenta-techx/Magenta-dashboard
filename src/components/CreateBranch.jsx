@@ -18,6 +18,10 @@ const CreateBranch = () => {
     setName,
     setAddress,
     setPassCode,
+    setEditBranchAddress,
+    setEditBranchName,
+    setEditBranchPasscode,
+    editBranchName,
     state: { ForEachDetail },
   } = ItemContext();
   const navigate = useNavigate();
@@ -36,6 +40,7 @@ const CreateBranch = () => {
           },
         }
       );
+      
       setName("");
       setAddress("");
       setPassCode("");
@@ -46,6 +51,10 @@ const CreateBranch = () => {
         navigate(`/branch/${res?.data?.id}`);
         localStorage.setItem("branch_report", JSON.stringify(res?.data));
         document.body.style.overflow = "visible";
+        // console.log(res);
+        setEditBranchAddress(res?.data?.address);
+        setEditBranchName(res?.data?.name);
+        setEditBranchPasscode(res?.data?.passcode);
       } else {
         setIsLoading(false);
       }

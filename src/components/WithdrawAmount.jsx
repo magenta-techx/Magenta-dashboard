@@ -53,8 +53,9 @@ export const WithdrawAmount = () => {
           setShowWithdrawAmount(false);
           setWithdrawAmount("");
           document.body.style.overflow = "visible";
+          localStorage.removeItem("account")
+          localStorage.removeItem("num")
           setSelected(false);
-          console.log("object");
           if (isLoading === true) {
             setIsLoading(false);
           }

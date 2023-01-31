@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState, useRef } from "react";
 import Header from "../components/Header";
+import { motion } from "framer-motion";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 
 const Settings = ({ onChange = () => {}, removeFile = () => {} }) => {
@@ -77,7 +78,10 @@ const Settings = ({ onChange = () => {}, removeFile = () => {} }) => {
   };
   // console.log(state.settingStates);
   return (
-    <div className="w-[80%] px-8 py-6 flex flex-col gap-10">
+    <div
+     
+      className="w-[80%] px-8 py-6 flex flex-col gap-10"
+    >
       <div className="w-[full]  bg-white   ">
         <Header />
       </div>
