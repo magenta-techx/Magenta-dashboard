@@ -99,7 +99,7 @@ const CashOut = () => {
           </p>
           <div className="flex gap-4 ">
             {accountDetails.map((detail) => {
-              return <Card key={detail.id} detail={detail} />;
+              return <Card key={detail.id}  detail={detail} />;
             })}
           </div>
           <div className="flex justify-end ">
@@ -187,7 +187,6 @@ const CashOut = () => {
                       <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
                         null
                       </div>
-                      <span>Loading</span>
                     </div>
                   ) : (
                     "Reset auto sweep"

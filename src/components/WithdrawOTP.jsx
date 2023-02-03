@@ -86,7 +86,7 @@ const WithdrawOTP = () => {
           setWithdrawAmount("");
           document.body.style.overflow = "visible";
           localStorage.removeItem("account");
-          localStorage.removeItem("num");
+          // localStorage.removeItem("num");
           if (isLoading === true) {
             setIsLoading(false);
             //STOP THE API CALL OR REMOVE EVENT LISTENER
@@ -130,7 +130,6 @@ const WithdrawOTP = () => {
               <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent poppins font-medium text-sm">
                 null
               </div>
-              <span>Loading</span>
             </div>
           ) : (
             "Continue"

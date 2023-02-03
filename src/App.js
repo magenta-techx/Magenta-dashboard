@@ -165,8 +165,8 @@ function App() {
             setWithdrawAmount("");
             document.body.style.overflow = "visible";
             setSelected(false);
-             localStorage.removeItem("account");
-             localStorage.removeItem("num");
+            localStorage.removeItem("account");
+            // localStorage.removeItem("num");
             if (isLoading === true) {
               setIsLoading(false);
             }
@@ -193,8 +193,8 @@ function App() {
             setShowAutoSweepAmount(false);
             setSelected(false);
             document.body.style.overflow = "visible";
-             localStorage.removeItem("account");
-             localStorage.removeItem("num");
+            localStorage.removeItem("account");
+            // localStorage.removeItem("num");
           }}
           className="w-screen h-screen z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center px-20"
         >
@@ -207,7 +207,7 @@ function App() {
             setShowAutoSweepOTP(false);
             document.body.style.overflow = "visible";
             localStorage.removeItem("account");
-            localStorage.removeItem("num");
+            // localStorage.removeItem("num");
             if (isLoading === true) {
               setIsLoading(false);
             }
@@ -236,8 +236,8 @@ function App() {
             setShowWithdrawOTP(false);
             document.body.style.overflow = "visible";
             setWithdrawAmount("");
-            localStorage.removeItem("account")
-            localStorage.removeItem("num")
+            localStorage.removeItem("account");
+            // localStorage.removeItem("num");
             if (isLoading === true) {
               setIsLoading(false);
             }
@@ -314,7 +314,6 @@ function App() {
           onClick={() => {
             setShowEditSucc(false);
             navigate("/branch/all");
-            // Get_Branch();
             setIsLoading(false);
             document.body.style.overflow = "visible";
           }}
@@ -402,7 +401,7 @@ function App() {
           <ProfilePage />
         </div>
       )}
-
+      
       <Suspense
         fallback={
           <span className="flex h-12 w-12  gap-2 absolute top-[50%] right-[50%] ml-10 -translate-x-[50%] -translate-y-[50%] animate-ping">
@@ -412,27 +411,24 @@ function App() {
           </span>
         }
       >
-          <Routes location={location} key={location.pathname}>
-            <Route element={<ProtectedRoutes />}>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="cashout" element={<CashOut />}></Route>
-              <Route path="branch" element={<CompanyBranch />}></Route>
-              <Route path="transaction" element={<Transaction />}></Route>
-              <Route path="branch/all" element={<ViewAllBranch />}></Route>
-              <Route path="branch/:id" element={<ViewBranchReport />}></Route>
-              <Route path="/settings" element={<Settings />} />
-              <Route path="*" element={<ErrorPage />} />
-            </Route>
-            <Route path="/getStarted" element={<GetStarted />} />
-            <Route
-              path="/forgotPassword"
-              element={<PasswordResetComponent />}
-            />
-            <Route path="/emailchange" element={<EmailChangeComponent />} />
-            <Route path="/verify" element={<VerificationComponent />} />
-            <Route path="/signup" element={<Onboarding />} />
-            <Route path="/login" element={<LoginComponent />} />
-          </Routes>
+        <Routes location={location} key={location.pathname}>
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="cashout" element={<CashOut />}></Route>
+            <Route path="branch" element={<CompanyBranch />}></Route>
+            <Route path="transaction" element={<Transaction />}></Route>
+            <Route path="branch/all" element={<ViewAllBranch />}></Route>
+            <Route path="branch/:id" element={<ViewBranchReport />}></Route>
+            <Route path="/settings" element={<Settings />} />
+            <Route path="*" element={<ErrorPage />} />
+          </Route>
+          <Route path="/getStarted" element={<GetStarted />} />
+          <Route path="/forgotPassword" element={<PasswordResetComponent />} />
+          <Route path="/emailchange" element={<EmailChangeComponent />} />
+          <Route path="/verify" element={<VerificationComponent />} />
+          <Route path="/signup" element={<Onboarding />} />
+          <Route path="/login" element={<LoginComponent />} />
+        </Routes>
       </Suspense>
     </div>
   );

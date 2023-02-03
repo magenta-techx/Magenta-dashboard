@@ -57,6 +57,8 @@ const AutoSweepOTP = () => {
         document.body.style.overflow = "visible";
         setResetAutoSweepFreq(res.data?.frequency?.toLowerCase());
         localStorage.removeItem("account");
+        // localStorage.setItem("num",)
+        console.log(res);
         setIsLoading(false);
         Get_Auto_Sweep();
         localStorage.setItem(
@@ -139,7 +141,6 @@ const AutoSweepOTP = () => {
               <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
                 null
               </div>
-              <span>Loading</span>
             </div>
           ) : (
             "Continue"

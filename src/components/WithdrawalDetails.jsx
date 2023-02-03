@@ -3,8 +3,8 @@ import { useRef } from "react";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 
 const WithdrawalDetails = ({
-  account: { account_number, bank_name },
-  account,
+  account: { account_number, bank_name ,id},
+  account,key
 }) => {
   const { setSelected, selected } = ItemContext();
   const split = account_number.split("");
@@ -34,8 +34,10 @@ const WithdrawalDetails = ({
       onClick={() => {
         console.log(ref);
         ref.current.checked = true;
-        setSelected(true)
-        localStorage.setItem("num", JSON.stringify(account_number));
+        setSelected(true);
+        // localStorage.setItem("num", JSON.stringify(account_number));
+        // STORE THE ID!!!
+        localStorage.setItem("num", JSON.stringify(id));
         localStorage.setItem("account", JSON.stringify(account));
       }}
     >
@@ -54,10 +56,10 @@ const WithdrawalDetails = ({
               type: "Individual AcctDetails",
               payload: account,
             });
-
+            console.log(account);
             setSelected(true);
             localStorage.setItem("account", JSON.stringify(account));
-            localStorage.setItem("num", JSON.stringify(account_number));
+            localStorage.setItem("num", JSON.stringify(id));
           }}
           type="radio"
           name="sam"

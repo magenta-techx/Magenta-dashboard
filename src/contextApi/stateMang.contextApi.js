@@ -39,7 +39,7 @@ const Context = ({ children }) => {
   const { branchDetails } = state;
   const [newPassword, setNewPassword] = useState({});
   const [verificationMail, setVerificationMail] = useState("");
-  const [states, setStates] = useState(false);
+  const [states, setStates] = useState({firstAcct:false,secondAcct:false});
   const [user, setUser] = useState({});
   const [showNav, setShowNav] = useState(true);
   const [showCreateBranch, setShowCreateBranch] = useState(false);
@@ -87,6 +87,7 @@ const Context = ({ children }) => {
   const [resetAutoSweepFreq, setResetAutoSweepFreq] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [det, setDel] = useState(null);
+ 
   let isAuth;
   const handleAutoSweepDelete = async () => {
     const token = localStorage.getItem("login_token");
@@ -131,7 +132,7 @@ const Context = ({ children }) => {
       );
       dispatch({ type: "Branch Details", payload: res.data });
     } catch (err) {
-      if (err.response.statusText === "Unauthorized") {
+      if (err?.response?.statusText === "Unauthorized") {
         localStorage.clear();
       }
       console.log(err);
@@ -149,16 +150,17 @@ const Context = ({ children }) => {
           },
         }
       );
-      // setAutoSweepID(res?.data?.id)
+      console.log(res)
       res?.data?.map((a) => {
-        setAutoSweepID(a.id);
+        localStorage.setItem("reset_auto_sweep_result", JSON.stringify(a));
         localStorage.setItem("key", JSON.stringify(a?.id));
+        localStorage.setItem("item",true)
+        localStorage.setItem("num", a.account)
+        console.log(a.account)
       });
     } catch (err) {}
   };
-  useEffect(() => {
-    Get_Auto_Sweep();
-  }, []);
+ 
   const GET_ACCOUNT = async () => {
     const token = localStorage.getItem("login_token");
     try {
@@ -286,7 +288,7 @@ const Context = ({ children }) => {
     // if (!localStorage.getItem("isAuth")) {
     //   navigate("/login");
     // }
-    Get_Branch()
+    Get_Branch();
   }, [branchDetails]);
   const merchant = {
     company_name: companyDetails?.companyName,

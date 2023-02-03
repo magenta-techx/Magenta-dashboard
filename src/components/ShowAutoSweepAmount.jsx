@@ -80,6 +80,7 @@ export const ShowAutoSweepAmount = () => {
             name=""
             placeholder="Enter withdrawal amount"
             id=""
+            autoFocus={true}
             className="input border-[#ADB3BD] bg-[#F7F9FA] border text-center text-lg font-normal outline-none w-[299px] h-[60px] px-4 rounded-xl text-[#6B778C] inter"
           />
         </div>
@@ -89,7 +90,7 @@ export const ShowAutoSweepAmount = () => {
           </h2>
           <div className="flex flex-col gap-4">
             {accountDetails?.map((account, idx) => {
-              return <WithdrawalDetails account={account} key={idx} />;
+              return <WithdrawalDetails account={account}  />;
             })}
           </div>
           <button
@@ -101,7 +102,6 @@ export const ShowAutoSweepAmount = () => {
                 <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
                   null
                 </div>
-                <span>Loading</span>
               </div>
             ) : (
               "Continue"

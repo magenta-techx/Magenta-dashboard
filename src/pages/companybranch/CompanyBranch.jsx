@@ -25,7 +25,7 @@ const CompanyBranch = () => {
     setName("");
     setAddress("");
     setPassCode("");
-    Get_Branch();
+    // Get_Branch();
   };
   const handleClick2 = () => {
     navigate("/branch/all");

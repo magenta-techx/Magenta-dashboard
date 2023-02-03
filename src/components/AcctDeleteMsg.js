@@ -23,16 +23,19 @@ const AcctDeleteMsg = () => {
     ?.filter((a) => a !== '"')
     ?.join("");
   const handleDelete = async (detail) => {
-    setIsLoading(true);
+    // setIsLoading(true);
+
+    console.log(typeof Number(filterColon));
+    console.log(ForEachAcctDetail);
+
     const token = localStorage.getItem("login_token");
     // Check if acct number are equal
     if (localStorage.getItem("item")) {
-      if (detail?.account_number === filterColon) {
+      if (detail === Number(filterColon)) {
         handleAutoSweepDelete();
-        localStorage.removeItem("num")
         try {
           const res = await axios.delete(
-            `https://backend.magentacashier.com/accounts/account/delete/${detail?.id}`,
+            `https://backend.magentacashier.com/accounts/account/delete/${detail}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -50,11 +53,11 @@ const AcctDeleteMsg = () => {
           console.log(error);
         }
       } else {
-        localStorage.removeItem("num");
+        // localStorage.removeItem("num");
 
         try {
           const res = await axios.delete(
-            `https://backend.magentacashier.com/accounts/account/delete/${detail?.id}`,
+            `https://backend.magentacashier.com/accounts/account/delete/${detail}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -72,11 +75,11 @@ const AcctDeleteMsg = () => {
         }
       }
     } else {
-        localStorage.removeItem("num");
+        // localStorage.removeItem("num");
 
       try {
         const res = await axios.delete(
-          `https://backend.magentacashier.com/accounts/account/delete/${detail?.id}`,
+          `https://backend.magentacashier.com/accounts/account/delete/${detail}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -108,6 +111,7 @@ const AcctDeleteMsg = () => {
           onClick={() => {
             setShowAcctDelete(false);
             document.body.style.overflow = "visible";
+            console.log(filterColon)
           }}
           className="bg-[#4E00AD] w-[140px] h-[46px] rounded-xl text-white flex justify-center items-center cursor-pointer"
         >
@@ -115,7 +119,7 @@ const AcctDeleteMsg = () => {
         </div>
         <div
           onClick={() => {
-            handleDelete(ForEachAcctDetail);
+            handleDelete(ForEachAcctDetail?.id);
           }}
           className="bg-[#EEE8F8] w-[140px] h-[46px] rounded-xl text-black flex justify-center gap-4 items-center cursor-pointer"
         >
@@ -124,7 +128,6 @@ const AcctDeleteMsg = () => {
               <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
                 null
               </div>
-              <span>Loading</span>
             </div>
           ) : (
             <div className="text-[#DD55D4] flex items-center gap-4 font-normal">

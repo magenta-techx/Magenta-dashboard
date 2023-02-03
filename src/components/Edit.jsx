@@ -76,6 +76,7 @@ const Edit = () => {
             Branch Name
           </label>
           <input
+            autoFocus={true}
             type="text"
             value={editBranchName}
             // value={result.name}
@@ -128,7 +129,6 @@ const Edit = () => {
               <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
                 null
               </div>
-              <span>Loading</span>
             </div>
           ) : (
             "Save Changes"

@@ -74,7 +74,7 @@ const AddAccount = () => {
         setAccountName("");
       }
     } catch (error) {
-      setAccountName(error?.response?.data.message);
+      setAccountName(error?.response?.data?.message);
     }
   };
   const deb = useCallback(
@@ -127,6 +127,7 @@ const AddAccount = () => {
             </label>
             <input
               type="number"
+              autoFocus={true}
               // value={accountNumber}
               onChange={(e) => handleBankName(e.target.value)}
               name=""
@@ -184,6 +185,7 @@ const AddAccount = () => {
           <button
             disabled={
               !accountNumber ||
+              !accountName ||
               !selectedOption ||
               accountName === "could not fetch account name" ||
               isLoading
@@ -195,7 +197,6 @@ const AddAccount = () => {
                 <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
                   null
                 </div>
-                <span>Loading</span>
               </div>
             ) : (
               "Continue"
