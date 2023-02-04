@@ -53,8 +53,9 @@ export const WithdrawAmount = () => {
           setShowWithdrawAmount(false);
           setWithdrawAmount("");
           document.body.style.overflow = "visible";
+          localStorage.removeItem("account")
+          // localStorage.removeItem("num")
           setSelected(false);
-          console.log("object");
           if (isLoading === true) {
             setIsLoading(false);
           }
@@ -70,6 +71,7 @@ export const WithdrawAmount = () => {
         </div>
         <div className="flex flex-col justify-center items-center gap-2 w-full">
           <input
+            autoFocus={true}
             inputMode="numeric"
             type="number"
             value={withdrawAmount}
@@ -88,7 +90,7 @@ export const WithdrawAmount = () => {
             {accountDetails?.map((account, idx) => {
               return (
                 <>
-                  <WithdrawalDetails account={account} key={idx} />
+                  <WithdrawalDetails key={account.id} account={account} />
                 </>
               );
             })}
@@ -102,7 +104,6 @@ export const WithdrawAmount = () => {
                 <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent ">
                   null
                 </div>
-                <span>Loading</span>
               </div>
             ) : (
               "Continue"

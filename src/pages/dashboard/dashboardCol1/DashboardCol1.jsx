@@ -69,7 +69,7 @@ const DashboardCol1 = () => {
           </div>
           <div className="flex flex-col gap-3">
             <h4 className="albert">All Time Cash</h4>
-            <h2 className="font-bold flex items-center inter text-[24px]">
+            <h2 className="font-bold flex items-center poppins text-[24px]">
               <TbCurrencyNaira />
               4,390,800
             </h2>

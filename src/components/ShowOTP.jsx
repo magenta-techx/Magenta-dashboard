@@ -10,20 +10,18 @@ const ShowOTP = () => {
     setOTP,
     setShowOTP,
     loginEmail,
-
     setIsLoading,
     isLoading,
-
-    bankName,
-    GET_ACCOUNT,
-    setBankName,
     accountNumber,
     setAccountNumber,
     accountName,
     setAccountName,
     bankCode,
+    selectedOption,
+    setSelectedOption,
   } = ItemContext();
   const handleSubmit = async (e) => {
+    console.log(selectedOption);
     e.preventDefault();
     const token = localStorage.getItem("login_token");
     setIsLoading(true);
@@ -32,8 +30,8 @@ const ShowOTP = () => {
         "https://backend.magentacashier.com/accounts/account/",
         {
           account_number: accountNumber,
-          bank_name: bankName,
-          bank_code: bankCode,
+          bank_name: selectedOption?.label,
+          bank_code: selectedOption?.value,
           account_name: accountName,
           token: otp,
         },
@@ -46,9 +44,8 @@ const ShowOTP = () => {
       if (res.status === 200 || res.status === 201) {
         setIsLoading(false);
         setShowOTP(false);
-        GET_ACCOUNT();
-        setBankName("");
         setAccountNumber("");
+        document.body.style.overflow = "visible";
         setAccountName("");
       } else {
         setIsLoading(false);
@@ -89,8 +86,6 @@ const ShowOTP = () => {
           document.body.style.overflow = "visible";
           setAccountName("");
           setAccountNumber("");
-          setBankName("");
-          GET_ACCOUNT();
           if (isLoading === true) {
             setIsLoading(false);
           }
@@ -130,7 +125,6 @@ const ShowOTP = () => {
               <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
                 null
               </div>
-              <span>Loading</span>
             </div>
           ) : (
             "Continue"

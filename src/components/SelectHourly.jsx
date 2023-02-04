@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 import { timee } from "./data";
-import WithdrawalDetails from "./WithdrawalDetails";
 const SelectHourly = () => {
   const { setFrequency, time, setShowSelectHourly, setTime } = ItemContext();
   const [index, setIndex] = useState(0);

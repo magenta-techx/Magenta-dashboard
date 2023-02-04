@@ -21,7 +21,7 @@ const AutoSweepOTP = () => {
     hour,
     isLoading,
     setIsLoading,
-    Get_Auto_Sweep ,
+    Get_Auto_Sweep,
     freq,
     state: { ForEachAcctDetail },
   } = ItemContext();
@@ -30,7 +30,8 @@ const AutoSweepOTP = () => {
     const index = hour.indexOf(" ");
     const hou = hour.substring(index + 1, 0);
     const token = localStorage.getItem("login_token");
-   console.log(hou)
+    const getAcct = localStorage.getItem("account");
+    const result = JSON.parse(getAcct);
     setIsLoading(true);
     try {
       const res = await axios.post(
@@ -40,7 +41,7 @@ const AutoSweepOTP = () => {
           frequency: freq,
           time: time,
           hour: hou,
-          account: ForEachAcctDetail.id,
+          account: result.id,
         },
         {
           headers: {
@@ -48,21 +49,23 @@ const AutoSweepOTP = () => {
           },
         }
       );
-    
-      
+
       // setShowAcctSucc(true);
       if (res.status === 200 || res.status === 201) {
         setShowAutoSweepOTP(false);
         setResetAutoSweepTime(res.data?.hour);
+        document.body.style.overflow = "visible";
         setResetAutoSweepFreq(res.data?.frequency?.toLowerCase());
+        localStorage.removeItem("account");
+        // localStorage.setItem("num",)
+        console.log(res);
         setIsLoading(false);
-        Get_Auto_Sweep()
+        Get_Auto_Sweep();
         localStorage.setItem(
           "reset_auto_sweep_result",
           JSON.stringify(res.data)
         );
-        localStorage.setItem("item",true)
-
+        localStorage.setItem("item", true);
       } else {
         setShowWithdrawSucc(false);
       }
@@ -97,6 +100,8 @@ const AutoSweepOTP = () => {
         onClick={() => {
           setShowAutoSweepOTP(false);
           document.body.style.overflow = "visible";
+          localStorage.removeItem("account");
+          localStorage.removeItem("num");
         }}
         className="absolute w-[60px] h-[60px] flex justify-center items-center rounded-full bg-[#EEE8F8] cursor-pointer top-0 -right-4"
       >
@@ -136,7 +141,6 @@ const AutoSweepOTP = () => {
               <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
                 null
               </div>
-              <span>Loading</span>
             </div>
           ) : (
             "Continue"

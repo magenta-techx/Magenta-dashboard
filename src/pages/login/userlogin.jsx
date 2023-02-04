@@ -21,8 +21,11 @@ const LoginComponent = () => {
     setShowNav,
     isLoading,
     setIsLoading,
+    Get_Auto_Sweep
   } = ItemContext();
 
+ const auth = localStorage.getItem("isAuth");
+  const isAuth = JSON.parse(auth);
   useEffect(() => {
     setShowNav(false);
   }, []);
@@ -36,13 +39,16 @@ const LoginComponent = () => {
           email: loginEmail,
           password: loginPassword,
         }
-      );
-      if (response.status !== 401 && response.status !== 400) {
+        );
+        if (response.status !== 401 && response.status !== 400) {
         const login_token = response.data.tokens["access"];
         localStorage.setItem("login_token", login_token);
         localStorage.setItem("isAuth", true);
         navigate("/");
         setIsLoading(false);
+        Get_Auto_Sweep()
+       
+        
       } else {
         console.log("bad request");
         console.log(response.data);
@@ -51,7 +57,7 @@ const LoginComponent = () => {
       console.log(response.data);
     } catch (err) {
       console.log(err);
-      if (err.response.data === undefined) {
+      if (err?.response?.data === undefined) {
         setErr(err.message);
         setIsLoading(false);
       } else {
@@ -69,7 +75,7 @@ const LoginComponent = () => {
       <div className="px-[20px] py-4">
         <MagentaLogo />
       </div>
-      <div className="w-full">
+      <div className="w-full albert">
         <div className="user-details text-center bg-[#EEE8F8] rounded-xl w-[550px] m-auto my-[50px] flex pt-[44px] flex-col gap-5">
           <div className="flex justify-center relative z-[]">
             <svg
@@ -105,7 +111,7 @@ const LoginComponent = () => {
             </svg>
           </div>
 
-          <h1 className="text-[32px] font-semibold">Login to your Account</h1>
+          <h1 className="text-[32px] font-semibold ">Login to your Account</h1>
           <p className="text-[14px]">Pls Provide your details</p>
 
           <div
@@ -145,11 +151,12 @@ const LoginComponent = () => {
             Forgot Password
           </p>
           <button
-            className="w-[360px] max-w-full h-[46px]  m-auto rounded-[10px] disabled:text-gray-500 disabled:bg-[#E2E6EE] bg-[#4E00AD] text-white flex justify-center items-center"
+            className="w-[360px] max-w-full h-[46px]  m-auto rounded-[10px] disabled:text-gray-500 disabled:bg-[#E2E6EE] bg-[#4E00AD] text-white flex justify-center items-center disabled:cursor-not-allowed"
             onClick={handleSubmit}
             disabled={
               !loginPassword ||
               !loginPassword > 2 ||
+              isLoading||
               !loginEmail ||
               !loginEmail.includes("@") ||
               !loginEmail.includes(".")
@@ -157,10 +164,10 @@ const LoginComponent = () => {
           >
             {isLoading ? (
               <div className="flex items-center gap-4">
-                <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
+                <div className="  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
                   null
                 </div>
-                <span>Loading</span>
+                
               </div>
             ) : (
               "Continue"

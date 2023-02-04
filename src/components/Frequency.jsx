@@ -14,7 +14,6 @@ const Frequency = () => {
     setIndex((prevState) => prevState + 1);
     setHour(hourrs[index]);
   };
-  console.log(index);
   const handleSubmit = () => {
     setShowAutoSweepAmount(true);
     setFrequency(false);

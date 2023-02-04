@@ -18,6 +18,10 @@ const CreateBranch = () => {
     setName,
     setAddress,
     setPassCode,
+    setEditBranchAddress,
+    setEditBranchName,
+    setEditBranchPasscode,
+    editBranchName,
     state: { ForEachDetail },
   } = ItemContext();
   const navigate = useNavigate();
@@ -36,16 +40,20 @@ const CreateBranch = () => {
           },
         }
       );
+      
       setName("");
       setAddress("");
       setPassCode("");
       if (res.status === 200) {
         setIsLoading(false);
-        Get_Branch();
         setShowCreateBranch(false);
         navigate(`/branch/${res?.data?.id}`);
         localStorage.setItem("branch_report", JSON.stringify(res?.data));
         document.body.style.overflow = "visible";
+        // console.log(res);
+        setEditBranchAddress(res?.data?.address);
+        setEditBranchName(res?.data?.name);
+        setEditBranchPasscode(res?.data?.passcode);
       } else {
         setIsLoading(false);
       }
@@ -81,13 +89,14 @@ const CreateBranch = () => {
             Branch Name
           </label>
           <input
+            autoFocus={true}
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             name=""
             placeholder="Shoprite Lekki"
             id="name"
-            className="border-[#AF8BDA] border outline-none w-full h-[46px] px-4 rounded-xl font-normal text-sm" 
+            className="border-[#AF8BDA] border outline-none w-full h-[46px] px-4 rounded-xl font-normal text-sm " 
           />
         </div>
         <div className="flex flex-col gap-2 w-full">
@@ -127,7 +136,6 @@ const CreateBranch = () => {
               <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
                 null
               </div>
-              <span>Loading</span>
             </div>
           ) : (
             "Continue"

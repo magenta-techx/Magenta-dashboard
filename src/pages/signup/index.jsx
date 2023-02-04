@@ -38,7 +38,7 @@ const Onboarding = () => {
 
   return (
     <div className="onboarding min-h-screen flex w-screen">
-      <aside className="bg-[#EEE8F8] w-[40%] p-[48px] flex flex-col gap-20">
+      <aside className="bg-[#EEE8F8] w-[40%] p-[48px] lg:flex flex-col gap-20 hidden">
         <MagentaLogo />
 
         <ul className="flex flex-col gap-10">
@@ -63,7 +63,7 @@ const Onboarding = () => {
           ))}
         </ul>
       </aside>
-      <main className="bg-white flex justify-center w-[60%] items-center flex-col gap-20">
+      <main className="bg-white flex justify-center w-[100vw] lg:w-[60%] items-center  flex-col gap-20 ">
         {/* Onboarding Pages */}
         {currentStep === 0 && (
           <UserDetails

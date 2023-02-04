@@ -1,11 +1,12 @@
 import React from "react";
+import { useRef } from "react";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 
 const WithdrawalDetails = ({
-  account: { account_number, bank_name },
-  account,
+  account: { account_number, bank_name ,id},
+  account,key
 }) => {
-  const { setSelected } = ItemContext();
+  const { setSelected, selected } = ItemContext();
   const split = account_number.split("");
   const fitr = split?.filter((a, i) => {
     return i < 3;
@@ -24,10 +25,22 @@ const WithdrawalDetails = ({
   const sec = midfth.splice(1, 1, "*");
   const trd = midfth.splice(2, 2, "*");
   const fth = midfth.splice(3, 2, "*");
+  const ref = useRef(null);
   const { dispatch } = ItemContext();
 
   return (
-    <div className="w-full h-[43px] relative bg-white rounded-xl flex justify-between p-2 albert items-center">
+    <div
+      className="w-full h-[43px] relative bg-white rounded-xl flex justify-between p-2 albert items-center cursor-pointer"
+      onClick={() => {
+        console.log(ref);
+        ref.current.checked = true;
+        setSelected(true);
+        // localStorage.setItem("num", JSON.stringify(account_number));
+        // STORE THE ID!!!
+        localStorage.setItem("num", JSON.stringify(id));
+        localStorage.setItem("account", JSON.stringify(account));
+      }}
+    >
       <h3 className="">
         {fitr}
         {midfth?.join("")}
@@ -36,16 +49,17 @@ const WithdrawalDetails = ({
       <div className="flex gap-4 check items-center">
         <span>{bank_name}</span>
         <input
-          className="appearance-none cursor-pointer w-[33px] h-[33px] rounded-xl bg-[#8652C7] "
-          // checked
+          ref={ref}
+          className="appearance-none  w-[33px] h-[33px] rounded-xl bg-[#8652C7] cursor-pointer"
           onChange={(e) => {
             dispatch({
               type: "Individual AcctDetails",
               payload: account,
             });
-
-            // setSelected(true);
-            // localStorage.setItem("account", JSON.stringify(account_number));
+            console.log(account);
+            setSelected(true);
+            localStorage.setItem("account", JSON.stringify(account));
+            localStorage.setItem("num", JSON.stringify(id));
           }}
           type="radio"
           name="sam"

@@ -39,7 +39,7 @@ const Context = ({ children }) => {
   const { branchDetails } = state;
   const [newPassword, setNewPassword] = useState({});
   const [verificationMail, setVerificationMail] = useState("");
-  const [states, setStates] = useState(false);
+  const [states, setStates] = useState({firstAcct:false,secondAcct:false});
   const [user, setUser] = useState({});
   const [showNav, setShowNav] = useState(true);
   const [showCreateBranch, setShowCreateBranch] = useState(false);
@@ -54,7 +54,6 @@ const Context = ({ children }) => {
   const [showEditSucc, setShowEditSucc] = useState(false);
   const [showAddAccount, setShowAddAccount] = useState(false);
   const [accountNumber, setAccountNumber] = useState("");
-  const [bankName, setBankName] = useState("");
   const [accountName, setAccountName] = useState("");
   const [bankCode, setBankCode] = useState("");
   const [acctName, setAcctName] = useState("");
@@ -74,6 +73,7 @@ const Context = ({ children }) => {
   const [showSelectHourly, setShowSelectHourly] = useState(false);
   const [showSelectDaily, setShowSelectDaily] = useState(false);
   const [selected, setSelected] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
   const [frequency, setFrequency] = useState(false);
   const [freq, setFreq] = useState("");
   const [showAutoSweepAmount, setShowAutoSweepAmount] = useState(false);
@@ -86,13 +86,16 @@ const Context = ({ children }) => {
   const [resetAutoSweepTime, setResetAutoSweepTime] = useState("");
   const [resetAutoSweepFreq, setResetAutoSweepFreq] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [det, setDel] = useState(null);
+ 
   let isAuth;
   const handleAutoSweepDelete = async () => {
     const token = localStorage.getItem("login_token");
+    const id = localStorage.getItem("key");
     setIsLoading(true);
     try {
       const res = await axios.delete(
-        `https://backend.magentacashier.com/business/recurrentcashout/delete/${autoSweepID}`,
+        `https://backend.magentacashier.com/business/recurrentcashout/delete/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -101,11 +104,11 @@ const Context = ({ children }) => {
       );
       if (res.status === 204) {
         setIsLoading(false);
-
+        console.log(res);
         localStorage.removeItem("reset_auto_sweep_result");
-        // if (localStorage.getItem("item") !== null) {
         localStorage.removeItem("item");
-        // }
+        localStorage.removeItem("key");
+        localStorage.removeItem("num");
       }
     } catch (error) {
       setIsLoading(false);
@@ -128,10 +131,10 @@ const Context = ({ children }) => {
         }
       );
       dispatch({ type: "Branch Details", payload: res.data });
-      if (res.status === "401") {
-        localStorage.clear("isAuth");
-      }
     } catch (err) {
+      if (err?.response?.statusText === "Unauthorized") {
+        localStorage.clear();
+      }
       console.log(err);
     }
   };
@@ -147,12 +150,17 @@ const Context = ({ children }) => {
           },
         }
       );
-      // setAutoSweepID(res?.data?.id)
+      console.log(res)
       res?.data?.map((a) => {
-        setAutoSweepID(a.id);
+        localStorage.setItem("reset_auto_sweep_result", JSON.stringify(a));
+        localStorage.setItem("key", JSON.stringify(a?.id));
+        localStorage.setItem("item",true)
+        localStorage.setItem("num", a.account)
+        console.log(a.account)
       });
     } catch (err) {}
   };
+ 
   const GET_ACCOUNT = async () => {
     const token = localStorage.getItem("login_token");
     try {
@@ -164,6 +172,7 @@ const Context = ({ children }) => {
           },
         }
       );
+
       dispatch({ type: "Account Details", payload: res.data });
     } catch (error) {
       console.log(error);
@@ -276,9 +285,9 @@ const Context = ({ children }) => {
     isAuth = true;
   }
   useEffect(() => {
-    if (!localStorage.getItem("isAuth")) {
-      navigate("/login");
-    }
+    // if (!localStorage.getItem("isAuth")) {
+    //   navigate("/login");
+    // }
     Get_Branch();
   }, [branchDetails]);
   const merchant = {
@@ -321,6 +330,8 @@ const Context = ({ children }) => {
         setShowAutoSweepAmount,
         Get_Auto_Sweep,
         frequency,
+        det,
+        setDel,
         setFrequency,
         isAuth,
         hour,
@@ -344,6 +355,8 @@ const Context = ({ children }) => {
         setShowWithdrawOTP,
         setShowWithdrawPassword,
         withdrawOTP,
+        selectedOption,
+        setSelectedOption,
         setWithdrawOTP,
         showWithdrawAmount,
         setShowWithdrawAmount,
@@ -368,10 +381,8 @@ const Context = ({ children }) => {
         setShowAddAccount,
         accountNumber,
         setAccountNumber,
-        bankName,
         accountName,
         setAccountName,
-        setBankName,
         showEditSucc,
         setShowEditSucc,
         setEditBranchAddress,

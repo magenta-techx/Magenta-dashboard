@@ -19,7 +19,12 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <div className="shadow-xl  shadow-[rgba(113,50,189,0.05)] w-full h-16 border px-6 rounded-xl  flex justify-between items-center">
-      <div>
+      <div
+        onClick={() => {
+          localStorage.clear();
+          navigate("/login")
+        }}
+      >
         <TbNotification size="30px" className="text-[#7132BD]" />
       </div>
       <div className="flex gap-6 ">

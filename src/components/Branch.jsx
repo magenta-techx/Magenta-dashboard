@@ -21,10 +21,7 @@ const Branch = ({ branch }) => {
     setEditBranchPasscode(item?.passcode);
     navigate(`/branch/${item.id}`);
     document.documentElement.scrollTop = 0;
-    // dispatch({ type: "Individual Details", payload: item });
     localStorage.setItem("branch_report", JSON.stringify(item));
-    const repor = localStorage.getItem("branch_report");
-   
   };
   const handleDelete = (item) => {
     setShowDeleteBranch(true);
