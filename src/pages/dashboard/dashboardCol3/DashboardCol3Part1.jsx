@@ -73,6 +73,7 @@ const DashboardCol3Part1 = () => {
           onClick={() => {
             console.log('object');
             navigate("branch/all");
+            document.documentElement.scrollTop = 0;
           }}
           className="flex cursor-pointer text-[#4E00AD] items-center gap-6 mt-2  justify-end albert"
         >

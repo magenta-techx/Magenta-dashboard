@@ -21,7 +21,7 @@ const GetStarted = () => {
       src="/assets/getstarted.png"
       alt="get started image"
     />
-     <p className="pb-5">Yay we have recieved your document. <br />
+     <p className="pb-5">Yay we have received your document. <br />
      You will get a response from us after it has been verified</p>
 
    <button

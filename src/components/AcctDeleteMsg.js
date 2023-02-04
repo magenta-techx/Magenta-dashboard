@@ -23,7 +23,7 @@ const AcctDeleteMsg = () => {
     ?.filter((a) => a !== '"')
     ?.join("");
   const handleDelete = async (detail) => {
-    // setIsLoading(true);
+    setIsLoading(true);
 
     console.log(typeof Number(filterColon));
     console.log(ForEachAcctDetail);
