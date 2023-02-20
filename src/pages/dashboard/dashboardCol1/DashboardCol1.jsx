@@ -1,9 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineCash, HiOutlineChartSquareBar } from "react-icons/hi";
 import { BsWallet2 } from "react-icons/bs";
 import { TbCurrencyNaira } from "react-icons/tb";
-
+import { ItemContext } from "../../../contextApi/stateMang.contextApi";
+import { NumericFormat } from "react-number-format";
+import axios from "axios";
 const DashboardCol1 = () => {
+  const { transaction, GET_MERCHANT_TRANSACTION } = ItemContext();
+  useEffect(() => {
+    GET_MERCHANT_TRANSACTION();
+  }, []);
+  // const GET_MERCHANT_TRANSACTION = async () => {
+
+  //   const token = localStorage.getItem("login_token");
+  //   try {
+  //     const res = await axios.get(
+  //       "https://backend.magentacashier.com/business/merchant-transaction-total/",
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     console.log(res)
+  //     if (res.status === 200)  setTransaction(res.data);
+  //     console.log(res);
+
+  //     console.log(transaction);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // const numFormatter=require('number_formatter')
+  const all_time_sales = transaction?.all_time_sales;
+  const available_cash = transaction?.available_cash;
+  const today_sale = transaction?.today_sales;
+
+  const month = new Date().getMonth() + 1;
+  // const [month,setMonth]=useState("")
+  const getMonth = (month) => {
+    switch (month) {
+      case 1:
+        return "January";
+      case 2:
+        return "February";
+      case 3:
+        return "March";
+      case 4:
+        return "April";
+      case 5:
+        return "May";
+      case 6:
+        return "June";
+      case 7:
+        return "July";
+      case 8:
+        return "August";
+      case 9:
+        return "September";
+      case 10:
+        return "October";
+      case 11:
+        return "November";
+      case 12:
+        return "December";
+      default:
+        console.log("first");
+    }
+  };
   return (
     <div className="flex flex-col w-full gap-4 mb-10">
       <div className="flex mt-6 justify-between">
@@ -58,7 +122,10 @@ const DashboardCol1 = () => {
                 />
               </svg>
             </div>
-            <p className="m-1 albert font-bold text-sm">September {new Date().getDate()}, { new Date().getFullYear()}</p>
+            <p className="m-1 albert font-bold text-sm">
+              {getMonth(month)} {new Date().getDate()},{" "}
+              {new Date().getFullYear()}
+            </p>
           </div>
         </div>
       </div>
@@ -69,9 +136,15 @@ const DashboardCol1 = () => {
           </div>
           <div className="flex flex-col gap-3">
             <h4 className="albert">All Time Cash</h4>
-            <h2 className="font-bold flex items-center poppins text-[24px]">
+            <h2 className="font-bold flex items-center inter text-[24px]">
               <TbCurrencyNaira />
-              4,390,800
+              <NumericFormat
+                value={all_time_sales ? all_time_sales : 0}
+                thousandsGroupStyle="lakh"
+                thousandSeparator=","
+                displayType="text"
+                renderText={(value) => <b>{value}</b>}
+              />
             </h2>
           </div>
         </div>
@@ -83,19 +156,33 @@ const DashboardCol1 = () => {
             <h4 className="albert">Available Cash</h4>
             <h2 className="inter text-[24px] font-bold flex items-center">
               <TbCurrencyNaira />
-              4,390,800
+              <NumericFormat
+                value={available_cash ? available_cash : 0}
+                thousandsGroupStyle="lakh"
+                thousandSeparator=","
+                displayType="text"
+                renderText={(value) => (
+                  <b>{value.includes("-") ? "0" : value}</b>
+                )}
+              />
             </h2>
           </div>
         </div>
         <div className="w-80 h-fit border flex gap-6 rounded-lg px-6 py-4">
           <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
-            <HiOutlineChartSquareBar size="25px" className="text-[#4E00AD]" />
+            <HiOutlineChartSquareBar size="20px" className="text-[#4E00AD]" />
           </div>
           <div className="flex flex-col gap-3">
             <h4 className="albert">Today Sales</h4>
             <h2 className="inter text-[24px] font-bold flex items-center">
               <TbCurrencyNaira />
-              4,390,800
+              <NumericFormat
+                value={today_sale ? today_sale : 0}
+                // thousandsGroupStyle="lakh"
+                thousandSeparator=","
+                displayType="text"
+                renderText={(value) => <b>{value}</b>}
+              />
             </h2>
           </div>
         </div>

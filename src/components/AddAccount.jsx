@@ -19,74 +19,86 @@ const AddAccount = () => {
     setShowOTP,
 
     setSelectedOption,
+    setError,
+    setShowError,
     selectedOption,
+    GET_ACCOUNT_NAME,
+    REQUEST_OTP,
   } = ItemContext();
 
-  const REQUEST_OTP = async () => {
-    const token = localStorage.getItem("login_token");
-    setIsLoading(true);
-    try {
-      const res = await axios.get(
-        "https://backend.magentacashier.com/accounts/send-otp/",
+  // const REQUEST_OTP = async () => {
+  //   const token = localStorage.getItem("login_token");
+  //   setIsLoading(true);
+  //   try {
+  //     const res = await axios.get(
+  //       "https://backend.magentacashier.com/accounts/send-otp/",
 
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (res.status === 200) {
-        setIsLoading(false);
-        document.body.style.overflow = "hidden";
-      } else {
-        setIsLoading(true);
-      }
-      if (accountName) {
-        setShowOTP(true);
-        setShowAddAccount(false);
-      } else {
-        return;
-      }
-    } catch (err) {
-      setIsLoading(false);
-    }
-  };
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     if (res.status === 200) {
+  //       setIsLoading(false);
+  //       document.body.style.overflow = "hidden";
+  //     } else {
+  //       setIsLoading(true);
+  //     }
+  //     if (accountName) {
+  //       setShowOTP(true);
+  //       setShowAddAccount(false);
+  //     } else {
+  //       return;
+  //     }
+  //   } catch (err) {
+  //     setIsLoading(false);
+  //     console.log(err)
+  //     setError(err.message)
+  //     setShowError(true)
+  //   }
+  // };
 
-  const GET_ACCOUNT_NAME = async () => {
-    const token = localStorage.getItem("login_token");
-    try {
-      const res = await axios.post(
-        "https://backend.magentacashier.com/accounts/resolvebankdetails/",
-        {
-          account_number: accountNumber,
-          bank_code: selectedOption?.value,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(res);
-      if ((accountNumber && selectedOption) || res.data.status === 200) {
-        setAccountName(res?.data?.data.account_name);
-      } else {
-        setAccountName("");
-      }
-    } catch (error) {
-      setAccountName(error?.response?.data?.message);
-    }
-  };
+  // const GET_ACCOUNT_NAME = async () => {
+  //   const token = localStorage.getItem("login_token");
+  //   try {
+  //     const res = await axios.post(
+  //       "https://backend.magentacashier.com/accounts/resolvebankdetails/",
+  //       {
+  //         account_number: accountNumber,
+  //         bank_code: selectedOption?.value,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     console.log(res);
+  //     if ((accountNumber && selectedOption) || res.data.status === 200) {
+  //       setAccountName(res?.data?.data.account_name);
+  //     } else {
+  //       setAccountName("");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     setError(error.message);
+  //     setShowError(true);
+  //     setIsLoading(false)
+  //     setAccountName(error?.response?.data?.message);
+  //   }
+  // };
   const deb = useCallback(
     debounce((name) => setAccountNumber(name), 1000),
     []
   );
 
   const handleBankName = (name) => {
-    deb(name);
+   deb(name);
     // setAccountNumber(name);
   };
   useEffect(() => {
+    if (accountNumber.length!==10||!selectedOption) return;
     GET_ACCOUNT_NAME();
   }, [accountNumber, selectedOption]);
   const handleSubmit = async (e) => {
@@ -131,6 +143,8 @@ const AddAccount = () => {
               // value={accountNumber}
               onChange={(e) => handleBankName(e.target.value)}
               name=""
+              maxLength={10}
+              minLength={10}
               id="accountnumber"
               className="border-[#AF8BDA] border outline-none w-full h-[46px] px-4 rounded-xl font-medium bg-[#F7F9FA] poppins"
             />
@@ -146,6 +160,8 @@ const AddAccount = () => {
 
             <Select
               options={data}
+              name=""
+              id="bankname"
               defaultValue={selectedOption}
               onChange={setSelectedOption}
               styles={{
@@ -194,9 +210,7 @@ const AddAccount = () => {
           >
             {isLoading ? (
               <div className="flex items-center gap-4">
-                <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
-                  null
-                </div>
+                <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent"></div>
               </div>
             ) : (
               "Continue"

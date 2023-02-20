@@ -23,7 +23,8 @@ const AutoSweepOTP = () => {
     setIsLoading,
     Get_Auto_Sweep,
     freq,
-    state: { ForEachAcctDetail },
+    error,
+    setError,setShowError,setShowSuccess,setSuccess,success,showSuccess
   } = ItemContext();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -66,12 +67,16 @@ const AutoSweepOTP = () => {
           JSON.stringify(res.data)
         );
         localStorage.setItem("item", true);
+        setSuccess(res.statusText)
+        setShowSuccess(true)
       } else {
         setShowWithdrawSucc(false);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
       setIsLoading(false);
+      setShowError(true)
+      setError(err.response.data.message)
+      console.log(error)
     }
     // setOTP("");
   };
@@ -87,8 +92,19 @@ const AutoSweepOTP = () => {
           },
         }
       );
+      if (res.status === 200) {
+        setShowSuccess(true)
+        setSuccess(res.data.message)
+        console.log(showSuccess,success)
+        
+      } else {
+        return false
+      }
+      // console.log(res)
     } catch (err) {
       console.log(err);
+      setError(err.message)
+      setShowError(true)
     }
   };
   return (

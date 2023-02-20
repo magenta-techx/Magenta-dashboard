@@ -14,7 +14,10 @@ const WithdrawOTP = () => {
     setIsLoading,
     withdrawAmount,
     setShowWithdrawSucc,
-
+    setSuccess,
+    setShowSuccess,
+    setError,
+    setShowError,
     setAccountName,
     setAccountNumber,
     state: { ForEachAcctDetail },
@@ -22,15 +25,15 @@ const WithdrawOTP = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const getAcct=localStorage.getItem('account')
-    const result=JSON.parse(getAcct)
+    const getAcct = localStorage.getItem("account");
+    const result = JSON.parse(getAcct);
     const token = localStorage.getItem("login_token");
     try {
       const res = await axios.post(
         "https://backend.magentacashier.com/business/cashout/",
         {
           account_id: result.id,
-          bank_code:result.bank_code,
+          bank_code: result.bank_code,
           amount: withdrawAmount,
           token: withdrawOTP,
         },
@@ -40,20 +43,26 @@ const WithdrawOTP = () => {
           },
         }
       );
-      console.log(res)
+      console.log(res);
       // setShowAcctSucc(true);
       if (res.status === 200) {
         setShowWithdrawSucc(true);
         setShowWithdrawOTP(false);
         setIsLoading(false);
-        localStorage.removeItem("account")
+        localStorage.removeItem("account");
         // setWithdrawAmount("")
       } else {
         setShowWithdrawSucc(false);
       }
     } catch (error) {
-      console.log(error);
-      setIsLoading(false);
+      if (error) {
+        setShowError(true);
+        setError(error?.response.data.message);
+        setIsLoading(false);
+        console.log(error);
+
+        console.log("peter");
+      }
     }
     // setOTP("");
   };
@@ -69,8 +78,14 @@ const WithdrawOTP = () => {
           },
         }
       );
+      if (res.status === 200) {
+        setShowSuccess(true);
+        setSuccess(res.data.message);
+      }
     } catch (err) {
       console.log(err);
+      setError(err.message);
+      setShowError(true);
     }
   };
   return (

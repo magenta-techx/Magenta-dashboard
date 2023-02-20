@@ -8,10 +8,11 @@ import DashboardCol2 from "./dashboardCol2/DashboardCol2.jsx";
 import DashboardCol3 from "./dashboardCol3/DashboardCol3";
 import { motion } from "framer-motion";
 const Dashboard = () => {
-  const { setShowNav, Get_Branch } = ItemContext();
+  const { setShowNav, Get_Branch ,GET_CHART_DATA} = ItemContext();
   const navigate=useNavigate()
   useEffect(() => {
     setShowNav(true);
+    GET_CHART_DATA()
     if (!localStorage.getItem("isAuth")) {
       navigate("/login");
     }
@@ -28,8 +29,10 @@ const Dashboard = () => {
       <DashboardCol1 />
       <div className="border px-6 py-4">
         <DashboardCol2 />
-        <DashboardCol3 />
+        {/* <DashboardCol3 /> */}
+
       </div>
+     
     </div>
   );
 };

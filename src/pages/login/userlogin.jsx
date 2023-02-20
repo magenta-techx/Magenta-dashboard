@@ -21,7 +21,7 @@ const LoginComponent = () => {
     setShowNav,
     isLoading,
     setIsLoading,
-    Get_Auto_Sweep
+    Get_Auto_Sweep,Get_Branch
   } = ItemContext();
 
  const auth = localStorage.getItem("isAuth");
@@ -48,10 +48,10 @@ const LoginComponent = () => {
         setIsLoading(false);
         Get_Auto_Sweep()
        
-        
       } else {
         console.log("bad request");
         console.log(response.data);
+        setIsLoading(false)
       }
       localStorage.setItem("user",JSON.stringify(response.data));
       console.log(response.data);
