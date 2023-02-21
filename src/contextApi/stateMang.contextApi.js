@@ -7,6 +7,7 @@ import React, {
   useRef,
   useEffect,
 } from "react";
+import { useIdleTimer } from "react-idle-timer";
 import { useNavigate } from "react-router-dom";
 import reducer, { INITIAL_STATE } from "../components/reducer/reducer";
 import { onboardingSteps } from "../pages/utils";
@@ -93,8 +94,11 @@ const Context = ({ children }) => {
   const [det, setDel] = useState(null);
   const [transaction, setTransaction] = useState({});
   const [chartLineRes, setLineChartRes] = useState([]);
-
+  const [remaining, setRemainingTime] = useState(0);
+ const [count, setCount] = useState(0);
+ const [open, setOpen] = useState(false);
   let isAuth;
+  let timeleft;
   const handleAutoSweepDelete = async () => {
     const token = localStorage.getItem("login_token");
     const id = localStorage.getItem("key");
@@ -125,7 +129,59 @@ const Context = ({ children }) => {
       setShowError(true);
     }
   };
+ 
 
+ const promptBeforeIdle = 4_000;
+ const timeout = 10_000;
+ const onIdle = () => {
+   setOpen(false);
+   localStorage.clear();
+ };
+ const onActive = () => {
+   setOpen(false);
+ };
+ const onPrompt = () => {
+   // if (localStorage.isAuth) {
+   setOpen(true);
+   // }
+   // setOpen(false);
+ };
+ const onAction = () => {
+   // setOpen(false)
+ };
+
+ const { getRemainingTime, activate, pause, resume, reset } = useIdleTimer({
+   onIdle,
+   onActive,
+   onAction,
+   onPrompt,
+   timeout,
+   promptBeforeIdle,
+   throttle: 1000,
+ });
+
+ const timeTillPrompt = Math.max(remaining - promptBeforeIdle / 1000, 0);
+ const seconds = timeTillPrompt > 1 ? "seconds" : "second";
+ useEffect(() => {
+   timeleft = setInterval(() => {
+     setRemainingTime(Math.ceil(getRemainingTime() / 1000));
+   }, 1000);
+
+   return () => {
+     clearInterval(timeleft);
+   };
+ }, []);
+ const handleStillHere = () => {
+   activate();
+   // console.log("Logged out");
+ };
+ if (!localStorage.getItem("isAuth")) {
+   pause();
+   reset();
+ } else {
+   resume();
+   // reset();
+ }
   const Get_Branch = async () => {
     let controller = new AbortController();
     (async () => {
@@ -286,7 +342,6 @@ const Context = ({ children }) => {
      
       // return res.status===200?setLineChartRes(res.data):""
       if(res.status===200) setLineChartRes(res.data)
-      console.log(chartLineRes);
     } catch (error) {
       console.log(error);
     }
@@ -385,6 +440,8 @@ const Context = ({ children }) => {
         autoSweepID,
         GET_ACCOUNT_NAME,
         setAutoSweepOTP,
+        timeTillPrompt,
+        handleStillHere,
         showAutoSweepOTP,
         freq,
         setFreq,
@@ -396,6 +453,7 @@ const Context = ({ children }) => {
         setShowDeleteSucc,
         showAutoSweepAmount,
         isLoading,
+        setOpen,
         setIsLoading,
         setShowAutoSweepAmount,
         GET_CHART_DATA,
@@ -409,6 +467,7 @@ const Context = ({ children }) => {
         isAuth,
         showError,
         setShowError,
+        open,remaining,
         hour,
         setHour,
         time,

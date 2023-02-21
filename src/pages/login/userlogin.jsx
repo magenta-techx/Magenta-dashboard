@@ -20,6 +20,7 @@ const LoginComponent = () => {
     setLoginPassword,
     setShowNav,
     isLoading,
+    setOpen,
     setIsLoading,
     Get_Auto_Sweep,Get_Branch
   } = ItemContext();
@@ -45,7 +46,8 @@ const LoginComponent = () => {
         localStorage.setItem("login_token", login_token);
         localStorage.setItem("isAuth", true);
         navigate("/");
-        setIsLoading(false);
+          setIsLoading(false);
+          setOpen(false)
         Get_Auto_Sweep()
        
       } else {

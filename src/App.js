@@ -34,6 +34,7 @@ import ShowDeleteSucc from "./components/ShowDeleteSucc";
 import ProfilePage from "./components/ProfilePage";
 import { AnimatePresence } from "framer-motion";
 import { useIdleTimer } from "react-idle-timer";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 const Dashboard = lazy(() => import("./pages/dashboard/Dashboard"));
 const CompanyBranch = lazy(() => import("./pages/companybranch/CompanyBranch"));
 const CashOut = lazy(() => import("./components/CashOut"));
@@ -104,72 +105,27 @@ function App() {
     showSuccess,
     success,
     setShowSuccess,
+    // activate,
+    // resume,
+    // pause,
+    // getRemainingTime,
+    remaining,
+    open,
+    timeTillPrompt,
+    handleStillHere,
   } = ItemContext();
   let docTitle = document.title;
   const navigate = useNavigate();
-  let timeleft;
-  const [remaining, setRemainingTime] = useState(0);
-  const [count, setCount] = useState(0);
-  const [open, setOpen] = useState(false);
 
-  const promptBeforeIdle = 20_000;
-  const timeout = 50_000;
-  const onIdle = () => {
-    setOpen(false);
-    localStorage.clear();
-  };
-  const onActive = () => {
-    setOpen(false);
-  };
-  const onPrompt = () => {
-    // if (localStorage.isAuth) {
-    setOpen(true);
-    // }
-    // setOpen(false);
-  };
-  const onAction = () => {
-    // setOpen(false)
-  };
-
-  const { getRemainingTime, activate, pause, resume } = useIdleTimer({
-    onIdle,
-    onActive,
-    onAction,
-    onPrompt,
-    timeout,
-    promptBeforeIdle,
-    throttle: 1000,
+  window.addEventListener("blur", () => {
+    document.title = "Come back 😒";
   });
-
-  const timeTillPrompt = Math.max(remaining - promptBeforeIdle / 1000, 0);
-  const seconds = timeTillPrompt > 1 ? "seconds" : "second";
+  window.addEventListener("focus", () => {
+    document.title = docTitle;
+  });
   useEffect(() => {
-    timeleft = setInterval(() => {
-      setRemainingTime(Math.ceil(getRemainingTime() / 1000));
-    }, 1000);
-
-    return () => {
-      clearInterval(timeleft);
-    };
+    document.addEventListener("contextmenu", (event) => event.preventDefault());
   }, []);
-  const handleStillHere = () => {
-    activate();
-    // console.log("Logged out");
-  };
-  if (!localStorage.getItem("isAuth")) {
-    pause();
-  } else {
-    resume();
-  }
-  // window.addEventListener("blur", () => {
-  //   document.title = "Come back 😒";
-  // });
-  // window.addEventListener("focus", () => {
-  //   document.title = docTitle;
-  // });
-  // useEffect(() => {
-  //   document.addEventListener("contextmenu", (event) => event.preventDefault());
-  // }, []);
 
   const auth = localStorage.getItem("isAuth");
   const isAuth = JSON.parse(auth);
@@ -201,12 +157,6 @@ function App() {
     setFrequency(false);
   };
 
-  const newLocal = (
-    <input
-      type="text"
-      className="w-36 h-36 border border-red-800 border-dotted bg-red-600 focus:border-green-500 "
-    />
-  );
   return (
     <>
       <motion.div
@@ -242,12 +192,24 @@ function App() {
         <motion.div
           animate={{ y: open ? 10 : -10 }}
           transition={{ type: "tween" }}
-          className={`bg-[#EEE8F8] p-4 poppins  w-fit gap-10 items-center fixed right-10  border-l-4   top-5 z-[100]   h-fit  
+          className={`bg-[#EEE8F8] p-3  poppins w-[400px]  gap-10 items-center fixed right-10    top-5 z-[100]   h-fit border border-l-4 border-l-[#200047]
         ${open ? "flex" : "hidden"}`}
         >
-          <h3>Are you still here?</h3>
-          <p>Logging out in {remaining} seconds</p>
-          <button onClick={handleStillHere}>Im still here</button>
+          <HiOutlineExclamationCircle size={"30px"} />
+          <div className="w-1/2">
+            <p>
+              Due to inactivity you will be logged out of your account in{" "}
+              {remaining} seconds
+            </p>
+          </div>
+          <div className="w-">
+            <button
+              onClick={handleStillHere}
+              className="bg-white shadow-lg p-2 "
+            >
+              I'm still here
+            </button>
+          </div>
         </motion.div>
       )}
       <div className="flex relative w-full max-w-7xl m-auto">
