@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BsTrash } from "react-icons/bs";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { TbCurrencyNaira } from "react-icons/tb";
@@ -14,6 +14,9 @@ const Branch = ({ branch }) => {
     setEditBranchPasscode,
     state: { ForEachAcctDetail },
   } = ItemContext();
+
+ 
+  
   const navigate = useNavigate();
   const handleClick = (item) => {
     setEditBranchAddress(item?.address);

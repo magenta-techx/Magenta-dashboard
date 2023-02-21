@@ -15,6 +15,9 @@ export const ShowAutoSweepAmount = () => {
     selected,
     setSelected,
     state: { accountDetails },
+    setShowError,
+    setSuccess,
+    setShowSuccess,
   } = ItemContext();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,10 +39,13 @@ export const ShowAutoSweepAmount = () => {
         setShowAutoSweepOTP(true);
 
         setSelected(false);
+        setSuccess(res?.data.message);
+        setShowSuccess(true);
       }
     } catch (err) {
       console.log(err);
       setIsLoading(false);
+      setShowError(true);
     }
   };
   return (
@@ -56,8 +62,8 @@ export const ShowAutoSweepAmount = () => {
           setAutoSweepAmount("");
           setSelected(false);
           document.body.style.overflow = "visible";
-           localStorage.removeItem("account");
-           localStorage.removeItem("num");
+          localStorage.removeItem("account");
+          localStorage.removeItem("num");
           if (isLoading === true) {
             setIsLoading(false);
           }
@@ -90,11 +96,11 @@ export const ShowAutoSweepAmount = () => {
           </h2>
           <div className="flex flex-col gap-4">
             {accountDetails?.map((account, idx) => {
-              return <WithdrawalDetails account={account}  />;
+              return <WithdrawalDetails account={account} />;
             })}
           </div>
           <button
-            disabled={autoSweepAmount<10 || !selected || isLoading}
+            disabled={autoSweepAmount < 10 || !selected || isLoading}
             className="w-[299px] mx-auto h-[46px] text-white flex justify-center items-center disabled:text-gray-500 disabled:bg-[#E2E6EE]  bg-[#4E00AD] rounded-xl disabled:cursor-not-allowed poppins font-normal"
           >
             {isLoading ? (

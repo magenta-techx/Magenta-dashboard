@@ -19,7 +19,13 @@ const ShowOTP = () => {
     bankCode,
     selectedOption,
     setSelectedOption,
+    GET_ACCOUNT,
+    setError,
+    setShowError,
+    setSuccess,
+    setShowSuccess,
   } = ItemContext();
+
   const handleSubmit = async (e) => {
     console.log(selectedOption);
     e.preventDefault();
@@ -46,13 +52,19 @@ const ShowOTP = () => {
         setShowOTP(false);
         setAccountNumber("");
         document.body.style.overflow = "visible";
+        GET_ACCOUNT()
         setAccountName("");
+        setShowSuccess(true)
+        setSuccess(res.statusText)
+        console.log(res);
       } else {
         setIsLoading(false);
       }
     } catch (error) {
       console.log(error);
       setIsLoading(false);
+      setError(error?.response?.data.message)
+      setShowError(true)
     }
     setOTP("");
   };
@@ -68,8 +80,15 @@ const ShowOTP = () => {
           },
         }
       );
+      console.log(res);
+      if (res.status === 200) {
+        setShowSuccess(true)
+        setSuccess(res.data.message)
+      }
     } catch (err) {
       console.log(err);
+      setError(err.message)
+      setShowError(true)
     }
   };
   return (
@@ -123,7 +142,7 @@ const ShowOTP = () => {
           {isLoading ? (
             <div className="flex items-center gap-4">
               <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
-                null
+                
               </div>
             </div>
           ) : (

@@ -9,13 +9,12 @@ const DeleteBranchMsg = () => {
     isLoading,
     setIsLoading,
     state: { ForEachDetail },
-    setShowDeleteBranch,
+    setShowDeleteBranch,setError,setShowError,Get_Branch
   } = ItemContext();
   const handleDelete = async (id) => {
     //   Check if the message is successful before setting showDeletedMsg=true
     const token = localStorage.getItem("login_token");
     setIsLoading(true)
-    console.log('isLoading');
     try {
       const res = await axios.delete(
         `https://backend.magentacashier.com/business/branch/delete/${id}/`,
@@ -28,12 +27,15 @@ const DeleteBranchMsg = () => {
       if (res.status === 204) {
         setShowDeletedMsg(true);
         setIsLoading(false)
+        Get_Branch()
         setShowDeleteBranch(false);
       } else {
       }
     } catch (err) {
       console.log(err);
       setIsLoading(false)
+      setError(err.message)
+      setShowError(true)
     }
     //     setShowDeletedMsg(true);
   };
@@ -80,7 +82,7 @@ const DeleteBranchMsg = () => {
           {isLoading ? (
             <div className="flex items-center gap-4">
               <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
-                null
+                
               </div>
             </div>
           ) : (

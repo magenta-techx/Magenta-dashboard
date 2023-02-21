@@ -7,6 +7,7 @@ import React, {
   useRef,
   useEffect,
 } from "react";
+import { useIdleTimer } from "react-idle-timer";
 import { useNavigate } from "react-router-dom";
 import reducer, { INITIAL_STATE } from "../components/reducer/reducer";
 import { onboardingSteps } from "../pages/utils";
@@ -39,7 +40,7 @@ const Context = ({ children }) => {
   const { branchDetails } = state;
   const [newPassword, setNewPassword] = useState({});
   const [verificationMail, setVerificationMail] = useState("");
-  const [states, setStates] = useState({firstAcct:false,secondAcct:false});
+  const [states, setStates] = useState({ firstAcct: false, secondAcct: false });
   const [user, setUser] = useState({});
   const [showNav, setShowNav] = useState(true);
   const [showCreateBranch, setShowCreateBranch] = useState(false);
@@ -86,9 +87,18 @@ const Context = ({ children }) => {
   const [resetAutoSweepTime, setResetAutoSweepTime] = useState("");
   const [resetAutoSweepFreq, setResetAutoSweepFreq] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
   const [det, setDel] = useState(null);
- 
+  const [transaction, setTransaction] = useState({});
+  const [chartLineRes, setLineChartRes] = useState([]);
+  const [remaining, setRemainingTime] = useState(0);
+ const [count, setCount] = useState(0);
+ const [open, setOpen] = useState(false);
   let isAuth;
+  let timeleft;
   const handleAutoSweepDelete = async () => {
     const token = localStorage.getItem("login_token");
     const id = localStorage.getItem("key");
@@ -109,34 +119,90 @@ const Context = ({ children }) => {
         localStorage.removeItem("item");
         localStorage.removeItem("key");
         localStorage.removeItem("num");
+        setShowSuccess(true);
+        setSuccess(res.statusText);
       }
     } catch (error) {
       setIsLoading(false);
       console.log(error);
+      setError(error.message);
+      setShowError(true);
     }
   };
-  const data = {
-    passcode,
-    address,
-    name,
-  };
+ 
+
+ const promptBeforeIdle = 4_000;
+ const timeout = 10_000;
+ const onIdle = () => {
+   setOpen(false);
+   localStorage.clear();
+ };
+ const onActive = () => {
+   setOpen(false);
+ };
+ const onPrompt = () => {
+   // if (localStorage.isAuth) {
+   setOpen(true);
+   // }
+   // setOpen(false);
+ };
+ const onAction = () => {
+   // setOpen(false)
+ };
+
+ const { getRemainingTime, activate, pause, resume, reset } = useIdleTimer({
+   onIdle,
+   onActive,
+   onAction,
+   onPrompt,
+   timeout,
+   promptBeforeIdle,
+   throttle: 1000,
+ });
+
+ const timeTillPrompt = Math.max(remaining - promptBeforeIdle / 1000, 0);
+ const seconds = timeTillPrompt > 1 ? "seconds" : "second";
+ useEffect(() => {
+   timeleft = setInterval(() => {
+     setRemainingTime(Math.ceil(getRemainingTime() / 1000));
+   }, 1000);
+
+   return () => {
+     clearInterval(timeleft);
+   };
+ }, []);
+ const handleStillHere = () => {
+   activate();
+   // console.log("Logged out");
+ };
+ if (!localStorage.getItem("isAuth")) {
+   pause();
+   reset();
+ } else {
+   resume();
+   // reset();
+ }
   const Get_Branch = async () => {
-    try {
-      const res = await axios.get(
-        "https://backend.magentacashier.com/business/branch/",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      dispatch({ type: "Branch Details", payload: res.data });
-    } catch (err) {
-      if (err?.response?.statusText === "Unauthorized") {
-        localStorage.clear();
+    let controller = new AbortController();
+    (async () => {
+      try {
+        const res = await axios.get(
+          "https://backend.magentacashier.com/business/branch/",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            signal: controller.signal,
+          }
+        );
+        dispatch({ type: "Branch Details", payload: res.data });
+        controller = null;
+      } catch (e) {
+        // Handle the error
       }
-      console.log(err);
-    }
+    })();
+    //aborts the request when the component umounts
+    return () => controller?.abort();
   };
 
   const Get_Auto_Sweep = async () => {
@@ -150,17 +216,36 @@ const Context = ({ children }) => {
           },
         }
       );
-      console.log(res)
+      console.log(res);
       res?.data?.map((a) => {
         localStorage.setItem("reset_auto_sweep_result", JSON.stringify(a));
         localStorage.setItem("key", JSON.stringify(a?.id));
-        localStorage.setItem("item",true)
-        localStorage.setItem("num", a.account)
-        console.log(a.account)
+        localStorage.setItem("item", true);
+        localStorage.setItem("num", a.account);
+        console.log(a.account);
       });
     } catch (err) {}
   };
- 
+
+  const GET_MERCHANT_TRANSACTION = async () => {
+    // console.log("merchant")
+    const token = localStorage.getItem("login_token");
+    try {
+      const res = await axios.get(
+        "https://backend.magentacashier.com/business/merchant-transaction-total/",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status === 200) setTransaction(res?.data);
+      // console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const GET_ACCOUNT = async () => {
     const token = localStorage.getItem("login_token");
     try {
@@ -172,80 +257,123 @@ const Context = ({ children }) => {
           },
         }
       );
-
       dispatch({ type: "Account Details", payload: res.data });
     } catch (error) {
       console.log(error);
     }
   };
+  const REQUEST_OTP = async () => {
+    const token = localStorage.getItem("login_token");
+    setIsLoading(true);
+    try {
+      const res = await axios.get(
+        "https://backend.magentacashier.com/accounts/send-otp/",
 
-  const label = [
-    "Jan",
-    "",
-    "March",
-    "",
-    "May",
-    "",
-    "July",
-    "",
-    "September",
-    "",
-    "November",
-    "",
-  ];
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setIsLoading(false);
+        setShowSuccess(true);
+        setSuccess(res.data.message);
+        document.body.style.overflow = "hidden";
+        setShowOTP(true);
+        setShowAddAccount(false);
+      } else {
+        return;
+      }
+      // if (accountName) {
+      // } else {
+      //   return;
+      // }
+    } catch (err) {
+      setIsLoading(false);
+      console.log(err);
+      setError(error?.response?.data.message);
+      setShowError(true);
+    }
+  };
+
+  // console.log("first");
+  const GET_ACCOUNT_NAME = async () => {
+    const token = localStorage.getItem("login_token");
+    try {
+      const res = await axios.post(
+        "https://backend.magentacashier.com/accounts/resolvebankdetails/",
+        {
+          account_number: accountNumber,
+          bank_code: selectedOption?.value,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res);
+      if ((accountNumber && selectedOption) || res.data.status === 200) {
+        setAccountName(res?.data?.data.account_name);
+      } else {
+        setAccountName("");
+      }
+    } catch (error) {
+      console.log(error);
+
+      setError(error.message);
+      setShowError(true);
+      setIsLoading(false);
+      setAccountName(error?.response?.data?.message);
+    }
+  };
+  const GET_CHART_DATA = async () => {
+    const token = localStorage.getItem("login_token");
+    try {
+      const res = await axios.get(
+        "https://backend.magentacashier.com/business/client-daily-transaction",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+     
+      // return res.status===200?setLineChartRes(res.data):""
+      if(res.status===200) setLineChartRes(res.data)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+ 
+ 
+  const label =chartLineRes?.map((data)=>data.day);
   const option1 = {
     maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "bottom",
+        display:false
       },
       title: {
         display: true,
       },
     },
+    scale: {
+      y: {
+        min:0
+        ,max:20
+      }
+    }
   };
 
   const data1 = {
     labels: label,
     datasets: [
       {
-        label: "Sales",
-        data: [
-          "50",
-          "100",
-          "150",
-          "200",
-          "20",
-          "50",
-          "100",
-          "150",
-          "200",
-          "20",
-          "30",
-          "13",
-        ],
-        backgroundColor: "#7132BD",
-
-        cutout: "90%",
-        fontFamily: "albert",
-        borderRadius: 100,
-      },
-      {
-        label: "Customer",
-        data: [
-          "50",
-          "100",
-          "10",
-          "100",
-          "30",
-          "50",
-          "100",
-          "150",
-          "200",
-          "20",
-          "40",
-          "20",
-        ],
+        label: "Total",
+        data: chartLineRes?.map((data)=>data.total),
         backgroundColor: "#D733CE",
         cutout: "90%",
         fontFamily: "albert",
@@ -284,12 +412,7 @@ const Context = ({ children }) => {
   } else {
     isAuth = true;
   }
-  useEffect(() => {
-    // if (!localStorage.getItem("isAuth")) {
-    //   navigate("/login");
-    // }
-    Get_Branch();
-  }, [branchDetails]);
+
   const merchant = {
     company_name: companyDetails?.companyName,
     email: userDetails.email,
@@ -315,31 +438,45 @@ const Context = ({ children }) => {
         setResetAutoSweepTime,
         GET_ACCOUNT,
         autoSweepID,
+        GET_ACCOUNT_NAME,
         setAutoSweepOTP,
+        timeTillPrompt,
+        handleStillHere,
         showAutoSweepOTP,
         freq,
         setFreq,
         setShowAutoSweepOTP,
         autoSweepAmount,
         setAutoSweepAmount,
+        GET_MERCHANT_TRANSACTION,
         showDeleteSucc,
         setShowDeleteSucc,
         showAutoSweepAmount,
         isLoading,
+        setOpen,
         setIsLoading,
         setShowAutoSweepAmount,
+        GET_CHART_DATA,
         Get_Auto_Sweep,
         frequency,
         det,
+        showSuccess,
+        setShowSuccess,
         setDel,
         setFrequency,
         isAuth,
+        showError,
+        setShowError,
+        open,remaining,
         hour,
         setHour,
         time,
         setTime,
+        REQUEST_OTP,
         setOrResetAutoSweep,
         setSetOrResetAutoSweep,
+        transaction,
+        chartLineRes,
         showWithdrawPassword,
         showSelectHourly,
         setShowSelectHourly,
@@ -350,6 +487,8 @@ const Context = ({ children }) => {
         showSelectAutoSweep,
         setShowSelectAutoSweep,
         selected,
+        success,
+        setSuccess,
         setSelected,
         showWithdrawOTP,
         setShowWithdrawOTP,
@@ -357,6 +496,8 @@ const Context = ({ children }) => {
         withdrawOTP,
         selectedOption,
         setSelectedOption,
+        error,
+        setError,
         setWithdrawOTP,
         showWithdrawAmount,
         setShowWithdrawAmount,

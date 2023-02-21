@@ -6,11 +6,11 @@ import { ItemContext } from "../../../contextApi/stateMang.contextApi";
 const DashboardCol3Part1 = () => {
   const {
     state: { branchDetails },
-    Get_Branch,
+    Get_Branch
   } = ItemContext();
   useEffect(() => {
     Get_Branch();
-  }, [branchDetails]);
+  }, []);
   const navigate = useNavigate();
   return (
     <div className="w-8/12 border rounded-lg shadow-md h-fit flex flex-col p-4 gap-4">
@@ -42,7 +42,10 @@ const DashboardCol3Part1 = () => {
             })}
         </div>
       </div> */}
-      <table className="border h-fit w-full py-4 albert" onClick={()=>console.log('object')}>
+      <table
+        className="border h-fit w-full py-4 albert"
+        onClick={() => console.log("object")}
+      >
         <thead>
           <tr className="border-b  bg-[#F7F9FA]">
             <th className="py-3 font-medium  text-[16px]">Branch name</th>
@@ -71,7 +74,7 @@ const DashboardCol3Part1 = () => {
       {branchDetails?.length > 3 && (
         <div
           onClick={() => {
-            console.log('object');
+            console.log("object");
             navigate("branch/all");
             document.documentElement.scrollTop = 0;
           }}

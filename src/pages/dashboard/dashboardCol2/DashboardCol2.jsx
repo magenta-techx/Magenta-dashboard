@@ -5,7 +5,7 @@ import { BsSearch } from "react-icons/bs";
 
 const DashboardCol2 = () => {
   return (
-    <div className=" w-full h-fit mb-10  rounded-lg flex flex-col gap-4-">
+    <div className=" w-full h-fit mb-1  rounded-lg flex flex-col gap-4-">
       <div className="flex justify-between">
         <div className="bg-[#4E00AD] rounded-xl w-[143px] h-[48px] mb-5  flex justify-center items-center cursor-pointer">
           <div className="flex gap-6 items-center text-white">

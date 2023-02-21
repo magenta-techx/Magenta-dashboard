@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { FaTimes } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 import ShowChangePassword from "./ShowEditSucc";
 
@@ -16,9 +17,13 @@ const Edit = () => {
     setShowEditSucc,
    
     isLoading,
+    Get_Branch,
     setIsLoading,
+    setError,
+    setShowError,
     state: { ForEachDetail },
   } = ItemContext();
+  const navigate=useNavigate()
   const report = localStorage.getItem("branch_report");
   const result = JSON.parse(report);
   const handleSubmit = async (e) => {
@@ -43,12 +48,18 @@ const Edit = () => {
         setIsLoading(false);
         setShowEditSucc(true)
         setShowEdit(false)
+        Get_Branch()
+        navigate("branch/all")
+        // setError()
+        
       } else {
         setIsLoading(false);
       }
     } catch (error) {
       console.log(error);
+      setError(error.response.data.name)
       setIsLoading(false);
+      setShowError(true);
     }
   };
 
