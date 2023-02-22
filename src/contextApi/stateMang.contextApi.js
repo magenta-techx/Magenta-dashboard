@@ -377,6 +377,7 @@ const Context = ({ children }) => {
         cutout: "90%",
         fontFamily: "albert",
         borderRadius: 100,
+        fill: true,
       },
     ],
   };
