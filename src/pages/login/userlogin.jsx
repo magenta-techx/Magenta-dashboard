@@ -59,9 +59,9 @@ const LoginComponent = () => {
       console.log(response.data);
     } catch (err) {
       console.log(err);
+      setIsLoading(false);
       if (err?.response?.data === undefined) {
         setErr(err.message);
-        setIsLoading(false);
       } else {
         setErr(err.response.data.detail);
       }

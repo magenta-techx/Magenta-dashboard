@@ -95,8 +95,8 @@ const Context = ({ children }) => {
   const [transaction, setTransaction] = useState({});
   const [chartLineRes, setLineChartRes] = useState([]);
   const [remaining, setRemainingTime] = useState(0);
- const [count, setCount] = useState(0);
- const [open, setOpen] = useState(false);
+  const [count, setCount] = useState(0);
+  const [open, setOpen] = useState(false);
   let isAuth;
   let timeleft;
   const handleAutoSweepDelete = async () => {
@@ -129,59 +129,58 @@ const Context = ({ children }) => {
       setShowError(true);
     }
   };
- 
 
- const promptBeforeIdle = 4_000;
- const timeout = 10_000;
- const onIdle = () => {
-   setOpen(false);
-   localStorage.clear();
- };
- const onActive = () => {
-   setOpen(false);
- };
- const onPrompt = () => {
-   // if (localStorage.isAuth) {
-   setOpen(true);
-   // }
-   // setOpen(false);
- };
- const onAction = () => {
-   // setOpen(false)
- };
+  const promptBeforeIdle = 30_000;
+  const timeout = 3600_000;
+  const onIdle = () => {
+    setOpen(false);
+    localStorage.clear();
+  };
+  const onActive = () => {
+    setOpen(false);
+  };
+  const onPrompt = () => {
+    // if (localStorage.isAuth) {
+    setOpen(true);
+    // }
+    // setOpen(false);
+  };
+  const onAction = () => {
+    // setOpen(false)
+  };
 
- const { getRemainingTime, activate, pause, resume, reset } = useIdleTimer({
-   onIdle,
-   onActive,
-   onAction,
-   onPrompt,
-   timeout,
-   promptBeforeIdle,
-   throttle: 1000,
- });
+  const { getRemainingTime, activate, pause, resume, reset } = useIdleTimer({
+    onIdle,
+    onActive,
+    onAction,
+    onPrompt,
+    timeout,
+    promptBeforeIdle,
+    throttle: 1000,
+  });
 
- const timeTillPrompt = Math.max(remaining - promptBeforeIdle / 1000, 0);
- const seconds = timeTillPrompt > 1 ? "seconds" : "second";
- useEffect(() => {
-   timeleft = setInterval(() => {
-     setRemainingTime(Math.ceil(getRemainingTime() / 1000));
-   }, 1000);
+  const timeTillPrompt = Math.max(remaining - promptBeforeIdle / 1000, 0);
+  const seconds = timeTillPrompt > 1 ? "seconds" : "second";
+  useEffect(() => {
+    timeleft = setInterval(() => {
+      setRemainingTime(Math.ceil(getRemainingTime() / 1000));
+    }, 1000);
 
-   return () => {
-     clearInterval(timeleft);
-   };
- }, []);
- const handleStillHere = () => {
-   activate();
-   // console.log("Logged out");
- };
- if (!localStorage.getItem("isAuth")) {
-   pause();
-   reset();
- } else {
-   resume();
-   // reset();
- }
+    return () => {
+      clearInterval(timeleft);
+    };
+  }, []);
+  const handleStillHere = () => {
+    activate();
+    // console.log("Logged out");
+  };
+  if (!localStorage.getItem("isAuth")) {
+    pause();
+    reset();
+  } else {
+    resume();
+    // reset();
+  }
   const Get_Branch = async () => {
     let controller = new AbortController();
     (async () => {
@@ -332,40 +331,40 @@ const Context = ({ children }) => {
     const token = localStorage.getItem("login_token");
     try {
       const res = await axios.get(
-        "https://backend.magentacashier.com/business/client-daily-transaction",
+        "https://backend.magentacashier.com/business/merchant-daily-transaction",
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-     
       // return res.status===200?setLineChartRes(res.data):""
-      if(res.status===200) setLineChartRes(res.data)
+      if (res.status === 200) setLineChartRes(res.data);
+      return res
     } catch (error) {
       console.log(error);
     }
   };
- 
- 
-  const label =chartLineRes?.map((data)=>data.day);
+
+  const label = chartLineRes?.map((data) => data.day);
   const option1 = {
     maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "bottom",
-        display:false
+        display: false,
       },
       title: {
         display: true,
       },
     },
-    scale: {
+    scales: {
       y: {
-        min:0
-        ,max:20
-      }
-    }
+        min: 0,
+        max: 100,
+      },
+     
+    },
   };
 
   const data1 = {
@@ -373,7 +372,7 @@ const Context = ({ children }) => {
     datasets: [
       {
         label: "Total",
-        data: chartLineRes?.map((data)=>data.total),
+        data: chartLineRes?.map((data) => data.total),
         backgroundColor: "#D733CE",
         cutout: "90%",
         fontFamily: "albert",
@@ -405,6 +404,15 @@ const Context = ({ children }) => {
         borderRadius: 20,
       },
     ],
+    // options: {
+    //   scales: {
+    //     x: {
+    //       ticks: {
+    //         display: false,
+    //       },
+    //     },
+    //   },
+    // },
   };
 
   if (localStorage.getItem("isAuth") === null) {
@@ -467,7 +475,8 @@ const Context = ({ children }) => {
         isAuth,
         showError,
         setShowError,
-        open,remaining,
+        open,
+        remaining,
         hour,
         setHour,
         time,
