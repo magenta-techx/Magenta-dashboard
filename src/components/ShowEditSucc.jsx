@@ -28,7 +28,6 @@ const ShowEditSucc = () => {
           setShowEditSucc(false);
           navigate("/branch/all");
           document.body.style.overflow = "visible";
-          // Get_Branch()
         }}
       >
         <span>Close</span>

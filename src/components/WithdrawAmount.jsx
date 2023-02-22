@@ -16,6 +16,9 @@ export const WithdrawAmount = () => {
     setShowWithdrawOTP,
     selected,
     setSelected,
+    setError,
+    setShowSuccess,setSuccess,
+    setShowError,
   } = ItemContext();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,14 +34,19 @@ export const WithdrawAmount = () => {
           },
         }
       );
+      console.log(res)
       if (res.statusText === "OK") {
         setShowWithdrawAmount(false);
         setShowWithdrawOTP(true);
         setIsLoading(false);
+        setShowSuccess(true);
+        setSuccess(res.data.message);
       }
     } catch (err) {
       console.log(err);
       setIsLoading(false);
+      setShowError(true);
+      setError(err.response.data.message);
     }
   };
   return (
@@ -53,7 +61,7 @@ export const WithdrawAmount = () => {
           setShowWithdrawAmount(false);
           setWithdrawAmount("");
           document.body.style.overflow = "visible";
-          localStorage.removeItem("account")
+          localStorage.removeItem("account");
           // localStorage.removeItem("num")
           setSelected(false);
           if (isLoading === true) {

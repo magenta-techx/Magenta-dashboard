@@ -22,78 +22,49 @@ const AcctDeleteMsg = () => {
     ?.split("")
     ?.filter((a) => a !== '"')
     ?.join("");
+  const token = localStorage.getItem("login_token");
+  const deleteBranchFn = async (detail) => {
+    try {
+      const res = await axios.delete(
+        `https://backend.magentacashier.com/accounts/account/delete/${detail}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res);
+      if (res.status === 204) {
+        setStates(false);
+        setIsLoading(false);
+        setShowAcctDelete(false);
+        setShowDeleteSucc(true);
+        GET_ACCOUNT();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleDelete = async (detail) => {
     setIsLoading(true);
 
     console.log(typeof Number(filterColon));
     console.log(ForEachAcctDetail);
 
-    const token = localStorage.getItem("login_token");
     // Check if acct number are equal
     if (localStorage.getItem("item")) {
       if (detail === Number(filterColon)) {
         handleAutoSweepDelete();
-        try {
-          const res = await axios.delete(
-            `https://backend.magentacashier.com/accounts/account/delete/${detail}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-        console.log(res);
-          if (res.status === 204) {
-            setStates(false);
-            setIsLoading(false)
-            setShowAcctDelete(false);
-            setShowDeleteSucc(true);
-          }
-        } catch (error) {
-          console.log(error);
-        }
+        deleteBranchFn(detail);
       } else {
         // localStorage.removeItem("num");
 
-        try {
-          const res = await axios.delete(
-            `https://backend.magentacashier.com/accounts/account/delete/${detail}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          if (res.status === 204) {
-            // GET_ACCOUNT();
-            setStates(false);
-            setShowAcctDelete(false);
-            setShowDeleteSucc(true);
-          }
-        } catch (error) {
-          console.log(error);
-        }
+        deleteBranchFn(detail);
       }
     } else {
-        // localStorage.removeItem("num");
+      // localStorage.removeItem("num");
 
-      try {
-        const res = await axios.delete(
-          `https://backend.magentacashier.com/accounts/account/delete/${detail}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        if (res.status === 204) {
-          setShowAcctDelete(false);
-          setStates(false);
-          setShowDeleteSucc(true);
-        }
-      } catch (error) {
-        console.log(error);
-      }
+       deleteBranchFn(detail);
     }
   };
   return (
@@ -111,7 +82,7 @@ const AcctDeleteMsg = () => {
           onClick={() => {
             setShowAcctDelete(false);
             document.body.style.overflow = "visible";
-            console.log(filterColon)
+            console.log(filterColon);
           }}
           className="bg-[#4E00AD] w-[140px] h-[46px] rounded-xl text-white flex justify-center items-center cursor-pointer"
         >

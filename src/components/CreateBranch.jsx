@@ -22,6 +22,10 @@ const CreateBranch = () => {
     setEditBranchName,
     setEditBranchPasscode,
     editBranchName,
+    setShowError,
+    setError,
+    setSuccess,
+    setShowSuccess,
     state: { ForEachDetail },
   } = ItemContext();
   const navigate = useNavigate();
@@ -40,7 +44,7 @@ const CreateBranch = () => {
           },
         }
       );
-      
+
       setName("");
       setAddress("");
       setPassCode("");
@@ -50,15 +54,21 @@ const CreateBranch = () => {
         navigate(`/branch/${res?.data?.id}`);
         localStorage.setItem("branch_report", JSON.stringify(res?.data));
         document.body.style.overflow = "visible";
-        // console.log(res);
+        console.log(res);
         setEditBranchAddress(res?.data?.address);
         setEditBranchName(res?.data?.name);
+        setShowSuccess(true);
+        Get_Branch();
+
+        setSuccess("Branch Successfully Created");
         setEditBranchPasscode(res?.data?.passcode);
       } else {
         setIsLoading(false);
       }
     } catch (err) {
       setIsLoading(false);
+      setError(err?.message);
+      setShowError(true);
       console.log(err);
     }
     // setName("");
@@ -96,7 +106,7 @@ const CreateBranch = () => {
             name=""
             placeholder="Shoprite Lekki"
             id="name"
-            className="border-[#AF8BDA] border outline-none w-full h-[46px] px-4 rounded-xl font-normal text-sm " 
+            className="border-[#AF8BDA] border outline-none w-full h-[46px] px-4 rounded-xl font-normal text-sm "
           />
         </div>
         <div className="flex flex-col gap-2 w-full">
@@ -133,9 +143,7 @@ const CreateBranch = () => {
         >
           {isLoading ? (
             <div className="flex items-center gap-4">
-              <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
-                null
-              </div>
+              <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent"></div>
             </div>
           ) : (
             "Continue"

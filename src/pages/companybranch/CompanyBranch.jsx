@@ -1,5 +1,5 @@
 import axios from "axios";
-import React  from "react";
+import React, { useEffect }  from "react";
 import Branch from "../../components/Branch";
 import Header from "../../components/Header";
 import { HiArrowRight, HiOutlineFilter } from "react-icons/hi";
@@ -17,8 +17,11 @@ const CompanyBranch = () => {
     setName,
     setAddress,
     setPassCode,
+    companyDetails
   } = ItemContext();
-
+ useEffect(() => {
+   Get_Branch();
+ }, []);
   const handleClick = () => {
     document.body.style.overflow = "hidden";
     setShowCreateBranch(true);
@@ -96,7 +99,7 @@ const CompanyBranch = () => {
             <div className="w-1/2 border rounded-lg shadow-md h-fit flex flex-col p-4 gap-4">
               <h2 className="font-medium text-xl">Create New Branch</h2>
               <p className="text-[18px]">
-                You have created 3 branches for Shorprite, would you like to
+                You have created {branchDetails.length} branches for {companyDetails.companyName}, would you like to
                 create a new branch?
               </p>
               <div className="w-full flex justify-center">

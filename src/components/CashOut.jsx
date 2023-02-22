@@ -41,16 +41,37 @@ const CashOut = () => {
   const timeAmOrPm = time?.substring(index)?.trim();
   const handleWithdraw = () => {
     setShowWithdrawAmount(true);
+      document.body.style.overflow = "hidden";
   };
   const handleAutoSweep = () => {
     setShowSelectAutoSweep(true);
     document.body.style.overflow = "hidden";
   };
 
+  const handleChangeTrue = (id) => {
+    const change = accountDetails?.map((detail) => {
+      // console.log(detail);
+      return detail.id === id
+        ? { ...detail, isAbtDel: true }
+        : { ...detail, isAbtDel: false };
+    });
+    console.log(change)
+    dispatch({ type: "Account Details", payload: change });
+  };
+  const handleClose = (id) => {
+    const change = accountDetails?.map((detail) => {
+      // console.log(detail);
+      return detail.id === id
+        ? { ...detail, isAbtDel: false }
+        : { ...detail, isAbtDel: false };
+    });
+    // console.log(change)
+    dispatch({ type: "Account Details", payload: change });
+  };
   useEffect(() => {
     GET_ACCOUNT();
-  }, [accountDetails]);
- 
+  }, []);
+
   return (
     <div className="lg:w-[80%] sm:w-[92%] min-h-full px-8 py-6 flex flex-col gap-6">
       <div className="w-full  bg-white   ">
@@ -99,7 +120,14 @@ const CashOut = () => {
           </p>
           <div className="flex gap-4 ">
             {accountDetails.map((detail) => {
-              return <Card key={detail.id}  detail={detail} />;
+              return (
+                <Card
+                  key={detail.id}
+                  detail={detail}
+                  handleChangeTrue={handleChangeTrue}
+                  handleClose={handleClose}
+                />
+              );
             })}
           </div>
           <div className="flex justify-end ">
@@ -185,7 +213,7 @@ const CashOut = () => {
                   {isLoading ? (
                     <div className="flex items-center gap-4">
                       <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
-                        null
+                        
                       </div>
                     </div>
                   ) : (
