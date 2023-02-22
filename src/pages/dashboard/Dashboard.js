@@ -20,13 +20,13 @@ const Dashboard = () => {
   return (
     <div
      
-      className="w-[80%] px-8 py-6 font"
+      className="lg:w-[80%] sm:w-[90%] px-8 py-6 font"
     >
       <div className="w-[full]  bg-white  ">
         <Header />
       </div>
       <DashboardCol1 />
-      <div className="border px-6 py-4">
+      <div className="border rounded-lg px-6 py-4">
         <DashboardCol2 />
         <DashboardCol3 />
       </div>

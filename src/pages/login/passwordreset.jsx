@@ -24,7 +24,7 @@ const PasswordResetComponent = () => {
       <div className="px-[20px] py-4">
         <MagentaLogo />
       </div>
-      <div className="user-details text-center bg-[#EEE8F8] rounded-xl w-[550px] m-auto my-[50px] flex pt-[44px] flex-col gap-4">
+      <div className="user-details text-center sm:bg-white md:bg-[#EEE8F8] rounded-xl w-[550px] m-auto my-[50px] flex pt-[44px] flex-col gap-4">
         <div className="flex justify-center">
           <svg
             width="26"

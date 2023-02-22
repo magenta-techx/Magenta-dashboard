@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InputComponent from "../../InputComponent";
 import { Link } from "react-router-dom";
+import MagentaLogo from "../../../assets/logo";
 import { ItemContext } from "../../../contextApi/stateMang.contextApi";
 
 const UserDetails = ({ markAsComplete = () => {} }) => {
@@ -8,9 +9,15 @@ const UserDetails = ({ markAsComplete = () => {} }) => {
   const { userDetails, setUserDetails } = ItemContext();
 
   return (
-    <div className="user-details text-center flex flex-col gap-4">
-      <h1 className="text-[32px] font-semibold">Add Details</h1>
+    <div className="">
+   <div className="sm:px-[20px] sm:py-4">
+         <MagentaLogo />
+      </div>
 
+    <div className="user-details text-center flex flex-col gap-4 ">
+
+      <h1 className="text-[32px] font-semibold m-0">Add Details</h1>
+   
       <p>Please provide your name and email</p>
 
       <div className="input-group flex flex-col gap-7">
@@ -72,6 +79,7 @@ const UserDetails = ({ markAsComplete = () => {} }) => {
           Already a member? <span className="text-violet-500">Sign In</span>
         </Link>
       </p>
+      </div>
     </div>
   );
 };

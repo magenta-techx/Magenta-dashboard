@@ -137,7 +137,7 @@ function App() {
   return (
     <div className="flex">
       {showNav && (
-        <div className="w-[20%] min-h-screen bg-[#200047] flex flex-col">
+        <div className="lg:w-[20%] sm:w-24 sm:min-h-screen sm:flex  min-h-screen bg-[#200047] flex flex-col">
           <Navbar />
         </div>
       )}

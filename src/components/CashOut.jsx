@@ -52,7 +52,7 @@ const CashOut = () => {
   }, [accountDetails]);
  
   return (
-    <div className="w-[80%] min-h-full px-8 py-6 flex flex-col gap-6">
+    <div className="lg:w-[80%] sm:w-[92%] min-h-full px-8 py-6 flex flex-col gap-6">
       <div className="w-full  bg-white   ">
         <Header />
       </div>

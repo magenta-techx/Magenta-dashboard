@@ -76,7 +76,7 @@ const LoginComponent = () => {
         <MagentaLogo />
       </div>
       <div className="w-full albert">
-        <div className="user-details text-center bg-[#EEE8F8] rounded-xl w-[550px] m-auto my-[50px] flex pt-[44px] flex-col gap-5">
+        <div className="user-details text-center md:bg-[#EEE8F8] sm:bg-white rounded-xl w-[550px] m-auto my-[50px] flex pt-[44px] flex-col gap-5">
           <div className="flex justify-center relative z-[]">
             <svg
               width="22"
@@ -128,7 +128,7 @@ const LoginComponent = () => {
 
           <div className="input-group flex  m-auto flex-col gap-7">
             <InputComponent
-              className="bg-[#EEE8F8] border-[#C7AFE4]"
+              className="bg-[#EEE8F8] sm:bg-white  border-[#C7AFE4]"
               type="email"
               label="Email"
               name="email"
@@ -139,7 +139,7 @@ const LoginComponent = () => {
           </div>
           <div className="input-group flex m-auto flex-col gap-7">
             <InputComponent
-              className="bg-[#EEE8F8] border-[#C7AFE4]"
+              className="bg-[#EEE8F8] sm:bg-white border-[#C7AFE4]"
               type="password"
               label="Password"
               name="password"

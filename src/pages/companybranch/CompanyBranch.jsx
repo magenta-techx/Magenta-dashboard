@@ -34,7 +34,7 @@ const CompanyBranch = () => {
   return (
     <>
       <div
-        className="w-[80%] px-8 py-6 "
+        className="lg:w-[80%] sm:w-[92%] px-8 py-6 "
         // initial={{ width: "80%" }}
         // animate={{ width: "80%" }}
         // exit={{ x: "80%",transition:{duration:0.1} }}
