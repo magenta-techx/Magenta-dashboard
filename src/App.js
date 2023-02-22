@@ -123,9 +123,9 @@ function App() {
   window.addEventListener("focus", () => {
     document.title = docTitle;
   });
-  useEffect(() => {
-    document.addEventListener("contextmenu", (event) => event.preventDefault());
-  }, []);
+  // useEffect(() => {
+  //   document.addEventListener("contextmenu", (event) => event.preventDefault());
+  // }, []);
 
   const auth = localStorage.getItem("isAuth");
   const isAuth = JSON.parse(auth);

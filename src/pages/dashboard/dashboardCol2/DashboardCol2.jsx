@@ -2,13 +2,20 @@ import React from "react";
 import TransactionSta from "./TransactionSta";
 import { HiOutlineFilter } from "react-icons/hi";
 import { BsSearch } from "react-icons/bs";
+import { ItemContext } from "../../../contextApi/stateMang.contextApi";
 
 const DashboardCol2 = () => {
+  const { GET_CHART_DATA } = ItemContext();
   return (
     <div className=" w-full h-fit mb-1  rounded-lg flex flex-col gap-4-">
       <div className="flex justify-between">
         <div className="bg-[#4E00AD] rounded-xl w-[143px] h-[48px] mb-5  flex justify-center items-center cursor-pointer">
-          <div className="flex gap-6 items-center text-white">
+          <div
+            onClick={() => {
+              GET_CHART_DATA();
+            }}
+            className="flex gap-6 items-center text-white"
+          >
             <small className="text-sm albert font-normal">Refresh</small>
             <img src="/assets/refresh.png" alt="refresh image" />
           </div>
