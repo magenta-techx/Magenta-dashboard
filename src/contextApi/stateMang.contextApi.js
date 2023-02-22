@@ -359,11 +359,11 @@ const Context = ({ children }) => {
       },
     },
     scales: {
-      y: {
-        min: 0,
-        max: 100,
-      },
-     
+      // y: {
+      //   min: 0,
+      //   max: 100,
+      // },
+
     },
   };
 
