@@ -359,17 +359,24 @@ const Context = ({ children }) => {
       },
     },
     scales: {
-      xAxes: [{
-          gridLines: {
-              display:false
-          }
-      }],
-      yAxes: [{
-          gridLines: {
-              display:false
-          }
-      }]
-    },
+      x: {
+        autoSkip: true,
+        grid: {
+          display: false,
+        },
+        ticks: {
+          display: false //this will remove only the label
+        }
+      },
+      y: {
+        border: {
+          display: false
+        },
+        grid: {
+          display: true,
+        },
+      }
+  },
   };
 
   const data1 = {
@@ -380,15 +387,16 @@ const Context = ({ children }) => {
         data: chartLineRes?.map((data) => data.total),
         // backgroundColor: "#D733CE",
         // cutout: "90%",
-        // fontFamily: "albert",
+        fontFamily: "albert",
         // borderRadius: 100,
         // fill: true,
         fill : true,
         showLine : true,
         borderColor: '#7133bd',
-        backgroundColor: '#7133bd',
-        pointRadius : 5,
-        cubicInterpolationMode: 'monotone'
+        backgroundColor: '#7133bd4f',
+        pointRadius : 2,
+        cubicInterpolationMode: 'monotone',
+        tension: 0.1
       },
     ],
   };
