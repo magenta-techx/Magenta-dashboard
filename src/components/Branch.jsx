@@ -15,8 +15,8 @@ const Branch = ({ branch }) => {
     state: { ForEachAcctDetail },
   } = ItemContext();
 
- 
-  
+
+
   const navigate = useNavigate();
   const handleClick = (item) => {
     setEditBranchAddress(item?.address);
@@ -60,14 +60,13 @@ const Branch = ({ branch }) => {
             <span>Total Sales:</span>
             <span className="text-black text-xl flex items-center">
               <TbCurrencyNaira />
-              {branch?.sales_and_customers.total_transactions}
+              {branch?.sales_and_customers.sales}
             </span>
           </p>
 
           <p className="text-[#6B778C] text-sm flex gap-2 items-center albert">
-            <span>Total Customers</span>
+            <span>Total Transactions:</span>
             <span className="text-black text-xl flex items-center">
-              <TbCurrencyNaira />
               {branch?.sales_and_customers.unique_customers}
             </span>
           </p>

@@ -52,7 +52,7 @@ const ViewBranchReport = () => {
 
   const report = JSON.parse(repor);
   // console.log(report)
- 
+
 
   return (
     <div className="w-[80%] px-10 py-6 flex flex-col gap-10">
@@ -107,7 +107,7 @@ const ViewBranchReport = () => {
             <h4 className="font-normal  text-[16px]">Total Sales Made</h4>
             <h2 className="font-medium flex items-center text-xl">
               {/* <TbCurrencyNaira /> */}
-              {report?.sales_and_customers?.total_transactions}
+              {report?.sales_and_customers?.sales}
             </h2>
           </div>
         </div>
@@ -116,10 +116,10 @@ const ViewBranchReport = () => {
             <HiOutlineUserGroup size="20px" className="text-[#4E00AD]" />
           </div>
           <div className="flex flex-col gap-6 inter">
-            <h4 className="font-normal  text-[16px]">Total Transaction</h4>
+            <h4 className="font-normal  text-[16px]">Total Transactions</h4>
             <h2 className="font-medium flex items-center text-xl">
               {/* <TbCurrencyNaira />{" "} */}
-              {report?.sales_and_customers?.sales?report?.sales_and_customers?.sales:0}
+              {report?.sales_and_customers?.total_transactions?report?.sales_and_customers?.total_transactions:0}
             </h2>
           </div>
         </div>
