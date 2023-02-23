@@ -67,7 +67,7 @@ const Branch = ({ branch }) => {
           <p className="text-[#6B778C] text-sm flex gap-2 items-center albert">
             <span>Total Transactions:</span>
             <span className="text-black text-xl flex items-center">
-              {branch?.sales_and_customers.unique_customers}
+              {branch?.sales_and_customers.total_transactions}
             </span>
           </p>
         </div>
