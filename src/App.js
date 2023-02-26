@@ -126,9 +126,9 @@ function App() {
   window.addEventListener("focus", () => {
     document.title = docTitle;
   });
-  useEffect(() => {
-    document.addEventListener("contextmenu", (event) => event.preventDefault());
-  }, []);
+  // useEffect(() => {
+  //   document.addEventListener("contextmenu", (event) => event.preventDefault());
+  // }, []);
 
   const auth = localStorage.getItem("isAuth");
   const isAuth = JSON.parse(auth);
@@ -193,7 +193,7 @@ function App() {
 
       {localStorage.getItem("isAuth") && (
         <motion.div
-          animate={{ y: open ? 10 : -10 }}
+          animate={{ y: open ? 10000 : -10 }}
           transition={{ type: "tween" }}
           className={`bg-[#EEE8F8] p-3  poppins w-[400px]  gap-10 items-center fixed right-10    top-5 z-[100]   h-fit border border-l-4 border-l-[#200047]
         ${open ? "flex" : "hidden"}`}

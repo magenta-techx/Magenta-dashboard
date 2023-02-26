@@ -51,7 +51,8 @@ const ViewBranchReport = () => {
   const repor = localStorage.getItem("branch_report");
 
   const report = JSON.parse(repor);
-  console.log(report);
+  // console.log(report)
+
 
   return (
     <div className="lg:w-[80%] sm:w-[90%] px-10 py-6 flex flex-col gap-10">
@@ -105,8 +106,8 @@ const ViewBranchReport = () => {
           <div className="flex flex-col gap-6 inter">
             <h4 className="font-normal sm:text-[14px] lg:text-[16px] sm:pt-4 sm:text-gray-500">Total Sales Made</h4>
             <h2 className="font-medium flex items-center text-xl">
-            <TbCurrencyNaira />
-              {report?.sales_and_customers?.total_transactions}
+              {/* <TbCurrencyNaira /> */}
+              {report?.sales_and_customers?.sales}
             </h2>
           </div>
         </div>
@@ -115,10 +116,10 @@ const ViewBranchReport = () => {
             <HiOutlineUserGroup size="20px" className="text-[#4E00AD]" />
           </div>
           <div className="flex flex-col gap-6 inter">
-            <h4 className="font-normal sm:text-[14px] lg:text-[16px] sm:pt-4 sm:text-gray-500">Unique Customers</h4>
+            <h4 className="font-normal sm:text-[14px] lg:text-[16px] sm:pt-4 sm:text-gray-500">Total Transactions</h4>
             <h2 className="font-medium flex items-center text-xl">
               {/* <TbCurrencyNaira />{" "} */}
-              {report?.sales_and_customers?.unique_customers}
+              {report?.sales_and_customers?.total_transactions?report?.sales_and_customers?.total_transactions:0}
             </h2>
           </div>
         </div>
