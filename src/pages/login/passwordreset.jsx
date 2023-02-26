@@ -8,7 +8,7 @@ import { ItemContext } from "../../contextApi/stateMang.contextApi";
 const PasswordResetComponent = () => {
   // const [passwordDetails, setPasswordDetails] = useState({})
 
-  const { newPassword, setNewPassword, showNav, setShowNav, verificationMail } = ItemContext();
+  const { newPassword, setNewPassword, setShowFooter, setShowNav, verificationMail } = ItemContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,14 +17,16 @@ const PasswordResetComponent = () => {
   };
   useEffect(() => {
     setShowNav(false);
+    setShowFooter(false);
   }, []);
 
   return (
-    <div className="w-screen">
-      <div className="px-[20px] py-4">
+    <div className="sm:w-screen xs:w-[100%]">
+      <div className="sm:px-[20px] sm:py-4 sm:block sm:align-middle xs:m-[auto] xs:flex xs:justify-center xs:pt-12">
         <MagentaLogo />
       </div>
-      <div className="user-details text-center sm:bg-white md:bg-[#EEE8F8] rounded-xl w-[550px] m-auto my-[50px] flex pt-[44px] flex-col gap-4">
+      <div className="sm:w-full  xs:mt-[-20px] xs:flex xs:justify-center xs:m-[auto] albert">
+      <div className="user-details text-center xs:mt-8  sm:bg-white xs:m-[auto] xs:flex xs:justify-center lg:bg-[#EEE8F8] rounded-xl w-[550px] m-auto my-[50px] flex pt-[44px] flex-col gap-4">
         <div className="flex justify-center">
           <svg
             width="26"
@@ -104,6 +106,7 @@ const PasswordResetComponent = () => {
         <p className="pb-5">
           <Link to={"/signup"}></Link>
         </p>
+      </div>
       </div>
     </div>
   );

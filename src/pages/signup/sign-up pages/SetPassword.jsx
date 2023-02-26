@@ -2,6 +2,7 @@ import { useState } from "react";
 import InputComponent from "../../InputComponent";
 import { ItemContext } from "../../../contextApi/stateMang.contextApi";
 import axios from "axios";
+import MagentaLogo from "../../../assets/logo";
 
 const CompanyDetails = ({ markAsComplete = () => {} }) => {
   const {
@@ -70,11 +71,15 @@ const CompanyDetails = ({ markAsComplete = () => {} }) => {
     setBool(false);
   }, 3000);
   return (
-    <div className="user-details text-center flex flex-col gap-4">
+    <div className="xs:w-fit sm:w-screen">
+      <div className="sm:px-[20px] sm:py-4 sm:block lg:hidden sm:align-middle xs:m-[auto] xs:flex xs:justify-center xs:pt-3 sm:-pt-24">
+        <MagentaLogo />
+      </div>
+    <div className="user-details text-center flex flex-col xs:pt-12 sm:pt-20 lg:gap-4 xs:gap-4 sm:gap-6">
       <h1 className="text-[32px] font-semibold">Set Password</h1>
       <p>Choose a secure password</p>
 
-      <div className="input-group flex flex-col gap-7">
+      <div className="input-group sm:m-auto flex flex-col gap-7">
         <InputComponent
           type="password"
           label="Create Password"
@@ -101,7 +106,7 @@ const CompanyDetails = ({ markAsComplete = () => {} }) => {
       </div>
 
       <button
-        className="w-[360px] max-w-full h-[46px] rounded-[10px] disabled:text-gray-500 disabled:bg-[#E2E6EE] bg-[#4E00AD] text-white"
+        className="w-[360px] sm:m-auto max-w-full h-[46px] rounded-[10px] disabled:text-gray-500 disabled:bg-[#E2E6EE] bg-[#4E00AD] text-white"
         onClick={markAsComplete}
         disabled={
           !passwordDetails?.password?.trim() ||
@@ -120,6 +125,7 @@ const CompanyDetails = ({ markAsComplete = () => {} }) => {
       <p>
         Already a member? <span className="text-violet-500">Sign In</span>
       </p>
+    </div>
     </div>
   );
 };

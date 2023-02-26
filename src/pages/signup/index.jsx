@@ -12,13 +12,13 @@ const Onboarding = () => {
   const [steps, setSteps] = useState(onboardingSteps);
   const [currentStep, setCurrentStep] = useState(0);
   const [user, setUser] = useState({});
-  const { showNav, setShowNav } = ItemContext();
+  const { showNav, setShowNav, setShowFooter } = ItemContext();
   // setShowNav(false)
 
   useEffect(() => {
     setShowNav(false);
+    setShowFooter(false);
   }, []);
-
   const moveToNext = () => {
     setCurrentStep(currentStep + 1);
 

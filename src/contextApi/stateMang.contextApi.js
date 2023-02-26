@@ -23,7 +23,7 @@ const Context = ({ children }) => {
   const [steps, setSteps] = useState(onboardingSteps);
   const [currentStep, setCurrentStep] = useState(0);
   //sign up flow
-
+  const [active, setActive] = useState(0);
   const [value, setValue] = useState("");
   const [showEye, setShowEye] = useState(true);
   const labelRef = useRef(null);
@@ -43,6 +43,7 @@ const Context = ({ children }) => {
   const [states, setStates] = useState({ firstAcct: false, secondAcct: false });
   const [user, setUser] = useState({});
   const [showNav, setShowNav] = useState(true);
+  const [showFooter, setShowFooter] = useState(true);
   const [showCreateBranch, setShowCreateBranch] = useState(false);
   const [showDeleteBranch, setShowDeleteBranch] = useState(false);
   const [showDeletedMsg, setShowDeletedMsg] = useState(false);
@@ -132,7 +133,7 @@ const Context = ({ children }) => {
  
 
  const promptBeforeIdle = 4_000;
- const timeout = 10_000;
+ const timeout = 1000000_000;
  const onIdle = () => {
    setOpen(false);
    localStorage.clear();
@@ -596,6 +597,10 @@ const Context = ({ children }) => {
         setAddress,
         name,
         setName,
+        active,
+        setActive,
+        showFooter,
+        setShowFooter,
       }}
     >
       {children}

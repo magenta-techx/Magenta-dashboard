@@ -9,7 +9,7 @@ const idleTimer = () => {
 
   return (
     <div>
-      <IdleTimer ref={ref} timeout={5 * 4000} onIdle={handleIdle}></IdleTimer>
+       <IdleTimer ref={ref} timeout={5 * 4000} onIdle={handleIdle}></IdleTimer>
     </div>
   );
 };

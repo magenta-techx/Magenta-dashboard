@@ -7,20 +7,22 @@ import { ItemContext } from "../../contextApi/stateMang.contextApi";
 
 const EmailChangeComponent = () => {
   const navigate = useNavigate()
-  const { verificationMail, setVerificationMail , showNav, setShowNav} = ItemContext();
+  const { verificationMail, setVerificationMail , showNav,setShowFooter, setShowNav} = ItemContext();
   useEffect(() => {
-    setShowNav(false)
-  },[])
+    setShowNav(false);
+    setShowFooter(false);
+  }, []);
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
   return (
-    <div className="w-screen">
-      <div className="px-[20px] py-4">
+    <div className="sm:w-screen xs:w-[100%]">
+      <div className="sm:px-[20px] sm:py-4 sm:block sm:align-middle xs:m-[auto] xs:flex xs:justify-center xs:pt-12">
         <MagentaLogo />
       </div>
-      <div className="user-details text-center md:bg-[#EEE8F8] rounded-xl w-[550px] m-auto my-[50px] flex pt-[44px] flex-col gap-4">
+      <div className="sm:w-full  xs:mt-[-20px] xs:flex xs:justify-center xs:m-[auto] albert">
+      <div className="user-details xs:mt-8 text-center sm:bg-white lg:bg-[#EEE8F8] rounded-xl w-[550px] m-auto my-[50px] flex pt-[44px] flex-col gap-4">
         <div className="flex justify-center">
           <svg
             width="24"
@@ -74,7 +76,7 @@ const EmailChangeComponent = () => {
 
         <div className="input-group flex m-auto flex-col gap-7">
           <InputComponent
-          className="bg-[#EEE8F8] border-[#C7AFE4]"
+          className="sm:bg-white lg:bg-[#EEE8F8] border-[#C7AFE4]"
             type="email"
             label="Email"
             name="email"
@@ -101,6 +103,7 @@ const EmailChangeComponent = () => {
             Not a member yet? <span className="text-violet-500">Sign Up</span>
           </Link>
         </p>
+      </div>
       </div>
     </div>
   );

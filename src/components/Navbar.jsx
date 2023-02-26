@@ -11,15 +11,20 @@ import { HiOutlineChartSquareBar } from "react-icons/hi";
 const Navbar = () => {
   return (
     <>
-      <div className="h-fit p-10">
+      <div className="h-fit p-10 s">
         <Link to="/">
 
           <img
+            src="/assets/magentalogo.png"
+            alt="MAGENTA HEADER LOGO"
+            className="object-cover lg:hidden"
+          />
+           <img
             src="/assets/MAGENTA LOGO 4.png"
             alt="MAGENTA HEADER LOGO"
-            className="object-cover"
+            className="object-cover sm:hidden lg:flex"
           />
-         
+      
         </Link>
       </div>
       <NavLink

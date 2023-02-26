@@ -1,6 +1,7 @@
 import {React, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ItemContext } from '../../contextApi/stateMang.contextApi';
+import MagentaLogo from '../../assets/logo';
 
 
 
@@ -10,12 +11,18 @@ const GetStarted = () => {
         e.preventDefault();
         navigate("/")
     }
-    const {setShowNav} = ItemContext();
-    useEffect(() => {},[
-      setShowNav(false)
-    ])
+    const {setShowNav, setShowFooter} = ItemContext();
+    useEffect(() => {
+      setShowNav(false);
+      setShowFooter(false);
+    }, []);
   return(
-    <div className="m-auto w-[400px] text-center mt-[200px] text-grey">
+    <div className="sm:w-screen xs:w-[100%]">
+      <div className="sm:px-[20px] sm:py-4 sm:block sm:align-middle xs:m-[auto] xs:flex xs:justify-center xs:pt-12">
+        <MagentaLogo />
+      </div>
+    
+    <div className="m-auto w-[400px] text-center lg:mt-[200px] xs:mt-[80px] text-grey">
     <img
       className=" m-auto"
       src="/assets/getstarted.png"
@@ -30,7 +37,7 @@ const GetStarted = () => {
       >
        Get Started
       </button>
-
+      </div>
     </div>
   )
 }

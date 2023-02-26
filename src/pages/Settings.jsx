@@ -80,7 +80,7 @@ const Settings = ({ onChange = () => {}, removeFile = () => {} }) => {
   return (
     <div
      
-      className="lg:w-[80%] sm:w-[92%] px-8 py-6 flex flex-col gap-10"
+      className="lg:w-[80%] sm:w-[90%] px-8 py-6 flex flex-col gap-10"
     >
       <div className="w-[full]  bg-white   ">
         <Header />

@@ -54,7 +54,7 @@ const ViewBranchReport = () => {
   console.log(report);
 
   return (
-    <div className="w-[80%] px-10 py-6 flex flex-col gap-10">
+    <div className="lg:w-[80%] sm:w-[90%] px-10 py-6 flex flex-col gap-10">
       <div className="w-[full]  bg-white   ">
         <Header />
       </div>
@@ -98,37 +98,37 @@ const ViewBranchReport = () => {
         </div>
       </div>
       <div className="flex w-full justify-between gap-4">
-        <div className="w-80 h-fit border flex gap-6 rounded-lg px-6 py-4">
+        <div className="w-80 h-fit border lg:flex lg:gap-6 sm:gap-2 rounded-lg px-6 py-4">
           <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
-            <HiOutlineChartSquareBar size="25px" className="text-[#4E00AD]" />
+          <HiOutlineChartSquareBar size="25px" className="text-[#4E00AD]" />
           </div>
           <div className="flex flex-col gap-6 inter">
-            <h4 className="font-normal  text-[16px]">Total Sales Made</h4>
+            <h4 className="font-normal sm:text-[14px] lg:text-[16px] sm:pt-4 sm:text-gray-500">Total Sales Made</h4>
             <h2 className="font-medium flex items-center text-xl">
-              <TbCurrencyNaira />
+            <TbCurrencyNaira />
               {report?.sales_and_customers?.total_transactions}
             </h2>
           </div>
         </div>
-        <div className="w-80 h-fit border flex gap-6 rounded-lg px-6 py-4">
+        <div className="w-80 h-fit border lg:flex lg:gap-6 sm:gap-2 rounded-lg px-6 py-4">
           <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
             <HiOutlineUserGroup size="20px" className="text-[#4E00AD]" />
           </div>
           <div className="flex flex-col gap-6 inter">
-            <h4 className="font-normal  text-[16px]">Unique Customers</h4>
+            <h4 className="font-normal sm:text-[14px] lg:text-[16px] sm:pt-4 sm:text-gray-500">Unique Customers</h4>
             <h2 className="font-medium flex items-center text-xl">
               {/* <TbCurrencyNaira />{" "} */}
               {report?.sales_and_customers?.unique_customers}
             </h2>
           </div>
         </div>
-        <div className="w-80 h-fit border flex gap-6 rounded-lg px-6 py-4">
+        <div className="w-80 h-fit border lg:flex lg:gap-6 sm:gap-2rounded-lg px-6 py-4">
           <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
             <RiCalendar2Line size="25px" className="text-[#4E00AD]" />
           </div>
           <div className="flex flex-col gap-6 inter">
-            <h4 className="font-medium text-[16px]">Date Created</h4>
-            <h2 className="font-bold text-xl">
+            <h4 className="font-medium sm:text-[14px] lg:text-[16px] sm:pt-4 sm:text-gray-500">Date Created</h4>
+            <h2 className="font-medium text-xl">
               {report?.created_at?.substring(0, 10)}
             </h2>
           </div>
@@ -153,7 +153,7 @@ const ViewBranchReport = () => {
         <div className="border mt-10">
           <table className="border h-[412px] w-full py-4 relative">
             <thead>
-              <tr className="border-b  bg-[#F7F9FA] font-medium text-lg">
+              <tr className="border-b  bg-[#F7F9FA] font-medium sm:font-small lg:text-lg">
                 <th className="py-3">User UIID</th>
                 <th className="py-3">Branch Name</th>
                 <th className="py-3">Invoice date</th>
