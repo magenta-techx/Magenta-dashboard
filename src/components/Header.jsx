@@ -11,20 +11,10 @@ const Header = () => {
     state: { showProfile },
     dispatch,
   } = ItemContext();
-  const user = localStorage.getItem("user");
-  const email = JSON.parse(user);
 
-  const userFirstLetter = email?.email?.split("")[0];
-  const userSecondLetter = email?.email?.split("")[1];
-  const navigate = useNavigate();
   return (
     <div className="shadow-xl  shadow-[rgba(113,50,189,0.05)] w-full h-16 border px-6 rounded-xl  flex justify-between items-center">
-      <div
-        onClick={() => {
-          localStorage.clear();
-          navigate("/login")
-        }}
-      >
+      <div>
         <TbNotification size="30px" className="text-[#7132BD]" />
       </div>
       <div className="flex gap-6 ">
@@ -32,7 +22,7 @@ const Header = () => {
         <div
           onClick={() => {
             dispatch({ type: "show-profile" });
-            document.body.style.overflow = "hidden";
+            // document.body.style.overflow = "hidden";
           }}
         >
           <DisplayName width={"42px"} height={"42px"} fontSize={"18px"} />

@@ -38,7 +38,7 @@ const Card = ({
   const handleShowAcctDeleteMsg = (item) => {
     dispatch({ type: "Individual AcctDetails", payload: item });
     setShowAcctDelete(true);
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
   };
   return (
     <>
@@ -55,9 +55,9 @@ const Card = ({
           <div className="relative">
             <div>
               {detail.isAbtDel ? (
-                <FaTimes className="cursor-pointer"
-                
-                onClick={() => handleClose(id)}
+                <FaTimes
+                  className="cursor-pointer text-[#4E00AD]"
+                  onClick={() => handleClose(id)}
                 />
               ) : (
                 <BsThreeDots
@@ -71,12 +71,9 @@ const Card = ({
             {detail.isAbtDel && (
               <div
                 onClick={() => handleShowAcctDeleteMsg(detail)}
-                className="absolute w-[107px] h-[60px] bg-white  flex justify-center items-center gap-2 rounded-2xl cursor-pointer"
+                className="absolute w-[107px] h-[60px] bg-white  flex justify-center items-center gap-2 rounded-2xl text-[#DD55D4] cursor-pointer"
               >
-                <TbTrash
-                  size="20px"
-                  className="text-[#DD55D4] cursor-pointer"
-                />
+                <TbTrash size="20px" className=" cursor-pointer" />
                 <small className="text-sm poppins">Delete</small>
               </div>
             )}

@@ -61,7 +61,7 @@ export const ShowAutoSweepAmount = () => {
           setShowAutoSweepAmount(false);
           setAutoSweepAmount("");
           setSelected(false);
-          document.body.style.overflow = "visible";
+          // document.body.style.overflow = "visible";
           localStorage.removeItem("account");
           localStorage.removeItem("num");
           if (isLoading === true) {

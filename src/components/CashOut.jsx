@@ -41,11 +41,11 @@ const CashOut = () => {
   const timeAmOrPm = time?.substring(index)?.trim();
   const handleWithdraw = () => {
     setShowWithdrawAmount(true);
-      document.body.style.overflow = "hidden";
+      // document.body.style.overflow = "hidden";
   };
   const handleAutoSweep = () => {
     setShowSelectAutoSweep(true);
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
   };
 
   const handleChangeTrue = (id) => {
@@ -73,7 +73,7 @@ const CashOut = () => {
   }, []);
 
   return (
-    <div className="w-[80%] min-h-full px-8 py-6 flex flex-col gap-6">
+    <div className="w-[80%] min-h-full px-8 py-6 flex flex-col gap-6 overflow-y-scroll">
       <div className="w-full  bg-white   ">
         <Header />
       </div>
@@ -138,7 +138,7 @@ const CashOut = () => {
                 setAddress("");
                 setOTP("");
                 setPassCode("");
-                document.body.style.overflow = "hidden";
+                // document.body.style.overflow = "hidden";
               }}
               disabled={accountDetails?.length >= 2 ? true : false}
               className="text-sm w-[236px] h-[49px] poppins text-white 
@@ -212,9 +212,7 @@ const CashOut = () => {
                 <button className="text-sm w-[157px] h-[45px]  flex rounded-xl justify-center items-center bg-[#4E00AD] text-white font-medium cursor-pointer  ">
                   {isLoading ? (
                     <div className="flex items-center gap-4">
-                      <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
-                        
-                      </div>
+                      <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent"></div>
                     </div>
                   ) : (
                     "Reset auto sweep"

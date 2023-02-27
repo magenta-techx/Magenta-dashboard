@@ -23,7 +23,7 @@ const CompanyBranch = () => {
    Get_Branch();
  }, []);
   const handleClick = () => {
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
     setShowCreateBranch(true);
     setName("");
     setAddress("");
@@ -37,11 +37,10 @@ const CompanyBranch = () => {
   return (
     <>
       <div
-        className="w-[80%] px-8 py-6 "
+        className="w-[80%] px-8 py-6 overflow-y-scroll"
         // initial={{ width: "80%" }}
         // animate={{ width: "80%" }}
         // exit={{ x: "80%",transition:{duration:0.1} }}
-       
       >
         <div className="w-[full]  bg-white   ">
           <Header />
@@ -64,7 +63,7 @@ const CompanyBranch = () => {
               </div>
             </div>
           </div>
-          <div className="border p-4 flex flex-col ">
+          <div className="border p-4 flex flex-col rounded-[12px]">
             <div className="flex flex-wrap gap-4">
               {branchDetails
                 ?.filter((a, idx) => idx < 2)
@@ -99,8 +98,9 @@ const CompanyBranch = () => {
             <div className="w-1/2 border rounded-lg shadow-md h-fit flex flex-col p-4 gap-4">
               <h2 className="font-medium text-xl">Create New Branch</h2>
               <p className="text-[18px]">
-                You have created {branchDetails.length} branches for {companyDetails.companyName}, would you like to
-                create a new branch?
+                You have created {branchDetails.length} branches for{" "}
+                {companyDetails.companyName}, would you like to create a new
+                branch?
               </p>
               <div className="w-full flex justify-center">
                 <img
@@ -113,7 +113,7 @@ const CompanyBranch = () => {
                 className="flex justify-end"
                 onClick={() => {
                   setShowCreateBranch(true);
-                  document.body.style.overflow = "hidden";
+                  // document.body.style.overflow = "hidden";
                 }}
               >
                 <button className="text-sm w-[157px] h-[45px]  flex rounded-xl justify-center items-center bg-[#4E00AD] text-white font-medium cursor-pointer  ">

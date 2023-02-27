@@ -51,7 +51,7 @@ const ShowOTP = () => {
         setIsLoading(false);
         setShowOTP(false);
         setAccountNumber("");
-        document.body.style.overflow = "visible";
+        // document.body.style.overflow = "visible";
         GET_ACCOUNT()
         setAccountName("");
         setShowSuccess(true)
@@ -102,7 +102,7 @@ const ShowOTP = () => {
         onClick={() => {
           setShowOTP(false);
           setOTP("");
-          document.body.style.overflow = "visible";
+          // document.body.style.overflow = "visible";
           setAccountName("");
           setAccountNumber("");
           if (isLoading === true) {

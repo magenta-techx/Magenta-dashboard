@@ -7,12 +7,12 @@ import { ItemContext } from "../../../contextApi/stateMang.contextApi";
 const DashboardCol2 = () => {
   const { GET_CHART_DATA } = ItemContext();
   return (
-    <div className=" w-full h-fit mb-1  rounded-lg flex flex-col gap-4-">
+    <div className=" w-full h-fit mb-1  rounded-lg flex flex-col">
       <div className="flex justify-between">
         <div className="bg-[#4E00AD] rounded-xl w-[143px] h-[48px] mb-5  flex justify-center items-center cursor-pointer">
           <div
             onClick={() => {
-              GET_CHART_DATA();
+              window.location.reload()
             }}
             className="flex gap-6 items-center text-white"
           >

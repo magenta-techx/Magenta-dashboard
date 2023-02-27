@@ -14,7 +14,7 @@ const ViewAllBranch = () => {
   } = ItemContext();
   const handleClick = () => {
     setShowCreateBranch(true);
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
   };
   return (
     <div className="w-[80%] px-10 py-6 flex flex-col gap-10">
