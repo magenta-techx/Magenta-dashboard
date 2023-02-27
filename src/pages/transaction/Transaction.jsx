@@ -12,7 +12,7 @@ const Get_transaction = async () => {
   const token = localStorage.getItem("login_token");
   try {
     const res = await axios.get(
-      "https://backend.magentacashier.com/business/merchant-transaction/",
+      "https://backend.magentacashier.com/business/merchant-transaction-list/",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -27,12 +27,12 @@ const Get_transaction = async () => {
 };
 useEffect(() => {
   Get_transaction();
-}, [data]);
+}, []);
 
 
 
   return (
-    <div className="lg:w-[80%] sm:w-[88%] px-8 py-6 ">
+    <div className="lg:w-[80%] sm:w-[90%] px-8 py-6 ">
       <div className="w-[full]  bg-white   ">
         <Header />
       </div>
@@ -75,7 +75,12 @@ useEffect(() => {
             .map((dat, idx) => {
               return (
                 <tr className="text-center border " key={idx}>
-                  <td className="py-2 font-normal text-sm">{dat.name}</td>
+                  <td className="py-2 font-normal text-sm">{data.id}</td>
+                  <td className="py-2 font-normal text-sm">{data.branch_name}</td>
+                  <td className="py-2 font-normal text-sm">{data.memo}</td>
+                  <td className="py-2 font-normal text-sm">{data.amount}</td>
+                  <td className="py-2 font-normal text-sm">{data.reference}</td>
+                  <td className="py-2 font-normal text-sm">{data.card_type}</td>
                 </tr>
               );
             })}

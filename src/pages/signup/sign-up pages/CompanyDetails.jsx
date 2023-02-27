@@ -70,11 +70,11 @@ const CompanyDetails = ({ markAsComplete = () => {} }) => {
   }, 3000);
 
   return (
-    <div className="xs:w-fit sm:w-screen">
-      <div className="sm:px-[20px] sm:py-4 sm:block lg:hidden sm:align-middle xs:m-[auto] xs:flex xs:justify-center xs:pt-3">
+    <div className="xs:w-screen lg:w-[60%] sm:h-full ">
+      <div className="sm:px-[20px] sm:py-4 sm:block lg:hidden sm:align-middle xs:m-[auto] xs:flex xs:justify-center xs:pt-6 ">
         <MagentaLogo />
       </div>
-    <div className="user-details text-center xs:pt-12 sm:pt-20 flex flex-col lg:gap-4 sm:gap-8 xs:gap-4">
+    <div className="user-details text-center flex flex-col gap-4 pt-12">
       <h1 className="text-[32px]  font-semibold">Company Details</h1>
       <p>Enter Company Details</p>
       <div
@@ -89,7 +89,7 @@ const CompanyDetails = ({ markAsComplete = () => {} }) => {
         </p>
       </div>
 
-      <div className="input-group sm:m-auto flex flex-col gap-7">
+      <div className="input-group xs:m-auto flex flex-col gap-7">
         <InputComponent
           type="text"
           label="Company name"
@@ -116,7 +116,7 @@ const CompanyDetails = ({ markAsComplete = () => {} }) => {
       </div>
 
       <button
-        className="w-[360px] sm:m-auto max-w-full h-[46px] rounded-[10px] disabled:text-gray-500 disabled:bg-[#E2E6EE] bg-[#4E00AD] text-white"
+        className="w-[360px] xs:m-auto max-w-full h-[46px] rounded-[10px] disabled:text-gray-500 disabled:bg-[#E2E6EE] bg-[#4E00AD] text-white"
         onClick={markAsComplete}
         disabled={
           !companyDetails?.companyName?.trim() ||

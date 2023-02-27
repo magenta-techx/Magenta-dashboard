@@ -21,7 +21,7 @@ const Dashboard = () => {
   return (
     <div
      
-      className="lg:w-[80%] sm:w-[90%] px-8 py-6 font"
+      className="lg:w-[80%] sm:w-[90%] px-8 py-6 font overflow-y-hidden"
     >
       <div className="w-[full]  bg-white  ">
         <Header />

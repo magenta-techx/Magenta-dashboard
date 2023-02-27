@@ -9,8 +9,8 @@ const UserDetails = ({ markAsComplete = () => {} }) => {
   const { userDetails, setUserDetails } = ItemContext();
 
   return (
-    <div className="xs:w-fit sm:w-screen">
-      <div className="sm:px-[20px] sm:py-4 sm:block lg:hidden sm:align-middle xs:m-[auto] xs:flex xs:justify-center xs:pt-0">
+    <div className="xs:w-screen lg:w-[60%] sm:h-full ">
+      <div className="sm:px-[20px] sm:py-4 sm:block lg:hidden sm:align-middle xs:m-[auto] xs:flex xs:justify-center xs:pt-6">
         <MagentaLogo />
       </div>
     <div className="user-details text-center flex flex-col gap-4 ">
@@ -19,7 +19,7 @@ const UserDetails = ({ markAsComplete = () => {} }) => {
    
       <p>Please provide your name and email</p>
 
-      <div className="input-group flex sm:m-auto flex-col gap-7">
+      <div className="input-group flex xs:m-auto flex-col gap-7">
         <InputComponent
           type="text"
           label="First name"
@@ -58,7 +58,7 @@ const UserDetails = ({ markAsComplete = () => {} }) => {
       </div>
 
       <button
-        className="w-[360px] max-w-full sm:m-auto h-[46px] rounded-[10px] disabled:text-gray-500 disabled:bg-[#E2E6EE] bg-[#4E00AD] text-white"
+        className="w-[360px] max-w-full xs:m-auto h-[46px] rounded-[10px] disabled:text-gray-500 disabled:bg-[#E2E6EE] bg-[#4E00AD] text-white"
         onClick={markAsComplete}
         disabled={
           !userDetails.firstname ||

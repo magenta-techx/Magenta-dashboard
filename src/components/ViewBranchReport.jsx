@@ -55,7 +55,7 @@ const ViewBranchReport = () => {
 
 
   return (
-    <div className="lg:w-[80%] sm:w-[90%] px-10 py-6 flex flex-col gap-10">
+    <div className="lg:w-[80%] sm:w-[90%] px-10 py-6 flex flex-col gap-10 sm:overflow-y-hidden">
       <div className="w-[full]  bg-white   ">
         <Header />
       </div>

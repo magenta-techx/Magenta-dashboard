@@ -73,8 +73,8 @@ const CashOut = () => {
   }, []);
 
   return (
-    <div className="lg:w-[80%] sm:w-[90%] min-h-full px-8 py-6 flex flex-col gap-6">
-      <div className="w-full  bg-white   ">
+    <div className="lg:w-[80%] sm:w-[90%] overflow-y-hidden min-h-full px-8 py-6 flex flex-col gap-6 ">
+      <div className="w-full bg-white   ">
         <Header />
       </div>
       <h2 className="font-medium text-xl albert">Cash Out</h2>
@@ -84,7 +84,7 @@ const CashOut = () => {
             <HiOutlineChartSquareBar size="25px" className="text-[#4E00AD]" />
           </div>
           <div className="flex flex-col albert gap-3 ">
-            <h4 className="font-normal sm:text-sm sm:pt-4 sm:text-gray-500">Total Withdrawal</h4>
+            <h4 className="font-normal sm:text-sm sm:pt-4 lg:pt-0 sm:text-gray-500">Total Withdrawal</h4>
             <h2 className="font-medium flex items-center text-[24px]">
               <TbCurrencyNaira /> 0
             </h2>
@@ -95,7 +95,7 @@ const CashOut = () => {
           <HiOutlineUserGroup size="20px" className="text-[#4E00AD]" />
           </div>
           <div className="flex flex-col albert gap-3 ">
-            <h4 className="font-normal sm:text-sm sm:pt-4 sm:text-gray-500">Total Payments Made</h4>
+            <h4 className="font-normal sm:text-sm sm:pt-4 lg:pt-0 sm:text-gray-500">Total Payments Made</h4>
             <h2 className="font-medium flex items-center text-[24px]">
               <TbCurrencyNaira /> 0
             </h2>
@@ -107,7 +107,7 @@ const CashOut = () => {
             <RiCalendar2Line size="25px" className="text-[#4E00AD]" />
           </div>
           <div className="flex flex-col gap-3 albert">
-            <h4 className="font-normal sm:text-sm sm:pt-4 sm:text-gray-500">In App Cash</h4>
+            <h4 className="font-normal sm:text-sm sm:pt-4 lg:pt-0 sm:text-gray-500">In App Cash</h4>
             <h2 className="font-medium text-[24px] flex items-center">
               <TbCurrencyNaira />0
             </h2>
@@ -150,7 +150,7 @@ const CashOut = () => {
           </div>
         </div>
         <div className="w-1/2  p-4 lg:flex gap-4 border-[#E1E1E1] border-2  rounded-xl">
-          <div className="lg:w-1/2 px-4 py-3 lg:h-full sm:h-[148px] sm:grid sm:grid-cols-2 bg-[#4E00AD] shadow-[4px_4px_13px_rgba(0,0,0,0.3)] rounded-3xl lg:flex lg:flex-col gap-2">
+          <div className="lg:w-1/2 px-4 py-3 lg:h-full sm:h-[162px] sm:grid sm:grid-cols-2 bg-[#4E00AD] shadow-[4px_4px_13px_rgba(0,0,0,0.3)] rounded-3xl lg:flex lg:flex-col gap-2">
             <div>
               <img
                 className="w-[120px] h-[120px]"
@@ -159,13 +159,13 @@ const CashOut = () => {
               />
             </div>
             <div>
-            <p className="text-white text-sm ml-2 mb-2 albert font-normal">
+            <p className="text-white text-sm sm:pt-3   ml-2 mb-2 albert font-normal">
               Make a withdrawal into your bank account
             </p>
             <div className="flex lg:justify-end" onClick={handleWithdraw}>
               <button
                 disabled={accountDetails.length === 0}
-                className="text-[16px] w-[157px] h-[45px] m-auto  flex  albert rounded-xl justify-center items-center bg-white text-[#4E00AD] font-normal cursor-pointer  disabled:text-black disabled:bg-[#E2E6EE] disabled:cursor-not-allowed"
+                className="lg:text-[16px] sm:text-sm w-[157px] h-[45px] m-auto  flex  albert rounded-xl justify-center items-center bg-white text-[#4E00AD] font-normal cursor-pointer  disabled:text-black disabled:bg-[#E2E6EE] disabled:cursor-not-allowed"
               >
                 Withdraw
               </button>
@@ -173,7 +173,7 @@ const CashOut = () => {
             </div>
           </div>
           {!items && (
-            <div className="lg:w-1/2 px-4 py-3 sm:mt-4 lg:mt-0 lg:h-full sm:h-[148px] sm:grid sm:grid-cols-2 bg-white shadow-[2px_2px_4px_4px_rgba(113,50,189,0.15)] rounded-3xl lg:flex lg:flex-col gap-2">
+            <div className="lg:w-1/2 px-4 py-3 sm:mt-4 lg:mt-0 lg:h-full sm:h-[162px] sm:grid sm:pt-7 sm:grid-cols-2 bg-white shadow-[2px_2px_4px_4px_rgba(113,50,189,0.15)] rounded-3xl lg:flex lg:flex-col gap-2">
               <div>
                 <img
                   className="w-[114px] h-[114px]"
@@ -188,7 +188,7 @@ const CashOut = () => {
               <div className="flex justify-end" onClick={handleAutoSweep}>
                 <button
                   disabled={accountDetails.length === 0}
-                  className="text-[15px] mt-2 w-[157px] h-[45px] m-auto albert flex rounded-xl justify-center items-center inter font-normal bg-[#4E00AD] text-white cursor-pointer   disabled:text-black disabled:bg-[#E2E6EE] disabled:cursor-not-allowed"
+                  className="lg:text-[16px] sm:text-sm mt-2 w-[157px] h-[45px] m-auto albert flex rounded-xl justify-center items-center inter font-normal bg-[#4E00AD] text-white cursor-pointer   disabled:text-black disabled:bg-[#E2E6EE] disabled:cursor-not-allowed"
                 >
                   Set auto sweep
                 </button>

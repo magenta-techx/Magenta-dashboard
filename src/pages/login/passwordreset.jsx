@@ -65,6 +65,7 @@ const PasswordResetComponent = () => {
         <div className="input-group flex m-auto flex-col gap-7">
           <InputComponent
             type="password"
+            className="lg:bg-[#EEE8F8] xs:bg-white border-[#C7AFE4]"
             label="Create Password"
             name="password"
             onChange={(evt) =>
@@ -77,6 +78,7 @@ const PasswordResetComponent = () => {
 
           <InputComponent
             type="password"
+            className="lg:bg-[#EEE8F8] xs:bg-white border-[#C7AFE4]"
             label="Confirm Password"
             name="confirmPassword"
             onChange={(evt) =>

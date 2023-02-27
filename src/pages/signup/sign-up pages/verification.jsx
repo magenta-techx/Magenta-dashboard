@@ -98,7 +98,7 @@ const VerificationComponent = () => {
 
           <div className="input-group flex m-auto flex-col gap-7">
             <InputComponent
-              className="bg-[#EEE8F8] xs:bg-white border-[#C7AFE4]"
+              className="lg:bg-[#EEE8F8] xs:bg-white border-[#C7AFE4]"
               type="text"
               label="otp"
               name="otp"

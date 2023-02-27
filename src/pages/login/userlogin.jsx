@@ -132,7 +132,7 @@ const LoginComponent = () => {
 
           <div className="input-group flex m-auto flex-col gap-7">
             <InputComponent
-              className="bg-[#EEE8F8] xs:bg-white  border-[#C7AFE4]"
+              className="lg:bg-[#EEE8F8] xs:bg-white  border-[#C7AFE4]"
               type="email"
               label="Email"
               name="email"
@@ -143,7 +143,7 @@ const LoginComponent = () => {
           </div>
           <div className="input-group flex m-auto flex-col gap-7">
             <InputComponent
-              className="bg-[#EEE8F8] xs:bg-white border-[#C7AFE4]"
+              className="lg:bg-[#EEE8F8] xs:bg-white border-[#C7AFE4]"
               type="password"
               label="Password"
               name="password"

@@ -12,13 +12,17 @@ const Onboarding = () => {
   const [steps, setSteps] = useState(onboardingSteps);
   const [currentStep, setCurrentStep] = useState(0);
   const [user, setUser] = useState({});
-  const { showNav, setShowNav, setShowFooter } = ItemContext();
+
+  const { showNav, setShowNav , setShowFooter} = ItemContext();
   // setShowNav(false)
 
   useEffect(() => {
     setShowNav(false);
-    setShowFooter(false);
+    setShowFooter(false)
+
   }, []);
+
+
   const moveToNext = () => {
     setCurrentStep(currentStep + 1);
 
@@ -37,7 +41,7 @@ const Onboarding = () => {
   };
 
   return (
-    <div className="onboarding min-h-screen flex w-screen">
+    <div className="onboarding min-h-screen flex w-[100%]">
       <aside className="bg-[#EEE8F8] w-[40%] p-[48px] lg:flex flex-col gap-20 hidden">
         <MagentaLogo />
 
@@ -63,7 +67,7 @@ const Onboarding = () => {
           ))}
         </ul>
       </aside>
-      <main className="bg-white flex justify-center w-[100vw] lg:w-[60%] items-center  flex-col gap-20 ">
+      <main className="bg-white flex justify-center  lg:w-[60%] items-center h-fit flex-col gap-10 ">
         {/* Onboarding Pages */}
         {currentStep === 0 && (
           <UserDetails
