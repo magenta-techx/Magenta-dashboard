@@ -45,7 +45,7 @@ const ViewBranchReport = () => {
   }, []);
   const handleEdit = () => {
     setShowEdit(true);
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
   };
   const navigate = useNavigate();
   const repor = localStorage.getItem("branch_report");

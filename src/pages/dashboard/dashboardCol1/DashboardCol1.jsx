@@ -140,7 +140,6 @@ const DashboardCol1 = () => {
               <TbCurrencyNaira />
               <NumericFormat
                 value={all_time_sales ? all_time_sales : 0}
-                thousandsGroupStyle="lakh"
                 thousandSeparator=","
                 displayType="text"
                 renderText={(value) => <b>{value}</b>}
@@ -158,7 +157,6 @@ const DashboardCol1 = () => {
               <TbCurrencyNaira />
               <NumericFormat
                 value={available_cash ? available_cash : 0}
-                thousandsGroupStyle="lakh"
                 thousandSeparator=","
                 displayType="text"
                 renderText={(value) => (
@@ -178,7 +176,6 @@ const DashboardCol1 = () => {
               <TbCurrencyNaira />
               <NumericFormat
                 value={today_sale ? today_sale : 0}
-                // thousandsGroupStyle="lakh"
                 thousandSeparator=","
                 displayType="text"
                 renderText={(value) => <b>{value}</b>}

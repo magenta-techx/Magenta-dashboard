@@ -11,7 +11,7 @@ const ShowEditSucc = () => {
     <div
       onClick={(e) => {
         e.stopPropagation();
-        document.body.style.overflow = "visible";
+        // document.body.style.overflow = "visible";
       }}
       className="w-[271px] flex border-l-8 border-l-[#1EBF46] h-fit bg-white absolute p-4 "
     >
@@ -27,7 +27,7 @@ const ShowEditSucc = () => {
         onClick={() => {
           setShowEditSucc(false);
           navigate("/branch/all");
-          document.body.style.overflow = "visible";
+          // document.body.style.overflow = "visible";
         }}
       >
         <span>Close</span>

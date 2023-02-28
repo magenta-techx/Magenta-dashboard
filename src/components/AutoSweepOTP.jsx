@@ -55,7 +55,7 @@ const AutoSweepOTP = () => {
       if (res.status === 200 || res.status === 201) {
         setShowAutoSweepOTP(false);
         setResetAutoSweepTime(res.data?.hour);
-        document.body.style.overflow = "visible";
+        // document.body.style.overflow = "visible";
         setResetAutoSweepFreq(res.data?.frequency?.toLowerCase());
         localStorage.removeItem("account");
         // localStorage.setItem("num",)
@@ -115,7 +115,7 @@ const AutoSweepOTP = () => {
       <div
         onClick={() => {
           setShowAutoSweepOTP(false);
-          document.body.style.overflow = "visible";
+          // document.body.style.overflow = "visible";
           localStorage.removeItem("account");
           localStorage.removeItem("num");
         }}
