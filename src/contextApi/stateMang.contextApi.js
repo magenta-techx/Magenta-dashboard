@@ -358,25 +358,24 @@ const Context = ({ children }) => {
       },
     },
     scales: {
-      y: {
-        min: 0,
-        max: 100,
-      },
-    },
-    responsive: true,
-    hitRadius: 30,
-    animation: {
-      onComplete: () => {
-        delayed = true;
-      },
-      delay: (context) => {
-        let delay = 0;
-        if (context.type === "data" && context.mode === "default" && !delayed) {
-          delay = context.dataIndex * 300 + context.datasetIndex * 100;
+      x: {
+        autoSkip: true,
+        grid: {
+          display: false,
+        },
+        ticks: {
+          display: false //this will remove only the label
         }
-        return delay;
       },
-    },
+      y: {
+        border: {
+          display: false
+        },
+        grid: {
+          display: true,
+        },
+      }
+  },
   };
 
   const data1 = {
@@ -387,10 +386,18 @@ const Context = ({ children }) => {
         label: "Total",
         tension: 0.5,
         data: chartLineRes?.map((data) => data.total),
-        backgroundColor: "#D733CE",
-        cutout: "90%",
+        // backgroundColor: "#D733CE",
+        // cutout: "90%",
         fontFamily: "albert",
-        borderRadius: 100,
+        // borderRadius: 100,
+        // fill: true,
+        fill : true,
+        showLine : true,
+        borderColor: '#7133bd',
+        backgroundColor: '#7133bd4f',
+        pointRadius : 2,
+        cubicInterpolationMode: 'monotone',
+        tension: 0.1
       },
     ],
   };
