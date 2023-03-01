@@ -212,7 +212,7 @@ function App() {
           </div>
         </motion.div>
       )}
-      <div className="flex relative h-screen overflow-hidden  w-full max-w-7xl m-auto">
+      <div className="flex relative h-screen overflow-hidden  w-full max-w-[100rem] m-auto">
         {showNav && (
           <div className="w-[20%] h-screen bg-[#200047] flex flex-col">
             <Navbar />
