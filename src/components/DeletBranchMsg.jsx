@@ -69,7 +69,7 @@ const DeleteBranchMsg = () => {
         <div
           onClick={() => {
             setShowDeleteBranch(false)
-            document.body.style.overflow = "visible";
+            // document.body.style.overflow = "visible";
           }}
           className="bg-[#4E00AD] w-[140px] h-[46px] rounded-xl text-white flex justify-center items-center cursor-pointer"
         >

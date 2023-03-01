@@ -22,7 +22,7 @@ const ProfilePage = () => {
         <img
           onClick={() => {
             dispatch({ type: "hide-profile" });
-             document.body.style.overflow = "visible";
+            //  document.body.style.overflow = "visible";
           }}
           src="/assets/Group 2184.png"
           className="cursor-pointer"

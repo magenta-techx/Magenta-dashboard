@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import BNav from "./components/bottomnav";
 // import Dashboard from "./pages/dashboard/Dashboard";
 // import Onboarding from "./pages/signup";
-import ProtectedRoutes from "./ProtectedRoutes";
+import ProtectedRoutes from "./routes/ProtectedRoutes";
 import EmailChangeComponent from "./pages/login/addemail";
 import PasswordResetComponent from "./pages/login/passwordreset";
 import VerificationComponent from "./pages/signup/sign-up pages/verification";
@@ -139,7 +139,7 @@ function App() {
     if (showSuccess) setShowSuccess(false);
   }, 3000);
   window.onpopstate = function () {
-    document.body.style.overflow = "visible";
+    // document.body.style.overflow = "visible";
     setShowAcctDelete(false);
     setShowAcctSucc(false);
     setShowAddAccount(false);
@@ -215,9 +215,9 @@ function App() {
           </div>
         </motion.div>
       )}
-      <div className="flex relative sm:w-[100%] sm:justify-center  m-auto">
+      <div className="flex relative sm:w-[100%] h-screen sm:justify-center  m-auto">
         {showNav && (
-          <div className="lg:w-[20%] xs:hidden sm:w-[107px] sm:min-h-screen sm:flex min-h-screen bg-[#200047] flex flex-col">
+          <div className="lg:w-[20%] xs:hidden h-screen sm:w-[107px] sm:min-h-screen sm:flex min-h-screen bg-[#200047] flex flex-col">
             <Navbar />
           </div>
         )}
@@ -235,7 +235,7 @@ function App() {
               setName("");
               setAddress("");
               setPassCode("");
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
               if (isLoading === true) {
                 setIsLoading(false);
               }
@@ -250,7 +250,7 @@ function App() {
             onClick={() => {
               setShowWithdrawAmount(false);
               setWithdrawAmount("");
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
               setSelected(false);
               localStorage.removeItem("account");
               // localStorage.removeItem("num");
@@ -267,7 +267,7 @@ function App() {
           <div
             onClick={() => {
               setFrequency(false);
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
             }}
             className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center px-20"
           >
@@ -279,7 +279,7 @@ function App() {
             onClick={() => {
               setShowAutoSweepAmount(false);
               setSelected(false);
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
               localStorage.removeItem("account");
               // localStorage.removeItem("num");
             }}
@@ -292,7 +292,7 @@ function App() {
           <div
             onClick={() => {
               setShowAutoSweepOTP(false);
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
               localStorage.removeItem("account");
               // localStorage.removeItem("num");
               if (isLoading === true) {
@@ -310,7 +310,7 @@ function App() {
               setShowWithdrawSucc(false);
               setWithdrawOTP("");
               setWithdrawAmount("");
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
             }}
             className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center px-20"
           >
@@ -321,7 +321,7 @@ function App() {
           <div
             onClick={() => {
               setShowWithdrawOTP(false);
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
               setWithdrawAmount("");
               localStorage.removeItem("account");
               // localStorage.removeItem("num");
@@ -338,7 +338,7 @@ function App() {
           <div
             onClick={() => {
               setShowSelectHourly(false);
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
             }}
             className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center px-20"
           >
@@ -350,7 +350,7 @@ function App() {
             onClick={() => {
               setShowSelectAutoSweep(false);
               setSelected(false);
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
             }}
             className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center px-20"
           >
@@ -361,7 +361,7 @@ function App() {
           <div
             onClick={() => {
               setShowDeleteBranch(false);
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
             }}
             className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
           >
@@ -372,7 +372,7 @@ function App() {
           <div
             onClick={() => {
               setShowDeletedMsg(false);
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
             }}
             className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
           >
@@ -386,7 +386,7 @@ function App() {
               setEditBranchAddress("");
               setEditBranchName("");
               setEditBranchPasscode("");
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
               if (isLoading === true) {
                 setIsLoading(false);
               }
@@ -402,7 +402,7 @@ function App() {
               setShowEditSucc(false);
               navigate("/branch/all");
               setIsLoading(false);
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
             }}
             className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
           >
@@ -414,7 +414,7 @@ function App() {
             onClick={() => {
               setShowDeleteSucc(false);
               setIsLoading(false);
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
             }}
             className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
           >
@@ -427,7 +427,7 @@ function App() {
               setShowOTP(false);
               setAccountName("");
               setAccountNumber("");
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
               if (isLoading === true) {
                 setIsLoading(false);
               }
@@ -444,7 +444,7 @@ function App() {
               setAccountName("");
               setAccountNumber("");
               setSelectedOption(null);
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
               if (isLoading === true) {
                 setIsLoading(false);
               }
@@ -458,7 +458,7 @@ function App() {
           <div
             onClick={() => {
               setShowAcctSucc(false);
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
             }}
             className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
           >
@@ -469,7 +469,7 @@ function App() {
           <div
             onClick={() => {
               setShowAcctDelete(false);
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
             }}
             className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
           >
@@ -479,7 +479,7 @@ function App() {
         {showProfile && isAuth && (
           <div
             onClick={() => {
-              document.body.style.overflow = "visible";
+              // document.body.style.overflow = "visible";
               dispatch({ type: "hide-profile" });
             }}
             className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center"
@@ -488,6 +488,7 @@ function App() {
           </div>
         )}
 
+        {/* <div>{timeTillPrompt}</div> */}
         <Suspense
           fallback={
             <span className="flex h-12 w-12   gap-2 absolute top-[50%] right-[50%] ml-10 -translate-x-[50%] -translate-y-[50%] animate-ping">

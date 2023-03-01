@@ -64,7 +64,7 @@ const AcctDeleteMsg = () => {
     } else {
       // localStorage.removeItem("num");
 
-       deleteBranchFn(detail);
+      deleteBranchFn(detail);
     }
   };
   return (
@@ -81,7 +81,7 @@ const AcctDeleteMsg = () => {
         <div
           onClick={() => {
             setShowAcctDelete(false);
-            document.body.style.overflow = "visible";
+            // document.body.style.overflow = "visible";
             console.log(filterColon);
           }}
           className="bg-[#4E00AD] w-[140px] h-[46px] rounded-xl text-white flex justify-center items-center cursor-pointer"

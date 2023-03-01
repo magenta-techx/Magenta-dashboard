@@ -16,11 +16,11 @@ const BNav = () => {
         {name:'Settings', link: '/settings', icon: FiSettings, size:"18"},
     ]
     return(
-        <footer className="sm:hidden xs:bg-[#200047]  xs:h-18  xs:w-full xs:flex xs:flex-col fixed bottom-0">
+        <footer className="sm:hidden xs:bg-[#200047]  xs:h-18  xs:w-screen xs:flex xs:flex-col fixed bottom-0">
          <ul className="flex relative justify-around">
          {
             menu.map((item, index) => (
-             <Link to={item?.link} key={index} onClick={() => (setActive(index))}>
+             <Link to={item?.link} onClick={() => (setActive(index))}>
              <li key={index}>
                 <div className={`${ active === index ? "m-auto flex pt-4 justify-center text-white" : "text-gray-500 pt-6 flex justify-center text-2xl"}`}>{React.createElement(item?.icon, {size: item?.size})}</div>
                 <span className={`${ active === index ? "text-white font-normal text-xs " : "text-gray-400 font-normal text-xs opacity-0 text-clip"}`}>{item.name}</span>
@@ -36,4 +36,5 @@ const BNav = () => {
 }
 
 export default BNav
+
 

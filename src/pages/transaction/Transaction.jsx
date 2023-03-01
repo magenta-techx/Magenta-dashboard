@@ -32,7 +32,7 @@ useEffect(() => {
 
 
   return (
-    <div className="lg:w-[80%] sm:w-[90%] px-8 py-6 ">
+    <div className="lg:w-[80%] sm:w-[90%] px-8 py-6 overflow-y-scroll ">
       <div className="w-[full]  bg-white   ">
         <Header />
       </div>
@@ -110,7 +110,7 @@ useEffect(() => {
               <path
                 className="transaction"
                 d="M9.32031 6.50043L11.8803 3.94043L14.4403 6.50043"
-                stroke="grey"
+                stroke="white"
                 strokeWidth="1.5"
                 strokeMiterlimit="10"
                 strokeLinecap="round"
@@ -119,7 +119,7 @@ useEffect(() => {
               <path
                 className="transaction"
                 d="M11.8809 14.1798V4.00977"
-                stroke="grey"
+                stroke="white"
                 strokeWidth="1.5"
                 strokeMiterlimit="10"
                 strokeLinecap="round"
@@ -128,7 +128,7 @@ useEffect(() => {
               <path
                 className="transaction"
                 d="M4 12C4 16.42 7 20 12 20C17 20 20 16.42 20 12"
-                stroke="grey"
+                stroke="white"
                 strokeWidth="1.5"
                 strokeMiterlimit="10"
                 strokeLinecap="round"

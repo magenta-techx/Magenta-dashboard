@@ -53,7 +53,7 @@ const CreateBranch = () => {
         setShowCreateBranch(false);
         navigate(`/branch/${res?.data?.id}`);
         localStorage.setItem("branch_report", JSON.stringify(res?.data));
-        document.body.style.overflow = "visible";
+        // document.body.style.overflow = "visible";
         console.log(res);
         setEditBranchAddress(res?.data?.address);
         setEditBranchName(res?.data?.name);
@@ -83,7 +83,7 @@ const CreateBranch = () => {
       <div
         onClick={() => {
           setShowCreateBranch(false);
-          document.body.style.overflow = "visible";
+          // document.body.style.overflow = "visible";
           if (isLoading === true) {
             setIsLoading(false);
           }

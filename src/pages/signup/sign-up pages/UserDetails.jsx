@@ -18,6 +18,7 @@ const UserDetails = ({ markAsComplete = () => {} }) => {
       <h1 className="text-[32px] font-semibold sm:pt-20 m-0 xs:pt-12">Add Details</h1>
    
       <p>Please provide your name and email</p>
+      
 
       <div className="input-group flex xs:m-auto flex-col gap-7">
         <InputComponent

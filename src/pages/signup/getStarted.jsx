@@ -2,7 +2,7 @@ import {React, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ItemContext } from '../../contextApi/stateMang.contextApi';
 import MagentaLogo from '../../assets/logo';
-
+import { Link } from 'react-router-dom';
 
 
 const GetStarted = () => {
@@ -35,7 +35,10 @@ const GetStarted = () => {
         className="w-[360px] max-w-full h-[46px] rounded-[10px] bg-[#4E00AD] text-white"
         onClick={handleSubmit}
       >
-       Get Started
+        <Link to={"/login"}>
+        Get Started
+        </Link>
+ 
       </button>
       </div>
     </div>

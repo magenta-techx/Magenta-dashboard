@@ -99,7 +99,7 @@ const WithdrawOTP = () => {
         onClick={() => {
           setShowWithdrawOTP(false);
           setWithdrawAmount("");
-          document.body.style.overflow = "visible";
+          // document.body.style.overflow = "visible";
           localStorage.removeItem("account");
           // localStorage.removeItem("num");
           if (isLoading === true) {

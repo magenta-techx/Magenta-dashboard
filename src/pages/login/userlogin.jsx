@@ -23,10 +23,11 @@ const LoginComponent = () => {
     isLoading,
     setOpen,
     setIsLoading,
-    Get_Auto_Sweep,Get_Branch
+    Get_Auto_Sweep,
+    Get_Branch,
   } = ItemContext();
 
- const auth = localStorage.getItem("isAuth");
+  const auth = localStorage.getItem("isAuth");
   const isAuth = JSON.parse(auth);
   useEffect(() => {
     setShowNav(false);
@@ -42,22 +43,21 @@ const LoginComponent = () => {
           email: loginEmail,
           password: loginPassword,
         }
-        );
-        if (response.status !== 401 && response.status !== 400) {
+      );
+      if (response.status !== 401 && response.status !== 400) {
         const login_token = response.data.tokens["access"];
         localStorage.setItem("login_token", login_token);
         localStorage.setItem("isAuth", true);
         navigate("/");
-          setIsLoading(false);
-          setOpen(false)
-        Get_Auto_Sweep()
-       
+        setIsLoading(false);
+        setOpen(false);
+        Get_Auto_Sweep();
       } else {
         console.log("bad request");
         console.log(response.data);
-        setIsLoading(false)
+        setIsLoading(false);
       }
-      localStorage.setItem("user",JSON.stringify(response.data));
+      localStorage.setItem("user", JSON.stringify(response.data));
       console.log(response.data);
     } catch (err) {
       console.log(err);
@@ -116,7 +116,7 @@ const LoginComponent = () => {
           </div>
 
           <h1 className="text-[32px] font-semibold ">Login to your Account</h1>
-          <p className="text-[14px]">Pls Provide your details</p>
+          <p className="text-[14px] ">Pls Provide your details</p>
 
           <div
             className={`${
@@ -162,7 +162,7 @@ const LoginComponent = () => {
             disabled={
               !loginPassword ||
               !loginPassword > 2 ||
-              isLoading||
+              isLoading ||
               !loginEmail ||
               !loginEmail.includes("@") ||
               !loginEmail.includes(".")
@@ -170,10 +170,7 @@ const LoginComponent = () => {
           >
             {isLoading ? (
               <div className="flex items-center gap-4">
-                <div className="  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
-                  null
-                </div>
-                
+                <div className="  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent"></div>
               </div>
             ) : (
               "Continue"

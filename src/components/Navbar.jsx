@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
   BsFillBarChartLineFill,
   BsGrid,
@@ -8,7 +8,9 @@ import {
 import { FiSettings } from "react-icons/fi";
 import { TbCashBanknote } from "react-icons/tb";
 import { HiOutlineChartSquareBar } from "react-icons/hi";
+import { BiLogOutCircle } from "react-icons/bi";
 const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="h-fit p-10 s">
@@ -52,7 +54,6 @@ const Navbar = () => {
       >
         <div className="lg:flex items-center gap-3 albert sm:block">
           <HiOutlineChartSquareBar className="text-xl  " />
-
           <p className="text-[16px] sm:overflow-hidden sm:opacity-0 lg:opacity-100 sm:hidden lg:flex">Company Branch</p>
         </div>
       </NavLink>
@@ -62,7 +63,7 @@ const Navbar = () => {
         className={({ isActive }) => {
           return isActive
             ? "text-white duration-500 w-full bg-[#7132BD]   px-10 py-3   border-[#C7AFE4] border-r-4 my-2"
-            : " text-[#ADB3BD] w-full px-10 py-3 my-2";
+            : " text-[#ADB3BD] w-full px-10 py-3 my-2 ";
         }}
       >
         <div className="lg:flex items-center gap-3 albert sm:block">
@@ -75,7 +76,7 @@ const Navbar = () => {
         to="/cashout"
         className={({ isActive }) => {
           return isActive
-            ? "text-white duration-500 w-full bg-[#7132BD]   px-10 py-3   border-[#C7AFE4] border-r-4 my-2"
+            ? "text-white duration-500 w-full bg-[#7132BD] px-10 py-3   border-[#C7AFE4] border-r-4 my-2"
             : " text-[#ADB3BD] w-full px-10 py-3 my-2";
         }}
       >
@@ -98,6 +99,16 @@ const Navbar = () => {
           <p className="text-[16px] sm:overflow-hidden sm:opacity-0 lg:opacity-100 sm:hidden lg:flex ">Settings</p>
         </div>
       </NavLink>
+      <div
+        className=" flex gap-4 items-center absolute bottom-5 px-10 py-3 justify-between text-white cursor-pointer"
+        onClick={() => {
+          localStorage.clear();
+          navigate("/login");
+        }}
+      >
+        <BiLogOutCircle className="w-10 h-10  " />
+        <p className="text-xl sm:overflow-hidden sm:opacity-0 lg:opacity-100 sm:hidden lg:flex">Logout</p>
+      </div>
     </>
   );
 };

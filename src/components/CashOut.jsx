@@ -41,11 +41,11 @@ const CashOut = () => {
   const timeAmOrPm = time?.substring(index)?.trim();
   const handleWithdraw = () => {
     setShowWithdrawAmount(true);
-      document.body.style.overflow = "hidden";
+      // document.body.style.overflow = "hidden";
   };
   const handleAutoSweep = () => {
     setShowSelectAutoSweep(true);
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
   };
 
   const handleChangeTrue = (id) => {
@@ -73,7 +73,7 @@ const CashOut = () => {
   }, []);
 
   return (
-    <div className="lg:w-[80%] sm:w-[90%] overflow-y-hidden min-h-full px-8 py-6 flex flex-col gap-6 ">
+    <div className="lg:w-[80%] sm:w-[90%] overflow-y-scroll min-h-full px-8 py-6 flex flex-col gap-6">
       <div className="w-full bg-white   ">
         <Header />
       </div>
@@ -139,7 +139,7 @@ const CashOut = () => {
                 setAddress("");
                 setOTP("");
                 setPassCode("");
-                document.body.style.overflow = "hidden";
+                // document.body.style.overflow = "hidden";
               }}
               disabled={accountDetails?.length >= 2 ? true : false}
               className="text-sm w-[236px] h-[49px] poppins text-white 
@@ -150,7 +150,7 @@ const CashOut = () => {
           </div>
         </div>
         <div className="w-1/2  p-4 lg:flex gap-4 border-[#E1E1E1] border-2  rounded-xl">
-          <div className="lg:w-1/2 px-4 py-3 lg:h-full sm:h-[162px] sm:grid sm:grid-cols-2 bg-[#4E00AD] shadow-[4px_4px_13px_rgba(0,0,0,0.3)] rounded-3xl lg:flex lg:flex-col gap-2">
+          <div className="lg:w-1/2 px-4 py-3 lg:h-full sm:h-[152px] sm:grid sm:grid-cols-2 bg-[#4E00AD] shadow-[4px_4px_13px_rgba(0,0,0,0.3)] rounded-3xl lg:flex lg:flex-col gap-2">
             <div>
               <img
                 className="w-[120px] h-[120px]"
@@ -173,7 +173,7 @@ const CashOut = () => {
             </div>
           </div>
           {!items && (
-            <div className="lg:w-1/2 px-4 py-3 sm:mt-4 lg:mt-0 lg:h-full sm:h-[162px] sm:grid sm:pt-7 sm:grid-cols-2 bg-white shadow-[2px_2px_4px_4px_rgba(113,50,189,0.15)] rounded-3xl lg:flex lg:flex-col gap-2">
+            <div className="lg:w-1/2 px-4 py-3 sm:mt-4 lg:mt-0 lg:h-full sm:h-[152px] sm:grid sm:pt-7 sm:grid-cols-2 bg-white shadow-[2px_2px_4px_4px_rgba(113,50,189,0.15)] rounded-3xl lg:flex lg:flex-col gap-2">
               <div>
                 <img
                   className="w-[114px] h-[114px]"
@@ -217,9 +217,7 @@ const CashOut = () => {
                 <button className="text-sm w-[157px] h-[45px]  flex rounded-xl justify-center items-center bg-[#4E00AD] text-white font-medium cursor-pointer  ">
                   {isLoading ? (
                     <div className="flex items-center gap-4">
-                      <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
-                        
-                      </div>
+                      <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent"></div>
                     </div>
                   ) : (
                     "Reset auto sweep"

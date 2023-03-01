@@ -59,7 +59,7 @@ const AttachDocuments = ({ markAsComplete = () => {} }) => {
       <Link to={"/verify"}>
         <p
           onClick={handleOtp}
-          className="text-violet-500 flex justify-end sm:pt-0 sm:px-6 lg:pb-5 lg:pt-5 lg:-px-20"
+          className="text-violet-500 flex justify-end sm:mt-0 sm:px-6 lg:pb-0 lg:m-13 lg:w-[700px] lg:pt-5 lg:-px-20"
         >
           skip
         </p>

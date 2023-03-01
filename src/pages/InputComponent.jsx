@@ -46,9 +46,10 @@ const InputComponent = ({
   return (
     <div className="relative w-[360px] max-w-full h-[48px]">
       <label
-        className={labelClassNames.blurred}
+        className={`${value ? labelClassNames.focused : labelClassNames.blurred } `}
         ref={labelRef}
         onClick={() => inputRef.current.focus()}
+        onChange={() => inputRef.current.focus()}
       >
         {label}
       </label>

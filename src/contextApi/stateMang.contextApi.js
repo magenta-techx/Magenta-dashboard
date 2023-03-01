@@ -98,6 +98,7 @@ const Context = ({ children }) => {
   const [remaining, setRemainingTime] = useState(0);
   const [count, setCount] = useState(0);
   const [open, setOpen] = useState(false);
+  let delayed;
   let isAuth;
   let timeleft;
   const handleAutoSweepDelete = async () => {
@@ -132,7 +133,7 @@ const Context = ({ children }) => {
   };
 
   const promptBeforeIdle = 30_000;
-  const timeout = 3600_000;
+  const timeout = 3000_000;
   const onIdle = () => {
     setOpen(false);
     localStorage.clear();
@@ -230,7 +231,6 @@ const Context = ({ children }) => {
       });
     } catch (err) {}
   };
-
   const GET_MERCHANT_TRANSACTION = async () => {
     // console.log("merchant")
     const token = localStorage.getItem("login_token");
@@ -283,7 +283,7 @@ const Context = ({ children }) => {
         setIsLoading(false);
         setShowSuccess(true);
         setSuccess(res.data.message);
-        document.body.style.overflow = "hidden";
+        // document.body.style.overflow = "hidden";
         setShowOTP(true);
         setShowAddAccount(false);
       } else {
@@ -325,7 +325,6 @@ const Context = ({ children }) => {
       }
     } catch (error) {
       console.log(error);
-
       setError(error.message);
       setShowError(true);
       setIsLoading(false);
@@ -345,7 +344,7 @@ const Context = ({ children }) => {
       );
       // return res.status===200?setLineChartRes(res.data):""
       if (res.status === 200) setLineChartRes(res.data);
-      return res
+      return res;
     } catch (error) {
       console.log(error);
     }
@@ -388,7 +387,9 @@ const Context = ({ children }) => {
     labels: label,
     datasets: [
       {
+        fill: true,
         label: "Total",
+        tension: 0.5,
         data: chartLineRes?.map((data) => data.total),
         // backgroundColor: "#D733CE",
         // cutout: "90%",

@@ -98,10 +98,9 @@ const EmailChangeComponent = () => {
           Continue
         </button>
         <p className="pb-5">
-          <Link to={"/signup"}>
-            {" "}
+
             Not a member yet? <span className="text-violet-500">Sign Up</span>
-          </Link>
+
         </p>
       </div>
       </div>

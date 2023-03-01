@@ -19,24 +19,6 @@ const CompanyDetails = ({ markAsComplete = () => {} }) => {
 
   const handleSubmit = async () => {
     try {
-      //   const response = await axios.post("https://backend.magentacashier.com/accounts/register-client/", {
-      //     email: userDetails.email,
-      //     first_name:userDetails.firstname,
-      //     last_name:userDetails.surname,
-      //     password: passwordDetails.password,
-      //     phone_number: companyDetails.companyPhone,
-      //   })
-
-      //  if (response.status != 401 && response.status != 400) {
-      //   const token = response.data.tokens["access"];
-      //   localStorage.setItem('token', token);
-      //   console.log(response.data)
-      //   console.log(token)
-      //  } else {
-      //   console.log("bad request")
-      //   console.log(response.data)
-      //  }
-      // console.log(response.data.tokens["access"])
 
       const response = await axios.post(
         "https://backend.magentacashier.com/accounts/register-merchant/",
@@ -79,7 +61,7 @@ const CompanyDetails = ({ markAsComplete = () => {} }) => {
       <h1 className="text-[32px] font-semibold">Set Password</h1>
       <p>Choose a secure password</p>
 
-      <div className="input-group xs:m-auto  flex flex-col gap-7">
+      <div className="input-group xs:m-auto flex flex-col gap-7">
         <InputComponent
           type="password"
           label="Create Password"

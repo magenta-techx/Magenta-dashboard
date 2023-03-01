@@ -29,7 +29,7 @@ const Branch = ({ branch }) => {
   const handleDelete = (item) => {
     setShowDeleteBranch(true);
     dispatch({ type: "Individual Details", payload: item });
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
   };
   return (
     <div className="flex flex-col gap-2  lg:w-[280px] sm:w-[241px]">

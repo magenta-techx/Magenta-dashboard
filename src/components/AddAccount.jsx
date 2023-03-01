@@ -114,7 +114,7 @@ const AddAccount = () => {
     >
       <div
         onClick={() => {
-          document.body.style.overflow = "visible";
+          // document.body.style.overflow = "visible";
           setShowAddAccount(false);
           setAccountNumber("");
           setSelectedOption(null);
