@@ -61,7 +61,7 @@ useEffect(() => {
             <tr className="border-b  bg-[#F7F9FA] ">
               <th className="py-3 font-medium sm:text-sm sm:font-semibold lg:font-semibold lg:text-[16px]">User UUID</th>
               <th className="py-3 font-medium sm:text-sm sm:font-semibold lg:font-semibold lg:text-[16px]">Branch Name</th>
-              <th className="py-3 font-medium sm:text-sm sm:font-semibold lg:font-semibold lg:text-[16px]">Invoice Data</th>
+              <th className="py-3 font-medium sm:text-sm sm:font-semibold lg:font-semibold lg:text-[16px]">Billed Amount</th>
               <th className="py-3 font-medium sm:text-sm sm:font-semibold lg:font-semibold lg:text-[16px]">Amount</th>
               <th className="py-3 font-medium sm:text-sm sm:font-semibold lg:font-semibold lg:text-[16px]">Reference</th>
               <th className="py-3 font-medium sm:text-sm sm:font-semibold lg:font-semibold lg:text-[16px]">Card Type</th>
@@ -75,12 +75,12 @@ useEffect(() => {
             .map((dat, idx) => {
               return (
                 <tr className="text-center border " key={idx}>
-                  <td className="py-2 font-normal text-sm">{data.id}</td>
-                  <td className="py-2 font-normal text-sm">{data.branch_name}</td>
-                  <td className="py-2 font-normal text-sm">{data.memo}</td>
-                  <td className="py-2 font-normal text-sm">{data.amount}</td>
-                  <td className="py-2 font-normal text-sm">{data.reference}</td>
-                  <td className="py-2 font-normal text-sm">{data.card_type}</td>
+                  <td className="py-2 font-normal text-sm">{dat.client.magenta_id}</td>
+                  <td className="py-2 font-normal text-sm">{dat.branch_name}</td>
+                  <td className="py-2 font-normal text-sm">{dat.billed_amount}</td>
+                  <td className="py-2 font-normal text-sm">{dat.amount}</td>
+                  <td className="py-2 font-normal text-sm">{dat.reference}</td>
+                  <td className="py-2 font-normal text-sm">{dat.card_type}</td>
                 </tr>
               );
             })}
