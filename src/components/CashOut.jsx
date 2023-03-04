@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useCallback } from "react";
 import { useEffect } from "react";
 import { HiOutlineChartSquareBar, HiOutlineUserGroup } from "react-icons/hi";
 import { RiCalendar2Line } from "react-icons/ri";
@@ -41,7 +41,7 @@ const CashOut = () => {
   const timeAmOrPm = time?.substring(index)?.trim();
   const handleWithdraw = () => {
     setShowWithdrawAmount(true);
-      // document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
   };
   const handleAutoSweep = () => {
     setShowSelectAutoSweep(true);
@@ -50,22 +50,20 @@ const CashOut = () => {
 
   const handleChangeTrue = (id) => {
     const change = accountDetails?.map((detail) => {
-      // console.log(detail);
       return detail.id === id
         ? { ...detail, isAbtDel: true }
         : { ...detail, isAbtDel: false };
     });
-    console.log(change)
+   
     dispatch({ type: "Account Details", payload: change });
   };
+
   const handleClose = (id) => {
     const change = accountDetails?.map((detail) => {
-      // console.log(detail);
       return detail.id === id
         ? { ...detail, isAbtDel: false }
         : { ...detail, isAbtDel: false };
     });
-    // console.log(change)
     dispatch({ type: "Account Details", payload: change });
   };
   useEffect(() => {
@@ -126,6 +124,7 @@ const CashOut = () => {
                   detail={detail}
                   handleChangeTrue={handleChangeTrue}
                   handleClose={handleClose}
+                  // GET_ACCOUNT={GET_ACCOUNT}
                 />
               );
             })}

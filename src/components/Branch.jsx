@@ -25,11 +25,11 @@ const Branch = ({ branch }) => {
     navigate(`/branch/${item.id}`);
     document.documentElement.scrollTop = 0;
     localStorage.setItem("branch_report", JSON.stringify(item));
+    
   };
   const handleDelete = (item) => {
     setShowDeleteBranch(true);
     dispatch({ type: "Individual Details", payload: item });
-    // document.body.style.overflow = "hidden";
   };
   return (
     <div className="flex flex-col gap-2  w-[280px]">

@@ -30,6 +30,7 @@ const WithdrawalDetails = ({
 
   return (
     <div
+      key={id}
       className="w-full h-[43px] relative bg-white rounded-xl flex justify-between p-2 albert items-center cursor-pointer"
       onClick={() => {
         console.log(ref);

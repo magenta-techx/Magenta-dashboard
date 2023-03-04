@@ -115,7 +115,7 @@ const Context = ({ children }) => {
       );
       if (res.status === 204) {
         setIsLoading(false);
-        console.log(res);
+       
         localStorage.removeItem("reset_auto_sweep_result");
         localStorage.removeItem("item");
         localStorage.removeItem("key");

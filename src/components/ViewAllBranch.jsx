@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BsArrowLeft, BsSearch } from "react-icons/bs";
 import { HiOutlineFilter } from "react-icons/hi";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -10,14 +10,18 @@ const ViewAllBranch = () => {
   const navigate = useNavigate();
   const {
     setShowCreateBranch,
+    Get_Branch,
     state: { branchDetails },
   } = ItemContext();
   const handleClick = () => {
     setShowCreateBranch(true);
     // document.body.style.overflow = "hidden";
   };
+  useEffect(() => {
+    Get_Branch();
+  }, []);
   return (
-    <div className="w-[80%] px-10 py-6 flex flex-col gap-10">
+    <div className="w-[80%] px-10 py-6 flex flex-col gap-10 overflow-scroll overflow-x-auto">
       <div className="w-[full]  bg-white   ">
         <Header />
       </div>

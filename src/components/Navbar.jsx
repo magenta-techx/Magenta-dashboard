@@ -9,8 +9,10 @@ import { FiSettings } from "react-icons/fi";
 import { TbCashBanknote } from "react-icons/tb";
 import { HiOutlineChartSquareBar } from "react-icons/hi";
 import { BiLogOutCircle } from "react-icons/bi";
+import { useState } from "react";
 const Navbar = () => {
   const navigate = useNavigate();
+  const [isActive,setIsActive]=useState()
   return (
     <>
       <div className="h-fit p-10">
@@ -54,9 +56,10 @@ const Navbar = () => {
         onClick={() => (document.documentElement.scrollTop = 0)}
         to="/transaction"
         className={({ isActive }) => {
+         
           return isActive
-            ? "text-white duration-500 w-full bg-[#7132BD]   px-10 py-3   border-[#C7AFE4] border-r-4 my-2"
-            : " text-[#ADB3BD] w-full px-10 py-3 my-2 ";
+          ? "text-white duration-500 w-full bg-[#7132BD]   px-10 py-3   border-[#C7AFE4] border-r-4 my-2"
+          : " text-[#ADB3BD] w-full px-10 py-3 my-2 ";
         }}
       >
         <div className="flex items-center gap-3 albert">
@@ -93,7 +96,7 @@ const Navbar = () => {
         </div>
       </NavLink>
       <div
-        className=" flex gap-4 items-center absolute bottom-5 px-10 py-3 justify-between text-white cursor-pointer"
+        className=" flex gap-4 items-center absolute bottom-5 px-10 py-3 justify-between text-white cursor-pointer "
         onClick={() => {
           localStorage.clear();
           navigate("/login");

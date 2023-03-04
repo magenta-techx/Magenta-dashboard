@@ -44,7 +44,7 @@ export const WithdrawPassword = () => {
         onClick={() => {
           setShowWithdrawPassword(false);
           setShowWithdrawAmount("");
-          // document.body.style.overflow = "visible";
+    
         }}
         className="absolute w-[60px] h-[60px] flex justify-center items-center rounded-full bg-[#EEE8F8] cursor-pointer top-0 -right-4"
       >

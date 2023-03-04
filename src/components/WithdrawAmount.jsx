@@ -60,7 +60,7 @@ export const WithdrawAmount = () => {
         onClick={() => {
           setShowWithdrawAmount(false);
           setWithdrawAmount("");
-          // document.body.style.overflow = "visible";
+        
           localStorage.removeItem("account");
           // localStorage.removeItem("num")
           setSelected(false);

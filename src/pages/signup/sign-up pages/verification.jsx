@@ -45,8 +45,11 @@ const VerificationComponent = () => {
     } catch (err) {
       if (err.response.data === undefined) {
         setErr(err.message);
+        console.log(new Error("please"))
       } else {
         setErr(err.response.data.detail);
+        console.log(new Error("please"));
+
       }
     }
   };

@@ -19,13 +19,11 @@ import Header from "./Header";
 
 const ViewBranchReport = () => {
   const [data, setData] = useState([]);
-  const {
-    setShowEdit,
-  } = ItemContext();
+  const { setShowEdit } = ItemContext();
   const history = async () => {
     const token = localStorage.getItem("login_token");
-    const get =localStorage.getItem("branch_report")
-    const {id}=JSON.parse(get);
+    const get = localStorage.getItem("branch_report");
+    const { id } = JSON.parse(get);
     try {
       const res = await axios.get(
         `https://backend.magentacashier.com/business/branch/transactions/${id}/`,
@@ -52,10 +50,9 @@ const ViewBranchReport = () => {
 
   const report = JSON.parse(repor);
   // console.log(report)
- 
 
   return (
-    <div className="w-[80%] px-10 py-6 flex flex-col gap-10">
+    <div className="w-[80%] px-10 py-6 flex flex-col gap-10 overflow-scroll overflow-x-hidden">
       <div className="w-[full]  bg-white   ">
         <Header />
       </div>
@@ -119,7 +116,9 @@ const ViewBranchReport = () => {
             <h4 className="font-normal  text-[16px]">Total Transaction</h4>
             <h2 className="font-medium flex items-center text-xl">
               {/* <TbCurrencyNaira />{" "} */}
-              {report?.sales_and_customers?.sales?report?.sales_and_customers?.sales:0}
+              {report?.sales_and_customers?.sales
+                ? report?.sales_and_customers?.sales
+                : 0}
             </h2>
           </div>
         </div>
@@ -183,14 +182,14 @@ const ViewBranchReport = () => {
                     );
                   })}
             </tbody>
-          {!data.length && (
-            <div className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
-              <img
-                src="/assets/NothingHereYet.png"
-                alt="Nothing here yet image"
-              />
-            </div>
-          )}
+            {!data.length && (
+              <div className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
+                <img
+                  src="/assets/NothingHereYet.png"
+                  alt="Nothing here yet image"
+                />
+              </div>
+            )}
           </table>
         </div>
       </div>

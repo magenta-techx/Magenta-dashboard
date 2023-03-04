@@ -11,11 +11,9 @@ const Card = ({
   detail,
   handleClose,
   handleChangeTrue,
+  
 }) => {
-  const {
-    setShowAcctDelete,
-    dispatch,
-  } = ItemContext();
+  const { setShowAcctDelete, dispatch ,GET_ACCOUNT} = ItemContext();
 
   const split = account_number.split("");
   const fitr = split?.filter((a, i) => {
@@ -40,6 +38,7 @@ const Card = ({
     setShowAcctDelete(true);
     // document.body.style.overflow = "hidden";
   };
+
   return (
     <>
       <div
@@ -52,7 +51,10 @@ const Card = ({
             {midfth?.join("")}
             {latr}
           </small>
-          <div className="relative">
+          <div
+            className="relative"
+          
+          >
             <div>
               {detail.isAbtDel ? (
                 <FaTimes

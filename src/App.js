@@ -157,6 +157,7 @@ function App() {
     setFrequency(false);
   };
 
+
   return (
     <>
       <motion.div
