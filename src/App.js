@@ -215,7 +215,9 @@ function App() {
           </div>
         </motion.div>
       )}
+
       <div className="flex relative sm:w-[100%] h-screen sm:justify-center  m-auto">
+
         {showNav && (
           <div className="lg:w-[20%] xs:hidden h-screen sm:w-[107px] sm:min-h-screen sm:flex min-h-screen bg-[#200047] flex flex-col">
             <Navbar />
