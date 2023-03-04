@@ -78,7 +78,7 @@ const Settings = ({ onChange = () => {}, removeFile = () => {} }) => {
   };
   // console.log(state.settingStates);
   return (
-    <div className="w-[80%] px-8 py-6 flex flex-col gap-10 overflow-y-scroll">
+    <div className="lg:w-[80%] sm:w-[90%] px-8 py-6 flex flex-col gap-10 overflow-y-scroll">
       <div className="w-[full]  bg-white   ">
         <Header />
       </div>

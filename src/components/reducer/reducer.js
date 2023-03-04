@@ -1,6 +1,7 @@
 import { Types } from "./type";
 export const INITIAL_STATE = {
   branchDetails: [],
+  transactionDetails: [],
   accountDetails: [],
   ForEachDetail: {},
   ForEachAcctDetail: {},
@@ -20,6 +21,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         branchDetails: action.payload,
+      };
+    case "Transaction Details":
+      return {
+        ...state,
+        transactionDetails: action.payload,
       };
     case "Account Details":
       return {

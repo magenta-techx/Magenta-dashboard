@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { calcLength, motion } from "framer-motion";
 import Navbar from "./components/Navbar";
+import BNav from "./components/bottomnav";
 // import Dashboard from "./pages/dashboard/Dashboard";
 // import Onboarding from "./pages/signup";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
@@ -98,6 +99,8 @@ function App() {
     setShowDeleteSucc,
     showDeleteSucc,
     showError,
+    showFooter,
+    setShowFooter,
     setShowError,
     state: { showProfile },
     dispatch,
@@ -105,9 +108,9 @@ function App() {
     showSuccess,
     success,
     setShowSuccess,
-    // activate,
-    // resume,
-    // pause,
+    activate,
+    resume,
+    pause,
     // getRemainingTime,
     remaining,
     open,
@@ -212,12 +215,21 @@ function App() {
           </div>
         </motion.div>
       )}
-      <div className="flex relative h-screen overflow-hidden  w-full max-w-[100rem] m-auto">
+
+      <div className="flex relative sm:w-[100%] h-screen sm:justify-center  m-auto">
+
         {showNav && (
-          <div className="w-[20%] h-screen bg-[#200047] flex flex-col">
+          <div className="lg:w-[20%] xs:hidden h-screen sm:w-[107px] sm:min-h-screen sm:flex min-h-screen bg-[#200047] flex flex-col">
             <Navbar />
           </div>
         )}
+        {
+          showFooter && (
+            <div className="flex flex-col mt-auto  bottom-0">
+              <BNav />
+            </div>
+          )
+        }
         {showCreateBranch && isAuth && (
           <div
             onClick={() => {

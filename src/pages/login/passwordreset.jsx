@@ -2,29 +2,58 @@ import React from "react";
 import { useState, useEffect } from "react";
 import InputComponent from "../InputComponent";
 import MagentaLogo from "../../assets/logo";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ItemContext } from "../../contextApi/stateMang.contextApi";
 
+
 const PasswordResetComponent = () => {
   // const [passwordDetails, setPasswordDetails] = useState({})
+  const [err, setErr] = useState("")
+  const [newPassword, setNewPassword] = useState("")
+  const { userDetails,setShowFooter, setShowNav,verificationMail, setVerificationMail } = ItemContext();
+  const navigate = useNavigate()
 
-  const { newPassword, setNewPassword, showNav, setShowNav, verificationMail } = ItemContext();
+  const handleSubmit = async (e) => {
 
-  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newPassword);
-    console.log(verificationMail)
+    try {
+      const response = await axios.post(
+        "https://backend.magentacashier.com/accounts/password/change/",
+        { password: newPassword, email: verificationMail }
+      );
+      if (response.status == 401 || response.status == 400 || response.status == 500) {
+        console.log(response.status);
+
+     
+    } else {
+      console.log(response.data);
+      navigate("/verify")
+    }
+    
+ 
+    } catch (err) {
+      if (err.response.data === undefined) {
+        setErr(err.message);
+      } else {
+        setErr(err.response.data.detail);
+
+      }
+    }
   };
   useEffect(() => {
     setShowNav(false);
+    setShowFooter(false);
   }, []);
 
   return (
-    <div className="w-screen">
-      <div className="px-[20px] py-4">
+    <div className="sm:w-screen xs:w-[100%]">
+      <div className="sm:px-[20px] sm:py-4 sm:block sm:align-middle xs:m-[auto] xs:flex xs:justify-center xs:pt-12">
         <MagentaLogo />
       </div>
-      <div className="user-details text-center bg-[#EEE8F8] rounded-xl w-[550px] m-auto my-[50px] flex pt-[44px] flex-col gap-4">
+      <div className="sm:w-full  xs:mt-[-20px] xs:flex xs:justify-center xs:m-[auto] albert">
+      <div className="user-details text-center xs:mt-8  sm:bg-white xs:m-[auto] xs:flex xs:justify-center lg:bg-[#EEE8F8] rounded-xl w-[550px] m-auto my-[50px] flex pt-[44px] flex-col gap-4">
         <div className="flex justify-center">
           <svg
             width="26"
@@ -61,27 +90,23 @@ const PasswordResetComponent = () => {
         <h1 className="text-[32px] font-semibold">Change Password</h1>
 
         <div className="input-group flex m-auto flex-col gap-7">
-          <InputComponent
-            type="password"
-            label="Create Password"
-            name="password"
-            onChange={(evt) =>
-              setNewPassword({
-                ...newPassword,
-                [evt.target.name]: evt.target.value,
-              })
-            }
+        <InputComponent
+          className="sm:bg-white lg:bg-[#EEE8F8] border-[#C7AFE4]"
+            type="email"
+            label="Email"
+            name="email"
+            onChange={(evt) => {
+              setVerificationMail(evt.target.value);
+            }}
           />
 
           <InputComponent
             type="password"
+            className="lg:bg-[#EEE8F8] xs:bg-white border-[#C7AFE4]"
             label="Confirm Password"
             name="confirmPassword"
             onChange={(evt) =>
-              setNewPassword({
-                ...newPassword,
-                [evt.target.name]: evt.target.value,
-              })
+              setNewPassword(evt.target.value)
             }
           />
         </div>
@@ -90,20 +115,24 @@ const PasswordResetComponent = () => {
           className="w-[360px] m-auto max-w-full h-[46px] rounded-[10px] disabled:text-gray-500 disabled:bg-[#E2E6EE] bg-[#4E00AD] text-white"
           onClick={handleSubmit}
           disabled={
-            !newPassword?.password?.trim() ||
-            !newPassword?.confirmPassword?.trim() ||
-            !(newPassword?.password === newPassword?.confirmPassword)
+            !verificationMail ||
+            !verificationMail.includes("@") ||
+            !verificationMail.includes(".") ||
+            !newPassword.trim()||
+            !(newPassword.length >= 6)
+            // !(newPassword?.password === newPassword?.confirmPassword)
           }
         >
           Continue
         </button>
 
-        {!(newPassword?.password === newPassword?.confirmPassword) && (
+        {/* {!(newPassword?.password === newPassword?.confirmPassword) && (
           <span className="text-red-500 text-sm">Passwords do not match!</span>
-        )}
+        )} */}
         <p className="pb-5">
           <Link to={"/signup"}></Link>
         </p>
+      </div>
       </div>
     </div>
   );

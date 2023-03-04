@@ -19,6 +19,7 @@ const LoginComponent = () => {
     setLoginEmail,
     setLoginPassword,
     setShowNav,
+    setShowFooter,
     isLoading,
     setOpen,
     setIsLoading,
@@ -30,6 +31,7 @@ const LoginComponent = () => {
   const isAuth = JSON.parse(auth);
   useEffect(() => {
     setShowNav(false);
+    setShowFooter(false);
   }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -73,12 +75,12 @@ const LoginComponent = () => {
   }, 3000);
 
   return (
-    <div className="w-screen">
-      <div className="px-[20px] py-4">
+    <div className="sm:w-screen xs:w-[100%]">
+      <div className="sm:px-[20px] sm:py-4 sm:block sm:align-middle xs:m-[auto] xs:flex xs:justify-center xs:pt-12">
         <MagentaLogo />
       </div>
-      <div className="w-full albert">
-        <div className="user-details text-center bg-[#EEE8F8] rounded-xl w-[550px] m-auto my-[50px] flex pt-[44px] flex-col gap-5">
+      <div className="sm:w-full  xs:mt-[-20px] xs:flex xs:justify-center xs:m-[auto] albert">
+        <div className="user-details text-center lg:bg-[#EEE8F8] xs:bg-white  rounded-xl w-[550px] m-auto my-[50px] flex pt-[44px] flex-col gap-5">
           <div className="flex justify-center relative z-[]">
             <svg
               width="22"
@@ -128,9 +130,9 @@ const LoginComponent = () => {
             </p>
           </div>
 
-          <div className="input-group flex  m-auto flex-col gap-7">
+          <div className="input-group flex m-auto flex-col gap-7">
             <InputComponent
-              className="bg-[#EEE8F8] border-[#C7AFE4]"
+              className="lg:bg-[#EEE8F8] xs:bg-white  border-[#C7AFE4]"
               type="email"
               label="Email"
               name="email"
@@ -141,7 +143,7 @@ const LoginComponent = () => {
           </div>
           <div className="input-group flex m-auto flex-col gap-7">
             <InputComponent
-              className="bg-[#EEE8F8] border-[#C7AFE4]"
+              className="lg:bg-[#EEE8F8] xs:bg-white border-[#C7AFE4]"
               type="password"
               label="Password"
               name="password"
@@ -149,8 +151,10 @@ const LoginComponent = () => {
             />
           </div>
 
-          <p className="mx-[90px] p-[0px] text-[14px] w-[120px]">
+          <p className="sm:mx-[90px] xs:-ml-[130px] xs:flex xs:justify-center p-[0px] text-[14px] xs:w-[100%] sm:w-[120px] relative">
+            <Link to='/emailchange'>
             Forgot Password
+            </Link>
           </p>
           <button
             className="w-[360px] max-w-full h-[46px]  m-auto rounded-[10px] disabled:text-gray-500 disabled:bg-[#E2E6EE] bg-[#4E00AD] text-white flex justify-center items-center disabled:cursor-not-allowed"
