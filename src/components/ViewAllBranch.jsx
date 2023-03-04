@@ -21,7 +21,7 @@ const ViewAllBranch = () => {
     Get_Branch();
   }, []);
   return (
-    <div className="w-[80%] px-10 py-6 flex flex-col gap-10 overflow-scroll overflow-x-auto">
+    <div className="lg:w-[80%] sm:w-[90%] px-10 py-6 flex flex-col gap-10">
       <div className="w-[full]  bg-white   ">
         <Header />
       </div>
@@ -36,7 +36,7 @@ const ViewAllBranch = () => {
       </div>
       <div className="flex flex-col gap-6 w-full ">
         <div className="flex  gap-6 items-center justify-between">
-          <div className="w-[344px] bg-white opacity-75 rounded-xl border gap-4 px-4 h-[48px] flex items-center justify-end">
+          <div className="lg:w-[344px] sm:w-[290px]  bg-white opacity-75 rounded-xl border gap-4 px-4 h-[48px] flex items-center justify-end">
             <div className="">
               <BsSearch className="text-[#4E00AD]" />
             </div>
@@ -51,15 +51,15 @@ const ViewAllBranch = () => {
 
           <div
             onClick={handleClick}
-            className="bg-[#4E00AD] w-[330px] h-[45px] rounded-xl text-white flex justify-center items-center cursor-pointer"
+            className="bg-[#4E00AD] lg:w-[330px] sm:w-[241px] h-[45px] rounded-xl text-white flex justify-center items-center cursor-pointer"
           >
             Create New Branch
           </div>
         </div>
         {/* Mapping through the ARRAY and displaying all here  */}
-        <div className="flex flex-wrap gap-10">
+        <div className="flex flex-wrap lg:gap-10 sm:gap-[24px] ">
           {branchDetails.map((detail) => {
-            return <Branch key={detail.id} branch={detail} />;
+            return <Branch key={detail.id} branch={detail}/>;
           })}
         </div>
       </div>

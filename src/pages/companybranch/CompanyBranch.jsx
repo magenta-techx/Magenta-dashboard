@@ -33,11 +33,11 @@ const CompanyBranch = () => {
   const handleClick2 = () => {
     navigate("/branch/all");
     document.documentElement.scrollTop = 0;
-  };
+  }
   return (
     <>
       <div
-        className="w-[80%] px-8 py-6 overflow-y-scroll"
+        className="lg:w-[80%] sm:w-[90%] px-8 py-6 overflow-y-scroll"
         // initial={{ width: "80%" }}
         // animate={{ width: "80%" }}
         // exit={{ x: "80%",transition:{duration:0.1} }}
@@ -71,12 +71,12 @@ const CompanyBranch = () => {
                   return <Branch key={detail.id} branch={detail} />;
                 })}
 
-              <div className="w-[300px]  h-[240px] flex justify-center items-center">
+              <div className="lg:w-[300px] lg:h-[240px] flex justify-center items-center">
                 <div
                   onClick={handleClick}
-                  className="bg-[#FAFAFA] cursor-pointer w-full h-[150px] flex justify-center items-center"
+                  className="lg:bg-[#FAFAFA] lg:w-64 sm:w-24 rounded-sm  cursor-pointer w-full h-[150px] flex justify-center items-center"
                 >
-                  <div className="w-[40px] h-[40px] bg-[#4E00AD] rounded-md flex justify-center items-center">
+                  <div className="w-[40px]  h-[40px] bg-[#4E00AD] rounded-md flex justify-center items-center">
                     <BsPlusLg className="text-white " />
                   </div>
                 </div>
@@ -94,10 +94,10 @@ const CompanyBranch = () => {
               </div>
             )}
           </div>
-          <div className="w-full flex gap-10">
-            <div className="w-1/2 border rounded-lg shadow-md h-fit flex flex-col p-4 gap-4">
+          <div className="w-full lg:flex sm:block gap-10">
+            <div className="lg:w-1/2 border rounded-lg shadow-md h-fit flex flex-col p-4 gap-4">
               <h2 className="font-medium text-xl">Create New Branch</h2>
-              <p className="text-[18px]">
+              <p className="lg:text-[18px] sm:text-[16px]">
                 You have created {branchDetails.length} branches for{" "}
                 {companyDetails.companyName}, would you like to create a new
                 branch?
@@ -116,12 +116,12 @@ const CompanyBranch = () => {
                   // document.body.style.overflow = "hidden";
                 }}
               >
-                <button className="text-sm w-[157px] h-[45px]  flex rounded-xl justify-center items-center bg-[#4E00AD] text-white font-medium cursor-pointer  ">
+                <button className="text-sm lg:w-[157px] sm:w-[208px] h-[45px]  flex rounded-xl justify-center items-center bg-[#4E00AD] text-white font-medium cursor-pointer  ">
                   Create New Branch
                 </button>
               </div>
             </div>
-            <div className="w-1/2 border rounded-lg shadow-md h-fit flex flex-col p-4 gap-4"></div>
+            <div className="lg:w-1/2 border sm:mt-5 rounded-lg shadow-md h-fit flex flex-col p-4 gap-4"></div>
           </div>
         </div>
         {/* <Outlet /> */}

@@ -19,7 +19,10 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="w-[80%] px-8 py-6 font overflow-y-scroll">
+    <div
+     
+      className="lg:w-[80%] sm:w-[90%] px-8 py-6 font overflow-y-scroll"
+    >
       <div className="w-[full]  bg-white  ">
         <Header />
       </div>

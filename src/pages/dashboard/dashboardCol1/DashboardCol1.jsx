@@ -130,12 +130,12 @@ const DashboardCol1 = () => {
         </div>
       </div>
       <div className="flex w-full gap-6 justify-between">
-        <div className="w-80 h-fit border flex gap-6 rounded-lg px-6 py-4">
+        <div className="w-80 h-fit border lg:flex sm:block  gap-6 rounded-lg px-6 py-4">
           <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
             <HiOutlineCash size="25px" className="text-[#4E00AD]" />
           </div>
-          <div className="flex flex-col gap-3">
-            <h4 className="albert">All Time Cash</h4>
+          <div className="flex flex-col lg:gap-3 sm:gap-1 ">
+            <h4 className="albert font-normal sm:text-sm sm:pt-4 lg:pt-1">All Time Cash</h4>
             <h2 className="font-bold flex items-center inter text-[24px]">
               <TbCurrencyNaira />
               <NumericFormat
@@ -147,12 +147,12 @@ const DashboardCol1 = () => {
             </h2>
           </div>
         </div>
-        <div className="w-80 h-fit border flex gap-6 rounded-lg px-6 py-4">
+        <div className="w-80 h-fit border lg:flex sm:block gap-6 rounded-lg px-6 py-4">
           <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
             <BsWallet2 size="20px" className="text-[#4E00AD]" />
           </div>
-          <div className="flex flex-col gap-3">
-            <h4 className="albert">Available Cash</h4>
+          <div className="flex flex-col lg:gap-3 sm:gap-1 ">
+            <h4 className="albert font-normal sm:text-sm sm:pt-4 lg:pt-1">Available Cash</h4>
             <h2 className="inter text-[24px] font-bold flex items-center">
               <TbCurrencyNaira />
               <NumericFormat
@@ -166,12 +166,12 @@ const DashboardCol1 = () => {
             </h2>
           </div>
         </div>
-        <div className="w-80 h-fit border flex gap-6 rounded-lg px-6 py-4">
+        <div className="w-80 h-fit border lg:flex sm:block  gap-6 rounded-lg px-6 py-4">
           <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
             <HiOutlineChartSquareBar size="20px" className="text-[#4E00AD]" />
           </div>
-          <div className="flex flex-col gap-3">
-            <h4 className="albert">Today Sales</h4>
+          <div className="flex flex-col lg:gap-3 sm:gap-1 ">
+            <h4 className="albert font-normal sm:text-sm sm:pt-4 lg:pt-1">Today Sales</h4>
             <h2 className="inter text-[24px] font-bold flex items-center">
               <TbCurrencyNaira />
               <NumericFormat

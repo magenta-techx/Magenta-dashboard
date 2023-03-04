@@ -11,6 +11,12 @@ html{
   border-bottom: 1px solid #c7afe4;
 }
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body{
   scroll-behavior: smooth;
 }
@@ -48,3 +54,4 @@ input::-webkit-inner-spin-button {
     border: 1px solid #8652c7;
 
 }
+

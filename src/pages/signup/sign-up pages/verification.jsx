@@ -8,7 +8,7 @@ import { ItemContext } from "../../../contextApi/stateMang.contextApi";
 import UserDetails from "./UserDetails";
 
 const VerificationComponent = () => {
-  const { userOtp, setUserOtp, setShowNav, userDetails } = ItemContext();
+  const { userOtp, setUserOtp, setShowNav,setShowFooter, userDetails, verificationMail } = ItemContext();
   const [err, setErr] = useState("");
   // const{ userMail} = ItemContext();
   const navigate = useNavigate();
@@ -18,12 +18,7 @@ const VerificationComponent = () => {
         "https://backend.magentacashier.com/accounts/send-otp/",
         { email: userDetails.email }
       );
-      if (response.status !== 401 && response.status !== 400) {
-          navigate("/getStarted")
-       
-      } else {
-        console.log("bad request");
-      }
+
     } catch (err) {
       if (err.response.data === undefined) {
         setErr(err.message);
@@ -37,18 +32,26 @@ const VerificationComponent = () => {
 
     e.preventDefault();
     try {
-      const response = axios.post(
+      const response = await axios.post(
         "https://backend.magentacashier.com/accounts/verify-email/",
         { token: userOtp.otp, email: userDetails.email }
       );
       console.log(response.data);
+      if (response.status == 401 && response.status == 400 && response.status == 500) {
+        console.log(response.status);
+        navigate("/getStarted")
+     
+    } else {
+      console.log("bad request");
+    }
+    
+ 
     } catch (err) {
       if (err.response.data === undefined) {
         setErr(err.message);
         console.log(new Error("please"))
       } else {
         setErr(err.response.data.detail);
-        console.log(new Error("please"));
 
       }
     }
@@ -56,15 +59,17 @@ const VerificationComponent = () => {
 
   useEffect(() => {
     setShowNav(false);
+    setShowFooter(false);
   }, []);
 
   return (
-    <div>
-      <div className="px-[20px] py-4">
+
+    <div className="sm:w-screen xs:w-[100%]">
+      <div className="sm:px-[20px] sm:py-4 sm:block sm:align-middle xs:m-[auto] xs:flex xs:justify-center xs:pt-12">
         <MagentaLogo />
       </div>
-      <div className="w-screen">
-        <div className="user-details text-center bg-[#EEE8F8] rounded-xl w-[550px] m-auto my-[50px] flex justify-center  pt-[44px] flex-col gap-4">
+      <div className="sm:w-full  xs:mt-[-20px] xs:flex xs:justify-center xs:m-[auto] albert">
+        <div className="user-details text-center xs:bg-white xs:pt-3 lg:bg-[#EEE8F8] rounded-xl w-[550px] m-auto my-[50px] flex justify-center  pt-[44px] flex-col gap-4">
           <div className="flex justify-center">
             <svg
               width="26"
@@ -93,13 +98,13 @@ const VerificationComponent = () => {
           <p className="text-[14px]">
             Pls enter otp sent to{" "}
             <span className="text-violet-700 font-bold">
-              {userDetails.email}
+              {userDetails.email || verificationMail}
             </span>{" "}
           </p>
 
           <div className="input-group flex m-auto flex-col gap-7">
             <InputComponent
-              className="bg-[#EEE8F8] border-[#C7AFE4]"
+              className="lg:bg-[#EEE8F8] xs:bg-white border-[#C7AFE4]"
               type="text"
               label="otp"
               name="otp"
@@ -124,6 +129,7 @@ const VerificationComponent = () => {
             onClick={handleSubmit}
             disabled={!userOtp.otp}
           >
+            
             Verify Account
           </button>
           <p className="pb-5"></p>

@@ -23,7 +23,7 @@ const Context = ({ children }) => {
   const [steps, setSteps] = useState(onboardingSteps);
   const [currentStep, setCurrentStep] = useState(0);
   //sign up flow
-
+  const [active, setActive] = useState(0);
   const [value, setValue] = useState("");
   const [showEye, setShowEye] = useState(true);
   const labelRef = useRef(null);
@@ -43,6 +43,7 @@ const Context = ({ children }) => {
   const [states, setStates] = useState({ firstAcct: false, secondAcct: false });
   const [user, setUser] = useState({});
   const [showNav, setShowNav] = useState(true);
+  const [showFooter, setShowFooter] = useState(true);
   const [showCreateBranch, setShowCreateBranch] = useState(false);
   const [showDeleteBranch, setShowDeleteBranch] = useState(false);
   const [showDeletedMsg, setShowDeletedMsg] = useState(false);
@@ -205,6 +206,10 @@ const Context = ({ children }) => {
     return () => controller?.abort();
   };
 
+
+
+
+
   const Get_Auto_Sweep = async () => {
     const token = localStorage.getItem("login_token");
     try {
@@ -358,25 +363,24 @@ const Context = ({ children }) => {
       },
     },
     scales: {
-      y: {
-        min: 0,
-        max: 100,
-      },
-    },
-    responsive: true,
-    hitRadius: 30,
-    animation: {
-      onComplete: () => {
-        delayed = true;
-      },
-      delay: (context) => {
-        let delay = 0;
-        if (context.type === "data" && context.mode === "default" && !delayed) {
-          delay = context.dataIndex * 300 + context.datasetIndex * 100;
+      x: {
+        autoSkip: true,
+        grid: {
+          display: false,
+        },
+        ticks: {
+          display: false //this will remove only the label
         }
-        return delay;
       },
-    },
+      y: {
+        border: {
+          display: false
+        },
+        grid: {
+          display: true,
+        },
+      }
+  },
   };
 
   const data1 = {
@@ -387,10 +391,18 @@ const Context = ({ children }) => {
         label: "Total",
         tension: 0.5,
         data: chartLineRes?.map((data) => data.total),
-        backgroundColor: "#D733CE",
-        cutout: "90%",
+        // backgroundColor: "#D733CE",
+        // cutout: "90%",
         fontFamily: "albert",
-        borderRadius: 100,
+        // borderRadius: 100,
+        // fill: true,
+        fill : true,
+        showLine : true,
+        borderColor: '#7133bd',
+        backgroundColor: '#7133bd4f',
+        pointRadius : 2,
+        cubicInterpolationMode: 'monotone',
+        tension: 0.1
       },
     ],
   };
@@ -615,6 +627,10 @@ const Context = ({ children }) => {
         setAddress,
         name,
         setName,
+        active,
+        setActive,
+        showFooter,
+        setShowFooter,
       }}
     >
       {children}
