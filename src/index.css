@@ -54,4 +54,7 @@ input::-webkit-inner-spin-button {
     border: 1px solid #8652c7;
 
 }
+.wrap::-webkit-scrollbar{
+  display: none;
+}
 

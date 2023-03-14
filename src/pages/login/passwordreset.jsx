@@ -13,7 +13,37 @@ const PasswordResetComponent = () => {
   const [err, setErr] = useState("")
   const [newPassword, setNewPassword] = useState("")
   const { userDetails,setShowFooter, setShowNav,verificationMail, setVerificationMail } = ItemContext();
+  const [token, setToken] = useState("")
   const navigate = useNavigate()
+
+
+  const handleToken = async (e) => {
+
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "https://backend.magentacashier.com/accounts/password/change/",
+        { password: newPassword, email: verificationMail }
+      );
+      if (response.status == 401 || response.status == 400 || response.status == 500) {
+        console.log(response.status);
+
+     
+    } else {
+      console.log(response.data);
+      navigate("/verify")
+    }
+    
+ 
+    } catch (err) {
+      if (err.response.data === undefined) {
+        setErr(err.message);
+      } else {
+        setErr(err.response.data.detail);
+
+      }
+    }
+  };
 
   const handleSubmit = async (e) => {
 
@@ -109,6 +139,20 @@ const PasswordResetComponent = () => {
               setNewPassword(evt.target.value)
             }
           />
+
+          <InputComponent
+            type="text"
+            className="lg:bg-[#EEE8F8] xs:bg-white border-[#C7AFE4]"
+            label="Token"
+            name="Token"
+            onChange={(evt) =>
+              setNewPassword(evt.target.value)
+            }
+          />
+          <button className="w-fit ml-auto flex justify-center -mt-4 -mb-1" onClick={handleToken}>
+            <p className="text-red-700 text-sm">Send Token</p>
+          </button>
+
         </div>
 
         <button
