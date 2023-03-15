@@ -149,8 +149,8 @@ const CashOut = () => {
             </button>
           </div>
         </div>
-        <div className="w-1/2  p-4 lg:flex gap-4 border-[#E1E1E1] border-2  rounded-xl">
-          <div className="lg:w-1/2 px-4 py-3 lg:h-full sm:h-[152px] sm:grid sm:grid-cols-2 bg-[#4E00AD] shadow-[4px_4px_13px_rgba(0,0,0,0.3)] rounded-3xl lg:flex lg:flex-col gap-2">
+        <div className="w-1/2  p-4 lg:flex gap-4 border-[#E1E1E1] border-2  rounded-xl ">
+          <div className="lg:w-1/2 px-4 py-3 lg:h-full sm:h-[163px] sm:grid sm:grid-cols-2 bg-[#4E00AD] shadow-[4px_4px_13px_rgba(0,0,0,0.3)] rounded-3xl lg:flex lg:flex-col gap-2">
             <div>
               <img
                 className="w-[120px] h-[120px]"
@@ -173,7 +173,7 @@ const CashOut = () => {
             </div>
           </div>
           {!items && (
-            <div className="lg:w-1/2 px-4 py-3 sm:mt-4 lg:mt-0 lg:h-full sm:h-[152px] sm:grid sm:pt-7 sm:grid-cols-2 bg-white shadow-[2px_2px_4px_4px_rgba(113,50,189,0.15)] rounded-3xl lg:flex lg:flex-col gap-2">
+            <div className="lg:w-1/2 px-4 py-3 sm:mt-4 lg:mt-0 lg:h-full sm:h-[154px] sm:grid sm:pt-7 sm:grid-cols-2 bg-white shadow-[2px_2px_4px_4px_rgba(113,50,189,0.15)] rounded-3xl lg:flex lg:flex-col gap-2">
               <div>
                 <img
                   className="w-[114px] h-[114px]"

@@ -76,11 +76,7 @@ useEffect(() => {
             </tr>
           </thead>
           <tbody className="content-dashboard border">
-            {data
-            .filter((dat, idx) => {
-              return idx < 9;
-            })
-            .map((dat, idx) => {
+            {data.map((dat, idx) => {
               return (
                 <tr className="text-center border" key={idx}>
                   <td className="py-2 font-normal text-sm sm:text-xs">{dat.client.magenta_id}</td>
@@ -107,11 +103,11 @@ useEffect(() => {
         <div className="flex justify-end  relative h-2 m-4 ">
               <div className="ma mt-[15.2px] flex ">
               <IoMdArrowDropdown className={!data.length ? "flex justify-center m-auto text-gray-500 cursor-pointer" : "flex justify-center m-auto text-[#4E00AD] cursor-pointer "} />
-              <p className={!data.length ? "text-xs albert text-gray-500" : "text-xs albert text-black]"}>9 row(s) per page</p>
+              <p className={!data.length ? "text-xs albert text-gray-500" : "text-xs albert text-black"}>9 row(s) per page</p>
               </div>
               <div className="m mx-2 " >
               <HiOutlineArrowNarrowDown onClick={handleTransScroll}  className={!data.length ? "flex justify-center m-auto text-gray-500 cursor-pointer" : "flex justify-center m-auto text-[#4E00AD] cursor-pointer"} />
-              <p className={!data.length ? "text-xs albert text-gray-500" : "text-xs albert text-black]"}>More</p>
+              <p className={!data.length ? "text-xs albert text-gray-500" : "text-xs albert text-black"}>More</p>
               </div>
               </div>
     </div>
