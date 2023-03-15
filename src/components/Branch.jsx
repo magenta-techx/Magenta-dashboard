@@ -32,7 +32,7 @@ const Branch = ({ branch }) => {
     dispatch({ type: "Individual Details", payload: item });
   };
   return (
-    <div className="flex flex-col gap-2  lg:w-[280px] sm:w-[241px]">
+    <div className="flex flex-col gap-2  lg:w-[280px] sm:w-[100px]">
       <div className="bg-[#4E00AD] h-[57px] px-3  flex rounded-tl-lg rounded-tr-lg justify-between items-center">
         <h2 className="text-white text-xl inter">{branch.name}</h2>
         <BsTrash

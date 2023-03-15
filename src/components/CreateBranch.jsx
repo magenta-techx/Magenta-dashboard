@@ -59,7 +59,7 @@ const CreateBranch = () => {
         setEditBranchName(res?.data?.name);
         setShowSuccess(true);
         Get_Branch();
-
+        console.log(res);
         setSuccess("Branch Successfully Created");
         setEditBranchPasscode(res?.data?.passcode);
       } else {
@@ -67,7 +67,10 @@ const CreateBranch = () => {
       }
     } catch (err) {
       setIsLoading(false);
-      setError(err?.message);
+      setError(
+        err?.response?.data?.error ? err.response.data.error : err?.message
+      );
+      console.log();
       setShowError(true);
       console.log(err);
     }

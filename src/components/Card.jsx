@@ -11,9 +11,8 @@ const Card = ({
   detail,
   handleClose,
   handleChangeTrue,
-  
 }) => {
-  const { setShowAcctDelete, dispatch ,GET_ACCOUNT} = ItemContext();
+  const { setShowAcctDelete, dispatch, GET_ACCOUNT } = ItemContext();
 
   const split = account_number.split("");
   const fitr = split?.filter((a, i) => {
@@ -43,18 +42,15 @@ const Card = ({
     <>
       <div
         key={id}
-        className="w-[242px] bg-[#F4F5F7] h-[86px] p-4 flex flex-col gap-4 rounded-lg"
+        className="w-full lg:w-[242px] bg-[#F4F5F7]  lg:h-[86px] p-4 flex flex-col gap-4 rounded-lg"
       >
         <div className="flex justify-between">
-          <small className="text-[16px] font-normal- albert text-black">
+          <small className="text-[16px] font-normal inter sm:albert text-black">
             {fitr}
             {midfth?.join("")}
             {latr}
           </small>
-          <div
-            className="relative"
-          
-          >
+          <div className="relative">
             <div>
               {detail.isAbtDel ? (
                 <FaTimes
@@ -73,7 +69,7 @@ const Card = ({
             {detail.isAbtDel && (
               <div
                 onClick={() => handleShowAcctDeleteMsg(detail)}
-                className="absolute w-[107px] h-[60px] bg-white  flex justify-center items-center gap-2 rounded-2xl text-[#DD55D4] cursor-pointer"
+                className="absolute -left-20 sm:-left-0 w-[107px] h-[60px] bg-white  flex justify-center items-center gap-2 rounded-2xl text-[#DD55D4] cursor-pointer"
               >
                 <TbTrash size="20px" className=" cursor-pointer" />
                 <small className="text-sm poppins">Delete</small>
@@ -81,7 +77,7 @@ const Card = ({
             )}
           </div>
         </div>
-        <h4 className="text-[rgba(0,0,0,0.4)] albert font-normal text-[16px]">
+        <h4 className="text-[rgba(0,0,0,0.4)] inter sm:albert font-normal text-[16px]">
           {bank_name}
         </h4>
       </div>
