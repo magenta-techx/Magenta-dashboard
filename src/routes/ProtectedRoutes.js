@@ -5,9 +5,11 @@ const ProtectedRoutes = () => {
   const isAuth = JSON.parse(auth);
   const location = useLocation();
   return isAuth ? (
+    <>
     <Outlet />
+    </>
   ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
+    <Navigate to={"/login"}  state={{ from: location }} replace />
   );
 };
 

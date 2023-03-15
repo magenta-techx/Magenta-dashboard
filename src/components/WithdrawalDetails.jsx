@@ -3,8 +3,9 @@ import { useRef } from "react";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 
 const WithdrawalDetails = ({
-  account: { account_number, bank_name ,id},
-  account,key
+  account: { account_number, bank_name, id },
+  account,
+  key,
 }) => {
   const { setSelected, selected } = ItemContext();
   const split = account_number.split("");
@@ -30,7 +31,8 @@ const WithdrawalDetails = ({
 
   return (
     <div
-      className="w-full h-[43px] relative bg-white rounded-xl flex justify-between p-2 albert items-center cursor-pointer"
+      key={id}
+      className="w-full h-[43px] relative bg-white rounded-xl flex justify-between p-2 albert items-center cursor-pointer gap-2 sm:gap-0 border border-[#E2E6EE] sm:border-none"
       onClick={() => {
         console.log(ref);
         ref.current.checked = true;
@@ -41,16 +43,17 @@ const WithdrawalDetails = ({
         localStorage.setItem("account", JSON.stringify(account));
       }}
     >
-      <h3 className="">
+      <h3 className="text-[14px] sm:text-[16px]">
         {fitr}
         {midfth?.join("")}
         {latr}
       </h3>
-      <div className="flex gap-4 check items-center">
-        <span>{bank_name}</span>
+      <div className="flex gap-10 w-ful  sm:gap-4 check items-center border border-[#FFFFFF] rounded-sm sm:border-none">
+        <span className="text-[12px] sm:text-[14px]">{bank_name}</span>
+        {/* <div className=""> */}
         <input
           ref={ref}
-          className="appearance-none  w-[33px] h-[33px] rounded-xl bg-[#8652C7] cursor-pointer"
+          className="appearance-none  w-[33px]   h-[33px] rounded-xl bg-[#8652C7] cursor-pointer"
           onChange={(e) => {
             dispatch({
               type: "Individual AcctDetails",
@@ -65,6 +68,7 @@ const WithdrawalDetails = ({
           name="sam"
           id={Math.random()}
         />
+        {/* </div> */}
         <div className="w-full absolute top-0 left-0 bg-transparent h-[43px] bg-white rounded-xl  pointer-events-none"></div>
       </div>
     </div>

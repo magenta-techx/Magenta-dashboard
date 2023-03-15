@@ -2,13 +2,13 @@ import React from "react";
 import { useState } from "react";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 import { timee } from "./data";
+import Header from "./Header";
 const SelectHourly = () => {
   const { setFrequency, time, setShowSelectHourly, setTime } = ItemContext();
   const [index, setIndex] = useState(0);
   const handleIncrease = () => {
     setIndex((prevState) => prevState - 1);
     setTime(timee[index]);
-
   };
   const handleDecrease = () => {
     setIndex((prevState) => prevState + 1);
@@ -23,27 +23,30 @@ const SelectHourly = () => {
       onClick={(e) => {
         e.stopPropagation();
       }}
-      className="w-[472px] h-fit bg-white rounded-3xl relative py-4 poppins"
+      className="w-full h-full  overflow-y-scroll overflow-x-hidden sm:overflow-hidden sm:w-[472px] sm:h-fit bg-[#FAFAFA] sm:bg-white sm:rounded-3xl relative sm:pt-4 poppins"
     >
       <div
         onClick={() => {
-          //     setShowWi(false);
           setShowSelectHourly(false);
-          // document.body.style.overflow = "visible";
         }}
-        className="absolute w-[60px] h-[60px]  flex justify-center items-center rounded-full bg-[#EEE8F8] cursor-pointer top-0 -right-4"
+        className="absolute w-[60px] h-[60px]  sm:flex justify-center items-center rounded-full bg-[#EEE8F8] cursor-pointer top-0 -right-4 hidden"
       >
         <img src="/assets/x.png" alt="Delete image" />
       </div>
-
-      <div className="flex flex-col gap-4">
-        <div className="flex items-center gap-4 p-4">
+      <div className="w-full bg-white   sm:hidden">
+        <Header
+          showLogo={false}
+          handleClick={() => setShowSelectHourly(false)}
+        />
+      </div>
+      <div className="flex flex-col gap-4 w-full">
+        <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-4 p-4 w-full">
           <img
             src="/assets/Time image.png"
-            className="w-[96px] h-[96px]"
+            className="self-center w-[130px] h-[130px] sm:w-[96px] sm:h-[96px] "
             alt="Time management-cuate 2"
           />
-          <p className="text-lg tracking-normal w-[265px] font-normal">
+          <p className="text-lg tracking-normal  sm:w-[265px] font-normal">
             Set an auto Hourly or Daily withdrawal sweep for your company to
             your bank account
           </p>
