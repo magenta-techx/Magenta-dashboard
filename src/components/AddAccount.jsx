@@ -6,7 +6,6 @@ import { useState } from "react";
 import { data } from "./data";
 import { debounce } from "lodash";
 import Select from "react-select";
-import Header from "./Header";
 
 const AddAccount = () => {
   const {
@@ -95,12 +94,11 @@ const AddAccount = () => {
   );
 
   const handleBankName = (name) => {
-    deb(name);
+   deb(name);
     // setAccountNumber(name);
   };
   useEffect(() => {
-    // if (accountNumber.length !== 10 ) return;
-    if(accountNumber.length===0|| !selectedOption)return
+    if (accountNumber.length!==10||!selectedOption) return;
     GET_ACCOUNT_NAME();
   }, [accountNumber, selectedOption]);
   const handleSubmit = async (e) => {
@@ -112,7 +110,7 @@ const AddAccount = () => {
       onClick={(e) => {
         e.stopPropagation();
       }}
-      className="w-full h-full sm:w-[487px] overflow-x-hidden overflow-y-scroll pb-10 sm:pb-0 sm:overflow-hidden sm:h-[398px] bg-white sm:rounded-3xl relative sm:p-6 poppins"
+      className="w-[487px] h-[398px] bg-white rounded-3xl relative p-6 poppins"
     >
       <div
         onClick={() => {
@@ -125,30 +123,14 @@ const AddAccount = () => {
             setIsLoading(false);
           }
         }}
-        className="absolute w-[60px] h-[60px] sm:flex justify-center items-center rounded-full bg-[#EEE8F8] top-0 -right-4 cursor-pointer hidden"
+        className="absolute w-[60px] h-[60px] flex justify-center items-center rounded-full bg-[#EEE8F8] top-0 -right-4 cursor-pointer"
       >
         <img src="/assets/x.png" alt="Delete image" />
       </div>
       <form className="flex flex-col gap-4" onSubmit={(e) => handleSubmit(e)}>
-        <div className="w-full bg-white   sm:hidden mb-4">
-          <Header
-            showLogo={false}
-            handleClick={() => {
-              setShowAddAccount(false);
-              setAccountNumber("");
-              setSelectedOption(null);
-              setAccountName("");
-              if (isLoading === true) {
-                setIsLoading(false);
-              }
-            }}
-          />
-        </div>
-        <h1 className="text-xl font-medium ml-4 sm:ml-0">
-          Add New Account Name
-        </h1>
-        <div className="flex flex-col  sm:flex-row gap-4 mx-4 sm:mx-0">
-          <div className="flex flex-col gap-2 w-full sm:w-1/2">
+        <h1 className="text-xl font-medium">Add New Account Name</h1>
+        <div className="flex gap-4">
+          <div className="flex flex-col gap-2 w-1/2">
             <label
               className="text-lg text-[rgba(11,11,11,0.8)]"
               htmlFor="accountnumber"
@@ -168,7 +150,7 @@ const AddAccount = () => {
             />
           </div>
 
-          <div className="flex flex-col gap-2 w-full sm:w-1/2">
+          <div className="flex flex-col gap-2 w-1/2">
             <label
               className="text-lg text-[rgba(11,11,11,0.8)]"
               htmlFor="bankname"
@@ -194,33 +176,28 @@ const AddAccount = () => {
             />
           </div>
         </div>
-        <div className="mx-4">
-          <div className="flex flex-col gap-2 w-full mb-10 ">
-            <label
-              className="text-lg text-[rgba(11,11,11,0.8)]"
-              htmlFor="accountname"
-            >
-              Account name
-            </label>
-            <input
-              value={accountName ? accountName : ""}
-              onChange={(e) => setAccountName(e.target.value)}
-              disabled={true}
-              type="text"
-              name=""
-              id="accountname"
-              className={`${
-                accountName === "could not fetch account name"
-                  ? "text-red-500"
-                  : "text-black"
-              } border-[#AF8BDA] border outline-none w-full h-[46px] px-4 rounded-xl font-medium poppins bg-[#F7F9FA] `}
-            />
-          </div>
+        <div className="flex flex-col gap-2 w-full mb-10">
+          <label
+            className="text-lg text-[rgba(11,11,11,0.8)]"
+            htmlFor="accountname"
+          >
+            Account name
+          </label>
+          <input
+            value={accountName ? accountName : ""}
+            onChange={(e) => setAccountName(e.target.value)}
+            disabled={true}
+            type="text"
+            name=""
+            id="accountname"
+            className={`${
+              accountName === "could not fetch account name"
+                ? "text-red-500"
+                : "text-black"
+            } border-[#AF8BDA] border outline-none w-full h-[46px] px-4 rounded-xl font-medium poppins bg-[#F7F9FA] `}
+          />
         </div>
-        <div
-          className="  flex justify-center mx-4 sm:mx-0"
-          onClick={REQUEST_OTP}
-        >
+        <div className="w-full  flex justify-center" onClick={REQUEST_OTP}>
           <button
             disabled={
               !accountNumber ||

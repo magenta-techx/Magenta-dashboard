@@ -20,9 +20,7 @@ const BNav = () => {
          <ul className="flex relative justify-around">
          {
             menu.map((item, index) => (
-                <Link to={item?.link} onClick={() => {
-                    (setActive(index))
-                }}>
+             <Link to={item?.link} onClick={() => (setActive(index))}>
              <li key={index}>
                 <div className={`${ active === index ? "m-auto flex pt-4 justify-center text-white" : "text-gray-500 pt-6 flex justify-center text-2xl"}`}>{React.createElement(item?.icon, {size: item?.size})}</div>
                 <span className={`${ active === index ? "text-white font-normal text-xs " : "text-gray-400 font-normal text-xs opacity-0 text-clip"}`}>{item.name}</span>

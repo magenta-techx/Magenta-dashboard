@@ -15,7 +15,7 @@ const Edit = () => {
     editBranchPasscode,
     setShowEdit,
     setShowEditSucc,
-
+   
     isLoading,
     Get_Branch,
     setIsLoading,
@@ -23,7 +23,7 @@ const Edit = () => {
     setShowError,
     state: { ForEachDetail },
   } = ItemContext();
-  const navigate = useNavigate();
+  const navigate=useNavigate()
   const report = localStorage.getItem("branch_report");
   const result = JSON.parse(report);
   const handleSubmit = async (e) => {
@@ -46,22 +46,18 @@ const Edit = () => {
       );
       if (res.status === 200) {
         setIsLoading(false);
-        setShowEditSucc(true);
-        setShowEdit(false);
-        Get_Branch();
-        navigate("branch/all");
+        setShowEditSucc(true)
+        setShowEdit(false)
+        Get_Branch()
+        navigate("branch/all")
         // setError()
+        
       } else {
         setIsLoading(false);
       }
     } catch (error) {
       console.log(error);
-      // setError(error.response.data.name ? error.response.data.name : "Network Error");
-      setError(
-        error.message === "Request failed with status code 500"
-          ? "Branch Name Must Be Unique "
-          : error.message
-      );
+      setError(error.response.data.name)
       setIsLoading(false);
       setShowError(true);
     }
@@ -141,7 +137,9 @@ const Edit = () => {
         >
           {isLoading ? (
             <div className="flex items-center gap-4">
-              <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent"></div>
+              <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
+                null
+              </div>
             </div>
           ) : (
             "Save Changes"
