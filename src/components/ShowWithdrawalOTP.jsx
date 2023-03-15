@@ -12,10 +12,6 @@ const ShowWithdrawalOTP = () => {
     withdrawAmount,
     setWithdrawOTP,
     loginEmail,
-    setError,
-    setShowError,
-    setShowSuccess,
-    setSuccess,
   } = ItemContext();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,9 +31,6 @@ const ShowWithdrawalOTP = () => {
           },
         }
       );
-      console.log(res);
-      setShowSuccess(true);
-
       // setShowAcctSucc(true);
       // setShowOTP(false);
       // if (res.status === 200) {
@@ -45,8 +38,6 @@ const ShowWithdrawalOTP = () => {
       // }
     } catch (error) {
       console.log(error);
-      setError(error?.message);
-      setShowError(true);
     }
     //     setOTP("");
   };
@@ -62,11 +53,7 @@ const ShowWithdrawalOTP = () => {
           },
         }
       );
-      setShowSuccess(true);
-      // setSuccess(res.data)
     } catch (err) {
-      setShowError(true);
-      setError(err?.message);
       console.log(err);
     }
   };
@@ -87,10 +74,7 @@ const ShowWithdrawalOTP = () => {
       <form className="flex flex-col gap-4" onSubmit={(e) => handleSubmit(e)}>
         <h1 className="text-xl">Add New Account Number</h1>
         <div className="flex flex-col justify-center items-center gap-2 w-full">
-          <label
-            className="text-sm sm:text-[16px]  inter sm:poppins font-normal mx-4 text-[#505F79]"
-            htmlFor="name"
-          >
+          <label className="text-lg poppins font-normal" htmlFor="name">
             Enter OTP sent to{" "}
             <span className="text-sm">
               {loginEmail ? loginEmail : "your email"}

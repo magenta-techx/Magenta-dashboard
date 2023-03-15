@@ -1,6 +1,5 @@
 import React from "react";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
-import Header from "./Header";
 
 const SelectAutoSweep = () => {
   const {
@@ -25,11 +24,12 @@ const SelectAutoSweep = () => {
 
     setShowSelectAutoSweep(false);
     setFreq(freq);
+  
   };
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="w-full sm:w-[472px] h-full sm:h-[255px] bg-white sm:rounded-3xl relative  poppins"
+      className="w-[472px] h-[255px] bg-white rounded-3xl relative p-6 poppins"
     >
       <div
         onClick={() => {
@@ -37,28 +37,25 @@ const SelectAutoSweep = () => {
           setShowWithdrawAmount("");
           // document.body.style.overflow = "visible";
         }}
-        className="absolute w-[60px] h-[60px] sm:flex justify-center items-center rounded-full bg-[#EEE8F8] cursor-pointer top-0 -right-4 hidden"
+        className="absolute w-[60px] h-[60px] flex justify-center items-center rounded-full bg-[#EEE8F8] cursor-pointer top-0 -right-4"
       >
         <img src="/assets/x.png" alt="Delete image" />
       </div>
-      <div className="w-full bg-white  sm:hidden mb-4">
-        <Header showLogo={false} handleClick={handleClick} />
-      </div>
-      <div className="flex flex-col gap-4 w-full">
-        <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-4 p-4 w-full">
+      <div className="flex flex-col gap-4">
+        <div className="flex items-center gap-4">
           <img
             src="/assets/Time image.png"
-            className="self-center w-[130px] h-[130px] sm:w-[96px] sm:h-[96px] "
+            className="w-[96px] h-[96px]"
             alt="Time management-cuate 2"
           />
-          <p className=" text-[14px] sm:text-lg tracking-normal  sm:w-[265px] font-normal">
+          <p className="text-lg tracking-normal w-[265px] ">
             Set an auto Hourly or Daily withdrawal sweep for your company to
             your bank account
           </p>
         </div>
-        <h2 className="text-center font-medium text-2xl">{withdrawAmount} </h2>
+        <h2 className="text-center font-medium text-2xl">{withdrawAmount}</h2>
 
-        <div className="w-full h-full p-4 sm:p-0  flex justify-around gap-6">
+        <div className="w-full h-full p-6 flex justify-around gap-6">
           <button
             onClick={() => handleClick("HOURLY")}
             className="w-[151px] text-white

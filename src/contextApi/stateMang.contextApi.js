@@ -98,7 +98,6 @@ const Context = ({ children }) => {
   const [remaining, setRemainingTime] = useState(0);
   const [count, setCount] = useState(0);
   const [open, setOpen] = useState(false);
-  const ref = useRef(null);
   let delayed;
   let isAuth;
   let timeleft;
@@ -117,13 +116,13 @@ const Context = ({ children }) => {
       );
       if (res.status === 204) {
         setIsLoading(false);
-
+        console.log(res);
         localStorage.removeItem("reset_auto_sweep_result");
         localStorage.removeItem("item");
         localStorage.removeItem("key");
         localStorage.removeItem("num");
         setShowSuccess(true);
-        setSuccess("Changes saved");
+        setSuccess(res.statusText);
       }
     } catch (error) {
       setIsLoading(false);
@@ -133,59 +132,57 @@ const Context = ({ children }) => {
     }
   };
 
-    const promptBeforeIdle = 30_000;
-    const timeout = 3000_000;
-    const onIdle = () => {
-      setOpen(false);
-      localStorage.clear();
-    };
-    const onActive = () => {
-      setOpen(false);
-    };
-    const onPrompt = () => {
-      // if (localStorage.isAuth) {
-      setOpen(true);
-      // }
-      // setOpen(false);
-    };
-    const onAction = () => {
-      // setOpen(false)
-    };
+  const promptBeforeIdle = 30_000;
+  const timeout = 3000_000;
+  const onIdle = () => {
+    setOpen(false);
+    localStorage.clear();
+  };
+  const onActive = () => {
+    setOpen(false);
+  };
+  const onPrompt = () => {
+    // if (localStorage.isAuth) {
+    setOpen(true);
+    // }
+    // setOpen(false);
+  };
+  const onAction = () => {
+    // setOpen(false)
+  };
 
-    const { getRemainingTime, activate, pause, resume, reset } = useIdleTimer({
-      onIdle,
-      onActive,
-      onAction,
-      onPrompt,
-      timeout,
-      promptBeforeIdle,
-      throttle: 1000,
-    });
+  const { getRemainingTime, activate, pause, resume, reset } = useIdleTimer({
+    onIdle,
+    onActive,
+    onAction,
+    onPrompt,
+    timeout,
+    promptBeforeIdle,
+    throttle: 1000,
+  });
 
-    const timeTillPrompt = Math.max(remaining - promptBeforeIdle / 1000, 0);
-    const seconds = timeTillPrompt > 1 ? "seconds" : "second";
-    useEffect(() => {
-      timeleft = setInterval(() => {
-        setRemainingTime(Math.ceil(getRemainingTime() / 1000));
-      }, 1000);
+  const timeTillPrompt = Math.max(remaining - promptBeforeIdle / 1000, 0);
+  const seconds = timeTillPrompt > 1 ? "seconds" : "second";
+  useEffect(() => {
+    timeleft = setInterval(() => {
+      setRemainingTime(Math.ceil(getRemainingTime() / 1000));
+    }, 1000);
 
-      return () => {
-        clearInterval(timeleft);
-      };
-    }, []);
-    const handleStillHere = () => {
-      activate();
-      // console.log("Logged out");
+    return () => {
+      clearInterval(timeleft);
     };
-    if (!localStorage.getItem("isAuth")) {
-      pause();
-      reset();
-    } else {
-      resume();
-      // reset();
-    }
-  
-
+  }, []);
+  const handleStillHere = () => {
+    activate();
+    // console.log("Logged out");
+  };
+  if (!localStorage.getItem("isAuth")) {
+    pause();
+    reset();
+  } else {
+    resume();
+    // reset();
+  }
   const Get_Branch = async () => {
     let controller = new AbortController();
     (async () => {
@@ -208,6 +205,10 @@ const Context = ({ children }) => {
     //aborts the request when the component umounts
     return () => controller?.abort();
   };
+
+
+
+
 
   const Get_Auto_Sweep = async () => {
     const token = localStorage.getItem("login_token");
@@ -341,7 +342,7 @@ const Context = ({ children }) => {
           },
         }
       );
-
+      // return res.status===200?setLineChartRes(res.data):""
       if (res.status === 200) setLineChartRes(res.data);
       return res;
     } catch (error) {
@@ -352,7 +353,6 @@ const Context = ({ children }) => {
   const label = chartLineRes?.map((data) => data.day);
   const option1 = {
     maintainAspectRatio: false,
-    type:"line",
     plugins: {
       legend: {
         position: "bottom",
@@ -362,12 +362,6 @@ const Context = ({ children }) => {
         display: true,
       },
     },
-    options: {
-      responsive: true,
-      radius: 10,
-      hitRadius: 100,
-      hoverRadius:12
-    },
     scales: {
       x: {
         autoSkip: true,
@@ -375,21 +369,18 @@ const Context = ({ children }) => {
           display: false,
         },
         ticks: {
-          display: false, //this will remove only the label
-        },
+          display: false //this will remove only the label
+        }
       },
       y: {
-        beginAtZero: true,
-        min: 0,
-        max:100,
         border: {
-          display: false,
+          display: false
         },
         grid: {
           display: true,
         },
-      },
-    },
+      }
+  },
   };
 
   const data1 = {
@@ -398,17 +389,20 @@ const Context = ({ children }) => {
       {
         fill: true,
         label: "Total",
-        // tension: 0.5,
+        tension: 0.5,
         data: chartLineRes?.map((data) => data.total),
-        backgroundColor: "#D733CE",
-        cutout: "90%",
+        // backgroundColor: "#D733CE",
+        // cutout: "90%",
         fontFamily: "albert",
-        showLine: true,
-        borderColor: "#7133bd",
-        // backgroundColor: "#7133bd4f",
-        pointRadius: 4,
-        cubicInterpolationMode: "monotone",
-        tension: 2,
+        // borderRadius: 100,
+        // fill: true,
+        fill : true,
+        showLine : true,
+        borderColor: '#7133bd',
+        backgroundColor: '#7133bd4f',
+        pointRadius : 2,
+        cubicInterpolationMode: 'monotone',
+        tension: 0.1
       },
     ],
   };
@@ -554,7 +548,6 @@ const Context = ({ children }) => {
         acctName,
         setAcctName,
         showOTP,
-        ref,
         setShowOTP,
         acct,
         otp,
@@ -573,7 +566,6 @@ const Context = ({ children }) => {
         setEditBranchPasscode,
         handleAutoSweepDelete,
         editBranchAddress,
-        seconds,
         editBranchName,
         editBranchPasscode,
         showEdit,
