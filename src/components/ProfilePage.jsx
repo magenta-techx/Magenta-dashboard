@@ -16,13 +16,12 @@ const ProfilePage = () => {
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="bg-white w-[504px] h-full p-4 relative transition-all"
+      className="bg-white w-full sm:w-[504px] h-full p-4 relative transition-all"
     >
-      <div className="bg-[#EEE8F8] absolute top-2 -left-6 rounded-full w-fit h-fit text-[#EEE8F8] p-2">
+      <div className="bg-[#EEE8F8] absolute top-2 -left-6 rounded-full w-fit h-fit text-[#EEE8F8] p-2 hidden sm:flex">
         <img
           onClick={() => {
             dispatch({ type: "hide-profile" });
-            //  document.body.style.overflow = "visible";
           }}
           src="/assets/Group 2184.png"
           className="cursor-pointer"
@@ -35,7 +34,7 @@ const ProfilePage = () => {
       </div>
       <div className="flex flex-col justify-center items-center gap-6">
         <h1 className="font-medium text-xl">Profile Settings</h1>
-        <DisplayName width={"80px"} height="80px" fontSize={"32px"}/>
+        <DisplayName mobile={"false"} width={"80px"} height="80px" fontSize={"32px"} />
       </div>
     </div>
   );

@@ -25,6 +25,24 @@ const LoginComponent = () => {
     setIsLoading,
     Get_Auto_Sweep,
     Get_Branch,
+    setShowAcctDelete,
+    setShowAcctSucc,
+    setShowAddAccount,
+    setShowAutoSweepAmount,
+    setShowAutoSweepOTP,
+    setShowCreateBranch,
+    setShowDeleteBranch,
+    setShowDeleteSucc,
+    setShowDeletedMsg,
+    setShowEdit,
+    setShowEditSucc,
+    setShowWithdrawAmount,
+    setShowSelectHourly,
+    setShowWithdrawSucc,
+    setShowWithdrawOTP,
+    setShowOTP,
+    setShowSelectAutoSweep,
+    setFrequency,
   } = ItemContext();
 
   const auth = localStorage.getItem("isAuth");
@@ -49,6 +67,25 @@ const LoginComponent = () => {
         localStorage.setItem("login_token", login_token);
         localStorage.setItem("isAuth", true);
         navigate("/");
+        setIsLoading(false);
+        setShowAcctDelete(false);
+        setShowAcctSucc(false);
+        setShowAddAccount(false);
+        setShowAutoSweepAmount(false);
+        setShowAutoSweepOTP(false);
+        setShowCreateBranch(false);
+        setShowDeleteBranch(false);
+        setShowDeleteSucc(false);
+        setShowDeletedMsg(false);
+        setShowEdit(false);
+        setShowEditSucc(false);
+        setShowWithdrawAmount(false);
+        setShowSelectHourly(false);
+        setShowWithdrawSucc(false);
+        setShowWithdrawOTP(false);
+        setShowOTP(false);
+        setShowSelectAutoSweep(false);
+        setFrequency(false);
         setIsLoading(false);
         setOpen(false);
         Get_Auto_Sweep();
@@ -75,7 +112,7 @@ const LoginComponent = () => {
   }, 3000);
 
   return (
-    <div className="sm:w-screen xs:w-[100%]">
+    <div className="sm:w-screen xs:w-[100%]  overflow-y-scroll">
       <div className="sm:px-[20px] sm:py-4 sm:block sm:align-middle xs:m-[auto] xs:flex xs:justify-center xs:pt-12">
         <MagentaLogo />
       </div>
@@ -132,7 +169,7 @@ const LoginComponent = () => {
 
           <div className="input-group flex m-auto flex-col gap-7">
             <InputComponent
-              className="lg:bg-[#EEE8F8] xs:bg-white  border-[#C7AFE4]"
+              className="lg:bg-[#EE8F8] xs:bg-white  border-[#C7AFE4]"
               type="email"
               label="Email"
               name="email"
@@ -152,12 +189,10 @@ const LoginComponent = () => {
           </div>
 
           <p className="sm:mx-[90px] xs:-ml-[130px] xs:flex xs:justify-center p-[0px] text-[14px] xs:w-[100%] sm:w-[120px] relative">
-            <Link to='/emailchange'>
-            Forgot Password
-            </Link>
+            <Link to="/emailchange">Forgot Password</Link>
           </p>
           <button
-            className="w-[360px] max-w-full h-[46px]  m-auto rounded-[10px] disabled:text-gray-500 disabled:bg-[#E2E6EE] bg-[#4E00AD] text-white flex justify-center items-center disabled:cursor-not-allowed"
+            className=" w-[360px] max-w-full h-[46px]  m-auto rounded-[10px] disabled:text-gray-500 disabled:bg-[#E2E6EE] bg-[#4E00AD] text-white flex justify-center items-center disabled:cursor-not-allowed hover:shadow-white hover:shadow-2xl "
             onClick={handleSubmit}
             disabled={
               !loginPassword ||
@@ -170,13 +205,12 @@ const LoginComponent = () => {
           >
             {isLoading ? (
               <div className="flex items-center gap-4">
-                <div className="  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent"></div>
+                <div className="  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent "></div>
               </div>
             ) : (
               "Continue"
             )}
           </button>
-
           <p className="pb-5">
             <Link to={"/signup"}>
               {" "}

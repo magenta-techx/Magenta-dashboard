@@ -14,7 +14,9 @@ const AcctDeleteMsg = () => {
     state: { ForEachAcctDetail },
     setStates,
     det,
+    setError,
     setDel,
+    setShowError,
   } = ItemContext();
 
   const acc = localStorage.getItem("num");
@@ -24,6 +26,7 @@ const AcctDeleteMsg = () => {
     ?.join("");
   const token = localStorage.getItem("login_token");
   const deleteBranchFn = async (detail) => {
+    setIsLoading(true);
     try {
       const res = await axios.delete(
         `https://backend.magentacashier.com/accounts/account/delete/${detail}`,
@@ -43,14 +46,12 @@ const AcctDeleteMsg = () => {
       }
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
+      setShowError(true);
+      setError(error.message);
     }
   };
-  const handleDelete = async (detail) => {
-    setIsLoading(true);
-
-    console.log(typeof Number(filterColon));
-    console.log(ForEachAcctDetail);
-
+  const handleDelete = (detail) => {
     // Check if acct number are equal
     if (localStorage.getItem("item")) {
       if (detail === Number(filterColon)) {
@@ -70,7 +71,7 @@ const AcctDeleteMsg = () => {
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="w-[500px] h-[212px] bg-white rounded-3xl relative px-6 py-10 flex flex-col gap-3 justify-between albert"
+      className="w-full sm:w-[500px] h-fit sm:h-[212px] bg-white rounded-3xl relative px-6 py-10 flex flex-col gap-3 justify-between albert"
     >
       <p className="text-lg ">
         Are you sure you want to <span className="text-[#DD55D4]">Delete</span>{" "}
@@ -81,14 +82,15 @@ const AcctDeleteMsg = () => {
         <div
           onClick={() => {
             setShowAcctDelete(false);
-            // document.body.style.overflow = "visible";
+            setIsLoading(false);
             console.log(filterColon);
           }}
           className="bg-[#4E00AD] w-[140px] h-[46px] rounded-xl text-white flex justify-center items-center cursor-pointer"
         >
           Cancel
         </div>
-        <div
+        <button
+          disabled={isLoading}
           onClick={() => {
             handleDelete(ForEachAcctDetail?.id);
           }}
@@ -97,7 +99,7 @@ const AcctDeleteMsg = () => {
           {isLoading ? (
             <div className="flex items-center gap-4">
               <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
-                null
+                
               </div>
             </div>
           ) : (
@@ -106,7 +108,7 @@ const AcctDeleteMsg = () => {
               <p>Delete</p>
             </div>
           )}
-        </div>
+        </button>
       </div>
     </div>
   );

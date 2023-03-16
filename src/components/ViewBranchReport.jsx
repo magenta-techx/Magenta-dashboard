@@ -11,21 +11,24 @@ import {
   HiOutlineUserGroup,
 } from "react-icons/hi";
 import { MdEditLocation } from "react-icons/md";
+import { CiSaveUp1 } from "react-icons/ci";
 import { RiCalendar2Line } from "react-icons/ri";
+import { BsTrash } from "react-icons/bs";
+import { AiOutlineIdcard } from "react-icons/ai";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 import Header from "./Header";
+import Navbar from "./Navbar";
+import TransactionCard from "./transactionCard";
 
-const ViewBranchReport = () => {
+const ViewBranchReport = ({branch}) => {
   const [data, setData] = useState([]);
-  const {
-    setShowEdit,
-  } = ItemContext();
+  const { setShowEdit, showNav, setShowCreateBranch, setShowDeleteBranch,    dispatch, } = ItemContext();
   const history = async () => {
     const token = localStorage.getItem("login_token");
-    const get =localStorage.getItem("branch_report")
-    const {id}=JSON.parse(get);
+    const get = localStorage.getItem("branch_report");
+    const { id } = JSON.parse(get);
     try {
       const res = await axios.get(
         `https://backend.magentacashier.com/business/branch/transactions/${id}/`,
@@ -40,6 +43,10 @@ const ViewBranchReport = () => {
       console.log(err);
     }
   };
+  const handleClick = () => {
+    setShowCreateBranch(true);
+    // document.body.style.overflow = "hidden";
+  };
   useEffect(() => {
     history();
   }, []);
@@ -47,151 +54,233 @@ const ViewBranchReport = () => {
     setShowEdit(true);
     // document.body.style.overflow = "hidden";
   };
+  const handleDelete = (item) => {
+    setShowDeleteBranch(true);
+    dispatch({ type: "Individual Details", payload: item });
+  };
   const navigate = useNavigate();
   const repor = localStorage.getItem("branch_report");
 
   const report = JSON.parse(repor);
   // console.log(report)
 
-
   return (
-    <div className="lg:w-[80%] sm:w-[90%] px-10 py-6 flex flex-col gap-10 overflow-y-scroll">
-      <div className="w-[full]  bg-white   ">
-        <Header />
-      </div>
-      <div className="flex justify-between items-center">
-        <div className="flex gap-6 items-center">
-          <div
-            className=" w-[50px] h-[50px] flex justify-center items-center rounded-full bg-[#EEE8F8] cursor-pointer"
-            onClick={() => {
-              navigate("/branch");
-              document.documentElement.scrollTop = 0;
-            }}
-          >
-            <BsArrowLeft className="text-[#4E00AD] text-2xl" />
-          </div>
-          <p className="text-2xl font-medium abert">{report?.name}</p>
+    <div className="flex w-screen">
+      {showNav && (
+        <div className="lg:w-[20%] xs:hidden h-screen sm:w-[107px] sm:min-h-screen sm:flex min-h-screen bg-[#200047] flex flex-col">
+          <Navbar />
         </div>
-        <p className="text-[#6B778C] text-[16px] flex gap-2">
-          <span>Branch Id</span>
-          <span className="text-black inter font-normal ">
-            {report?.unique_id}
-          </span>
-        </p>
-      </div>
-      <div className="flex w-full">
-        <div></div>
-        <div className="flex gap-2 items-center albert text-[#7132BD]">
-          <MdEditLocation className="h-[20px] w-[17.25px] text-[#4E00AD]" />
-          <p className=" whitespace-nowrap overflow-hidden text-ellipsis text-[16px] font-normal">
-            {report?.address}
-          </p>
-          <div className="flex flex-col cursor-pointer">
-            <p
-              className="flex items-center justify-center"
-              onClick={handleEdit}
+      )}
+      <div className="sm:w-[100%] xs:w-[100%] sm:px-10 sm:py-6 flex flex-col gap-10 overflow-y-scroll">
+        <div className="w-full xs:hidden sm:flex bg-white   ">
+          <Header showLogo={true} />
+        </div>
+        <div
+          className="w-full  bg-white sm:hidden "
+          onClick={() => navigate("/branch")}
+        >
+          <Header showLogo={false} />
+        </div>
+        <div className="flex justify-between items-center">
+          <div className="mx-3 sm:mx-0 flex gap-6 items-center">
+            <div
+              className=" w-[50px] hidden sm:flex h-[50px]  justify-center items-center rounded-full bg-[#EEE8F8] cursor-pointer"
+              onClick={() => {
+                navigate("/branch");
+                document.documentElement.scrollTop = 0;
+              }}
             >
-              <FiEdit />
-              <small>Edit</small>
+              <BsArrowLeft className="text-[#4E00AD] text-2xl" />
+            </div>
+            <p className="text-2xl font-medium abert">{report?.name}</p>
+          </div>
+          <p className="text-[#6B778C] text-[16px] flex gap-2 xs:hidden sm:flex">
+            <span>Branch Id</span>
+            <span className="text-black inter font-normal ">
+              {report?.unique_id}
+            </span>
+          </p>
+        </div>
+        <div className="flex w-full px-3 -mt-6 sm:-mt-0 sm:px-0">
+          <div className="flex gap-2 items-center albert text-[#7132BD] xs:w-full sm:w-fit ">
+            <MdEditLocation className="h-[20px] w-[17.25px] text-[#4E00AD]" />
+            <p className=" whitespace-nowrap overflow-hidden text-ellipsis text-[16px] font-normal">
+              {report?.address}
             </p>
-            <img src="/assets/line.png" />
-          </div>
-        </div>
-      </div>
-      <div className="flex w-full justify-between gap-4">
-        <div className="w-80 h-fit border lg:flex lg:gap-6 sm:gap-2 rounded-lg px-6 py-4">
-          <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
-          <HiOutlineChartSquareBar size="25px" className="text-[#4E00AD]" />
-          </div>
-          <div className="flex flex-col gap-6 inter">
-            <h4 className="font-normal sm:text-[14px] lg:text-[16px] sm:pt-4 sm:text-gray-500">Total Sales Made</h4>
-            <h2 className="font-medium flex items-center text-xl">
-              {/* <TbCurrencyNaira /> */}
-              {report?.sales_and_customers?.sales}
-            </h2>
-          </div>
-        </div>
-        <div className="w-80 h-fit border lg:flex lg:gap-6 sm:gap-2 rounded-lg px-6 py-4">
-          <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
-            <HiOutlineUserGroup size="20px" className="text-[#4E00AD]" />
-          </div>
-          <div className="flex flex-col gap-6 inter">
-            <h4 className="font-normal sm:text-[14px] lg:text-[16px] sm:pt-4 sm:text-gray-500">Total Transactions</h4>
-            <h2 className="font-medium flex items-center text-xl">
-              {/* <TbCurrencyNaira />{" "} */}
-              {report?.sales_and_customers?.total_transactions?report?.sales_and_customers?.total_transactions:0}
-            </h2>
-          </div>
-        </div>
-        <div className="w-80 h-fit border lg:flex lg:gap-6 sm:gap-2rounded-lg px-6 py-4">
-          <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
-            <RiCalendar2Line size="25px" className="text-[#4E00AD]" />
-          </div>
-          <div className="flex flex-col gap-6 inter">
-            <h4 className="font-medium sm:text-[14px] lg:text-[16px] sm:pt-4 sm:text-gray-500">Date Created</h4>
-            <h2 className="font-medium text-xl">
-              {report?.created_at?.substring(0, 10)}
-            </h2>
-          </div>
-        </div>
-      </div>
-      <div className="">
-        <div className="flex justify-between items-center albert">
-          <h2 className="text-xl font-medium ">Transaction History</h2>
-          <div className="w-[344px] bg-white opacity-75 rounded-xl border gap-4 px-4 h-[48px] flex items-center justify-end">
-            <div className="">
-              <BsSearch className="text-[#4E00AD]" />
-            </div>
-            <input
-              placeholder="Search"
-              className="border-r-[#93A3C0] border-r outline-none w-[80px] albert flex-1 font-medium"
-            />
-            <div className="">
-              <HiOutlineFilter className="text-[#4E00AD]" />
+            <div className="flex flex-col cursor-pointer xs:ml-auto">
+              <p
+                className="flex items-center justify-center"
+                onClick={handleEdit}
+              >
+                <FiEdit className="" />
+                <small className="xs:hidden sm:flex">Edit</small>
+              </p>
+              <img className="xs:hidden sm:flex" src="/assets/line.png" />
             </div>
           </div>
         </div>
-        <div className="border mt-10">
-          <table className="border h-[412px] w-full py-4 relative">
-            <thead>
-              <tr className="border-b  bg-[#F7F9FA] font-medium sm:font-small lg:text-lg">
-                <th className="py-3">User UIID</th>
-                <th className="py-3">Branch Name</th>
-                <th className="py-3">Invoice date</th>
-                <th className="py-3">Amount</th>
-                <th className="py-3">Reference</th>
-                <th className="py-3">Card Type</th>
-              </tr>
-            </thead>
+        <div className="upper sm:hidden flex">
+          <div
+            onClick={handleClick}
+            className="bg-[#4E00AD] sm:hidden xs:w-[50%]  lg:w-[330px] sm:w-[241px] xs:p-3 xs:ml-2 sm:mr-0 xs:mr-auto h-[45px] rounded-xl text-white flex justify-center items-center cursor-pointer"
+          >
+            Create New Branch
+            </div>
+        <div className="bg-[#4E00AD] w-fit p-3 h-[45px] rounded-lg mr-2">
+          <BsTrash
+            className="text-white text-xl cursor-pointer"
+            onClick={() => handleDelete(branch)}
+          />
+        </div>
+        </div>
 
-            <tbody className="content-dashboard flex">
-              {data.length > 1 &&
-                data
-                  // .filter((data, idx) => {
-                  //   return idx < 4;
-                  // })
-                  .map((data) => {
-                    return (
-                      <tr className="text-center">
-                        <td className="py-2">{data.id} </td>
-                        <td className="py-2">{data.name}</td>
-                        <td className="py-2">{data.i} </td>
-                        <td className="py-2">{data.amount} </td>
-                        <td className="py-2">{data.reference} </td>
-                        <td className="py-2">{data.type} </td>
-                      </tr>
-                    );
-                  })}
-            </tbody>
-          {!data.length && (
-            <div className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
-              <img
-                src="/assets/NothingHereYet.png"
-                alt="Nothing here yet image"
-              />
+        <div className="sm:flex p-2 w-full justify-between sm:m-0 gap-4 grid grid-cols-2">
+          <div className="sm:w-80 w-[1/2] h-[150px] sm:h-fit border lg:flex lg:gap-6 sm:gap-2 rounded-lg px-6 py-4">
+            <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
+              <HiOutlineChartSquareBar size="25px" className="text-[#4E00AD]" />
             </div>
-          )}
-          </table>
+            <div className="flex flex-col gap-6 inter">
+              <h4 className=" font-light sm:font-normal sm:text-[14px] lg:text-[16px] pt-3 sm:pt-4 sm:text-gray-500">
+                Total Sales Made
+              </h4>
+              <h2 className="font-medium flex items-center text-base sm:text-xl">
+                {/* <TbCurrencyNaira /> */}
+                {report?.sales_and_customers?.sales}
+              </h2>
+            </div>
+          </div>
+          <div className="sm:w-80 w-[1/2] h-[150px] sm:h-fit border lg:flex lg:gap-6 sm:gap-2 rounded-lg px-6 py-4">
+            <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
+              <HiOutlineUserGroup size="20px" className="text-[#4E00AD]" />
+            </div>
+            <div className="flex flex-col gap-6 inter">
+              <h4 className="font-light sm:font-normal sm:text-[14px] lg:text-[16px] pt-3 sm:pt-4 sm:text-gray-500">
+                Total Customers
+              </h4>
+              <h2 className="font-medium flex items-center text-base sm:text-xl">
+                {/* <TbCurrencyNaira />{" "} */}
+                {report?.sales_and_customers?.sales
+                  ? report?.sales_and_customers?.sales
+                  : 0}
+              </h2>
+            </div>
+          </div>
+          <div className="sm:w-80 w-[1/2] h-[150px] rounded-lg sm:h-fit border lg:flex lg:gap-6 sm:gap-2rounded-lg px-6 py-4">
+            <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
+              <RiCalendar2Line size="25px" className="text-[#4E00AD]" />
+            </div>
+            <div className="flex flex-col gap-6 inter">
+              <h4 className="font-light sm:font-normal sm:text-[14px] lg:text-[16px] pt-3 sm:pt-4 sm:text-gray-500">
+                Date Created
+              </h4>
+              <h2 className="font-medium text-base sm:text-xl">
+                {report?.created_at?.substring(0, 10)}
+              </h2>
+            </div>
+          </div>
+          <div className="sm:w-80 w-[1/2] h-[150px] sm:h-fit sm:hidden  border lg:flex lg:gap-6 sm:gap-2 rounded-lg px-6 py-4">
+            <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
+              <AiOutlineIdcard size="25px" className="text-[#4E00AD]" />
+            </div>
+            <div className="flex flex-col gap-1 sm:gap-6 inter">
+              <h4 className="font-light sm:font-normal sm:text-[14px] lg:text-[16px] pt-3 sm:pt-4 sm:text-gray-500">
+                Branch Id
+              </h4>
+              <h2 className="font-medium flex items-center text-base sm:text-xl">
+                {report?.unique_id}
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div className="">
+          <div className=" sm:flex justify-between items-center albert ">
+            <h2 className="text-xl font-medium sm:pb-0 p-2 sm:p-0 pb-3">
+              Transaction History
+            </h2>
+            <div className=" w-[95%] mx-2 sm:mx-0 sm:w-[344px] bg-white opacity-75 rounded-xl border gap-4 px-4 h-[48px] flex items-center justify-end">
+              <div className="">
+                <BsSearch className="text-[#4E00AD]" />
+              </div>
+              <input
+                placeholder="Search"
+                className="border-r-[#93A3C0] border-r outline-none w-[80px] albert flex-1 font-medium"
+              />
+              <div className="">
+                <HiOutlineFilter className="text-[#4E00AD]" />
+              </div>
+            </div>
+          </div>
+          <div className="relative ">
+            <div className="sm:hidden">
+            <TransactionCard data={data} />
+            </div>
+
+          </div>
+          <div className="border mt-10 hidden sm:block">
+            <table className="border h-[412px] w-full py-4 relative">
+              <thead>
+                <tr className="border-b  bg-[#F7F9FA] font-medium sm:font-small lg:text-lg">
+                  <th className="py-3">User UIID</th>
+                  <th className="py-3">Branch Name</th>
+                  <th className="py-3">Invoice date</th>
+                  <th className="py-3">Amount</th>
+                  <th className="py-3">Reference</th>
+                  <th className="py-3">Card Type</th>
+                </tr>
+              </thead>
+
+              <tbody className="content-dashboard flex">
+                {data.length > 1 &&
+                  data
+                    // .filter((data, idx) => {
+                    //   return idx < 4;
+                    // })
+                    .map((dat, idx) => {
+                      return (
+                        <tr className="text-center border " key={idx}>
+                          <td className="py-2 font-normal text-sm">
+                            {dat.client.magenta_id}
+                          </td>
+                          <td className="py-2 font-normal text-sm">
+                            {dat.branch_name}
+                          </td>
+                          <td className="py-2 font-normal text-sm">
+                            {dat.billed_amount}
+                          </td>
+                          <td className="py-2 font-normal text-sm">
+                            {dat.amount}
+                          </td>
+                          <td className="py-2 font-normal text-sm">
+                            {dat.reference}
+                          </td>
+                          <td className="py-2 font-normal text-sm">
+                            {dat.card_type}
+                          </td>
+                        </tr>
+                      );
+                    })}
+              </tbody>
+              {!data.length && (
+                <div className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
+                  <img
+                    src="/assets/NothingHereYet.png"
+                    alt="Nothing here yet image"
+                  />
+                </div>
+              )}
+            </table>
+          </div>
+            <button
+              disabled={!data.length}
+              className="mx-3 mb-3 xs:mb-0 sm:mx-0 bg-[#4E00AD] text-white disabled:text-gray-400 disabled:font-normal disabled:bg-gray-100 flex  w-fit rounded-xl p-3 lg:mt-4 sm:mt-4 "
+            >
+              <h1 className="px-2  font-normal albert ">
+                Export Transaction Table
+              </h1>
+              <b className="cursor-pointer px-1 ">
+                <CiSaveUp1 className="mt-1 text-lg " />
+              </b>
+            </button>
         </div>
       </div>
     </div>
