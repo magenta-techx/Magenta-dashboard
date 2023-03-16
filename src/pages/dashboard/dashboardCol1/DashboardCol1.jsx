@@ -158,7 +158,7 @@ const DashboardCol1 = () => {
               <h4 className="text-[rgba(0,0,0,0.82)] font-normal sm:text-sm sm:pt-4 lg:pt-1">
                 Available Cash
               </h4>
-              <h2 className="inter text-[24px] font-normal sm:font-bold flex items-center">
+              <h2 className="inter text-[24px] font-normal flex items-center">
                 <TbCurrencyNaira className="sm:block hidden" />
                 <NumericFormat
                   value={available_cash ? available_cash : 0}
@@ -179,7 +179,7 @@ const DashboardCol1 = () => {
               <h4 className="font-normal sm:text-sm text-[rgba(0,0,0,0.82)]">
                 Today Sales
               </h4>
-              <h2 className="inter text-[24px] font-normal sm:font-bold flex items-center">
+              <h2 className="inter text-[24px] font-normal  flex items-center">
                 <TbCurrencyNaira className="hidden sm:block" />
                 <NumericFormat
                   value={today_sale ? today_sale : 0}

@@ -35,8 +35,9 @@ const ShowWithdrawalOTP = () => {
           },
         }
       );
-      console.log(res);
+      
       setShowSuccess(true);
+      console.log(res);
 
       // setShowAcctSucc(true);
       // setShowOTP(false);

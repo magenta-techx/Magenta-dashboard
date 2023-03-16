@@ -81,12 +81,11 @@ const CreateBranch = () => {
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="w-[434px] h-[481px] bg-white rounded-3xl relative p-6 albert"
+      className="w-[434px] h-fit bg-white rounded-3xl relative p-6  albert"
     >
       <div
         onClick={() => {
           setShowCreateBranch(false);
-          // document.body.style.overflow = "visible";
           if (isLoading === true) {
             setIsLoading(false);
           }

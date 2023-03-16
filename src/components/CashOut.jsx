@@ -1,11 +1,9 @@
-import axios from "axios";
-import React, { useCallback } from "react";
+import React from "react";
 import { useEffect } from "react";
 import { HiOutlineChartSquareBar, HiOutlineUserGroup } from "react-icons/hi";
 import { RiCalendar2Line } from "react-icons/ri";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
-import { motion } from "framer-motion";
 import Card from "./Card";
 import Header from "./Header";
 import Navbar from "./Navbar";
@@ -14,7 +12,6 @@ import { NumericFormat } from "react-number-format";
 const CashOut = () => {
   const {
     setShowAddAccount,
-    setIsLoading,
     isLoading,
     setName,
     setAddress,
@@ -25,9 +22,8 @@ const CashOut = () => {
     time,
     GET_ACCOUNT,
     handleAutoSweepDelete,
-    state: { accountDetails, ForEachAcctDetail },
+    state: { accountDetails },
     dispatch,
-    autoSweepID,
     showNav,
     transaction,
     GET_MERCHANT_TRANSACTION,
@@ -35,7 +31,6 @@ const CashOut = () => {
   const get = localStorage.getItem("reset_auto_sweep_result");
   const all_time_sales = transaction?.all_time_sales;
   const available_cash = transaction?.available_cash;
-  const today_sale = transaction?.today_sales;
   const total_withdrawal = Number(all_time_sales) - Number(available_cash);
   let items;
   if (localStorage.getItem("item") === null) {
@@ -102,7 +97,7 @@ const CashOut = () => {
                 Total Withdrawal
               </h4>
               <h2 className="font-medium flex items-center text-[24px]">
-                <TbCurrencyNaira className="sm:block hidden"/>
+                <TbCurrencyNaira className="sm:block hidden" />
                 <NumericFormat
                   value={total_withdrawal > 0 ? total_withdrawal : 0}
                   thousandSeparator=","
@@ -122,7 +117,7 @@ const CashOut = () => {
                   Total Payments Made
                 </h4>
                 <h2 className="font-medium flex items-center text-[24px]">
-                  <TbCurrencyNaira className="sm:block hidden"/>
+                  <TbCurrencyNaira className="sm:block hidden" />
                   <NumericFormat
                     value={all_time_sales ? all_time_sales : 0}
                     thousandSeparator=","
@@ -142,7 +137,7 @@ const CashOut = () => {
                   In App Cash
                 </h4>
                 <h2 className="font-medium text-[24px] flex items-center">
-                  <TbCurrencyNaira className="sm:block hidden"/>
+                  <TbCurrencyNaira className="sm:block hidden" />
                   <NumericFormat
                     value={available_cash ? available_cash : 0}
                     thousandSeparator=","

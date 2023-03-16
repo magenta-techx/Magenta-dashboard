@@ -44,7 +44,7 @@ const DashboardCol3Part1 = () => {
       </div> */}
       <table
         className="border h-fit w-full py-4 albert"
-        onClick={() => console.log("object")}
+        
       >
         <thead>
           <tr className="border-b  bg-[#F7F9FA]">

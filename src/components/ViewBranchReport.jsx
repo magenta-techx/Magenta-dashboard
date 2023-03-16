@@ -50,7 +50,7 @@ const ViewBranchReport = () => {
   const repor = localStorage.getItem("branch_report");
 
   const report = JSON.parse(repor);
-  // console.log(report)
+ 
 
   return (
     <div className="flex w-screen">

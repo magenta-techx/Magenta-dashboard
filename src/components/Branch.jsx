@@ -1,21 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BsTrash } from "react-icons/bs";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 
-const Branch = ({ branch }) => {
+const Branch = ({ branch, isDev }) => {
   const {
     setShowDeleteBranch,
     dispatch,
     setEditBranchAddress,
     setEditBranchName,
     setEditBranchPasscode,
-    state: { ForEachAcctDetail },
   } = ItemContext();
-
-
 
   const navigate = useNavigate();
   const handleClick = (item) => {
@@ -25,16 +22,15 @@ const Branch = ({ branch }) => {
     navigate(`/branch/${item.id}`);
     document.documentElement.scrollTop = 0;
     localStorage.setItem("branch_report", JSON.stringify(item));
-    
   };
   const handleDelete = (item) => {
     setShowDeleteBranch(true);
     dispatch({ type: "Individual Details", payload: item });
   };
   return (
-    <div className="flex flex-col gap-2  lg:w-[280px] sm:w-[100px]">
+    <div className={`flex flex-col w-full h-fit gap-2  lg:w-full sm:w-full ${isDev?"dev":""}`}>
       <div className="bg-[#4E00AD] h-[57px] px-3  flex rounded-tl-lg rounded-tr-lg justify-between items-center">
-        <h2 className="text-white text-xl inter">{branch.name}</h2>
+        <h2 className="text-white text-xl inter">{branch?.name}</h2>
         <BsTrash
           className="text-white text-xl cursor-pointer"
           onClick={() => handleDelete(branch)}
@@ -84,3 +80,53 @@ const Branch = ({ branch }) => {
 };
 
 export default Branch;
+/*
+
+<div className="flex flex-col gap-2  lg:w-[280px] sm:w-[100px]">
+      <div className="bg-[#4E00AD] h-[57px] px-3  flex rounded-tl-lg rounded-tr-lg justify-between items-center">
+        <h2 className="text-white text-xl inter">{branch.name}</h2>
+        <BsTrash
+          className="text-white text-xl cursor-pointer"
+          onClick={() => handleDelete(branch)}
+        />
+      </div>
+      <div className="border  bg-[#FAFAFA] rounded-bl-lg rounded-br-lg">
+        <div className="border-b-[#8652C7] border-b m-2 py-2">
+          <p className="text-[#6B778C] lg:text-sm sm:text-[12px] flex gap-2 inter font-normal">
+            <span>Date Created:</span>
+            <span className="text-black">
+              {branch.created_at?.substring(0, 10)}
+            </span>
+          </p>
+          <p className="text-[#6B778C] lg:text-sm sm:text-[12px] flex gap-2 inter font-normal">
+            <span>Address:</span>
+            <span className="text-black whitespace-nowrap overflow-hidden text-ellipsis">
+              {branch?.address}
+            </span>
+          </p>
+        </div>
+        <div className="p-2">
+          <p className="text-[#6B778C] lg:text-sm sm:text-[12px] flex gap-2 items-center albert">
+            <span>Total Sales:</span>
+            <span className="text-black text-xl flex items-center">
+              <TbCurrencyNaira />
+              {branch?.sales_and_customers.sales}
+            </span>
+          </p>
+
+          <p className="text-[#6B778C] lg:text-sm sm:text-[12px] flex gap-2 items-center albert">
+            <span>Total Transactions:</span>
+            <span className="text-black text-xl flex items-center">
+              {branch?.sales_and_customers.total_transactions}
+            </span>
+          </p>
+        </div>
+        <div
+          className="bg-white w-full h-[56px] flex justify-end px-4 items-center gap-4 cursor-pointer poppins"
+          onClick={() => handleClick(branch)}
+        >
+          <p className="font-normal sm:text-sm">View Branch Report</p>
+          <MdOutlineArrowForwardIos className="text-[#7132BD]" />
+        </div>
+      </div>
+    </div>*/

@@ -46,76 +46,30 @@ const ViewBranchReport = lazy(() => import("./components/ViewBranchReport"));
 function App() {
   const location = useLocation();
   const {
-    showNav,
-    showCreateBranch,
     setShowCreateBranch,
-    showDeletedMsg,
     setShowDeletedMsg,
-    showDeleteBranch,
     setShowDeleteBranch,
-    setSelectedOption,
-    showEdit,
     setShowEdit,
-    showEditSucc,
     setShowEditSucc,
     setShowAddAccount,
-    showAddAccount,
-    showWithdrawSucc,
+   
     setShowWithdrawSucc,
-
-    setWithdrawOTP,
-    showOTP,
+   
     setShowOTP,
-    setName,
-    setAddress,
-    setPassCode,
-    setEditBranchAddress,
-    setEditBranchName,
-    setEditBranchPasscode,
-    showSelectHourly,
     setShowSelectHourly,
-    frequency,
     setFrequency,
-    showAutoSweepOTP,
     setShowAutoSweepOTP,
-    setAccountName,
-    setAccountNumber,
-    setIsLoading,
-    showAcctSucc,
-    showAcctDelete,
     setShowAcctDelete,
     setShowAcctSucc,
-    showWithdrawAmount,
     setShowWithdrawAmount,
-    showAutoSweepAmount,
     setShowAutoSweepAmount,
-    setWithdrawAmount,
-    showWithdrawOTP,
     setShowWithdrawOTP,
-    showSelectAutoSweep,
     setShowSelectAutoSweep,
-    setSelected,
-    isLoading,
     setShowDeleteSucc,
-    showDeleteSucc,
     showError,
-
     setShowError,
-    state: { showProfile },
-    dispatch,
-    error,
     showSuccess,
-    success,
     setShowSuccess,
-    activate,
-    resume,
-    pause,
-    // getRemainingTime,
-    remaining,
-    open,
-    timeTillPrompt,
-    seconds,
-    handleStillHere,
   } = ItemContext();
   let docTitle = document.title;
   const navigate = useNavigate();
@@ -156,330 +110,10 @@ function App() {
 
   return (
     <>
-      <div className="flex relative   sm:w-[100%] max-w-[1400px] h-screen overflow-hidden  m-auto">
+      <div className="flex relative   sm:w-[100%]  h-screen overflow-hidden">
         <Alert />
         <IdleTimer />
         <Modals />
-        {/* {showCreateBranch && isAuth && (
-          <div
-            onClick={() => {
-              setShowCreateBranch(false);
-              setName("");
-              setAddress("");
-              setPassCode("");
-              // document.body.style.overflow = "visible";
-              if (isLoading === true) {
-                setIsLoading(false);
-              }
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-20 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <CreateBranch />
-          </div>
-        )}
-        {showWithdrawAmount && isAuth && (
-          <div
-            onClick={() => {
-              setShowWithdrawAmount(false);
-              setWithdrawAmount("");
-              // document.body.style.overflow = "visible";
-              setSelected(false);
-              localStorage.removeItem("account");
-              // localStorage.removeItem("num");
-              if (isLoading === true) {
-                setIsLoading(false);
-              }
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed sm:bg-[rgba(0,0,0,0.5)] flex sm:justify-end sm:items-center flex-col sm:flex-row sm:px-20"
-          >
-            <WithdrawAmount />
-            {showNav && (
-              <div className="sm:hidden h-fit  bg-[#200047] flex  flex-row items-center">
-                <Navbar />
-              </div>
-            )}
-          </div>
-        )}
-        {frequency && isAuth && (
-          <div
-            onClick={() => {
-              setFrequency(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed sm:bg-[rgba(0,0,0,0.5)] flex sm:justify-end sm:items-center flex-col sm:flex-row sm:px-20"
-          >
-            <Frequency />
-            {showNav && (
-              <div className="sm:hidden h-fit  bg-[#200047] flex  flex-row items-center">
-                <Navbar />
-              </div>
-            )}
-          </div>
-        )}
-        {showAutoSweepAmount && isAuth && (
-          <div
-            onClick={() => {
-              setShowAutoSweepAmount(false);
-              setSelected(false);
-              // document.body.style.overflow = "visible";
-              localStorage.removeItem("account");
-              // localStorage.removeItem("num");
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed sm:bg-[rgba(0,0,0,0.5)] flex sm:justify-end sm:items-center flex-col sm:flex-row sm:px-20"
-          >
-            <ShowAutoSweepAmount />
-            {showNav && (
-              <div className="sm:hidden h-fit  bg-[#200047] flex  flex-row items-center">
-                <Navbar />
-              </div>
-            )}
-          </div>
-        )}
-        {showAutoSweepOTP && isAuth && (
-          <div
-            onClick={() => {
-              setShowAutoSweepOTP(false);
-              // document.body.style.overflow = "visible";
-              localStorage.removeItem("account");
-              // localStorage.removeItem("num");
-              if (isLoading === true) {
-                setIsLoading(false);
-              }
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed sm:bg-[rgba(0,0,0,0.5)] flex sm:justify-end sm:items-center flex-col sm:flex-row sm:px-20"
-          >
-            <AutoSweepOTP />
-            {showNav && (
-              <div className="sm:hidden h-fit  bg-[#200047] flex  flex-row items-center">
-                <Navbar />
-              </div>
-            )}
-          </div>
-        )}
-        {showWithdrawSucc && isAuth && (
-          <div
-            onClick={() => {
-              setShowWithdrawSucc(false);
-              setWithdrawOTP("");
-              setWithdrawAmount("");
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex sm:justify-end flex-col sm:flex-row sm:items-center sm:px-20"
-          >
-            <WithdrawSuccMsg />
-          </div>
-        )}
-        {showWithdrawOTP && isAuth && (
-          <div
-            onClick={() => {
-              setShowWithdrawOTP(false);
-              // document.body.style.overflow = "visible";
-              setWithdrawAmount("");
-              localStorage.removeItem("account");
-              // localStorage.removeItem("num");
-              if (isLoading === true) {
-                setIsLoading(false);
-              }
-            }}
-            className="w-full  h-full max-w-7xl sm:m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex sm:justify-end flex-col sm:flex-row sm:items-center sm:px-20"
-          >
-            <WithdrawOTP />
-            {showNav && (
-              <div className="sm:hidden h-fit  bg-[#200047] flex  flex-row items-center">
-                <Navbar />
-              </div>
-            )}
-          </div>
-        )}
-        {showSelectHourly && isAuth && (
-          <div
-            onClick={() => {
-              setShowSelectHourly(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex sm:justify-end sm:items-center flex-col sm:flex-row sm:px-20"
-          >
-            <SelectHourly />
-            {showNav && (
-              <div className="sm:hidden h-fit  bg-[#200047] flex  flex-row items-center">
-                <Navbar />
-              </div>
-            )}
-          </div>
-        )}
-        {showSelectAutoSweep && isAuth && (
-          <div
-            onClick={() => {
-              setShowSelectAutoSweep(false);
-              setSelected(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex sm:justify-end flex-col sm:flex-row sm:items-center sm:px-20"
-          >
-            <SelectAutoSweep />
-            {showNav && (
-              <div className="sm:hidden h-fit  bg-[#200047] flex  flex-row items-center">
-                <Navbar />
-              </div>
-            )}
-          </div>
-        )}
-        {showDeleteBranch && isAuth && (
-          <div
-            onClick={() => {
-              setShowDeleteBranch(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <DeleteBranchMsg />
-          </div>
-        )}
-        {showDeletedMsg && isAuth && (
-          <div
-            onClick={() => {
-              setShowDeletedMsg(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <DeletedMsg />
-          </div>
-        )}
-        {showEdit && isAuth && (
-          <div
-            onClick={() => {
-              setShowEdit(false);
-              setEditBranchAddress("");
-              setEditBranchName("");
-              setEditBranchPasscode("");
-              // document.body.style.overflow = "visible";
-              if (isLoading === true) {
-                setIsLoading(false);
-              }
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <Edit />
-          </div>
-        )}
-        {showEditSucc && isAuth && (
-          <div
-            onClick={() => {
-              setShowEditSucc(false);
-              navigate("/branch/all");
-              setIsLoading(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <ShowEditSucc />
-          </div>
-        )}
-        {showDeleteSucc && isAuth && (
-          <div
-            onClick={() => {
-              setShowDeleteSucc(false);
-              setIsLoading(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <ShowDeleteSucc />
-          </div>
-        )}
-        {showOTP && isAuth && (
-          <div
-            onClick={() => {
-              setShowOTP(false);
-              setAccountName("");
-              setAccountNumber("");
-              // document.body.style.overflow = "visible";
-              if (isLoading === true) {
-                setIsLoading(false);
-              }
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex sm:justify-center sm:items-center flex-col sm:flex-row"
-          >
-            <ShowOTP />
-            {showNav && (
-              <div className="sm:hidden h-fit  bg-[#200047] flex  flex-row items-center">
-                <Navbar />
-              </div>
-            )}
-          </div>
-        )}
-        {showAddAccount && isAuth && (
-          <div
-            onClick={() => {
-              setShowAddAccount(false);
-              setAccountName("");
-              setAccountNumber("");
-              setSelectedOption(null);
-              // document.body.style.overflow = "visible";
-              if (isLoading === true) {
-                setIsLoading(false);
-              }
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex sm:justify-center sm:items-center flex-col sm:flex-row"
-          >
-            <AddAccount />
-            {showNav && (
-              <div className="sm:hidden h-fit  bg-[#200047] flex  flex-row items-center">
-                <Navbar />
-              </div>
-            )}
-          </div>
-        )}
-        {showAcctSucc && isAuth && (
-          <div
-            onClick={() => {
-              setShowAcctSucc(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <AcctSuccMsg />
-          </div>
-        )}
-        {showAcctDelete && isAuth && (
-          <div
-            onClick={() => {
-              setShowAcctDelete(false);
-              if (isLoading) setIsLoading(false);
-
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center px-4 sm:px-0"
-          >
-            <AcctDeleteMsg />
-          </div>
-        )}
-        {showProfile && isAuth && (
-          <div
-            onClick={() => {
-              // document.body.style.overflow = "visible";
-              dispatch({ type: "hide-profile" });
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center flex-col sm:flex-row"
-          >
-            <ProfilePage />
-            {showNav && (
-              <div className="lg:w-[20%] w-full h-fit sm:h-screen sm:w-[107px] sm:min-h-screen flex  bg-[#200047]  sm:flex-col flex-row items-center sm:hidden">
-                <Navbar />
-              </div>
-            )}
-          </div>
-        )} */}
-
-        {/* <div>{timeTillPrompt}</div> */}
-        {/* {showNav && (
-          <div className="lg:w-[20%] xs:hidden h-screen sm:w-[107px] sm:min-h-screen sm:flex min-h-screen bg-[#200047] flex flex-col"
-          ref={ref}
-          >
-            <Navbar />
-          </div>
-        )} */}
 
         <Suspense
           fallback={

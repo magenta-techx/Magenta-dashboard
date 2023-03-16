@@ -1,12 +1,10 @@
-import axios from "axios";
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useEffect } from "react";
 import Branch from "../../components/Branch";
 import Header from "../../components/Header";
 import { HiArrowRight, HiOutlineFilter } from "react-icons/hi";
-import { motion } from "framer-motion";
 import { BsPlusLg, BsSearch } from "react-icons/bs";
 import { ItemContext } from "../../contextApi/stateMang.contextApi";
-import { Outlet, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 
 const CompanyBranch = () => {
@@ -72,7 +70,7 @@ const CompanyBranch = () => {
                 {branchDetails
                   ?.filter((a, idx) => idx < 2)
                   .map((detail) => {
-                    return <Branch key={detail.id} branch={detail} />;
+                    return <Branch isDev={false} key={detail.id} branch={detail} />;
                   })}
 
                 <div className="lg:w-[300px] lg:h-[240px] flex justify-center items-center">
