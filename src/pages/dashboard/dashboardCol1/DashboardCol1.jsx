@@ -152,7 +152,7 @@ const DashboardCol1 = () => {
         <div className="w-full sm:w-full flex gap-4">
           <div className="w-1/2 flex flex-col sm:w-full sm:h-[162px] border-[#E1E1E1] border-2 rounded-xl lg:flex gap-2 sm:gap-6 px-6 sm:py-4 py-2">
             <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
-              <BsWallet2 size="20px" className="text-[#4E00AD]" />
+              <BsWallet2 size="20px"  className="sm:h-12 lg:h-fit text-[#4E00AD]" />
             </div>
             <div className="flex flex-col inter sm:albert gap-2 sm:gap-3  ">
               <h4 className="text-[rgba(0,0,0,0.82)] font-normal sm:text-sm sm:pt-4 lg:pt-1">

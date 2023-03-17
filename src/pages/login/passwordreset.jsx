@@ -173,9 +173,10 @@ const PasswordResetComponent = () => {
         {/* {!(newPassword?.password === newPassword?.confirmPassword) && (
           <span className="text-red-500 text-sm">Passwords do not match!</span>
         )} */}
-        <p className="pb-5">
-          <Link to={"/signup"}></Link>
-        </p>
+        <Link to={"/login"}>
+          {" "}
+          Already a member? <span className="text-violet-500">Sign In</span>
+        </Link>
       </div>
       </div>
     </div>
