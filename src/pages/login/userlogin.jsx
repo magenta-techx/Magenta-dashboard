@@ -112,7 +112,7 @@ const LoginComponent = () => {
   }, 3000);
 
   return (
-    <div className="sm:w-screen xs:w-[100%]  overflow-y-scroll">
+    <div className="sm:w-screen xs:w-[100%]  overflow-y-hidden">
       <div className="sm:px-[20px] sm:py-4 sm:block sm:align-middle xs:m-[auto] xs:flex xs:justify-center xs:pt-12">
         <MagentaLogo />
       </div>

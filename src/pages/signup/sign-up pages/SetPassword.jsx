@@ -2,6 +2,7 @@ import { useState } from "react";
 import InputComponent from "../../InputComponent";
 import { ItemContext } from "../../../contextApi/stateMang.contextApi";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import MagentaLogo from "../../../assets/logo";
 
 const CompanyDetails = ({ markAsComplete = () => {} }) => {
@@ -104,9 +105,10 @@ const CompanyDetails = ({ markAsComplete = () => {} }) => {
         <span className="text-red-500 text-sm">Passwords do not match!</span>
       )}
 
-      <p>
-        Already a member? <span className="text-violet-500">Sign In</span>
-      </p>
+<Link to={"/login"}>
+          {" "}
+          Already a member? <span className="text-violet-500">Sign In</span>
+        </Link>
     </div>
     </div>
   );
