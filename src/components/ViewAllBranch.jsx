@@ -29,7 +29,7 @@ const ViewAllBranch = () => {
           <Navbar />
         </div>
       )}
-      <div className="lg:w-[80%] xs:w-[100%] overflow-x-hidden overflow-y-scroll h-full sm:h-screen sm:px-8 pb-4 sm:py-6 flex flex-col gap-6">
+      <div className="lg:w-[80%] xs:w-[100%] overflow-hidden overflow-y-scroll h-full sm:h-screen sm:px-8 pb-4 sm:py-6 flex flex-col gap-6">
         <div className="w-full  bg-white   ">
           <Header showLogo={true} />
         </div>
@@ -63,8 +63,11 @@ const ViewAllBranch = () => {
               Create New Branch
             </div>
           </div>
-          <div className="  relative">
-            <div className="bg-[#4E00AD] rounded-xl   w-[45%]  flex justify-center items-center cursor-pointer  text-white h-[60px] sm:hidden top-3 left-4 px-2 absolute btn  sm:static ">
+          <div className="  relative ">
+            <div
+              className="bg-[#4E00AD] rounded-xl   w-[45%]  flex justify-center items-center cursor-pointer  text-white h-[60px] sm:hidden top-3 left-4 px-2 absolute btn  sm:static pointer-events-auto z-10"
+              onClick={handleClick}
+            >
               Create New Branch
             </div>
             <div className="w-full h-fit  overflow-scroll overflow-x-hidden xs:grid relative  grid-cols-2 sm:grid-cols-3  py-4 px-4 grid-work gap-3">
