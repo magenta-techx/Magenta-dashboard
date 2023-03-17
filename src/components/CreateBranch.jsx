@@ -248,7 +248,6 @@ const CreateBranch = () => {
       <div
         onClick={() => {
           setShowCreateBranch(false);
-          // document.body.style.overflow = "visible";
           if (isLoading === true) {
             setIsLoading(false);
           }
@@ -271,7 +270,7 @@ const CreateBranch = () => {
           />
         </div>
         <div className="flex flex-col gap-4 mx-4 sm:mx-0">
-        <h1 className="text-lg font-medium">Create New Branch</h1>
+        <h1 className="sm:text-lg text-xl font-medium">Create New Branch</h1>
         <div className="flex flex-col gap-2 w-full">
           <label className="text-[16px] font-normal" htmlFor="name">
             Branch Name

@@ -175,7 +175,7 @@ const Context = ({ children }) => {
     }, []);
     const handleStillHere = () => {
       activate();
-      // console.log("Logged out");
+   
     };
     if (!localStorage.getItem("isAuth")) {
       pause();
@@ -231,7 +231,7 @@ const Context = ({ children }) => {
     } catch (err) {}
   };
   const GET_MERCHANT_TRANSACTION = async () => {
-    // console.log("merchant")
+    
     const token = localStorage.getItem("login_token");
     try {
       const res = await axios.get(
@@ -300,7 +300,7 @@ const Context = ({ children }) => {
     }
   };
 
-  // console.log("first");
+ 
   const GET_ACCOUNT_NAME = async () => {
     const token = localStorage.getItem("login_token");
     try {

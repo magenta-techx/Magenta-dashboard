@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import {IoMdArrowDropdown} from "react-icons/io";
 import { BsArrowLeft, BsSearch, BsWallet2 } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 import {
@@ -9,6 +10,7 @@ import {
   HiOutlineChartSquareBar,
   HiOutlineFilter,
   HiOutlineUserGroup,
+  HiOutlineArrowNarrowDown,
 } from "react-icons/hi";
 import { MdEditLocation } from "react-icons/md";
 import { CiSaveUp1 } from "react-icons/ci";
@@ -22,9 +24,9 @@ import Header from "./Header";
 import Navbar from "./Navbar";
 import TransactionCard from "./transactionCard";
 
-const ViewBranchReport = ({branch}) => {
+const ViewBranchReport = ( ) => {
   const [data, setData] = useState([]);
-  const { setShowEdit, showNav, setShowCreateBranch, setShowDeleteBranch,    dispatch, } = ItemContext();
+  const { setShowEdit, showNav, setShowCreateBranch, setShowDeleteBranch,    dispatch,   } = ItemContext();
   const history = async () => {
     const token = localStorage.getItem("login_token");
     const get = localStorage.getItem("branch_report");
@@ -43,6 +45,9 @@ const ViewBranchReport = ({branch}) => {
       console.log(err);
     }
   };
+  const handleTransScroll = () => {
+    document.getElementById('scroll').scrollTop += 100;
+  } 
   const handleClick = () => {
     setShowCreateBranch(true);
     // document.body.style.overflow = "hidden";
@@ -61,18 +66,19 @@ const ViewBranchReport = ({branch}) => {
   const navigate = useNavigate();
   const repor = localStorage.getItem("branch_report");
 
+
   const report = JSON.parse(repor);
-  // console.log(report)
+ 
 
   return (
     <div className="flex w-screen">
       {showNav && (
-        <div className="lg:w-[20%] xs:hidden h-screen sm:w-[107px] sm:min-h-screen sm:flex min-h-screen bg-[#200047] flex flex-col">
+        <div className="lg:w-[20%] hidden h-screen sm:w-[107px] sm:min-h-screen  min-h-screen bg-[#200047] sm:flex flex-col">
           <Navbar />
         </div>
       )}
-      <div className="sm:w-[100%] xs:w-[100%] sm:px-10 sm:py-6 flex flex-col gap-10 overflow-y-scroll">
-        <div className="w-full xs:hidden sm:flex bg-white   ">
+      <div className="sm:w-[100%] w-[100%] sm:px-10 sm:py-6 flex flex-col gap-10 overflow-y-scroll">
+        <div className="w-full hidden sm:flex bg-white   ">
           <Header showLogo={true} />
         </div>
         <div
@@ -94,7 +100,7 @@ const ViewBranchReport = ({branch}) => {
             </div>
             <p className="text-2xl font-medium abert">{report?.name}</p>
           </div>
-          <p className="text-[#6B778C] text-[16px] flex gap-2 xs:hidden sm:flex">
+          <p className="text-[#6B778C] text-[16px]  gap-2 hidden sm:flex">
             <span>Branch Id</span>
             <span className="text-black inter font-normal ">
               {report?.unique_id}
@@ -115,21 +121,21 @@ const ViewBranchReport = ({branch}) => {
                 <FiEdit className="" />
                 <small className="xs:hidden sm:flex">Edit</small>
               </p>
-              <img className="xs:hidden sm:flex" src="/assets/line.png" />
+              <img className="hidden sm:flex" src="/assets/line.png" />
             </div>
           </div>
         </div>
-        <div className="upper sm:hidden flex">
+        <div className="upper sm:hidden flex justify-between">
           <div
             onClick={handleClick}
-            className="bg-[#4E00AD] sm:hidden xs:w-[50%]  lg:w-[330px] sm:w-[241px] xs:p-3 xs:ml-2 sm:mr-0 xs:mr-auto h-[45px] rounded-xl text-white flex justify-center items-center cursor-pointer"
+            className="bg-[#4E00AD] mx-2 sm:hidden w-[50%]  lg:w-[330px] sm:w-[241px] xs:p-3 xs:ml-2 sm:mr-0 xs:mr-auto h-[45px] rounded-xl text-white flex justify-center items-center cursor-pointer"
           >
             Create New Branch
             </div>
         <div className="bg-[#4E00AD] w-fit p-3 h-[45px] rounded-lg mr-2">
           <BsTrash
             className="text-white text-xl cursor-pointer"
-            onClick={() => handleDelete(branch)}
+            onClick={() => handleDelete(report)}
           />
         </div>
         </div>
@@ -193,7 +199,7 @@ const ViewBranchReport = ({branch}) => {
           </div>
         </div>
         <div className="">
-          <div className=" sm:flex justify-between items-center albert ">
+          <div className=" sm:flex justify-between items-center albert  sm:mb-5">
             <h2 className="text-xl font-medium sm:pb-0 p-2 sm:p-0 pb-3">
               Transaction History
             </h2>
@@ -216,60 +222,59 @@ const ViewBranchReport = ({branch}) => {
             </div>
 
           </div>
-          <div className="border mt-10 hidden sm:block">
-            <table className="border h-[412px] w-full py-4 relative">
-              <thead>
-                <tr className="border-b  bg-[#F7F9FA] font-medium sm:font-small lg:text-lg">
-                  <th className="py-3">User UIID</th>
-                  <th className="py-3">Branch Name</th>
-                  <th className="py-3">Invoice date</th>
-                  <th className="py-3">Amount</th>
-                  <th className="py-3">Reference</th>
-                  <th className="py-3">Card Type</th>
+          <div className="sm:border mt-1 h-[442px] hidden sm:block">
+        <div id="scroll" className="wrap  border-none overflow-y-scroll h-[380px] scroll-smooth">
+        <table
+         className="border-none hidden sm:table w-full py-4 relative "
+          onClick={() => console.log("object")}
+        >
+          <thead className="-top-0.5  sticky ">
+            <tr className="border-b  bg-[#F7F9FA]">
+              <th className="py-3 font-medium sm:text-sm sm:font-semibold lg:font-semibold lg:text-[16px]">User UUID</th>
+              <th className="py-3 font-medium sm:text-sm sm:font-semibold lg:font-semibold lg:text-[16px]">Branch Name</th>
+              <th className="py-3 font-medium sm:text-sm sm:font-semibold lg:font-semibold lg:text-[16px]">Billed Amount</th>
+              <th className="py-3 font-medium sm:text-sm sm:font-semibold lg:font-semibold lg:text-[16px]">Amount</th>
+              <th className="py-3 font-medium sm:text-sm sm:font-semibold lg:font-semibold lg:text-[16px]">Reference</th>
+              <th className="py-3 font-medium sm:text-sm sm:font-semibold lg:font-semibold lg:text-[16px]">Card Type</th>
+            </tr>
+          </thead>
+          <tbody className="content-dashboard border">
+            {data.map((dat, idx) => {
+              return (
+                <tr className="text-center border" key={idx}>
+                  <td className="py-2 font-normal text-sm sm:text-xs">{dat.client.magenta_id}</td>
+                  <td className="py-2 font-normal text-sm sm:text-xs">{dat.branch_name}</td>
+                  <td className="py-2 font-normal text-sm sm:text-xs">{dat.billed_amount}</td>
+                  <td className="py-2 font-normal text-sm sm:text-xs">{dat.amount}</td>
+                  <td className="py-2 font-normal text-sm sm:text-xs">{dat.reference}</td>
+                  <td className="py-2 font-normal text-sm sm:text-xs">{dat.card_type}</td>
                 </tr>
-              </thead>
-
-              <tbody className="content-dashboard flex">
-                {data.length > 1 &&
-                  data
-                    // .filter((data, idx) => {
-                    //   return idx < 4;
-                    // })
-                    .map((dat, idx) => {
-                      return (
-                        <tr className="text-center border " key={idx}>
-                          <td className="py-2 font-normal text-sm">
-                            {dat.client.magenta_id}
-                          </td>
-                          <td className="py-2 font-normal text-sm">
-                            {dat.branch_name}
-                          </td>
-                          <td className="py-2 font-normal text-sm">
-                            {dat.billed_amount}
-                          </td>
-                          <td className="py-2 font-normal text-sm">
-                            {dat.amount}
-                          </td>
-                          <td className="py-2 font-normal text-sm">
-                            {dat.reference}
-                          </td>
-                          <td className="py-2 font-normal text-sm">
-                            {dat.card_type}
-                          </td>
-                        </tr>
-                      );
-                    })}
-              </tbody>
-              {!data.length && (
-                <div className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
-                  <img
-                    src="/assets/NothingHereYet.png"
-                    alt="Nothing here yet image"
-                  />
-                </div>
-              )}
-            </table>
+              );
+            })}
+          </tbody>
+          {!data.length && (
+            <div className="absolute  left-[50%] top-[200px] -translate-x-[50%] -translate-y-[50%]">
+              <img
+                src="/assets/NothingHereYet.png"
+                alt="Nothing here yet image"
+              />
+            </div>
+          )}
+         
+        </table>
+        
           </div>
+        <div className="xs:hidden sm:flex justify-end  relative h-2 m-4 ">
+              <div className="ma mt-[15.2px] flex ">
+              <IoMdArrowDropdown className={!data.length ? "flex justify-center m-auto text-gray-500 cursor-pointer" : "flex justify-center m-auto text-[#4E00AD] cursor-pointer "} />
+              <p className={!data.length ? "text-xs albert text-gray-500" : "text-xs albert text-black"}>9 row(s) per page</p>
+              </div>
+              <div className="m mx-2 " >
+              <HiOutlineArrowNarrowDown onClick={handleTransScroll}  className={!data.length ? "flex justify-center m-auto text-gray-500 cursor-pointer" : "flex justify-center m-auto text-[#4E00AD] cursor-pointer"} />
+              <p className={!data.length ? "text-xs albert text-gray-500" : "text-xs albert text-black"}>More</p>
+              </div>
+            </div>
+            </div>
             <button
               disabled={!data.length}
               className="mx-3 mb-3 xs:mb-0 sm:mx-0 bg-[#4E00AD] text-white disabled:text-gray-400 disabled:font-normal disabled:bg-gray-100 flex  w-fit rounded-xl p-3 lg:mt-4 sm:mt-4 "

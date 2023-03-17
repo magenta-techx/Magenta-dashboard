@@ -53,11 +53,8 @@ useEffect(() => {
         </div>
       )}
       <div className="lg:w-[80%] xs:w-[100%]  overflow-x-hidden sm:px-8 sm:py-6 h-[92%] sm:h-screen  overflow-y-scroll ">
-      <div className="w-full xs:hidden sm:flex bg-white   ">
+      <div className="w-full flex  bg-white   ">
           <Header showLogo={true}/>
-        </div>
-        <div className="w-full  bg-white sm:hidden "   onClick={() => navigate("/branch")}>
-          <Header showLogo={false}/>
         </div>
         <section>
           <div className="wrap sm:justify-between flex sm:flex-row flex-col gap-4 lg:justify-between py-4">

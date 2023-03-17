@@ -130,7 +130,7 @@ const DashboardCol1 = () => {
         </div>
       </div>
       <div className="flex sm:w-full justify-between gap-4 mx-4 sm:ml-0 flex-wrap sm:flex-nowrap">
-        <div className="w-full  sm:w-1/3 sm:h-[162px] border-[#E1E1E1] sm:bg-white border-2 rounded-xl lg:flex gap-6 px-6 py-4 bg-[#EEE8F8] flex items-center sm:flex-col sm:items-start">
+        <div className="w-full   sm:w-[45%] sm:h-[162px] border-[#E1E1E1] sm:bg-white border-2 rounded-xl lg:flex gap-6 px-6 py-4 bg-[#EEE8F8] flex items-center sm:flex-col sm:items-start">
           <div className="bg-white sm:bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
             <HiOutlineCash size="25px" className="text-[#4E00AD]" />
           </div>
@@ -158,7 +158,7 @@ const DashboardCol1 = () => {
               <h4 className="text-[rgba(0,0,0,0.82)] font-normal sm:text-sm sm:pt-4 lg:pt-1">
                 Available Cash
               </h4>
-              <h2 className="inter text-[24px] font-normal sm:font-bold flex items-center">
+              <h2 className="inter text-[24px] font-normal flex items-center">
                 <TbCurrencyNaira className="sm:block hidden" />
                 <NumericFormat
                   value={available_cash ? available_cash : 0}
@@ -179,7 +179,7 @@ const DashboardCol1 = () => {
               <h4 className="font-normal sm:text-sm text-[rgba(0,0,0,0.82)]">
                 Today Sales
               </h4>
-              <h2 className="inter text-[24px] font-normal sm:font-bold flex items-center">
+              <h2 className="inter text-[24px] font-normal  flex items-center">
                 <TbCurrencyNaira className="hidden sm:block" />
                 <NumericFormat
                   value={today_sale ? today_sale : 0}

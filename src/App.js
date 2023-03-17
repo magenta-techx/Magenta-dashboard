@@ -46,76 +46,30 @@ const ViewBranchReport = lazy(() => import("./components/ViewBranchReport"));
 function App() {
   const location = useLocation();
   const {
-    showNav,
-    showCreateBranch,
     setShowCreateBranch,
-    showDeletedMsg,
     setShowDeletedMsg,
-    showDeleteBranch,
     setShowDeleteBranch,
-    setSelectedOption,
-    showEdit,
     setShowEdit,
-    showEditSucc,
     setShowEditSucc,
     setShowAddAccount,
-    showAddAccount,
-    showWithdrawSucc,
+   
     setShowWithdrawSucc,
-
-    setWithdrawOTP,
-    showOTP,
+   
     setShowOTP,
-    setName,
-    setAddress,
-    setPassCode,
-    setEditBranchAddress,
-    setEditBranchName,
-    setEditBranchPasscode,
-    showSelectHourly,
     setShowSelectHourly,
-    frequency,
     setFrequency,
-    showAutoSweepOTP,
     setShowAutoSweepOTP,
-    setAccountName,
-    setAccountNumber,
-    setIsLoading,
-    showAcctSucc,
-    showAcctDelete,
     setShowAcctDelete,
     setShowAcctSucc,
-    showWithdrawAmount,
     setShowWithdrawAmount,
-    showAutoSweepAmount,
     setShowAutoSweepAmount,
-    setWithdrawAmount,
-    showWithdrawOTP,
     setShowWithdrawOTP,
-    showSelectAutoSweep,
     setShowSelectAutoSweep,
-    setSelected,
-    isLoading,
     setShowDeleteSucc,
-    showDeleteSucc,
     showError,
-
     setShowError,
-    state: { showProfile },
-    dispatch,
-    error,
     showSuccess,
-    success,
     setShowSuccess,
-    activate,
-    resume,
-    pause,
-    // getRemainingTime,
-    remaining,
-    open,
-    timeTillPrompt,
-    seconds,
-    handleStillHere,
   } = ItemContext();
   let docTitle = document.title;
   const navigate = useNavigate();
@@ -160,7 +114,6 @@ function App() {
         <Alert />
         <IdleTimer />
         <Modals />
-
 
         <Suspense
           fallback={

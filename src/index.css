@@ -4,20 +4,20 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Albert+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-html{
-   scroll-behavior: smooth;
+html {
+  scroll-behavior: smooth;
 }
 .content-dashboard tr:not(:last-child) {
   border-bottom: 1px solid #c7afe4;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body{
+body {
   scroll-behavior: smooth;
 }
 .input {
@@ -40,19 +40,18 @@ input::-webkit-inner-spin-button {
 }
 
 .check :checked + div::after {
-    content: "✔";
-    position: absolute;
+  content: "✔";
+  position: absolute;
 
-    width: fit-content;
-    height: fit-content;
-    top: 6px;
-    right: 16px;
-    font-size: 20px;
-    color: white;
+  width: fit-content;
+  height: fit-content;
+  top: 6px;
+  right: 16px;
+  font-size: 20px;
+  color: white;
 }
-.check :checked + div{
-    border: 1px solid #8652c7;
-
+.check :checked + div {
+  border: 1px solid #8652c7;
 }
 .wrap::-webkit-scrollbar{
   display: none;
@@ -65,3 +64,22 @@ input::-webkit-inner-spin-button {
   display: none;
 }
 
+.grid-work .dev:first-child {
+  margin-top: 70px;
+  
+}
+
+.grid-work .dev:nth-child(even):not(:nth-child(2)) {
+  position: relative;
+  top: -68px;
+}
+
+@media (min-width: 640px) {
+  .grid-work .dev:nth-child(even):not(:nth-child(2)) {
+    position: static;
+    top: 0;
+  }
+  .grid-work .dev:first-child {
+    margin-top: 0;
+  }
+}

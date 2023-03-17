@@ -1,18 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BsTrash } from "react-icons/bs";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 
-const AllBranch = ({ branch }) => {
+const AllBranch = ({ branch, isDev }) => {
   const {
     setShowDeleteBranch,
     dispatch,
     setEditBranchAddress,
     setEditBranchName,
     setEditBranchPasscode,
-    state: { ForEachAcctDetail },
   } = ItemContext();
 
   const navigate = useNavigate();
@@ -29,23 +28,23 @@ const AllBranch = ({ branch }) => {
     dispatch({ type: "Individual Details", payload: item });
   };
   return (
-    <div className="flex flex-col gap-2  lg:w-[280px] sm:w-[275px] xs:w-[1/2]">
+    <div className={`flex flex-col w-full h-fit gap-2  lg:w-full sm:w-full ${isDev?"dev":""}`}>
       <div className="bg-[#4E00AD] h-[57px] px-3  flex rounded-tl-lg rounded-tr-lg justify-between items-center">
-        <h2 className="text-white text-xl inter">{branch.name}</h2>
+        <h2 className="text-white text-xl inter">{branch?.name}</h2>
         <BsTrash
           className="text-white text-xl cursor-pointer"
           onClick={() => handleDelete(branch)}
         />
       </div>
       <div className="border  bg-[#FAFAFA] rounded-bl-lg rounded-br-lg">
-        <div className="sm:border-b-[#8652C7] xs:first-letter sm:border-b m-2 py-2">
-          <p className="text-[#6B778C] xs:hidden sm:flex  lg:text-sm sm:text-[12px] flex gap-2 inter font-normal">
-            <span>Date Created:</span>
-            <span className="text-black">
+        <div className="sm:border-b-[#8652C7] sm:border-b m-2 py-2">
+          <p className="text-[#6B778C] lg:text-sm sm:text-[12px] flex gap-2 inter font-normal">
+            <span>Date:</span>
+            <span className="text-black ">
               {branch.created_at?.substring(0, 10)}
             </span>
           </p>
-          <p className="text-[#6B778C] lg:text-sm sm:text-[12px] flex gap-2 inter font-normal">
+          <p className="text-[#6B778C] hidden  lg:text-sm sm:text-[12px] sm:flex gap-2 inter font-normal">
             <span>Address:</span>
             <span className="text-black whitespace-nowrap overflow-hidden text-ellipsis">
               {branch?.address}
@@ -61,7 +60,7 @@ const AllBranch = ({ branch }) => {
             </span>
           </p>
 
-          <p className="text-[#6B778C] xs:hidden sm:flex lg:text-sm sm:text-[12px] flex gap-2 items-center albert">
+          <p className="text-[#6B778C] hidden lg:text-sm sm:text-[12px] sm:flex gap-2 items-center albert">
             <span>Total Transactions:</span>
             <span className="text-black text-xl flex items-center">
               {branch?.sales_and_customers.total_transactions}

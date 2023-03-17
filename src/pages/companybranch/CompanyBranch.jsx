@@ -1,12 +1,10 @@
-import axios from "axios";
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useEffect } from "react";
 import Branch from "../../components/Branch";
 import Header from "../../components/Header";
 import { HiArrowRight, HiOutlineFilter } from "react-icons/hi";
-import { motion } from "framer-motion";
 import { BsPlusLg, BsSearch } from "react-icons/bs";
 import { ItemContext } from "../../contextApi/stateMang.contextApi";
-import { Outlet, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 
 const CompanyBranch = () => {
@@ -51,9 +49,9 @@ const CompanyBranch = () => {
           </div>
           <div className=" flex flex-col gap-4 py-6 w-full">
             <div className="sm:flex justify-between w-full xs:flex-col sm:flex-row">
-              <p className="font-medium text-[24px] albert xs:p-5 sm:P-0">Added Branch</p>
+              <p className="font-medium text-[24px] albert m-5 sm:P-0">Added Branch</p>
               <div>
-                <div className="sm:w-[344px]  bg-white opacity-75 rounded-xl border gap-4 px-4 h-[48px] flex items-center justify-end xs:mx-5 sm:p-0">
+                <div className="sm:w-[344px]  bg-white opacity-75 rounded-xl border gap-4 px-4 h-[48px] flex items-center justify-end mx-5 sm:p-0">
                   <div className="">
                     <BsSearch className="text-[#4E00AD]" />
                   </div>
@@ -67,12 +65,12 @@ const CompanyBranch = () => {
                 </div>
               </div>
             </div>
-            <div className="bran border xs:border-none p-5 flex sm:flex-col rounded-[12px] overflow-y-auto">
+            <div className="bran sm:border border-none p-5 flex sm:flex-col rounded-[12px] overflow-y-auto">
               <div className="flex sm:flex-wrap gap-4 ">
                 {branchDetails
                   ?.filter((a, idx) => idx < 2)
                   .map((detail) => {
-                    return <Branch key={detail.id} branch={detail} />;
+                    return <Branch isDev={false} key={detail.id} branch={detail} />;
                   })}
 
                 <div className="lg:w-[300px] lg:h-[240px] flex justify-center items-center">
@@ -89,7 +87,7 @@ const CompanyBranch = () => {
               {branchDetails?.length >= 2 && (
                 <div className="flex sm:justify-end sm:w-full sm:items-center xs:items-end">
                   <div
-                    className="cursor-pointer flex items-center gap-4 albert"
+                    className="cursor-pointer hidden sm:flex items-center gap-4 albert"
                     onClick={handleClick2}
                   >
                     <p className="text-[18px] font-medium">View all</p>
@@ -98,8 +96,17 @@ const CompanyBranch = () => {
                 </div>
               )}
             </div>
+            <div className="flex sm:justify-end sm:w-full sm:items-center xs:items-end">
+                  <div
+                    className="cursor-pointer ml-auto mx-4 flex sm:hidden items-center gap-4 albert"
+                    onClick={handleClick2}
+                  >
+                    <p className="text-[18px] font-medium">View all</p>
+                    <HiArrowRight className="text-xl text-[#7132BD]" />
+                  </div>
+                </div>
             <div className="w-full lg:flex sm:block gap-10 ">
-              <div className="lg:w-1/2 border rounded-lg shadow-md xs:mx-5 sm:m-0 h-fit flex flex-col p-4 gap-4">
+              <div className="lg:w-1/2 border rounded-lg shadow-md xs:mx-5 sm:m-0 h-fit flex flex-col m-4 p-4 gap-4">
                 <h2 className="font-medium text-xl">Create New Branch</h2>
                 <p className="lg:text-[18px] sm:text-[16px]">
                   You have created {branchDetails.length} branches for{" "}
@@ -125,7 +132,7 @@ const CompanyBranch = () => {
                   </button>
                 </div>
               </div>
-              <div className="lg:w-1/2  xs:mx-5 sm:m-0  xs:mt-2 border sm:mt-5 rounded-lg shadow-md h-fit flex flex-col p-4 gap-4"></div>
+              <div className="lg:w-1/2 m-4   xs:mx-5 sm:m-0  xs:mt-2 border sm:mt-5 rounded-lg shadow-md h-fit flex flex-col p-4 gap-4"></div>
             </div>
           </div>
           {/* <Outlet /> */}

@@ -77,7 +77,7 @@ const Settings = ({ onChange = () => {}, removeFile = () => {} }) => {
 
     return false;
   };
-  // console.log(state.settingStates);
+  
   return (
     <div className="flex sm:flex-row flex-col-reverse w-screen">
       {showNav && (
