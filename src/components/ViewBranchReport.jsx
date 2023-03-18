@@ -102,7 +102,7 @@ const ViewBranchReport = () => {
             >
               <BsArrowLeft className="text-[#4E00AD] text-2xl" />
             </div>
-            <p className="text-2xl font-medium abert">{report?.name}</p>
+            <p className="text-2xl -mt-5 sm:-mt-0 font-medium abert">{report?.name}</p>
           </div>
           <p className="text-[#6B778C] text-[16px]  gap-2 hidden sm:flex">
             <span>Branch Id</span>

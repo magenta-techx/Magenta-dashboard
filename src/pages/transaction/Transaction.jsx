@@ -84,9 +84,9 @@ const Transaction = () => {
                 {data.map((item) => (
                   <TransactionCard data={item} key={item.id} />
                 ))}
-                <div className="div sm:hidden">
+                <div className="div sm:hidden relative flex m-auto mt-[30%]">
                   {!data.length && (
-                    <div className="absolute  left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
+                    <div className="relative sm:absolute  left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
                       <img
                         src="/assets/NothingHereYet.png"
                         alt="Nothing here yet image"
