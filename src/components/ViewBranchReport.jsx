@@ -145,7 +145,7 @@ const ViewBranchReport = () => {
         </div>
 
         <div className="sm:flex p-2 w-full justify-between sm:m-0 gap-4 grid grid-cols-2">
-          <div className="sm:w-80 w-[1/2] h-[150px] sm:h-fit border lg:flex lg:gap-6 sm:gap-2 rounded-lg px-6 py-4">
+          <div className="sm:w-80 w-[1/2] h-fit sm:h-fit border lg:flex lg:gap-6 sm:gap-2 rounded-lg px-6 py-4">
             <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
               <HiOutlineChartSquareBar size="25px" className="text-[#4E00AD]" />
             </div>
@@ -159,7 +159,7 @@ const ViewBranchReport = () => {
               </h2>
             </div>
           </div>
-          <div className="sm:w-80 w-[1/2] h-[150px] sm:h-fit border lg:flex lg:gap-6 sm:gap-2 rounded-lg px-6 py-4">
+          <div className="sm:w-80 w-[1/2] h-fit sm:h-fit border lg:flex lg:gap-6 sm:gap-2 rounded-lg px-6 py-4">
             <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
               <HiOutlineUserGroup size="20px" className="text-[#4E00AD]" />
             </div>
@@ -175,7 +175,7 @@ const ViewBranchReport = () => {
               </h2>
             </div>
           </div>
-          <div className="sm:w-80 w-[1/2] h-[150px] rounded-lg sm:h-fit border lg:flex lg:gap-6 sm:gap-2rounded-lg px-6 py-4">
+          <div className="sm:w-80 w-[1/2] h-fit rounded-lg sm:h-fit border lg:flex lg:gap-6 sm:gap-2rounded-lg px-6 py-4">
             <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
               <RiCalendar2Line size="25px" className="text-[#4E00AD]" />
             </div>
@@ -188,7 +188,7 @@ const ViewBranchReport = () => {
               </h2>
             </div>
           </div>
-          <div className="sm:w-80 w-[1/2] h-[150px] sm:h-fit sm:hidden  border lg:flex lg:gap-6 sm:gap-2 rounded-lg px-6 py-4">
+          <div className="sm:w-80 w-[1/2] h-fit sm:h-fit sm:hidden  border lg:flex lg:gap-6 sm:gap-2 rounded-lg px-6 py-4">
             <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
               <AiOutlineIdcard size="25px" className="text-[#4E00AD]" />
             </div>
@@ -196,7 +196,7 @@ const ViewBranchReport = () => {
               <h4 className="font-light sm:font-normal sm:text-[14px] lg:text-[16px] pt-3 sm:pt-4 sm:text-gray-500">
                 Branch Id
               </h4>
-              <h2 className="font-medium flex items-center text-base sm:text-xl">
+              <h2 className="font-medium flex items-center text-[15px] sm:text-xl">
                 {report?.unique_id}
               </h2>
             </div>
