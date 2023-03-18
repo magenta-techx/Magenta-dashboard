@@ -155,7 +155,7 @@ const DashboardCol1 = () => {
               <BsWallet2 size="20px"  className="sm:h-12 lg:h-fit text-[#4E00AD]" />
             </div>
             <div className="flex flex-col inter sm:albert gap-2 sm:gap-3  ">
-              <h4 className="text-[rgba(0,0,0,0.82)] font-normal sm:text-sm sm:pt-4 lg:pt-1">
+              <h4 className="text-[rgba(0,0,0,0.82)] font-normal sm:text-sm  lg:pt-1">
                 Available Cash
               </h4>
               <h2 className="inter text-[24px] font-normal flex items-center">
