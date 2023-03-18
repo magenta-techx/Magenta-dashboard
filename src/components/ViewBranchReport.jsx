@@ -102,7 +102,7 @@ const ViewBranchReport = () => {
             >
               <BsArrowLeft className="text-[#4E00AD] text-2xl" />
             </div>
-            <p className="text-2xl -mt-5 sm:-mt-0 font-medium abert">{report?.name}</p>
+            <p className="text-2xl -mt-3 sm:-mt-0 font-medium abert">{report?.name}</p>
           </div>
           <p className="text-[#6B778C] text-[16px]  gap-2 hidden sm:flex">
             <span>Branch Id</span>
@@ -188,7 +188,7 @@ const ViewBranchReport = () => {
               </h2>
             </div>
           </div>
-          <div className="sm:w-80 w-[1/2] h-[150px] sm:h-fit sm:hidden  border lg:flex lg:gap-6 sm:gap-2 rounded-lg px-6 py-4">
+          <div className="sm:w-80 w-[1/2] h-[150px] sm:h-fit sm:hidden  border  lg:gap-6 sm:gap-2 rounded-lg px-6 py-4">
             <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
               <AiOutlineIdcard size="25px" className="text-[#4E00AD]" />
             </div>
