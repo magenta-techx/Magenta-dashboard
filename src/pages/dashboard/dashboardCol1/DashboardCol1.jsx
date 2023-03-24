@@ -129,9 +129,9 @@ const DashboardCol1 = () => {
           </div>
         </div>
       </div>
-      <div className="flex w-full gap-6 justify-between">
-        <div className="w-80 h-fit border lg:flex sm:block  gap-6 rounded-lg px-6 py-4">
-          <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
+      <div className="flex sm:w-full justify-between gap-4 mx-4 sm:ml-0 flex-wrap sm:flex-nowrap">
+        <div className="w-full   sm:w-[45%] sm:h-[162px] border-[#E1E1E1] sm:bg-white border-2 rounded-xl lg:flex gap-6 px-6 py-4 bg-[#EEE8F8] flex items-center sm:flex-col sm:items-start">
+          <div className="bg-white sm:bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
             <HiOutlineCash size="25px" className="text-[#4E00AD]" />
           </div>
           <div className="flex flex-col lg:gap-3 sm:gap-1 ">
@@ -147,40 +147,46 @@ const DashboardCol1 = () => {
             </h2>
           </div>
         </div>
-        <div className="w-80 h-fit border lg:flex sm:block gap-6 rounded-lg px-6 py-4">
-          <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
-            <BsWallet2 size="20px" className="text-[#4E00AD]" />
+        <div className="w-full sm:w-full flex gap-4">
+          <div className="w-1/2 flex flex-col sm:w-full sm:h-[162px] border-[#E1E1E1] border-2 rounded-xl lg:flex gap-2 sm:gap-6 px-6 sm:py-4 py-2">
+            <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
+              <BsWallet2 size="20px"  className="sm:h-12 lg:h-fit text-[#4E00AD]" />
+            </div>
+            <div className="flex flex-col inter sm:albert gap-2 sm:gap-3  ">
+              <h4 className="text-[rgba(0,0,0,0.82)] font-normal sm:text-sm  lg:pt-1">
+                Available Cash
+              </h4>
+              <h2 className="inter text-[24px] font-normal flex items-center">
+                <TbCurrencyNaira className="sm:block hidden" />
+                <NumericFormat
+                  value={available_cash ? available_cash : 0}
+                  thousandSeparator=","
+                  displayType="text"
+                  renderText={(value) => (
+                    <b>{value.includes("-") ? "0" : value}</b>
+                  )}
+                />
+              </h2>
+            </div>
           </div>
-          <div className="flex flex-col lg:gap-3 sm:gap-1 ">
-            <h4 className="albert font-normal sm:text-sm sm:pt-4 lg:pt-1">Available Cash</h4>
-            <h2 className="inter text-[24px] font-bold flex items-center">
-              <TbCurrencyNaira />
-              <NumericFormat
-                value={available_cash ? available_cash : 0}
-                thousandSeparator=","
-                displayType="text"
-                renderText={(value) => (
-                  <b>{value.includes("-") ? "0" : value}</b>
-                )}
-              />
-            </h2>
-          </div>
-        </div>
-        <div className="w-80 h-fit border lg:flex sm:block  gap-6 rounded-lg px-6 py-4">
-          <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
-            <HiOutlineChartSquareBar size="20px" className="text-[#4E00AD]" />
-          </div>
-          <div className="flex flex-col lg:gap-3 sm:gap-1 ">
-            <h4 className="albert font-normal sm:text-sm sm:pt-4 lg:pt-1">Today Sales</h4>
-            <h2 className="inter text-[24px] font-bold flex items-center">
-              <TbCurrencyNaira />
-              <NumericFormat
-                value={today_sale ? today_sale : 0}
-                thousandSeparator=","
-                displayType="text"
-                renderText={(value) => <b>{value}</b>}
-              />
-            </h2>
+          <div className="w-1/2 flex flex-col sm:w-full sm:h-[162px] border-[#E1E1E1] border-2 rounded-xl lg:flex gap-2 sm:gap-6 px-6 sm:py-4 py-2">
+            <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
+              <HiOutlineChartSquareBar size="20px" className="text-[#4E00AD]" />
+            </div>
+            <div className="flex flex-col inter sm:albert gap-2 sm:gap-3 ">
+              <h4 className="font-normal sm:text-sm text-[rgba(0,0,0,0.82)]">
+                Today Sales
+              </h4>
+              <h2 className="inter text-[24px] font-normal  flex items-center">
+                <TbCurrencyNaira className="hidden sm:block" />
+                <NumericFormat
+                  value={today_sale ? today_sale : 0}
+                  thousandSeparator=","
+                  displayType="text"
+                  renderText={(value) => <b>{value}</b>}
+                />
+              </h2>
+            </div>
           </div>
         </div>
       </div>

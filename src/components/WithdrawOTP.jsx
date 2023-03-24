@@ -61,7 +61,7 @@ const WithdrawOTP = () => {
         setIsLoading(false);
         console.log(error);
 
-        console.log("peter");
+   
       }
     }
     // setOTP("");

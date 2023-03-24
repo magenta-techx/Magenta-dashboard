@@ -168,21 +168,23 @@ const Context = ({ children }) => {
       setRemainingTime(Math.ceil(getRemainingTime() / 1000));
     }, 1000);
 
-    return () => {
-      clearInterval(timeleft);
+      return () => {
+        clearInterval(timeleft);
+      };
+    }, []);
+    const handleStillHere = () => {
+      activate();
+   
     };
-  }, []);
-  const handleStillHere = () => {
-    activate();
-    // console.log("Logged out");
-  };
-  if (!localStorage.getItem("isAuth")) {
-    pause();
-    reset();
-  } else {
-    resume();
-    // reset();
-  }
+    if (!localStorage.getItem("isAuth")) {
+      pause();
+      reset();
+    } else {
+      resume();
+      // reset();
+    }
+  
+
   const Get_Branch = async () => {
     let controller = new AbortController();
     (async () => {
@@ -232,7 +234,7 @@ const Context = ({ children }) => {
     } catch (err) {}
   };
   const GET_MERCHANT_TRANSACTION = async () => {
-    // console.log("merchant")
+    
     const token = localStorage.getItem("login_token");
     try {
       const res = await axios.get(
@@ -301,7 +303,7 @@ const Context = ({ children }) => {
     }
   };
 
-  // console.log("first");
+ 
   const GET_ACCOUNT_NAME = async () => {
     const token = localStorage.getItem("login_token");
     try {

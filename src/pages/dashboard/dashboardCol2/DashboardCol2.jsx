@@ -16,8 +16,14 @@ const DashboardCol2 = () => {
             }}
             className="flex gap-6 items-center text-white"
           >
-            <small className="text-sm albert font-normal">Refresh</small>
-            <img src="/assets/refresh.png" alt="refresh image" />
+            <small className="text-sm albert font-normal sm:block hidden">
+              Refresh
+            </small>
+            <img
+              src="/assets/refresh.png"
+              alt="refresh image"
+              className="object-cover w-[20px] h-[19.67px] sm:w-[23.23px] sm:h-[22.95px]"
+            />
           </div>
         </div>
         <div>

@@ -32,7 +32,6 @@ const WithdrawalDetails = ({
     <div
       className="w-full h-[43px] relative bg-white rounded-xl flex justify-between p-2 albert items-center cursor-pointer"
       onClick={() => {
-        console.log(ref);
         ref.current.checked = true;
         setSelected(true);
         // localStorage.setItem("num", JSON.stringify(account_number));
@@ -56,7 +55,7 @@ const WithdrawalDetails = ({
               type: "Individual AcctDetails",
               payload: account,
             });
-            console.log(account);
+            
             setSelected(true);
             localStorage.setItem("account", JSON.stringify(account));
             localStorage.setItem("num", JSON.stringify(id));

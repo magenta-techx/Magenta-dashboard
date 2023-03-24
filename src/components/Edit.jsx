@@ -4,6 +4,7 @@ import { FaTimes } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 import ShowChangePassword from "./ShowEditSucc";
+import Header from "./Header";
 
 const Edit = () => {
   const {
@@ -65,9 +66,9 @@ const Edit = () => {
 
   return (
     <div
-      onClick={(e) => e.stopPropagation()}
-      className="w-[404px] h-[487px] bg-white rounded-3xl relative p-6"
-    >
+    onClick={(e) => e.stopPropagation()}
+    className="w-full h-full sm:w-[487px] overflow-x-hidden overflow-y-scroll pb-10 sm:pb-0 sm:overflow-hidden sm:h-[468px] bg-white sm:rounded-3xl relative sm:p-6 poppins"
+  >
       <div
         onClick={() => {
           setShowEdit(false);
@@ -76,11 +77,24 @@ const Edit = () => {
           }
           // document.body.style.overflow = "visible";
         }}
-        className="albert absolute w-[60px] h-[60px] flex justify-center items-center rounded-full bg-[#EEE8F8] cursor-pointer top-0 -right-4"
-      >
+        className="absolute w-[60px] h-[60px] sm:flex justify-center items-center rounded-full bg-[#EEE8F8] top-0 -right-4 cursor-pointer hidden"
+        >
         <img src="/assets/x.png" alt="Delete image" />
       </div>
       <form className="flex flex-col gap-4" onSubmit={(e) => handleSubmit(e)}>
+      <div className="w-full bg-white sm:hidden mb-4">
+          <Header
+            showLogo={false}
+            handleClick={() => {
+              setShowEdit(false);
+              // document.body.style.overflow = "visible";
+              if (isLoading === true) {
+                setIsLoading(false);
+              }
+            }}
+          />
+        </div>
+        <div className="flex flex-col gap-4 mx-4 sm:mx-0">
         <h1 className="text-xl  font-medium">Edit Branch Information</h1>
         <div className="flex flex-col gap-4 w-full">
           <label className="text-lg albert font-normal" htmlFor="name">
@@ -145,6 +159,7 @@ const Edit = () => {
             "Save Changes"
           )}
         </button>
+        </div>
       </form>
       {/* {showChangePassword && (
         <div

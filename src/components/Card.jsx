@@ -38,7 +38,6 @@ const Card = ({
   const handleShowAcctDeleteMsg = (item) => {
     dispatch({ type: "Individual AcctDetails", payload: item });
     setShowAcctDelete(true);
-    // document.body.style.overflow = "hidden";
   };
   return (
     <>
@@ -71,7 +70,7 @@ const Card = ({
             {detail.isAbtDel && (
               <div
                 onClick={() => handleShowAcctDeleteMsg(detail)}
-                className="absolute w-[107px] h-[60px] bg-white  flex justify-center items-center gap-2 rounded-2xl text-[#DD55D4] cursor-pointer"
+                className="absolute -left-20 sm:-left-0 w-[107px] h-[60px] bg-white  flex justify-center items-center gap-2 border border-[#AF8BDA] rounded-2xl text-[#DD55D4] cursor-pointer"
               >
                 <TbTrash size="20px" className=" cursor-pointer" />
                 <small className="text-sm poppins">Delete</small>

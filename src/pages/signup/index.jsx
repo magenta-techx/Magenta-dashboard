@@ -67,7 +67,7 @@ const Onboarding = () => {
           ))}
         </ul>
       </aside>
-      <main className="bg-white flex justify-center  lg:w-[60%] items-center h-fit flex-col gap-10 ">
+      <main className="bg-white flex justify-center  lg:w-[60%] items-center h-fit flex-col gap-10 overflow-y-hidden">
         {/* Onboarding Pages */}
         {currentStep === 0 && (
           <UserDetails

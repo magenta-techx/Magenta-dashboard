@@ -9,7 +9,7 @@ const GetStarted = () => {
     const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate("/")
+        navigate("/login")
     }
     const {setShowNav, setShowFooter} = ItemContext();
     useEffect(() => {

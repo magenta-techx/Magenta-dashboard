@@ -131,7 +131,10 @@ const VerificationComponent = () => {
             
             Verify Account
           </button>
-          <p className="pb-5"></p>
+          <Link to={"/signup"}>
+          {" "}
+          Don't have an account? <span className="text-violet-500">Sign Up</span>
+        </Link>
         </div>
       </div>
     </div>

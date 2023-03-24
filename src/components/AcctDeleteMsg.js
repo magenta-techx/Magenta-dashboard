@@ -81,8 +81,7 @@ const AcctDeleteMsg = () => {
         <div
           onClick={() => {
             setShowAcctDelete(false);
-            // document.body.style.overflow = "visible";
-            console.log(filterColon);
+            setIsLoading(false);
           }}
           className="bg-[#4E00AD] w-[140px] h-[46px] rounded-xl text-white flex justify-center items-center cursor-pointer"
         >
@@ -96,9 +95,7 @@ const AcctDeleteMsg = () => {
         >
           {isLoading ? (
             <div className="flex items-center gap-4">
-              <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent">
-                null
-              </div>
+              <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent"></div>
             </div>
           ) : (
             <div className="text-[#DD55D4] flex items-center gap-4 font-normal">

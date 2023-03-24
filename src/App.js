@@ -47,75 +47,30 @@ const ViewBranchReport = lazy(() => import("./components/ViewBranchReport"));
 function App() {
   const location = useLocation();
   const {
-    showNav,
-    showCreateBranch,
     setShowCreateBranch,
-    showDeletedMsg,
     setShowDeletedMsg,
-    showDeleteBranch,
     setShowDeleteBranch,
-    setSelectedOption,
-    showEdit,
     setShowEdit,
-    showEditSucc,
     setShowEditSucc,
     setShowAddAccount,
-    showAddAccount,
-    showWithdrawSucc,
+   
     setShowWithdrawSucc,
-    setWithdrawOTP,
-    showOTP,
+   
     setShowOTP,
-    setName,
-    setAddress,
-    setPassCode,
-    setEditBranchAddress,
-    setEditBranchName,
-    setEditBranchPasscode,
-    showSelectHourly,
     setShowSelectHourly,
-    frequency,
     setFrequency,
-    showAutoSweepOTP,
     setShowAutoSweepOTP,
-    setAccountName,
-    setAccountNumber,
-    setIsLoading,
-    showAcctSucc,
-    showAcctDelete,
     setShowAcctDelete,
     setShowAcctSucc,
-    showWithdrawAmount,
     setShowWithdrawAmount,
-    showAutoSweepAmount,
     setShowAutoSweepAmount,
-    setWithdrawAmount,
-    showWithdrawOTP,
     setShowWithdrawOTP,
-    showSelectAutoSweep,
     setShowSelectAutoSweep,
-    setSelected,
-    isLoading,
     setShowDeleteSucc,
-    showDeleteSucc,
     showError,
-    showFooter,
-    setShowFooter,
     setShowError,
-    state: { showProfile },
-    dispatch,
-    error,
     showSuccess,
-    success,
     setShowSuccess,
-    activate,
-    resume,
-    pause,
-    // getRemainingTime,
-    remaining,
-    open,
-    timeTillPrompt,
-    handleStillHere,
   } = ItemContext();
   let docTitle = document.title;
   const navigate = useNavigate();
@@ -162,335 +117,11 @@ function App() {
 
   return (
     <>
-      <motion.div
-        animate={{ y: showError ? 10 : -100 }}
-        transition={{ type: "" }}
-        className={`bg-[#EEE8F8] p-4 poppins  w-fit gap-10 items-center fixed right-10  border-l-4   top-5 z-[100]   h-fit  border-l-green-700 ${
-          !error ? "hidden" : "flex"
-        }`}
-      >
-        <p> {showError ? error : error}</p>
+      <div className="flex relative   sm:w-[100%]  h-screen overflow-hidden">
+        <Alert />
+        <IdleTimer />
+        <Modals />
 
-        <img
-          onClick={() => setShowError(false)}
-          src="assets/x.png"
-          className="object-cover w- cursor-pointer h-8"
-        />
-      </motion.div>
-      <motion.div
-        animate={{ y: showSuccess ? 10 : -100 }}
-        transition={{ type: "tween" }}
-        className={`bg-[#EEE8F8] p-4 poppins  w-fit gap-10 items-center fixed right-10  border-l-4   top-5 z-[100]   h-fit  border-l-green-700
-        ${!success ? "hidden" : "flex"}`}
-      >
-        <p> {showSuccess ? success : success}</p>
-        <img
-          onClick={() => setShowSuccess(false)}
-          src="assets/x.png"
-          className="object-cover w- cursor-pointer h-8"
-        />
-      </motion.div>
-
-      {localStorage.getItem("isAuth") && (
-        <motion.div
-          animate={{ y: open ? 10000 : -10 }}
-          transition={{ type: "tween" }}
-          className={`bg-[#EEE8F8] p-3  poppins w-[400px]  gap-10 items-center fixed right-10    top-5 z-[100]   h-fit border border-l-4 border-l-[#200047]
-        ${open ? "flex" : "hidden"}`}
-        >
-          <HiOutlineExclamationCircle size={"30px"} />
-          <div className="w-1/2">
-            <p>
-              Due to inactivity you will be logged out of your account in{" "}
-              {remaining} seconds
-            </p>
-          </div>
-          <div className="w-">
-            <button
-              onClick={handleStillHere}
-              className="bg-white shadow-lg p-2 "
-            >
-              I'm still here
-            </button>
-          </div>
-        </motion.div>
-      )}
-
-      <div className="flex relative sm:w-[100%] h-screen sm:justify-center  m-auto">
-
-        {showNav && (
-          <div className="lg:w-[20%] xs:hidden h-screen sm:w-[107px] sm:min-h-screen sm:flex min-h-screen bg-[#200047] flex flex-col">
-            <Navbar />
-          </div>
-        )}
-        {
-          showFooter && (
-            <div className="flex flex-col mt-auto  bottom-0">
-              <BNav />
-            </div>
-          )
-        }
-        {showCreateBranch && isAuth && (
-          <div
-            onClick={() => {
-              setShowCreateBranch(false);
-              setName("");
-              setAddress("");
-              setPassCode("");
-              // document.body.style.overflow = "visible";
-              if (isLoading === true) {
-                setIsLoading(false);
-              }
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-20 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <CreateBranch />
-          </div>
-        )}
-        {showWithdrawAmount && isAuth && (
-          <div
-            onClick={() => {
-              setShowWithdrawAmount(false);
-              setWithdrawAmount("");
-              // document.body.style.overflow = "visible";
-              setSelected(false);
-              localStorage.removeItem("account");
-              // localStorage.removeItem("num");
-              if (isLoading === true) {
-                setIsLoading(false);
-              }
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center px-20"
-          >
-            <WithdrawAmount />
-          </div>
-        )}
-        {frequency && isAuth && (
-          <div
-            onClick={() => {
-              setFrequency(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center px-20"
-          >
-            <Frequency />
-          </div>
-        )}
-        {showAutoSweepAmount && isAuth && (
-          <div
-            onClick={() => {
-              setShowAutoSweepAmount(false);
-              setSelected(false);
-              // document.body.style.overflow = "visible";
-              localStorage.removeItem("account");
-              // localStorage.removeItem("num");
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center px-20"
-          >
-            <ShowAutoSweepAmount />
-          </div>
-        )}
-        {showAutoSweepOTP && isAuth && (
-          <div
-            onClick={() => {
-              setShowAutoSweepOTP(false);
-              // document.body.style.overflow = "visible";
-              localStorage.removeItem("account");
-              // localStorage.removeItem("num");
-              if (isLoading === true) {
-                setIsLoading(false);
-              }
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center px-20"
-          >
-            <AutoSweepOTP />
-          </div>
-        )}
-        {showWithdrawSucc && isAuth && (
-          <div
-            onClick={() => {
-              setShowWithdrawSucc(false);
-              setWithdrawOTP("");
-              setWithdrawAmount("");
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center px-20"
-          >
-            <WithdrawSuccMsg />
-          </div>
-        )}
-        {showWithdrawOTP && isAuth && (
-          <div
-            onClick={() => {
-              setShowWithdrawOTP(false);
-              // document.body.style.overflow = "visible";
-              setWithdrawAmount("");
-              localStorage.removeItem("account");
-              // localStorage.removeItem("num");
-              if (isLoading === true) {
-                setIsLoading(false);
-              }
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center px-20"
-          >
-            <WithdrawOTP />
-          </div>
-        )}
-        {showSelectHourly && isAuth && (
-          <div
-            onClick={() => {
-              setShowSelectHourly(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center px-20"
-          >
-            <SelectHourly />
-          </div>
-        )}
-        {showSelectAutoSweep && isAuth && (
-          <div
-            onClick={() => {
-              setShowSelectAutoSweep(false);
-              setSelected(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center px-20"
-          >
-            <SelectAutoSweep />
-          </div>
-        )}
-        {showDeleteBranch && isAuth && (
-          <div
-            onClick={() => {
-              setShowDeleteBranch(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <DeleteBranchMsg />
-          </div>
-        )}
-        {showDeletedMsg && isAuth && (
-          <div
-            onClick={() => {
-              setShowDeletedMsg(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <DeletedMsg />
-          </div>
-        )}
-        {showEdit && isAuth && (
-          <div
-            onClick={() => {
-              setShowEdit(false);
-              setEditBranchAddress("");
-              setEditBranchName("");
-              setEditBranchPasscode("");
-              // document.body.style.overflow = "visible";
-              if (isLoading === true) {
-                setIsLoading(false);
-              }
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <Edit />
-          </div>
-        )}
-        {showEditSucc && isAuth && (
-          <div
-            onClick={() => {
-              setShowEditSucc(false);
-              navigate("/branch/all");
-              setIsLoading(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <ShowEditSucc />
-          </div>
-        )}
-        {showDeleteSucc && isAuth && (
-          <div
-            onClick={() => {
-              setShowDeleteSucc(false);
-              setIsLoading(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <ShowDeleteSucc />
-          </div>
-        )}
-        {showOTP && isAuth && (
-          <div
-            onClick={() => {
-              setShowOTP(false);
-              setAccountName("");
-              setAccountNumber("");
-              // document.body.style.overflow = "visible";
-              if (isLoading === true) {
-                setIsLoading(false);
-              }
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <ShowOTP />
-          </div>
-        )}
-        {showAddAccount && isAuth && (
-          <div
-            onClick={() => {
-              setShowAddAccount(false);
-              setAccountName("");
-              setAccountNumber("");
-              setSelectedOption(null);
-              // document.body.style.overflow = "visible";
-              if (isLoading === true) {
-                setIsLoading(false);
-              }
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <AddAccount />
-          </div>
-        )}
-        {showAcctSucc && isAuth && (
-          <div
-            onClick={() => {
-              setShowAcctSucc(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <AcctSuccMsg />
-          </div>
-        )}
-        {showAcctDelete && isAuth && (
-          <div
-            onClick={() => {
-              setShowAcctDelete(false);
-              // document.body.style.overflow = "visible";
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
-          >
-            <AcctDeleteMsg />
-          </div>
-        )}
-        {showProfile && isAuth && (
-          <div
-            onClick={() => {
-              // document.body.style.overflow = "visible";
-              dispatch({ type: "hide-profile" });
-            }}
-            className="w-full  h-full max-w-7xl m-auto z-50 fixed bg-[rgba(0,0,0,0.5)] flex justify-end items-center"
-          >
-            <ProfilePage />
-          </div>
-        )}
-
-        {/* <div>{timeTillPrompt}</div> */}
         <Suspense
           fallback={
             <span className="flex h-12 w-12   gap-2 absolute top-[50%] right-[50%] ml-10 -translate-x-[50%] -translate-y-[50%] animate-ping">

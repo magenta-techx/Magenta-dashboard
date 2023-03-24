@@ -1,18 +1,15 @@
-import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { HiOutlineChartSquareBar, HiOutlineUserGroup } from "react-icons/hi";
 import { RiCalendar2Line } from "react-icons/ri";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
-import { motion } from "framer-motion";
 import Card from "./Card";
 import Header from "./Header";
 
 const CashOut = () => {
   const {
     setShowAddAccount,
-    setIsLoading,
     isLoading,
     setName,
     setAddress,
@@ -23,11 +20,16 @@ const CashOut = () => {
     time,
     GET_ACCOUNT,
     handleAutoSweepDelete,
-    state: { accountDetails, ForEachAcctDetail },
+    state: { accountDetails },
     dispatch,
-    autoSweepID,
+    showNav,
+    transaction,
+    GET_MERCHANT_TRANSACTION,
   } = ItemContext();
   const get = localStorage.getItem("reset_auto_sweep_result");
+  const all_time_sales = transaction?.all_time_sales;
+  const available_cash = transaction?.available_cash;
+  const total_withdrawal = Number(all_time_sales) - Number(available_cash);
   let items;
   if (localStorage.getItem("item") === null) {
     items = false;
@@ -73,76 +75,111 @@ const CashOut = () => {
   }, []);
 
   return (
-    <div className="lg:w-[80%] sm:w-[90%] overflow-y-scroll min-h-full px-8 py-6 flex flex-col gap-6">
-      <div className="w-full bg-white   ">
-        <Header />
-      </div>
-      <h2 className="font-medium text-xl albert">Cash Out</h2>
-      <div className="flex w-full justify-between gap-4 ">
-        <div className="w-80 h-fit border-[#E1E1E1] border-2 rounded-xl lg:flex gap-6 px-6 py-4">
-          <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
-            <HiOutlineChartSquareBar size="25px" className="text-[#4E00AD]" />
-          </div>
-          <div className="flex flex-col albert gap-3 ">
-            <h4 className="font-normal sm:text-sm sm:pt-4 lg:pt-0 sm:text-gray-500">Total Withdrawal</h4>
-            <h2 className="font-medium flex items-center text-[24px]">
-              <TbCurrencyNaira /> 0
-            </h2>
-          </div>
+    <div className="flex sm:flex-row flex-col-reverse w-screen h-full">
+      {showNav && (
+        <div className="lg:w-[20%] h-fit sm:h-screen sm:w-[107px] sm:min-h-screen sm:flex  bg-[#200047] flex sm:flex-col flex-row items-center">
+          <Navbar />
         </div>
-        <div className="w-80 h-fit border-[#E1E1E1] border-2 rounded-xl lg:flex gap-6 px-6 py-4">
-          <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
-          <HiOutlineUserGroup size="20px" className="text-[#4E00AD]" />
-          </div>
-          <div className="flex flex-col albert gap-3 ">
-            <h4 className="font-normal sm:text-sm sm:pt-4 lg:pt-0 sm:text-gray-500">Total Payments Made</h4>
-            <h2 className="font-medium flex items-center text-[24px]">
-              <TbCurrencyNaira /> 0
-            </h2>
-          </div>
+      )}
+      <div className="lg:w-[80%] xs:w-[100%] overflow-x-hidden overflow-y-scroll h-full sm:h-screen sm:px-8 pb-4 sm:py-6 flex flex-col gap-6 ">
+        <div className="w-full bg-white   ">
+          <Header showLogo={true} />
         </div>
-
-        <div className="w-80 h-fit border-[#E1E1E1] border-2 rounded-xl lg:flex gap-6 px-6 py-4">
-          <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
-            <RiCalendar2Line size="25px" className="text-[#4E00AD]" />
-          </div>
-          <div className="flex flex-col gap-3 albert">
-            <h4 className="font-normal sm:text-sm sm:pt-4 lg:pt-0 sm:text-gray-500">In App Cash</h4>
-            <h2 className="font-medium text-[24px] flex items-center">
-              <TbCurrencyNaira />0
-            </h2>
-          </div>
-        </div>
-      </div>
-      <div className="w-full h-fit flex  gap-4 mt-6">
-        <div className="w-1/2 border-[#E1E1E1] border-2 p-4 rounded-xl flex flex-col gap-4">
-          <p className="text-lg font-normal albert ">
-            Bank account number associated with your magenta account.
-          </p>
-          <div className="flex gap-4 ">
-            {accountDetails.map((detail) => {
-              return (
-                <Card
-                  key={detail.id}
-                  detail={detail}
-                  handleChangeTrue={handleChangeTrue}
-                  handleClose={handleClose}
+        <h2 className="font-medium text-xl albert mx-4 sm:ml-0">Cash Out</h2>
+        <div className=" flex sm:w-full justify-between gap-4 mx-4 sm:ml-0 flex-wrap sm:flex-nowrap">
+          <div className="w-full  sm:w-[45%] sm:h-[162px] border-[#E1E1E1] sm:bg-white border-2 rounded-xl lg:flex gap-6 px-6 py-4 bg-[#EEE8F8] flex items-center sm:flex-col sm:items-start">
+            <div className="bg-white sm:bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
+              <HiOutlineChartSquareBar size="25px" className="text-[#4E00AD]" />
+            </div>
+            <div className="flex flex-col inter sm:albert gap-3 ">
+              <h4 className="font-normal sm:text-sm sm:text-gray-500">
+                Total Withdrawal
+              </h4>
+              <h2 className="font-medium flex items-center text-[24px]">
+                <TbCurrencyNaira className="sm:block hidden" />
+                <NumericFormat
+                  value={total_withdrawal > 0 ? total_withdrawal : 0}
+                  thousandSeparator=","
+                  displayType="text"
+                  renderText={(value) => <b>{value}</b>}
                 />
-              );
-            })}
+              </h2>
+            </div>
           </div>
-          <div className="flex justify-end ">
-            <button
-              onClick={() => {
-                setShowAddAccount(true);
-                setName("");
-                setAddress("");
-                setOTP("");
-                setPassCode("");
-                // document.body.style.overflow = "hidden";
-              }}
-              disabled={accountDetails?.length >= 2 ? true : false}
-              className="text-sm w-[236px] h-[49px] poppins text-white 
+          <div className="w-full sm:w-full flex gap-4">
+            <div className="w-1/2 flex flex-col sm:w-full sm:h-[162px] border-[#E1E1E1] border-2 rounded-xl lg:flex gap-2 sm:gap-6 px-6 sm:py-4 py-2">
+              <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
+                <HiOutlineUserGroup size="20px" className="text-[#4E00AD]" />
+              </div>
+              <div className="flex flex-col inter sm:albert gap-2 sm:gap-3 ">
+                <h4 className="font-normal sm:text-sm text-[rgba(0,0,0,0.82)]">
+                  Total Payments Made
+                </h4>
+                <h2 className="font-medium flex items-center text-[24px]">
+                  <TbCurrencyNaira className="sm:block hidden" />
+                  <NumericFormat
+                    value={all_time_sales ? all_time_sales : 0}
+                    thousandSeparator=","
+                    displayType="text"
+                    renderText={(value) => <b>{value}</b>}
+                  />
+                </h2>
+              </div>
+            </div>
+
+            <div className="w-1/2 flex flex-col gap-2 sm:w-full sm:h-[162px] border-[#E1E1E1] border-2 rounded-xl lg:flex  sm:gap-6 px-6 sm:py-4 py-2">
+              <div className="bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
+                <RiCalendar2Line size="25px" className="text-[#4E00AD]" />
+              </div>
+              <div className="flex flex-col gap-2 sm:gap-3 inter sm:albert">
+                <h4 className="font-normal sm:text-sm sm:text-gray-500">
+                  In App Cash
+                </h4>
+                <h2 className="font-medium text-[24px] flex items-center">
+                  <TbCurrencyNaira className="sm:block hidden" />
+                  <NumericFormat
+                    value={available_cash ? available_cash : 0}
+                    thousandSeparator=","
+                    displayType="text"
+                    renderText={(value) => (
+                      <b>{value.includes("-") ? "0" : value}</b>
+                    )}
+                  />
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="sm:w-full h-fit flex flex-col sm:flex-row  gap-4 mt-6 mx-4 sm:ml-0 ">
+          <div className="w-full sm:w-1/2 border-[#E1E1E1] sm:border-2 sm:p-4 rounded-xl flex flex-col gap-4">
+            <p className="text-[14px] sm:text-lg font-normal inter sm:albert w-full">
+              Bank account number associated with your magenta account.
+            </p>
+            <div className="flex gap-4 flex-col lg:flex-row ">
+              {accountDetails.map((detail) => {
+                return (
+                  <Card
+                    key={detail.id}
+                    detail={detail}
+                    handleChangeTrue={handleChangeTrue}
+                    handleClose={handleClose}
+                    // GET_ACCOUNT={GET_ACCOUNT}
+                  />
+                );
+              })}
+            </div>
+            <div className="flex justify-end ">
+              <button
+                onClick={() => {
+                  setShowAddAccount(true);
+                  setName("");
+                  setAddress("");
+                  setOTP("");
+                  setPassCode("");
+                  // document.body.style.overflow = "hidden";
+                }}
+                disabled={accountDetails?.length >= 2 ? true : false}
+                className="text-sm w-[236px] h-[49px] poppins text-white 
                  flex rounded-xl justify-center items-center bg-[#4E00AD] font-medium cursor-pointer disabled:bg-[#E2E6EE] disabled:text-gray-500 disabled:cursor-not-allowed "
             >
               Add Account Number
@@ -227,6 +264,7 @@ const CashOut = () => {
             </div>
           )}
         </div>
+      </div>
       </div>
     </div>
   );

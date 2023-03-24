@@ -128,9 +128,25 @@ const AddAccount = () => {
         <img src="/assets/x.png" alt="Delete image" />
       </div>
       <form className="flex flex-col gap-4" onSubmit={(e) => handleSubmit(e)}>
-        <h1 className="text-xl font-medium">Add New Account Name</h1>
-        <div className="flex gap-4">
-          <div className="flex flex-col gap-2 w-1/2">
+        <div className="w-full bg-white sm:hidden mb-4">
+          <Header
+            showLogo={false}
+            handleClick={() => {
+              setShowAddAccount(false);
+              setAccountNumber("");
+              setSelectedOption(null);
+              setAccountName("");
+              if (isLoading === true) {
+                setIsLoading(false);
+              }
+            }}
+          />
+        </div>
+        <h1 className="text-xl font-medium ml-4 sm:ml-0">
+          Add New Account Name
+        </h1>
+        <div className="flex flex-col  sm:flex-row gap-4 mx-4 sm:mx-0">
+          <div className="flex flex-col gap-2 w-full sm:w-1/2">
             <label
               className="text-lg text-[rgba(11,11,11,0.8)]"
               htmlFor="accountnumber"
