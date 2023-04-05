@@ -10,7 +10,7 @@ const UserDetails = ({ markAsComplete = () => {} }) => {
 
   return (
     <div className="xs:w-screen lg:w-[60%] sm:h-full ">
-      <div className="sm:px-[20px] sm:py-4 sm:block lg:hidden sm:align-middle xs:m-[auto] xs:flex xs:justify-center xs:pt-6">
+      <div className="sm:px-[20px] sm:py-4 sm:block lg:hidden sm:align-middle xs:m-[auto] xs:flex xs:justify-center pt-12">
         <MagentaLogo />
       </div>
     <div className="user-details text-center flex flex-col gap-4 ">

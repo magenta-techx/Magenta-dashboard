@@ -85,7 +85,7 @@ const DragDropInputComponent = ({
       onDragOver={(evt) => evt.preventDefault()}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
-      className="bg-[#FAFAFA] border border-dashed border-violet-500 p-[24px] rounded-lg w-[408px]"
+      className="bg-[#FAFAFA] border border-dashed border-violet-500 p-[24px] rounded-lg w-[350px] sm:w-[408px]"
     >
       {!fileAvailable && (
         <div className="flex flex-col items-center gap-4">

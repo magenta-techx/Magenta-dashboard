@@ -1,10 +1,8 @@
-import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { calcLength, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Navbar from "./components/Navbar";
 import BNav from "./components/bottomnav";
-// import Dashboard from "./pages/dashboard/Dashboard";
-// import Onboarding from "./pages/signup";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import EmailChangeComponent from "./pages/login/addemail";
 import PasswordResetComponent from "./pages/login/passwordreset";
@@ -12,7 +10,6 @@ import VerificationComponent from "./pages/signup/sign-up pages/verification";
 import GetStarted from "./pages/signup/getStarted";
 import { ItemContext } from "./contextApi/stateMang.contextApi";
 import CreateBranch from "./components/CreateBranch";
-import ViewAllBranch from "./components/ViewAllBranch";
 import DeletedMsg from "./components/DeletedMsg";
 import Edit from "./components/Edit";
 import DeleteBranchMsg from "./components/DeletBranchMsg";
@@ -33,15 +30,17 @@ import { useNavigate } from "react-router-dom";
 import AcctDeleteMsg from "./components/AcctDeleteMsg";
 import ShowDeleteSucc from "./components/ShowDeleteSucc";
 import ProfilePage from "./components/ProfilePage";
-import { AnimatePresence } from "framer-motion";
-import { useIdleTimer } from "react-idle-timer";
+import IdleTimer from "./IdleTimer";
+import Alert from "./Alert";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import Modals from "./Modals";
 const Dashboard = lazy(() => import("./pages/dashboard/Dashboard"));
 const CompanyBranch = lazy(() => import("./pages/companybranch/CompanyBranch"));
 const CashOut = lazy(() => import("./components/CashOut"));
 const LoginComponent = lazy(() => import("./pages/login/userlogin"));
 const Onboarding = lazy(() => import("./pages/signup"));
 const Transaction = lazy(() => import("./pages/transaction/Transaction"));
+const ViewAllBranch = lazy(() => import("./components/ViewAllBranch"));
 const Settings = lazy(() => import("./pages/Settings"));
 const ViewBranchReport = lazy(() => import("./components/ViewBranchReport"));
 function App() {
@@ -81,12 +80,7 @@ function App() {
   window.addEventListener("focus", () => {
     document.title = docTitle;
   });
-  // useEffect(() => {
-  //   document.addEventListener("contextmenu", (event) => event.preventDefault());
-  // }, []);
 
-  const auth = localStorage.getItem("isAuth");
-  const isAuth = JSON.parse(auth);
   setTimeout(() => {
     if (showError) {
       setShowError(false);
@@ -94,7 +88,6 @@ function App() {
     if (showSuccess) setShowSuccess(false);
   }, 3000);
   window.onpopstate = function () {
-    // document.body.style.overflow = "visible";
     setShowAcctDelete(false);
     setShowAcctSucc(false);
     setShowAddAccount(false);
@@ -124,19 +117,20 @@ function App() {
 
         <Suspense
           fallback={
-            <span className="flex h-12 w-12   gap-2 absolute top-[50%] right-[50%] ml-10 -translate-x-[50%] -translate-y-[50%] animate-ping">
+            <div className="flex  gap-2 absolute top-[50%] right-[50%] mx-auto -translate-x-[50%] -translate-y-[50%] animate-ping justify-center">
               <span className=" h-3 w-3 rounded-full bg-[#200047] opacity-75"></span>
               <span className="  rounded-full h-3 w-3 bg-[#200047]"></span>
               <span className=" rounded-full h-3 w-3 bg-[#200047]"></span>
-            </span>
+            </div>
           }
         >
-          <Routes location={location} key={location.pathname}>
+          {/* {timeTillPromptp} */}
+          <Routes location={location}>
             <Route element={<ProtectedRoutes />}>
               <Route path="/" element={<Dashboard />} />
               <Route path="cashout" element={<CashOut />}></Route>
-              <Route path="branch" element={<CompanyBranch />}></Route>
               <Route path="transaction" element={<Transaction />}></Route>
+              <Route path="branch" element={<CompanyBranch />}></Route>
               <Route path="branch/all" element={<ViewAllBranch />}></Route>
               <Route path="branch/:id" element={<ViewBranchReport />}></Route>
               <Route path="/settings" element={<Settings />} />

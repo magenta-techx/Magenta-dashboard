@@ -14,6 +14,7 @@ const CompanyBranch = () => {
     setShowCreateBranch,
     Get_Branch,
     setName,
+    showNav,
     setAddress,
     setPassCode,
     companyDetails

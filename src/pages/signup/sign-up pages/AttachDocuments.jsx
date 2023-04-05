@@ -65,16 +65,16 @@ const AttachDocuments = ({ markAsComplete = () => {} }) => {
         </p>
       </Link>
       <div className="xs:w-screen sm:w-screen lg:w-[100%] ">
-      <div className="sm:px-[20px] sm:py-4 sm:block lg:hidden sm:align-middle xs:m-[auto] xs:flex xs:justify-center xs:pt-3 sm:pt-0">
+      <div className="sm:px-[20px] sm:py-4 sm:block lg:hidden sm:align-middle xs:m-[auto] xs:flex xs:justify-center pt-12 sm:pt-0">
         <MagentaLogo />
       </div>
       <div className="xs:flex xs:justify-center xs:m-auto">
-      <div className="user-details text-center items-center flex flex-col xs:pt-12 sm:pt-20 gap-4  xs:m-auto xs:justify-center">
+      <div className="user-details text-center items-center flex flex-col pt-10 sm:pt-20 gap-4  xs:m-auto xs:justify-center">
         <h1 className="text-[32px] font-semibold">Attach Document</h1>
 
-        <p>You need to upload your Coporate Affairs Commission document</p>
+        <p className="mx-[5px] sm:mx-0">You need to upload your Coporate Affairs Commission document</p>
 
-        <div className="input-group xs:m-auto flex flex-col gap-7">
+        <div className="input-group xs:m-auto flex flex-col gap-7 ">
           <DragDropInputComponent onChange={(fileInfo) => setFile(fileInfo)} />
         </div>
 
