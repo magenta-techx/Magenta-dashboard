@@ -14,26 +14,27 @@ const CompanyBranch = () => {
     setShowCreateBranch,
     Get_Branch,
     setName,
-    showNav,
     setAddress,
     setPassCode,
-    companyDetails
+    companyDetails,
+    showNav,
   } = ItemContext();
- useEffect(() => {
-   Get_Branch();
- }, []);
+  useEffect(() => {
+    Get_Branch();
+  }, []);
   const handleClick = () => {
     // document.body.style.overflow = "hidden";
     setShowCreateBranch(true);
     setName("");
     setAddress("");
     setPassCode("");
+
     // Get_Branch();
   };
   const handleClick2 = () => {
     navigate("/branch/all");
     document.documentElement.scrollTop = 0;
-  }
+  };
   return (
     <>
       <div className="flex sm:flex-row flex-col-reverse w-screen">
@@ -133,10 +134,9 @@ const CompanyBranch = () => {
               </div>
               <div className="lg:w-1/2 m-4   xs:mx-5 sm:m-0  xs:mt-2 border sm:mt-5 rounded-lg shadow-md h-fit flex flex-col p-4 gap-4"></div>
             </div>
-            <div className="lg:w-1/2 border sm:mt-5 rounded-lg shadow-md h-fit flex flex-col p-4 gap-4"></div>
           </div>
+          {/* <Outlet /> */}
         </div>
-        {/* <Outlet /> */}
       </div>
     </>
   );

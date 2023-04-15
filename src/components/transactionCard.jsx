@@ -1,20 +1,5 @@
 
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import {
-  HiOutlineArrowRight,
-  HiOutlineArrowNarrowDown,
-  HiOutlineArrowNarrowUp,
-  HiOutlineChevronUp,
-  HiOutlineChevronDown,
-} from "react-icons/hi";
-import { HiOutlineFilter } from "react-icons/hi";
-import { CiSaveUp1 } from "react-icons/ci";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { BsSearch } from "react-icons/bs";
-
-import { motion } from "framer-motion";
-
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 const TransactionCard = ({ data }) => {
   const { showNav } = ItemContext();

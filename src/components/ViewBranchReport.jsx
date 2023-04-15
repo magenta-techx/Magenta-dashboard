@@ -35,8 +35,8 @@ const ViewBranchReport = () => {
   } = ItemContext();
   const history = async () => {
     const token = localStorage.getItem("login_token");
-    const get =localStorage.getItem("branch_report")
-    const {id}=JSON.parse(get);
+    const get = localStorage.getItem("branch_report");
+    const { id } = JSON.parse(get);
     try {
       const res = await axios.get(
         `https://backend.magentacashier.com/business/branch/transactions/${id}/`,
@@ -348,7 +348,7 @@ const ViewBranchReport = () => {
           </div>
           <button
             disabled={!data.length}
-            className="mx-3 mb-3 sm:mb-0 sm:mx-0 bg-[#4E00AD] text-white disabled:text-gray-400 disabled:font-normal disabled:bg-gray-100 flex  w-fit rounded-xl p-3 lg:mt-4 sm:mt-4 "
+            className="mx-2 mb-3 sm:mb-0 sm:mx-0 bg-[#4E00AD] text-white disabled:text-gray-400 disabled:font-normal disabled:bg-gray-100 flex  w-fit rounded-xl p-3 lg:mt-4 sm:mt-4 "
           >
             <h1 className="px-2  font-normal albert ">
               Export Transaction Table

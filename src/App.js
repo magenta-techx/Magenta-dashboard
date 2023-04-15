@@ -30,7 +30,7 @@ import { useNavigate } from "react-router-dom";
 import AcctDeleteMsg from "./components/AcctDeleteMsg";
 import ShowDeleteSucc from "./components/ShowDeleteSucc";
 import ProfilePage from "./components/ProfilePage";
-import IdleTimer from "./IdleTimer";
+import IdleTimer from "./idleTimer";
 import Alert from "./Alert";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import Modals from "./Modals";

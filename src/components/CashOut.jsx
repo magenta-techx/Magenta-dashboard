@@ -6,6 +6,8 @@ import { TbCurrencyNaira } from "react-icons/tb";
 import { ItemContext } from "../contextApi/stateMang.contextApi";
 import Card from "./Card";
 import Header from "./Header";
+import Navbar from "./Navbar";
+import { NumericFormat } from "react-number-format";
 
 const CashOut = () => {
   const {
@@ -43,7 +45,7 @@ const CashOut = () => {
   const timeAmOrPm = time?.substring(index)?.trim();
   const handleWithdraw = () => {
     setShowWithdrawAmount(true);
-      // document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
   };
   const handleAutoSweep = () => {
     setShowSelectAutoSweep(true);
@@ -52,26 +54,25 @@ const CashOut = () => {
 
   const handleChangeTrue = (id) => {
     const change = accountDetails?.map((detail) => {
-      // console.log(detail);
       return detail.id === id
         ? { ...detail, isAbtDel: true }
         : { ...detail, isAbtDel: false };
     });
-    console.log(change)
+
     dispatch({ type: "Account Details", payload: change });
   };
+
   const handleClose = (id) => {
     const change = accountDetails?.map((detail) => {
-      // console.log(detail);
       return detail.id === id
         ? { ...detail, isAbtDel: false }
         : { ...detail, isAbtDel: false };
     });
-    // console.log(change)
     dispatch({ type: "Account Details", payload: change });
   };
   useEffect(() => {
     GET_ACCOUNT();
+    GET_MERCHANT_TRANSACTION();
   }, []);
 
   return (
@@ -181,90 +182,96 @@ const CashOut = () => {
                 disabled={accountDetails?.length >= 2 ? true : false}
                 className="text-sm w-[236px] h-[49px] poppins text-white 
                  flex rounded-xl justify-center items-center bg-[#4E00AD] font-medium cursor-pointer disabled:bg-[#E2E6EE] disabled:text-gray-500 disabled:cursor-not-allowed "
-            >
-              Add Account Number
-            </button>
-          </div>
-        </div>
-        <div className="w-1/2  p-4 lg:flex gap-4 border-[#E1E1E1] border-2  rounded-xl">
-          <div className="lg:w-1/2 px-4 py-3 lg:h-full sm:h-[152px] sm:grid sm:grid-cols-2 bg-[#4E00AD] shadow-[4px_4px_13px_rgba(0,0,0,0.3)] rounded-3xl lg:flex lg:flex-col gap-2">
-            <div>
-              <img
-                className="w-[120px] h-[120px]"
-                src="/assets/ATM machine.png"
-                alt="atm machine image"
-              />
-            </div>
-            <div>
-            <p className="text-white text-sm sm:pt-3   ml-2 mb-2 albert font-normal">
-              Make a withdrawal into your bank account
-            </p>
-            <div className="flex lg:justify-end" onClick={handleWithdraw}>
-              <button
-                disabled={accountDetails.length === 0}
-                className="lg:text-[16px] sm:text-sm w-[157px] h-[45px] m-auto  flex  albert rounded-xl justify-center items-center bg-white text-[#4E00AD] font-normal cursor-pointer  disabled:text-black disabled:bg-[#E2E6EE] disabled:cursor-not-allowed"
               >
-                Withdraw
+                Add Account Number
               </button>
             </div>
-            </div>
           </div>
-          {!items && (
-            <div className="lg:w-1/2 px-4 py-3 sm:mt-4 lg:mt-0 lg:h-full sm:h-[152px] sm:grid sm:pt-7 sm:grid-cols-2 bg-white shadow-[2px_2px_4px_4px_rgba(113,50,189,0.15)] rounded-3xl lg:flex lg:flex-col gap-2">
+          <div className="w-full   mx- sm:w-1/2 flex flex-row  sm:flex-col lg:flex-row  sm:p-4 lg:flex gap-3 sm:gap-2 border-[#E1E1E1] sm:border-2  sm:rounded-xl">
+            <div className=" w-1/2 sm:w-full lg:w-1/2 px-4 py-3 lg:h-full sm:h-fit sm:grid sm:grid-cols-2 bg-[#4E00AD] shadow-[4px_4px_13px_rgba(0,0,0,0.3)] rounded-3xl lg:flex lg:flex-col gap-2">
               <div>
                 <img
-                  className="w-[114px] h-[114px]"
-                  src="/assets/Time image.png"
-                  alt="Time management-cuate"
+                  className="w-[120px] h-[120px] object-cover"
+                  src="/assets/ATM machine.png"
+                  alt="atm machine image"
                 />
               </div>
-             <div>
-             <p className="text-black font-normal text-sm ml-2 mt-2 alb ert ">
-                Set an auto sweep for  withdrawal
-              </p>
-              <div className="flex justify-end" onClick={handleAutoSweep}>
-                <button
-                  disabled={accountDetails.length === 0}
-                  className="lg:text-[16px] sm:text-sm mt-2 w-[157px] h-[45px] m-auto albert flex rounded-xl justify-center items-center inter font-normal bg-[#4E00AD] text-white cursor-pointer   disabled:text-black disabled:bg-[#E2E6EE] disabled:cursor-not-allowed"
+              <div>
+                <p className="text-white text-sm sm:pt-3 sm:w-full w-[133p]  ml-2 mb-2 albert font-normal">
+                  Make a withdrawal into your bank account
+                </p>
+                <div className="flex lg:justify-end" onClick={handleWithdraw}>
+                  <button
+                    disabled={accountDetails.length === 0}
+                    className="lg:text-[16px] sm:text-sm w-[157px] h-[45px] m-auto  flex  albert rounded-xl justify-center items-center bg-white text-[#4E00AD] font-normal cursor-pointer  disabled:text-black disabled:bg-[#E2E6EE] disabled:cursor-not-allowed"
+                  >
+                    Withdraw
+                  </button>
+                </div>
+              </div>
+            </div>
+            {!items && (
+              <div className="w-1/2  sm:w-full lg:w-1/2 px-4 py-3 sm:mt-4 lg:mt-0 lg:h-full sm:h-fit sm:grid sm:pt-7 sm:grid-cols-2 bg-white shadow-[2px_2px_4px_4px_rgba(113,50,189,0.15)] rounded-3xl sm:gap-2 lg:flex lg:flex-col lg:gap-0  sm:items-center lg:items-start">
+                <div className="w-full">
+                  <img
+                    className="sm:w-full h-[114px] object-cover"
+                    src="/assets/Time image.png"
+                    alt="Time management-cuate"
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="text-black font-normal xs:w-[126px] sm:w-full text-sm ml-2 mt-2 sm:albert inter">
+                    Set an auto sweep for withdrawal
+                  </p>
+                  <div
+                    className="flex justify-end w-full"
+                    onClick={handleAutoSweep}
+                  >
+                    <button
+                      disabled={accountDetails.length === 0}
+                      className="lg:text-[16px] sm:text-sm text-[12px] mt-2 w-full h-[45px] m-auto inter sm:albert flex rounded-xl justify-center items-center inter font-normal bg-[#4E00AD] text-white cursor-pointer   disabled:text-black disabled:bg-[#E2E6EE] disabled:cursor-not-allowed"
+                    >
+                      Set auto sweep
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+            {items && (
+              <div className="sm:w-full lg:w-1/2  px-4 py-3 h-full bg-white shadow-[2px_2px_4px_4px_rgba(113,50,189,0.15)] rounded-3xl flex flex-col gap-2 ">
+                <div className="flex  justify-between relative">
+                  <img
+                    className="w-[114px] h-[114px]"
+                    src="/assets/Time image.png"
+                    alt="Time management-cuate"
+                  />
+                  <span className="text-[#CC00C1] font-medium absolute -right-5 sm:static sm:-right-0">
+                    {hour === 0 ? "12" : hour}
+                    {timeAmOrPm}
+                  </span>
+                </div>
+                <p className="text-black text-sm sm:pt-3 sm:w-full w-[133p]  ml-2 mb-2 albert font-normal">
+                  An auto sweep for {hour === 0 ? "12" : hour}
+                  {timeAmOrPm} {frequency} has been set
+                </p>
+                <div
+                  className="flex justify-end"
+                  onClick={handleAutoSweepDelete}
                 >
-                  Set auto sweep
-                </button>
-             </div>
+                  <button className="lg:text-[16px] sm:text-sm text-[12px] mt-2 w-full h-[45px] m-auto inter sm:albert flex rounded-xl justify-center items-center inter font-normal bg-[#4E00AD] text-white cursor-pointer   disabled:text-black disabled:bg-[#E2E6EE] disabled:cursor-not-allowed ">
+                    {isLoading ? (
+                      <div className="flex items-center gap-4">
+                        <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent"></div>
+                      </div>
+                    ) : (
+                      "Reset auto sweep"
+                    )}
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
-          {items && (
-            <div className="w-1/2  px-4 py-3 h-full bg-white shadow-[2px_2px_4px_4px_rgba(113,50,189,0.15)] rounded-3xl flex flex-col gap-2">
-              <div className="flex justify-between">
-                <img
-                  className="w-[114px] h-[114px]"
-                  src="/assets/Time image.png"
-                  alt="Time management-cuate"
-                />
-                <span className="text-[#CC00C1] font-medium">
-                  {hour === 0 ? "12" : hour}
-                  {timeAmOrPm}
-                </span>
-              </div>
-              <p className="text-black font-medium text-sm">
-                An auto sweep for {hour === 0 ? "12" : hour}
-                {timeAmOrPm} {frequency} has been set
-              </p>
-              <div className="flex justify-end" onClick={handleAutoSweepDelete}>
-                <button className="text-sm w-[157px] h-[45px]  flex rounded-xl justify-center items-center bg-[#4E00AD] text-white font-medium cursor-pointer  ">
-                  {isLoading ? (
-                    <div className="flex items-center gap-4">
-                      <div className=" cursor-pointer  text-white rounded-full w-6 h-6 flex justify-center items-center animate-spin border-white border-4 border-t-[#4E00AD] text-transparent"></div>
-                    </div>
-                  ) : (
-                    "Reset auto sweep"
-                  )}
-                </button>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );

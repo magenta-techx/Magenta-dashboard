@@ -13,6 +13,8 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import Header from "../../components/Header";
+import Navbar from "../../components/Navbar";
+import { ItemContext } from "../../contextApi/stateMang.contextApi";
 import TransactionCard from "../../components/transactionCard";
 import { motion } from "framer-motion";
 const Transaction = () => {
@@ -204,7 +206,7 @@ const Transaction = () => {
           </div>
           <button
             disabled={!data.length}
-            className="mx-3 sm:mx-0 mb-3 sm:mb-0 bg-[#4E00AD] text-white disabled:text-gray-400 disabled:font-normal disabled:bg-gray-100 flex  w-fit rounded-xl p-3 lg:mt-4 sm:mt-4 "
+            className="mx-2 sm:mx-0 mb-3 sm:mb-0 bg-[#4E00AD] text-white disabled:text-gray-400 disabled:font-normal disabled:bg-gray-100 flex  w-fit rounded-xl p-3 lg:mt-4 sm:mt-4 "
           >
             <h1 className="px-2  font-normal albert ">
               Export Transaction Table

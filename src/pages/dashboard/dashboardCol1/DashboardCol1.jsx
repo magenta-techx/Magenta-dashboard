@@ -70,10 +70,10 @@ const DashboardCol1 = () => {
   };
   return (
     <div className="flex flex-col w-full gap-4 mb-10">
-      <div className="flex mt-6 justify-between">
-        <h1 className="font-medium text-2xl albert">Dashboard</h1>
-        <div>
-          <div className="bg-[#EEE8F8] w-full text-black text-[12px] flex gap-2 font-medium border-rounded rounded-xl p-2 ">
+      <div className="flex mt-6 justify-between items-center">
+        <h1 className="font-medium text-[18px] sm:text-2xl inter  sm:albert mx-4 sm:mx-0">Dashboard</h1>
+        <div className="mx-4 sm:mx-0 ">
+          <div className="bg-[#EEE8F8] w-full text-black text-[12px] flex gap-2 font-medium border-rounded rounded-xl p-2 items-center">
             <div>
               <svg
                 width="30"
@@ -122,7 +122,7 @@ const DashboardCol1 = () => {
                 />
               </svg>
             </div>
-            <p className="m-1 albert font-bold text-sm">
+            <p className=" inter sm:albert font-normal sm:font-bold text-sm ">
               {getMonth(month)} {new Date().getDate()},{" "}
               {new Date().getFullYear()}
             </p>
@@ -134,9 +134,11 @@ const DashboardCol1 = () => {
           <div className="bg-white sm:bg-[#C7AFE4] w-10 h-8 flex justify-center items-center rounded-lg">
             <HiOutlineCash size="25px" className="text-[#4E00AD]" />
           </div>
-          <div className="flex flex-col lg:gap-3 sm:gap-1 ">
-            <h4 className="albert font-normal sm:text-sm sm:pt-4 lg:pt-1">All Time Cash</h4>
-            <h2 className="font-bold flex items-center inter text-[24px]">
+          <div className="flex flex-col inter sm:albert gap-3 ">
+            <h4 className="font-normal sm:text-sm text-[rgba(0,0,0,0.82)]">
+              All Time Cash
+            </h4>
+            <h2 className="font-medium flex items-center text-[24px]">
               <TbCurrencyNaira />
               <NumericFormat
                 value={all_time_sales ? all_time_sales : 0}

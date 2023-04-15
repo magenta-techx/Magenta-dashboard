@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BsArrowLeft, BsSearch } from "react-icons/bs";
 import { HiOutlineFilter } from "react-icons/hi";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -6,17 +6,23 @@ import { ItemContext } from "../contextApi/stateMang.contextApi";
 import Branch from "./Branch";
 import AllBranch from "./allBranch";
 import Header from "./Header";
+import Navbar from "./Navbar";
 
 const ViewAllBranch = () => {
   const navigate = useNavigate();
   const {
     setShowCreateBranch,
+    Get_Branch,
+    showNav,
     state: { branchDetails },
   } = ItemContext();
   const handleClick = () => {
     setShowCreateBranch(true);
     // document.body.style.overflow = "hidden";
   };
+  useEffect(() => {
+    Get_Branch();
+  }, []);
   return (
     <div className="flex sm:flex-row flex-col-reverse w-screen h-full">
       {showNav && (
